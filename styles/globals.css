@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @tailwind base;
 @layer base {
     h1,
@@ -7,7 +7,13 @@
     h4,
     h5,
     h6 {
-        @apply font-bebas
+        @apply font-bebas;
+    }
+    html {
+        @apply w-screen overflow-x-hidden bg-background-500
+    }
+    h1 {
+        @apply text-[10rem]
     }
 }
 
