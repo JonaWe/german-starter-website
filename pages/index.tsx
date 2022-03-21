@@ -3,7 +3,7 @@ import useLocalization from '../hooks/useLocalization';
 
 const Home: NextPage = () => {
   const t = useLocalization();
-  return <h1 className="text-red-800">{t.test}</h1>;
+  return <h1 className="text-rust-500">{t.test}</h1>;
 };
 
 export default Home;
