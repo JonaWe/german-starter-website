@@ -1,14 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @tailwind base;
 @layer base {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        @apply font-bebas
-    }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  button {
+    @apply font-bebas;
+  }
 }
 
 @tailwind components;
