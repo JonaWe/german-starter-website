@@ -9,7 +9,7 @@ export default function Navbar() {
   const scrollDistance = useScrollDistance();
 
   return (
-    <nav
+    <header
       className={`fixed z-50 w-screen flex flex-row gap-4 items-center place-content-between px-6 py-2 ${
         scrollDistance === 0
           ? 'bg-transparent drop-shadow-none'
@@ -24,6 +24,6 @@ export default function Navbar() {
         <NavItems />
         <JoinButton />
       </div>
-    </nav>
+    </header>
   );
 }
