@@ -15,6 +15,9 @@
     h1 {
         @apply text-[10rem]
     }
+    h2{
+        @apply text-3xl
+    }
     button {
         @apply font-bebas;
     }
