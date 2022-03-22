@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <a href="https://german-starter.de">
-    <img src="https://logos-world.net/wp-content/uploads/2021/02/Rust-Logo.png" alt="Logo" width="80" height="80">
+    <img src="https://logos-world.net/wp-content/uploads/2021/02/Rust-Logo.png" alt="Logo" height="200">
   </a>
 
 <h3 align="center">German Starter Website</h3>
