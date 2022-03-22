@@ -21,6 +21,9 @@
     button {
         @apply font-bebas;
     }
+    *{
+        @apply text-sand-500
+    }
 }
 
 @tailwind components;
