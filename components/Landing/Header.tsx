@@ -1,5 +1,5 @@
-import useLocalization from "../../hooks/useLocalization";
-import Button from "../UI/Button";
+import useLocalization from '../../hooks/useLocalization';
+import JoinButton from '../JoinButton';
 
 export default function Header() {
   const t = useLocalization();
@@ -9,7 +9,7 @@ export default function Header() {
         <h2>{t.subHeader}</h2>
         <h1 className="leading-none">German Starter</h1>
         <p className="sm:max-w-[30%] mb-6">{t.headerText}</p>
-        <Button text={t.joinBtn} onClick={() => console.log("ok")} primary />
+        <JoinButton />
       </div>
       <img
         src="/assets/images/banner_bg.png"
