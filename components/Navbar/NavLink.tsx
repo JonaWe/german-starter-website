@@ -11,9 +11,9 @@ export default function NavLink({ href, text, externalLink }: NavLinkProps) {
   return (
     <li>
       <Link href={href}>
-        <a className="flex items-center gap-1">
+        <a className="font-bebas flex items-center gap-1 text-3xl [text-shadow:0_4px_8px_rgba(0,0,0,0.12)]">
           {text}
-          {externalLink && <HiOutlineExternalLink />}
+          {externalLink && <HiOutlineExternalLink className="text-xl" />}
         </a>
       </Link>
     </li>
