@@ -82,32 +82,32 @@ export default {
   benefits: [
     {
       id: 'uptime',
-      titel:'Höchste uptime',
+      title:'Höchste uptime',
       text: 'With one of the highest possible uptimes we are allways up to play.',
     },
     {
       id: 'easy',
-      titel:'Anfängerfreundlich',
+      title:'Anfängerfreundlich',
       text: 'We and our community are here to help you get started.',
     },
     {
       id: 'activeAdmins',
-      titel:'Aktive Admins',
+      title:'Aktive Admins',
       text: 'A team of five admins is happy to help you.',
     },
     {
       id: 'reducedUpkeep',
-      titel:'Reduzierte upkeep',
+      title:'Reduzierte upkeep',
       text: 'Upkeep is reduced to onethird of the normal upkeep.',
     },
     {
       id: 'hardware',
-      titel:'Neuste hardware',
+      title:'Neuste hardware',
       text: 'This is definitly a placeholder and has to be replaced later',
     },
     {
       id: 'shop',
-      titel:'Ingame shop.',
+      title:'Ingame shop.',
       text: 'This is definitly a placeholder and has to be replaced later',
     },
   ],
