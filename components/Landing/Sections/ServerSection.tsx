@@ -31,7 +31,9 @@ export default function Server() {
         <h2 className="text-5xl">[EU] German Starter Server</h2>
         <CopyButton text={serverIP} />
         <p>{t.serverDescription}</p>
-        <PlayerCount serverIp={serverIP} />
+        <div className="flex justify-center">
+          <PlayerCount serverIp={serverIP} className="text-lg" />
+        </div>
         <div className="flex gap-5 justify-center mt-6">
           <JoinButton />
           <Button
