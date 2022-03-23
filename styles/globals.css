@@ -13,7 +13,7 @@
         @apply w-screen overflow-x-hidden bg-background-500
     }
     h1 {
-        @apply text-[10rem]
+        @apply sm:text-[10rem] text-8xl
     }
     h2{
         @apply text-3xl
