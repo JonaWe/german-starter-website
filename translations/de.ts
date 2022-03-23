@@ -62,5 +62,37 @@ export default {
   community: {
     title: 'Purer Spass!',
     text: `[EU] German Starter is a newbie friendly PvP Server. (that doesn't mean you won't be killed) That means if you have Questions about the game and how to play they will be answered. In case you've build wrong you can ask one of the Admins to help you removing a Wall. Full wipes are being done when Facepunch does their Monthly patches. Please read our Server rules to prevent misconceptions.`
-  }
+  },
+  benefits: [
+    {
+      id: 'uptime',
+      titel:'Höchste uptime',
+      text: 'With one of the highest possible uptimes we are allways up to play.',
+    },
+    {
+      id: 'easy',
+      titel:'Anfängerfreundlich',
+      text: 'We and our community are here to help you get started.',
+    },
+    {
+      id: 'activeAdmins',
+      titel:'Aktive Admins',
+      text: 'A team of five admins is happy to help you.',
+    },
+    {
+      id: 'reducedUpkeep',
+      titel:'Reduzierte upkeep',
+      text: 'Upkeep is reduced to onethird of the normal upkeep.',
+    },
+    {
+      id: 'hardware',
+      titel:'Neuste hardware',
+      text: 'This is definitly a placeholder and has to be replaced later',
+    },
+    {
+      id: 'shop',
+      titel:'Ingame shop.',
+      text: 'This is definitly a placeholder and has to be replaced later',
+    },
+  ],
 };

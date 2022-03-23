@@ -23,8 +23,8 @@ export default function Server() {
       : '51.195.60.162:28015';
 
   return (
-    <section className="my-32 sm:m-10">
-      <div className="bg-background-400 h-full max-w-screen-lg mx-auto p-5 pb-12 text-center">
+    <section className="sm:mt-32 sm:m-10">
+      <div className="bg-background-400 h-full max-w-screen-md mx-auto p-5 pb-12 text-center">
         <Badge text="Server" className="mx-auto -translate-y-10">
           <img src="/assets/icons/rust2.svg" alt="" className="w-7" />
         </Badge>
