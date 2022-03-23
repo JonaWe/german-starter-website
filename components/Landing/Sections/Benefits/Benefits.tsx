@@ -5,7 +5,6 @@ import {
   HiPhone,
   HiShieldCheck,
   HiShoppingCart,
-  HiUsers,
 } from 'react-icons/hi';
 import useLocalization from '../../../../hooks/useLocalization';
 import Card from './Card';
@@ -41,7 +40,7 @@ export default function Benefits() {
             key={benefit.id}
             title={benefit.title}
             text={benefit.text}
-            icon={icons[benefit.id]}
+            icon={icons[(benefit as Benefit).id]}
           />
         );
       })}
