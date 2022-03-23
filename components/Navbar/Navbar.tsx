@@ -10,19 +10,21 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed z-50 w-screen flex flex-row gap-4 items-center place-content-between px-6 py-2 ${
+      className={`fixed z-50 w-screen flex justify-center px-6 py-2 ${
         scrollDistance === 0
           ? 'bg-transparent drop-shadow-none'
           : 'bg-background-500 drop-shadow-xl'
       } transition-colors duration-[400ms]`}
     >
-      <div className="flex flex-row items-center gap-4 place-content-between">
-        <NavLogo />
-        <LanguageSelection />
-      </div>
-      <div className="flex flex-row items-center gap-7 place-content-between">
-        <NavItems />
-        <JoinButton />
+      <div className="w-full max-w-screen-2xl flex flex-row gap-4 items-center place-content-between">
+        <div className="flex flex-row items-center gap-4 place-content-between">
+          <NavLogo />
+          <LanguageSelection />
+        </div>
+        <div className="flex flex-row items-center gap-7 place-content-between">
+          <NavItems />
+          <JoinButton />
+        </div>
       </div>
     </header>
   );
