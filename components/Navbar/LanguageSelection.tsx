@@ -13,7 +13,7 @@ export default function LanguageSelection() {
   return (
     <div className="divide-x-2 grid grid-cols-2">
       <button
-        className={`text-2xl px-2 ${
+        className={`text-2xl px-2 hover:text-sand-500/100 transition-colors ${
           currentLocale === 'de' ? 'text-sand-500/100' : 'text-sand-500/80'
         }`}
         onClick={() => changeLocale('de')}
@@ -21,7 +21,7 @@ export default function LanguageSelection() {
         DE
       </button>
       <button
-        className={`text-2xl px-2 ${
+        className={`text-2xl px-2 hover:text-sand-500/100 transition-colors ${
           currentLocale === 'en' ? 'text-sand-500/100' : 'text-sand-500/80'
         }`}
         onClick={() => changeLocale('en')}
