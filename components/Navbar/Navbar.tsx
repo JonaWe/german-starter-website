@@ -9,7 +9,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed z-50 w-screen flex justify-center px-6 py-2 ${
+      className={`fixed z-50 w-screen flex justify-center px-6 py-2 overflow-hidden ${
         scrollDistance === 0
           ? 'bg-transparent drop-shadow-none pt-8'
           : 'bg-background-500 drop-shadow-xl pt-2'
