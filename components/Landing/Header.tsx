@@ -1,5 +1,5 @@
 import useLocalization from '../../hooks/useLocalization';
-import JoinButton from '../JoinButton';
+import JoinButton from '../Buttons/JoinButton';
 
 export default function Header() {
   const t = useLocalization();

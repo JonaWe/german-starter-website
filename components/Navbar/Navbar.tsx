@@ -1,5 +1,5 @@
 import useScrollDistance from '../../hooks/useScrollDistance';
-import JoinButton from '../JoinButton';
+import JoinButton from '../Buttons/JoinButton';
 import LanguageSelection from './LanguageSelection';
 import NavItems from './NavItems';
 import NavLogo from './NavLogo';
