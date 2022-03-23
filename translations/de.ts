@@ -59,4 +59,8 @@ export default {
       7: 'Sollte es zu Streitigkeiten (z.B. Codes ändern, Loot klauen, Base klauen usw.) innerhalb eines Teams kommen, werden sich die Admins nicht einmischen. Die Spieler sind selbst dafür verantwortlich mit wem Sie zusammen spielen und vertrauen. Regel Nummer 1 „Dont trust in Rust“',
     },
   },
+  community: {
+    title: 'Purer Spass!',
+    text: `[EU] German Starter is a newbie friendly PvP Server. (that doesn't mean you won't be killed) That means if you have Questions about the game and how to play they will be answered. In case you've build wrong you can ask one of the Admins to help you removing a Wall. Full wipes are being done when Facepunch does their Monthly patches. Please read our Server rules to prevent misconceptions.`
+  }
 };

@@ -4,9 +4,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 interface CopyBtnProps {
   text: string;
+  title?: string;
 }
 
-export default function CopyButton({ text }: CopyBtnProps) {
+export default function CopyButton({ text, title }: CopyBtnProps) {
   const [copied, setCopied] = useState(false);
   const handleClick = () => {
     setCopied(true);
@@ -19,8 +20,8 @@ export default function CopyButton({ text }: CopyBtnProps) {
 
   return (
     <AnimatePresence>
-      <button onClick={handleClick}>
-        <p className="font-bebas mb-3 flex items-center text-sand-600 hover:text-sand-500 transition-all group text-lg leading-none">
+      <button onClick={handleClick} title={title}>
+        <p className="font-bebas flex items-center text-sand-600 hover:text-sand-500 transition-all group text-lg leading-none">
           {text}
           {!copied ? (
             <motion.span
