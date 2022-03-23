@@ -4,8 +4,9 @@ import CopyButton from '../../CopyButton';
 import useDocumentDataFromCollectionOnce from '../../../hooks/useDocumentDataFromCollectionOnce';
 import JoinButton from '../../JoinButton';
 import Button from '../../UI/Button';
+import { useEffect } from 'react';
 
-export default function Header() {
+export default function Server() {
   const [serverConfig, loading, error] = useDocumentDataFromCollectionOnce(
     'config',
     'server'
