@@ -1,4 +1,5 @@
 import { AnimateSharedLayout } from 'framer-motion';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import useLocalization from '../../hooks/useLocalization';
 import NavLink from './NavLink';
@@ -22,7 +23,8 @@ const navigationItems: NavigationItem[] = [
 ];
 
 export default function NavItems() {
-  const [activeItem, setActiveItem] = useState(0);
+  const router = useRouter();
+  const [activeItem, setActiveItem] = useState(router.asPath);
   const t = useLocalization();
   return (
     <nav>
@@ -34,9 +36,9 @@ export default function NavItems() {
                 text={t.navigation[id]}
                 href={href}
                 externalLink={external}
-                selected={activeItem === index}
+                selected={activeItem === href}
                 key={index}
-                onClick={() => setActiveItem(index)}
+                onClick={() => setActiveItem(href)}
               />
             );
           })}

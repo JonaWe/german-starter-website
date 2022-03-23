@@ -21,7 +21,8 @@ export default function NavLink({
       <Link href={href}>
         <a
           className="font-bebas text-2xl lg:text-3xl [text-shadow:0_4px_8px_rgba(0,0,0,0.12)]"
-          onClick={onClick}
+          onClick={externalLink ? () => 0 : onClick}
+          target={externalLink ? '_blank' : '_self'}
         >
           <div className="relative w-fit">
             <div
