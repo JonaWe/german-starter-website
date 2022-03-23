@@ -14,6 +14,9 @@ export default {
   newsPage: {
     title: 'News',
   },
+  supportPage: {
+    title: 'Support',
+  },
   rulesPage: {
     title: 'Rules',
     ruleSets: [
