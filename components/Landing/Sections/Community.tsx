@@ -1,5 +1,7 @@
 import { HiUserGroup } from 'react-icons/hi';
 import useLocalization from '../../../hooks/useLocalization';
+import DiscordButton from '../../Buttons/DiscordButton';
+import TeamspeakButton from '../../Buttons/TeamspeakButton';
 import Badge from '../../UI/Badge';
 import Button from '../../UI/Button';
 
@@ -23,22 +25,10 @@ export default function Community() {
       </div>
       <div>
         <h2>{t.community.title}</h2>
-        <p className="">{t.community.text}</p>
+        <p className="mb-4">{t.community.text}</p>
         <div className="flex gap-4">
-          <Button text="Discord">
-            <img
-              src="/assets/icons/discord.svg"
-              className="w-5"
-              alt="Teamspeak"
-            />
-          </Button>
-          <Button text="Teamspeak">
-            <img
-              src="/assets/icons/teamspeak.svg"
-              className="w-5"
-              alt="Teamspeak"
-            />
-          </Button>
+          <DiscordButton />
+          <TeamspeakButton />
         </div>
       </div>
     </section>

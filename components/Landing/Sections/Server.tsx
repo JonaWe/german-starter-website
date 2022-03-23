@@ -1,8 +1,8 @@
 import useLocalization from '../../../hooks/useLocalization';
 import Badge from '../../UI/Badge';
-import CopyButton from '../../CopyButton';
+import CopyButton from '../../Buttons/CopyButton';
 import useDocumentDataFromCollectionOnce from '../../../hooks/useDocumentDataFromCollectionOnce';
-import JoinButton from '../../JoinButton';
+import JoinButton from '../../Buttons/JoinButton';
 import Button from '../../UI/Button';
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';

@@ -1,6 +1,6 @@
-import useDocumentDataFromCollectionOnce from '../../hooks/useDocumentDataFromCollectionOnce';
-import useLocalization from '../../hooks/useLocalization';
-import Button from '../UI/Button';
+import useDocumentDataFromCollectionOnce from '../../../hooks/useDocumentDataFromCollectionOnce';
+import useLocalization from '../../../hooks/useLocalization';
+import Button from '../../UI/Button';
 
 export default function JoinButton() {
   const [value, loading, error] = useDocumentDataFromCollectionOnce(
