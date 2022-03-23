@@ -1,23 +1,33 @@
 import { useRouter } from 'next/router';
-import { ChangeEventHandler } from 'react';
+import { useState } from 'react';
 
 export default function LanguageSelection() {
   const router = useRouter();
   const { locale } = router;
+  const [currentLocale, setCurrentLocale] = useState(locale);
 
-  const changeLanguage: ChangeEventHandler<HTMLSelectElement> = (e) => {
-    e.preventDefault();
-    const locale = e.target.value;
-    router.push(router.asPath, undefined, { locale });
+  const changeLocale = (newLocale: string) => {
+    setCurrentLocale(newLocale);
+    router.push(router.asPath, undefined, { locale: newLocale });
   };
   return (
-    <select
-      onChange={changeLanguage}
-      defaultValue={locale}
-      className="text-sand-500 text-xl font-bebas bg-transparent [text-shadow:0_4px_8px_rgba(0,0,0,0.12)]"
-    >
-      <option value="de">DE</option>
-      <option value="en">EN</option>
-    </select>
+    <div className="divide-x-2 grid grid-cols-2">
+      <button
+        className={`text-2xl px-2 ${
+          currentLocale === 'de' ? 'text-sand-500/100' : 'text-sand-500/80'
+        }`}
+        onClick={() => changeLocale('de')}
+      >
+        DE
+      </button>
+      <button
+        className={`text-2xl px-2 ${
+          currentLocale === 'en' ? 'text-sand-500/100' : 'text-sand-500/80'
+        }`}
+        onClick={() => changeLocale('en')}
+      >
+        EN
+      </button>
+    </div>
   );
 }
