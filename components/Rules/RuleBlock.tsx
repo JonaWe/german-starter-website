@@ -14,19 +14,22 @@ export default function RuleBlock({
   ruleIndex,
 }: RuleBlockProps) {
   return (
-    <section className="bg-background-400 relative px-14 pt-10 pb-7 max-w-screen-xl mt-20">
-      <Badge text={title} className="absolute -translate-y-16 translate-x-8" />
+    <section
+      className="bg-background-400 relative px-14 pt-10 pb-7 max-w-screen-xl mt-20 grid gap-x-3 gap-y-4"
+      style={{ gridTemplateColumns: 'min-content auto' }}
+    >
+      <Badge text={title} className="absolute -translate-y-6 translate-x-8" />
       {rules.map((rule, index) => {
         return (
-          <p className="text-sand-500 mb-3" key={index}>
-            <span className="font-bold">
+          <>
+            <p className="font-bold justify-self-end" key={index}>
               §{ruleIndex}.{index + 1}
-            </span>{' '}
-            {rule}
-          </p>
+            </p>{' '}
+            <p key={index * 100}>{rule}</p>
+          </>
         );
       })}
-      {comment && <p className="italic mb-3">{comment}</p>}
+      {comment && <p className="italic mb-3 col-span-2">{comment}</p>}
     </section>
   );
 }
