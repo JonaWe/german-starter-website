@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import useScrollDistance from '../../hooks/useScrollDistance';
 import JoinButton from '../JoinButton';
 import LanguageSelection from './LanguageSelection';

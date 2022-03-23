@@ -8,7 +8,6 @@ const Home: NextPage = () => {
   const t = useLocalization();
   return (
     <div className="">
-      <Navbar />
       <Header />
       <ServerSection />
     </div>
