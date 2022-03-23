@@ -1,11 +1,12 @@
 interface PageContentProps {
   children: React.ReactNode;
+  className?: string;
 }
 
-export default function PageContent({ children }: PageContentProps) {
+export default function PageContent({ children, className }: PageContentProps) {
   return (
-    <div className="flex justify-center">
-      <div className="max-w-screen-2xl w-full">{children}</div>
+    <div className="flex justify-center mt-16">
+      <div className={`max-w-screen-2xl w-full ${className}`}>{children}</div>
     </div>
   );
 }
