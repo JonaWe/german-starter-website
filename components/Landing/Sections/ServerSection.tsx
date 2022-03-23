@@ -32,7 +32,7 @@ export default function Server() {
         <CopyButton text={serverIP} />
         <p>{t.serverDescription}</p>
         <div className="flex justify-center">
-          <PlayerCount serverIp={serverIP} className="text-lg" />
+          <PlayerCount serverIp={serverIP} className="text-lg" title="Players on server" />
         </div>
         <div className="flex gap-5 justify-center mt-6">
           <JoinButton />
