@@ -11,6 +11,9 @@ export default {
     rules: 'Rules',
     playerstats: 'Playerstats',
   },
+  newsPage: {
+    title: 'News',
+  },
   rulesPage: {
     title: 'Rules',
     ruleSets: [
