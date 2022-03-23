@@ -18,7 +18,7 @@ export default function PageHeader({ imageURL, children }: PageHeaderProps) {
         alt="page banner"
         style={{
           filter: `blur(${Math.floor(scrollDistance / 20)}px)`,
-          opacity: 0.7 - 0.001 * scrollDistance,
+          opacity: 0.7 - 0.0015 * scrollDistance,
         }}
         className={`object-cover w-full h-full absolute inset-0`}
       />
