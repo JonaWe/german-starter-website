@@ -5,6 +5,9 @@ import useDocumentDataFromCollectionOnce from '../../../hooks/useDocumentDataFro
 import JoinButton from '../../JoinButton';
 import Button from '../../UI/Button';
 import { useEffect } from 'react';
+import { useQuery } from 'react-query';
+import axios from 'axios';
+import PlayerCount from '../../PlayerCount';
 
 export default function Server() {
   const [serverConfig, loading, error] = useDocumentDataFromCollectionOnce(
@@ -28,9 +31,15 @@ export default function Server() {
         <h2 className="text-5xl">[EU] German Starter Server</h2>
         <CopyButton text={serverIP} />
         <p>{t.serverDescription}</p>
+        <PlayerCount serverIp={serverIP} />
         <div className="flex gap-5 justify-center mt-6">
-            <JoinButton />
-            <Button href="/rules" text="Rules" useLink className="hover:bg-neutral-500 hover:text-sand-600" />
+          <JoinButton />
+          <Button
+            href="/rules"
+            text="Rules"
+            useLink
+            className="hover:bg-neutral-500 hover:text-sand-600"
+          />
         </div>
       </div>
     </section>

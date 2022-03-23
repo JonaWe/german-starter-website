@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { queryGameServerInfo } from 'steam-server-query';
+import { queryGameServerRules } from 'steam-server-query';
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,6 +10,6 @@ export default async function handler(
 
   if (!ip) return res.status(404).json({ message: 'no ip param' });
 
-  const info = await queryGameServerInfo(ip);
-  res.status(200).json({ info });
+  const rules = await queryGameServerRules(ip);
+  res.status(200).json({ rules });
 }
