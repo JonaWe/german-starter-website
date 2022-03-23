@@ -10,7 +10,7 @@ export default function PageHeader({ imageURL, children }: PageHeaderProps) {
 
   return (
     <header className="w-screen h-[45vh] bg-cover relative flex justify-center items-end">
-      <div className="z-10 leading-none w-full max-w-screen-2xl block mb-8">
+      <div className="z-10 leading-none w-full max-w-screen-2xl block mb-8 2xl:ml-0 ml-8">
         {children}
       </div>
       <img
