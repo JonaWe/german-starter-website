@@ -29,11 +29,15 @@ export default function Server() {
           <img src="/assets/icons/rust2.svg" alt="" className="w-7" />
         </Badge>
         <h2 className="text-5xl">[EU] German Starter Server</h2>
-        <CopyButton text={serverIP} />
-        <p>{t.serverDescription}</p>
-        <div className="flex justify-center">
-          <PlayerCount serverIp={serverIP} className="text-lg" title="Players on server" />
+        <div className="flex justify-center gap-4">
+          <CopyButton text={serverIP} title="Click to copy server IP" />
+          <PlayerCount
+            serverIp={serverIP}
+            className="text-sand-600"
+            title="Players on server"
+          />
         </div>
+        <p>{t.serverDescription}</p>
         <div className="flex gap-5 justify-center mt-6">
           <JoinButton />
           <Button

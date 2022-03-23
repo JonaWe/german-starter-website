@@ -19,7 +19,7 @@ export default function PlayerCount({ serverIp, className, title }: PlayerCountP
 
   return (
     <span className={`flex items-center gap-1 ${className}`} title={title}>
-      <p className="font-bebas">{data?.data.playerCount}</p>
+      <p className="font-bebas text-sand-600">{data?.data.playerCount}</p>
       <div className="bg-green-600 w-2 h-2 animate-pulse rounded-full anima"></div>
     </span>
   );
