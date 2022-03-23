@@ -25,7 +25,7 @@ export default function RuleBlock({
             <p className="font-bold justify-self-end" key={index}>
               §{ruleIndex}.{index + 1}
             </p>{' '}
-            <p key={index * 100}>{rule}</p>
+            <p key={(index + 1) * 100}>{rule}</p>
           </>
         );
       })}
