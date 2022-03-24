@@ -7,7 +7,11 @@ interface PlayerCountProps {
   title?: string;
 }
 
-export default function PlayerCount({ serverIp, className, title }: PlayerCountProps) {
+export default function PlayerCount({
+  serverIp,
+  className,
+  title,
+}: PlayerCountProps) {
   const fetchPlayerCount = async () => {
     const data = await axios.post('/api/server/playerCount', {
       ip: serverIp,
@@ -20,7 +24,7 @@ export default function PlayerCount({ serverIp, className, title }: PlayerCountP
   return (
     <span className={`flex items-center gap-1 ${className}`} title={title}>
       <p className="font-bebas text-sand-600">{data?.data.playerCount}</p>
-      <div className="bg-green-600 w-2 h-2 animate-pulse rounded-full anima"></div>
+      <div className="anima h-2 w-2 animate-pulse rounded-full bg-green-600"></div>
     </span>
   );
 }

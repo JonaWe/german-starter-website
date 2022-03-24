@@ -33,7 +33,7 @@ const icons = {
 export default function Benefits() {
   const t = useLocalization();
   return (
-    <section className="sm:mt-48 max-w-screen-xl flex flex-wrap gap-10 items-center justify-around gap-y-20 mx-auto p-5 sm:p-0">
+    <section className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-around gap-10 gap-y-20 p-5 sm:mt-48 sm:p-0">
       {t.benefits.map((benefit) => {
         return (
           <Card

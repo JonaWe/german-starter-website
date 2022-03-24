@@ -6,7 +6,9 @@ interface BadgeProps {
 
 export default function Badge({ text, children, className }: BadgeProps) {
   return (
-    <h2 className={`bg-rust-500 px-4 pb-1 pt-2 flex gap-3 items-center w-fit shadow-xl ${className}`}>
+    <h2
+      className={`flex w-fit items-center gap-3 bg-rust-500 px-4 pb-1 pt-2 shadow-xl ${className}`}
+    >
       {children}
       {text}
     </h2>

@@ -20,7 +20,7 @@ export default function NavLink({
     <li>
       <Link href={href}>
         <a
-          className="font-bebas text-2xl lg:text-3xl [text-shadow:0_4px_8px_rgba(0,0,0,0.12)]"
+          className="font-bebas text-2xl [text-shadow:0_4px_8px_rgba(0,0,0,0.12)] lg:text-3xl"
           onClick={externalLink ? () => 0 : onClick}
           target={externalLink ? '_blank' : '_self'}
         >
@@ -32,12 +32,12 @@ export default function NavLink({
             >
               {text}
               {externalLink && (
-                <HiOutlineExternalLink className="text-xl translate-y-[-0.11rem]" />
+                <HiOutlineExternalLink className="translate-y-[-0.11rem] text-xl" />
               )}
             </div>
             {selected && (
               <motion.div
-                className="absolute bg-rust-500 opacity-85 top-full left-0 w-full h-1"
+                className="opacity-85 absolute top-full left-0 h-1 w-full bg-rust-500"
                 layoutId="underline"
               />
             )}
