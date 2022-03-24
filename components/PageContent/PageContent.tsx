@@ -5,8 +5,8 @@ interface PageContentProps {
 
 export default function PageContent({ children, className }: PageContentProps) {
   return (
-    <div className="flex justify-center mt-16">
-      <div className={`max-w-screen-2xl w-full ${className}`}>{children}</div>
+    <div className="mt-16 flex justify-center">
+      <div className={`w-full max-w-screen-2xl ${className}`}>{children}</div>
     </div>
   );
 }

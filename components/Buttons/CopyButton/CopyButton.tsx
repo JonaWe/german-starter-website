@@ -21,7 +21,7 @@ export default function CopyButton({ text, title }: CopyBtnProps) {
   return (
     <AnimatePresence>
       <button onClick={handleClick} title={title}>
-        <p className="font-bebas flex items-center text-sand-600 hover:text-sand-500 transition-all group text-lg leading-none">
+        <p className="group flex items-center font-bebas text-lg leading-none text-sand-600 transition-all hover:text-sand-500">
           {text}
           {!copied ? (
             <motion.span
@@ -30,7 +30,7 @@ export default function CopyButton({ text, title }: CopyBtnProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <HiClipboard className="fill-sand-600 group-hover:fill-sand-500 transition-all translate-y-[-0.12rem]" />
+              <HiClipboard className="translate-y-[-0.12rem] fill-sand-600 transition-all group-hover:fill-sand-500" />
             </motion.span>
           ) : (
             <motion.span
@@ -39,7 +39,7 @@ export default function CopyButton({ text, title }: CopyBtnProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <HiClipboardCheck className="fill-green-600 group-hover:fill-green-500 transition-all translate-y-[-0.12rem]" />
+              <HiClipboardCheck className="translate-y-[-0.12rem] fill-green-600 transition-all group-hover:fill-green-500" />
             </motion.span>
           )}
         </p>
