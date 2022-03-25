@@ -11,6 +11,10 @@ export default {
     rules: 'Regeln',
     playerstats: 'Playerstats',
   },
+  commandPallet: {
+    noResults: 'Keine Ergebnisse für ',
+    searchPlaceholder: 'Suchen...',
+  },
   newsPage: {
     title: 'Neuigkeiten',
   },

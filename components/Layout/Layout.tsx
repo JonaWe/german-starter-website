@@ -1,3 +1,4 @@
+import CommandPallet from '../CommandPallet';
 import Navbar from '../Navbar';
 
 interface LayoutProps {
@@ -7,6 +8,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <>
+      <CommandPallet />
       <Navbar />
       {children}
     </>

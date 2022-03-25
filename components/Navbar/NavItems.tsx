@@ -10,7 +10,7 @@ interface NavigationItem {
   external: boolean;
 }
 
-const navigationItems: NavigationItem[] = [
+export const navigationItems: NavigationItem[] = [
   { id: 'home', href: '/', external: false },
   { id: 'news', href: '/news', external: false },
   { id: 'support', href: '/support', external: false },
