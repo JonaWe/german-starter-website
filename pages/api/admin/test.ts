@@ -6,7 +6,8 @@ import { admin } from '../../../firebase/admin/firebaseAdmin';
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const auth = getAuth(admin as FirebaseApp);
 
-//   auth.
+  //   auth.
+  console.log(auth.config);
 
   res.status(200).json({ message: 'ok' });
 }
