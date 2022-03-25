@@ -1,6 +1,6 @@
 import { AnimateSharedLayout } from 'framer-motion';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useLocalization from '../../hooks/useLocalization';
 import NavLink from './NavLink';
 
@@ -26,6 +26,22 @@ export default function NavItems() {
   const router = useRouter();
   const [activeItem, setActiveItem] = useState(router.asPath);
   const t = useLocalization();
+
+  useEffect(() => {
+    const updateActiveItem = (url: string) => {
+      const languagePrefixTrimmedURL = url.substring(url.lastIndexOf('/'));
+      setActiveItem(
+        languagePrefixTrimmedURL === '/en' ? '/' : languagePrefixTrimmedURL
+      );
+    };
+
+    router.events.on('routeChangeStart', updateActiveItem);
+
+    return () => {
+      router.events.off('routeChangeStart', updateActiveItem);
+    };
+  }, [router]);
+
   return (
     <nav>
       <ul className="flex flex-row gap-7 justify-self-end">
@@ -38,7 +54,6 @@ export default function NavItems() {
                 externalLink={external}
                 selected={activeItem === href}
                 key={index}
-                onClick={() => setActiveItem(href)}
               />
             );
           })}

@@ -7,21 +7,18 @@ interface NavLinkProps {
   text: string;
   externalLink?: boolean;
   selected?: boolean;
-  onClick(): void;
 }
 export default function NavLink({
   href,
   text,
   externalLink,
   selected,
-  onClick,
 }: NavLinkProps) {
   return (
     <li>
       <Link href={href}>
         <a
           className="font-bebas text-2xl [text-shadow:0_4px_8px_rgba(0,0,0,0.12)] lg:text-3xl"
-          onClick={externalLink ? () => 0 : onClick}
           target={externalLink ? '_blank' : '_self'}
         >
           <div className="relative w-fit">
