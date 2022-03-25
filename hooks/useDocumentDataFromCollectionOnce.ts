@@ -1,6 +1,7 @@
 import { FirebaseError } from 'firebase/app';
-import { collection, doc, DocumentData } from 'firebase/firestore';
+import { DocumentData, collection, doc } from 'firebase/firestore';
 import { useDocumentDataOnce } from 'react-firebase-hooks/firestore';
+
 import { db } from '../firebase/clientApp';
 
 export default function useDocumentDataFromCollectionOnce(

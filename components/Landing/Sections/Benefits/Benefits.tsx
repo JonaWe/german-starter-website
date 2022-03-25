@@ -6,6 +6,7 @@ import {
   HiShieldCheck,
   HiShoppingCart,
 } from 'react-icons/hi';
+
 import useLocalization from '../../../../hooks/useLocalization';
 import Card from './Card';
 
@@ -35,7 +36,7 @@ export default function Benefits() {
   return (
     <section className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-around gap-10 gap-y-20 p-5 sm:mt-48 sm:p-0">
       {t.benefits.map((b) => {
-        const benefit = b as Benefit
+        const benefit = b as Benefit;
         return (
           <Card
             key={benefit.id}

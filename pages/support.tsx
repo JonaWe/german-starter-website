@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+
 import PageContent from '../components/PageContent';
 import PageHeader from '../components/PageHeader';
 import useLocalization from '../hooks/useLocalization';

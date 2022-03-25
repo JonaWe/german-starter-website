@@ -1,9 +1,10 @@
-import { getAuth, GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
-import { initializeApp, getApps, getApp } from 'firebase/app';
-import { firebaseConfig } from '../config/firebaseClient.config';
+import { getApp, getApps, initializeApp } from 'firebase/app';
+import { GithubAuthProvider, GoogleAuthProvider, getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
-const app = getApps().length === 0 ? initializeApp(firebaseConfig, 'clientApp') : getApp('clientApp');
+import { firebaseConfig } from '../config/firebaseClient.config';
+
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 const auth = getAuth(app);
 const db = getFirestore(app);
 

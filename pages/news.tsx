@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
+
 import NewsItem from '../components/News/NewsItem';
 import PageContent from '../components/PageContent';
 import PageHeader from '../components/PageHeader';

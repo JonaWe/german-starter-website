@@ -1,5 +1,5 @@
-import Button from '../../UI/Button';
 import useServerConfig from '../../../hooks/useServerConfig';
+import Button from '../../UI/Button';
 
 export default function TeamspeakButton() {
   const [config] = useServerConfig();

@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
 import Link from 'next/link';
+
+import { motion } from 'framer-motion';
 import { HiOutlineExternalLink } from 'react-icons/hi';
 
 interface NavLinkProps {

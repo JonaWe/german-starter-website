@@ -1,13 +1,15 @@
-import useLocalization from '../../../hooks/useLocalization';
-import Badge from '../../UI/Badge';
-import CopyButton from '../../Buttons/CopyButton';
-import useDocumentDataFromCollectionOnce from '../../../hooks/useDocumentDataFromCollectionOnce';
-import JoinButton from '../../Buttons/JoinButton';
-import Button from '../../UI/Button';
 import { useEffect } from 'react';
-import { useQuery } from 'react-query';
+
 import axios from 'axios';
+import { useQuery } from 'react-query';
+
+import useDocumentDataFromCollectionOnce from '../../../hooks/useDocumentDataFromCollectionOnce';
+import useLocalization from '../../../hooks/useLocalization';
+import CopyButton from '../../Buttons/CopyButton';
+import JoinButton from '../../Buttons/JoinButton';
 import PlayerCount from '../../PlayerCount';
+import Badge from '../../UI/Badge';
+import Button from '../../UI/Button';
 
 export default function Server() {
   const [serverConfig, loading, error] = useDocumentDataFromCollectionOnce(

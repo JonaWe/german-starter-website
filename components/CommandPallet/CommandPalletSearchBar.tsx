@@ -1,5 +1,6 @@
-import { HiOutlineSearch } from 'react-icons/hi';
 import { Combobox } from '@headlessui/react';
+import { HiOutlineSearch } from 'react-icons/hi';
+
 import useLocalization from '../../hooks/useLocalization';
 
 interface CommandPalletSearchBarProps {

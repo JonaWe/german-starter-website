@@ -1,6 +1,8 @@
-import { FirebaseApp } from 'firebase/app';
-import { getAuth } from 'firebase-admin/auth';
 import { NextApiRequest, NextApiResponse } from 'next';
+
+import { getAuth } from 'firebase-admin/auth';
+import { FirebaseApp } from 'firebase/app';
+
 import { admin } from '../../../firebase/admin/firebaseAdmin';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {

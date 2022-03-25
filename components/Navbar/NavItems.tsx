@@ -1,6 +1,9 @@
-import { AnimateSharedLayout } from 'framer-motion';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+
+import { useRouter } from 'next/router';
+
+import { AnimateSharedLayout } from 'framer-motion';
+
 import useLocalization from '../../hooks/useLocalization';
 import NavLink from './NavLink';
 

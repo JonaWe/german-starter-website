@@ -1,5 +1,6 @@
-import Badge from '../../UI/Badge';
 import Markdown from 'markdown-to-jsx';
+
+import Badge from '../../UI/Badge';
 
 interface NewsItemProps {
   title: string;

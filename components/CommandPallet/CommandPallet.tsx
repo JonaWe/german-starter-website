@@ -1,6 +1,9 @@
-import { Dialog, Combobox, Transition } from '@headlessui/react';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+
+import { useRouter } from 'next/router';
+
+import { Combobox, Dialog, Transition } from '@headlessui/react';
+
 import useKeyboardShortcut from '../../hooks/useKeyboardShortcut';
 import useLocalization from '../../hooks/useLocalization';
 import { navigationItems } from '../Navbar/NavItems';

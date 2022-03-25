@@ -1,5 +1,6 @@
 import { collection, doc, setDoc } from 'firebase/firestore';
 import { useDocumentDataOnce } from 'react-firebase-hooks/firestore';
+
 import { db } from '../firebase/clientApp';
 
 interface ServerSettings {

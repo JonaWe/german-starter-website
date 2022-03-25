@@ -1,6 +1,7 @@
-import { NavigationItem } from '../Navbar/NavItems';
 import { Combobox } from '@headlessui/react';
+
 import useLocalization from '../../hooks/useLocalization';
+import { NavigationItem } from '../Navbar/NavItems';
 
 interface CommandPalletOptionProps {
   item: NavigationItem;

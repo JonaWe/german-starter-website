@@ -1,10 +1,10 @@
-import { App, getApp, getApps, initializeApp } from 'firebase-admin/app';
 import { credential } from 'firebase-admin';
+import { App, getApp, getApps, initializeApp } from 'firebase-admin/app';
 
-let admin: App 
+let admin: App;
 
-try { 
-  admin = getApp('admin')
+try {
+  admin = getApp('admin');
 } catch (e) {
   console.log((e as Error).message, getApps());
   admin = initializeApp(
@@ -16,7 +16,7 @@ try {
       }),
     },
     'admin'
-  )
+  );
 }
 
 export { admin };
