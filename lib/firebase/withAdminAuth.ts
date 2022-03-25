@@ -21,7 +21,7 @@ export default async function withAdminAuth(
 
   if (!user) return res.status(401).json('Invalid Token');
 
-  if (user.admin) return true;
+  if (user.admin) return user;
 
   return res.status(403).json('forbidden');
 }

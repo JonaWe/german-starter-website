@@ -15,7 +15,7 @@ const Home: NextPage = () => {
 
     user.getIdToken().then((token) => {
       axios
-        .get(`/api/admin/test`, {
+        .get(`/api/admin/promoteToAdmin`, {
           headers: {"Authorization" : `Bearer ${token}`}
         })
         .then((response) => {
@@ -36,7 +36,7 @@ const Home: NextPage = () => {
   return (
     <>
       <PageHeader imageURL="/assets/images/support_banner.jpg">
-        <h1>Test</h1>
+        <h1>{user?.email}</h1>
       </PageHeader>
       <PageContent>
         <button onClick={logout}>logout</button>
