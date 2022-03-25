@@ -46,16 +46,16 @@ export default function NavItems() {
     };
   }, [router]);
 
+  const currentNavItem = navigationItems.find(
+    (item) => item.href === activeItem
+  );
+
   return (
     <>
       <Head>
         <title>
           German Starter |{' '}
-          {
-            t.navigation[
-              navigationItems.find((item) => item.href === activeItem)!.id
-            ]
-          }
+          {currentNavItem ? t.navigation[currentNavItem.id] : '404'}
         </title>
       </Head>
       <nav>
