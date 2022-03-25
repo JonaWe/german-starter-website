@@ -23,7 +23,7 @@ export default {
       {
         title: '§1. General Rules',
         rules: [
-          `Beginner-friendly doesn't mean that beginners have special protection. It means that admins answer your questions (except on the topic of beginner-friendly) and that admins give you demolition help if you have obstructed yourself. It is up to each one himself how he plays as long as he is not cheated.`,
+          `Beginner-friendly **doesn't** mean that beginners have special protection. It **means** that admins answer your questions (except on the topic of beginner-friendly) and that admins give you demolition help if you have obstructed yourself. It is up to each one himself how he plays as long as he is not cheated.`,
           'Insults that go below the belt line are to be omitted (for example, son of a bitch, I hope your mother dies of cancer, etc.). Asshole, stupid wanker, etc. are tolerated in moderation because it can simply slip out in the affect. At the first time Players will be muted for 1 to 12 hrs, the player voilates again, there would be a 24 hrs mute.And Players who are learn resistant , would get a mute till wipe end, after 3 times of violating.',
           'Incitement is not tolerated in chat or on paintings. At the first offense the affected player receives a warning (signs / paintings are destroyed). If repeated, the player gets a mute or 24 hours ban depending on the nature of the offense.',
           'Foreign advertising has a permanent ban to follow.',

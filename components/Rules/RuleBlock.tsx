@@ -1,3 +1,4 @@
+import Markdown from 'markdown-to-jsx';
 import Badge from '../UI/Badge';
 
 interface RuleBlockProps {
@@ -25,7 +26,9 @@ export default function RuleBlock({
             <p className="justify-self-end font-bold" key={index}>
               §{ruleIndex}.{index + 1}
             </p>{' '}
-            <p key={(index + 1) * 100}>{rule}</p>
+            <p key={(index + 1) * 100}>
+              <Markdown options={{ forceInline: true }}>{rule}</Markdown>
+            </p>
           </>
         );
       })}
