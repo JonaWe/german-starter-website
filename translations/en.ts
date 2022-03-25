@@ -101,4 +101,9 @@ export default {
       text: 'Upkeep is reduced to onethird of the normal upkeep.',
     },
   ],
+  signIn: {
+    title: 'Sign in',
+    email: 'E-Mail',
+    pass: 'Password'
+  },
 };

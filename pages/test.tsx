@@ -1,11 +1,14 @@
-import type { NextPage } from 'next';
-import { auth } from '../firebase/clientApp';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { useEffect } from 'react';
+
+import type { NextPage } from 'next';
+
 import axios from 'axios';
 import { getAuth, signOut } from 'firebase/auth';
-import PageHeader from '../components/PageHeader';
+import { useAuthState } from 'react-firebase-hooks/auth';
+
 import PageContent from '../components/PageContent';
+import PageHeader from '../components/PageHeader';
+import { auth } from '../firebase/clientApp';
 
 const Home: NextPage = () => {
   const [user] = useAuthState(auth);
@@ -13,15 +16,17 @@ const Home: NextPage = () => {
   useEffect(() => {
     if (!user) return;
 
-    user.getIdToken().then((token) => {
-      axios
-        .get(`/api/admin/promoteToAdmin`, {
-          headers: {"Authorization" : `Bearer ${token}`}
-        })
-        .then((response) => {
-          console.log(response);
-        });
-    });
+    user.getIdTokenResult().then((res) => console.log(res))
+    
+    //   user.getIdToken().then((token) => {
+    //     axios
+    //       .get(`/api/admin/promoteToAdmin`, {
+    //         headers: {"Authorization" : `Bearer ${token}`}
+    //       })
+    //       .then((response) => {
+    //         console.log(response);
+    //       });
+    //   });
   }, [user]);
 
   const logout = () =>

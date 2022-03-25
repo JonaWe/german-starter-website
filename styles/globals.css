@@ -24,6 +24,9 @@
   * {
     @apply text-sand-500;
   }
+  input{
+    @apply bg-background-200/20 text-lg p-3 focus-visible:outline-none
+  }
 }
 
 @tailwind components;
