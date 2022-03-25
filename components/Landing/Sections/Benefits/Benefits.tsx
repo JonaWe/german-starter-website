@@ -1,35 +1,11 @@
-import {
-  HiAcademicCap,
-  HiAdjustments,
-  HiChip,
-  HiPhone,
-  HiShieldCheck,
-  HiShoppingCart,
-} from 'react-icons/hi';
-
 import useLocalization from '../../../../hooks/useLocalization';
 import Card from './Card';
 
 interface Benefit {
   title: string;
   text: string;
-  id:
-    | 'shop'
-    | 'uptime'
-    | 'easy'
-    | 'activeAdmins'
-    | 'reducedUpkeep'
-    | 'hardware';
+  id: 'easy' | 'activeAdmins' | 'reducedUpkeep';
 }
-
-const icons = {
-  shop: <HiShoppingCart />,
-  uptime: <HiShieldCheck />,
-  easy: <HiAcademicCap />,
-  activeAdmins: <HiPhone />,
-  reducedUpkeep: <HiAdjustments />,
-  hardware: <HiChip />,
-};
 
 export default function Benefits() {
   const t = useLocalization();
@@ -40,9 +16,9 @@ export default function Benefits() {
         return (
           <Card
             key={benefit.id}
+            id={benefit.id}
             title={benefit.title}
             text={benefit.text}
-            icon={icons[benefit.id]}
           />
         );
       })}
