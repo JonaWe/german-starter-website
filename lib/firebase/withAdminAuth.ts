@@ -1,14 +1,10 @@
-import { getAuth } from 'firebase-admin/auth';
-import { FirebaseApp } from 'firebase/app';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { admin } from '../../firebase/admin/firebaseAdmin';
+import { auth } from '../../firebase/admin/firebaseAdmin';
 
 export default async function withAdminAuth(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const auth = getAuth(admin as FirebaseApp);
-
   const authorization = req.headers.authorization;
 
   if (!authorization) return res.status(401).json('No Auth provided');
