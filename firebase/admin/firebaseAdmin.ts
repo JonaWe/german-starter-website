@@ -1,10 +1,12 @@
-import { App, initializeApp } from 'firebase-admin/app';
+import { App, getApp, getApps, initializeApp } from 'firebase-admin/app';
 import { credential } from 'firebase-admin';
-import { getApp } from 'firebase/app';
 
-let admin: App;
+let admin: App 
 
-try {
+try { 
+  admin = getApp('admin')
+} catch (e) {
+  console.log((e as Error).message, getApps());
   admin = initializeApp(
     {
       credential: credential.cert({
@@ -13,11 +15,8 @@ try {
         projectId: process.env.PROJECT_ID,
       }),
     },
-    'serviceApp'
-  );
-} catch (error) {
-  if (!/already exists/u.test((error as Error).message))
-    admin = getApp('serviceApp');
+    'admin'
+  )
 }
 
 export { admin };
