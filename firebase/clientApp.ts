@@ -3,7 +3,7 @@ import { initializeApp, getApps, getApp } from 'firebase/app';
 import { firebaseConfig } from '../config/firebaseClient.config';
 import { getFirestore } from 'firebase/firestore';
 
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+const app = getApps().length === 0 ? initializeApp(firebaseConfig, 'clientApp') : getApp('clientApp');
 const auth = getAuth(app);
 const db = getFirestore(app);
 
