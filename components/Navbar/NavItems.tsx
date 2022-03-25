@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { AnimateSharedLayout } from 'framer-motion';
@@ -46,22 +47,34 @@ export default function NavItems() {
   }, [router]);
 
   return (
-    <nav>
-      <ul className="flex flex-row gap-7 justify-self-end">
-        <AnimateSharedLayout>
-          {navigationItems.map(({ id, href, external }, index) => {
-            return (
-              <NavLink
-                text={t.navigation[id]}
-                href={href}
-                externalLink={external}
-                selected={activeItem === href}
-                key={index}
-              />
-            );
-          })}
-        </AnimateSharedLayout>
-      </ul>
-    </nav>
+    <>
+      <Head>
+        <title>
+          German Starter |{' '}
+          {
+            t.navigation[
+              navigationItems.find((item) => item.href === activeItem)!.id
+            ]
+          }
+        </title>
+      </Head>
+      <nav>
+        <ul className="flex flex-row gap-7 justify-self-end">
+          <AnimateSharedLayout>
+            {navigationItems.map(({ id, href, external }, index) => {
+              return (
+                <NavLink
+                  text={t.navigation[id]}
+                  href={href}
+                  externalLink={external}
+                  selected={activeItem === href}
+                  key={index}
+                />
+              );
+            })}
+          </AnimateSharedLayout>
+        </ul>
+      </nav>
+    </>
   );
 }
