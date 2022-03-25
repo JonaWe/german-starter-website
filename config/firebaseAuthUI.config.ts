@@ -1,4 +1,5 @@
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+
 export const uiConfig = (
   githubAuth: GithubAuthProvider,
   googleAuth: GoogleAuthProvider

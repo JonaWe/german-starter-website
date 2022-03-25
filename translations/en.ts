@@ -11,6 +11,10 @@ export default {
     rules: 'Rules',
     playerstats: 'Playerstats',
   },
+  commandPallet: {
+    noResults: 'No results for ',
+    searchPlaceholder: 'Search...',
+  },
   newsPage: {
     title: 'News',
   },
@@ -81,11 +85,6 @@ export default {
   },
   benefits: [
     {
-      id: 'uptime',
-      title: 'Highest uptime',
-      text: 'With one of the highest possible uptimes we are allways up to play.',
-    },
-    {
       id: 'easy',
       title: 'Frendly for beginners',
       text: 'We and our community are here to help you get started.',
@@ -99,16 +98,6 @@ export default {
       id: 'reducedUpkeep',
       title: 'Reduced upkeep',
       text: 'Upkeep is reduced to onethird of the normal upkeep.',
-    },
-    {
-      id: 'hardware',
-      title: 'Newest hardware',
-      text: 'This is definitly a placeholder and has to be replaced later',
-    },
-    {
-      id: 'shop',
-      title: 'Ingame shop.',
-      text: 'This is definitly a placeholder and has to be replaced later',
     },
   ],
 };

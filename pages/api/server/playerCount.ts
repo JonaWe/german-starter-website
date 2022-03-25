@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+
 import { queryGameServerPlayer } from 'steam-server-query';
 
 export default async function handler(

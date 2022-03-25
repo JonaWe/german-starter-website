@@ -1,4 +1,5 @@
 import Markdown from 'markdown-to-jsx';
+
 import Badge from '../UI/Badge';
 
 interface RuleBlockProps {

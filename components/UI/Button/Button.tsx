@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import { MouseEventHandler } from 'react';
+
+import Link from 'next/link';
 
 interface ButtonProps {
   text: string;

@@ -1,6 +1,7 @@
-import { HiClipboard, HiClipboardCheck } from 'react-icons/hi';
 import { useState } from 'react';
+
 import { AnimatePresence, motion } from 'framer-motion';
+import { HiClipboard, HiClipboardCheck } from 'react-icons/hi';
 
 interface CopyBtnProps {
   text: string;

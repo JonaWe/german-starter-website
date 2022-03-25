@@ -1,8 +1,9 @@
-import useLocalization from '../hooks/useLocalization';
 import { NextPage } from 'next';
-import RuleBlock from '../components/Rules/RuleBlock';
-import PageHeader from '../components/PageHeader';
+
 import PageContent from '../components/PageContent/PageContent';
+import PageHeader from '../components/PageHeader';
+import RuleBlock from '../components/Rules/RuleBlock';
+import useLocalization from '../hooks/useLocalization';
 
 const Rules: NextPage = () => {
   const t = useLocalization();

@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+
 import de from '../translations/de';
 import en from '../translations/en';
 
