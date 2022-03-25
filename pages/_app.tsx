@@ -1,16 +1,32 @@
+import type { ReactElement, ReactNode } from 'react';
+
+import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 
 import { NextSeo } from 'next-seo';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import Layout from '../components/Layout';
+import CommandPallet from '../components/CommandPallet';
+import Navbar from '../components/Navbar';
 import '../styles/globals.css';
+
+export type NextPageWithLayout<T = {}> = NextPage<T> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
 
 const queryClient = new QueryClient();
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page);
+
   return (
     <QueryClientProvider client={queryClient}>
+      <Navbar />
+      <CommandPallet />
       <NextSeo
         title="German Starter Server"
         description="German Starter Server"
@@ -30,9 +46,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           ],
         }}
       />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      {getLayout(<Component {...pageProps} />)}
     </QueryClientProvider>
   );
 }

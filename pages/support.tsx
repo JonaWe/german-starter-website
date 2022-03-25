@@ -1,19 +1,14 @@
-import { NextPage } from 'next';
-
-import PageContent from '../components/PageContent';
-import PageHeader from '../components/PageHeader';
+import { getDefaultLayout } from '../components/Layout/DefaultLayout';
+import { useSetHeading } from '../context/defaultLayoutHeadingContext';
 import useLocalization from '../hooks/useLocalization';
+import { NextPageWithLayout } from './_app';
 
-const Support: NextPage = () => {
+const Support: NextPageWithLayout = () => {
   const t = useLocalization();
-  return (
-    <>
-      <PageHeader imageURL="/assets/images/support_banner.jpg">
-        <h1>{t.supportPage.title}</h1>
-      </PageHeader>
-      <PageContent>Support</PageContent>
-    </>
-  );
+  useSetHeading(t.supportPage.title);
+  return <>Support</>;
 };
+
+Support.getLayout = getDefaultLayout('/assets/images/support_banner.jpg');
 
 export default Support;
