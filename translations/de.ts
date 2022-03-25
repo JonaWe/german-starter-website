@@ -4,6 +4,7 @@ export default {
   joinBtn: 'Server beitreten',
   headerText: `sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takim`,
   serverDescription: `[EU] German Starter ist ein einsteigerfreundlicher PvP Server. (das heißt nicht, dass du nicht getötet wirst) Das bedeutet, wenn du Fragen zum Spiel und zur Spielweise hast, werden diese beantwortet. Solltest du falsch gebaut haben, kannst du einen der Admins bitten, dir beim Entfernen einer Mauer zu helfen. Vollständige Wipes werden durchgeführt, wenn Facepunch seine monatlichen Patches durchführt. Bitte lest unsere Serverregeln, um Missverständnisse zu vermeiden`,
+  pageNotFound: 'Seite nicht gefunden',
   navigation: {
     home: 'Home',
     news: 'News',
