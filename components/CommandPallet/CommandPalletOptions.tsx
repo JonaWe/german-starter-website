@@ -30,7 +30,7 @@ export default function CommandPalletOptions({
           className="h-fit max-h-[30vh] overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-background-300 scrollbar-track-background-500 hover:scrollbar-thumb-background-200"
         >
           {filteredNavigationItems.map((item) => (
-            <CommandPalletOption item={item} />
+            <CommandPalletOption item={item} key={item.id} />
           ))}
         </Combobox.Options>
       )}

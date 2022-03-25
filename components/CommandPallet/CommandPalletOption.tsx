@@ -12,7 +12,7 @@ export default function CommandPalletOption({
 }: CommandPalletOptionProps) {
   const t = useLocalization();
   return (
-    <Combobox.Option value={item.href} key={item.id}>
+    <Combobox.Option value={item.href}>
       {({ active }) => (
         <div className={`space-x-1 px-4 py-2 ${active ? 'bg-rust-500' : ''}`}>
           <span
