@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import useLocalization from '../../hooks/useLocalization';
 import NavLink from './NavLink';
 
-interface NavigationItem {
+export interface NavigationItem {
   id: 'home' | 'news' | 'support' | 'rules' | 'playerstats';
   href: string;
   external: boolean;
