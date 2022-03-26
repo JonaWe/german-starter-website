@@ -30,7 +30,7 @@ const News: NextPageWithLayout<NewsPageProps> = ({
   const { locale } = useRouter();
   useSetHeading(t.newsPage.title);
   return (
-    <>
+    <section className="flex justify-center">
       {(!newsItems || newsItems.length === 0) && <p>No News found!</p>}
       {newsItems &&
         newsItems.map(({ en, de, releaseDate }, index) => {
@@ -44,7 +44,7 @@ const News: NextPageWithLayout<NewsPageProps> = ({
             />
           );
         })}
-    </>
+    </section>
   );
 };
 

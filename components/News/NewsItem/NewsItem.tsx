@@ -14,8 +14,8 @@ export default function NewsItem({
   releaseDate,
 }: NewsItemProps) {
   return (
-    <article className="relative inline-block bg-background-600 px-10 pb-10 pt-14">
-      <Badge className="absolute -top-6 -left-6">{title}</Badge>
+    <article className="relative inline-block bg-background-600 px-10 pb-10 pt-14 sm:w-4/6 w-full max-w-screen-2xl">
+      <Badge className="absolute -top-6 left-6">{title}</Badge>
       <div className="prose prose-invert prose-red">
         <Markdown>{content}</Markdown>
       </div>
