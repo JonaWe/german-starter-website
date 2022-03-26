@@ -27,12 +27,13 @@ const requirements = [
 export default function PasswordMeter({ password }: PasswordMeterProps) {
   return (
     <div>
-      {requirements.map((req, i) => {
+      {requirements.map(req => {
         return (
           <PasswordRequirement
             name={req.name}
             pattern={req.pattern}
             password={password}
+            key={req.name}
           />
         );
       })}

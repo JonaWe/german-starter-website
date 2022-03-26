@@ -18,12 +18,12 @@ export default function PasswordRequirement({
       <HiShieldCheck
         className={`${
           password?.match(pattern) ? 'fill-green-600' : 'fill-sand-500/20'
-        }`}
+        } transition-colors`}
       />
       <p
         className={`${
           password?.match(pattern) ? 'text-sand-500' : 'text-sand-500/50'
-        } text-xs`}
+        } text-xs transition-colors`}
       >
         {name}
       </p>
