@@ -18,7 +18,7 @@ export default function CommandPalletSearchBar({
         onChange={(event) => {
           setSearchQuery(event.target.value);
         }}
-        className="w-full border-0 bg-transparent text-sand-500 placeholder-sand-700 focus:outline-none"
+        className="w-full border-0 bg-transparent text-sand-500 placeholder-sand-700 focus:outline-none focus-visible:ring-0"
         placeholder={t.commandPallet.searchPlaceholder}
       />
     </div>
