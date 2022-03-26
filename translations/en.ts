@@ -104,6 +104,8 @@ export default {
   signIn: {
     title: 'Sign in',
     email: 'E-Mail',
-    pass: 'Password'
+    pass: 'Password',
+    passConf: 'Confirm password',
+    signUp: 'Sign up'
   },
 };

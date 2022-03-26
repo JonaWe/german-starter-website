@@ -16,13 +16,17 @@ const Home: NextPage = () => {
   useEffect(() => {
     if (!user) return;
 
-    user.getIdTokenResult().then((res) => console.log(res))
-    
+    user.getIdTokenResult().then((res) => console.log(res));
+
     //   user.getIdToken().then((token) => {
     //     axios
-    //       .get(`/api/admin/promoteToAdmin`, {
-    //         headers: {"Authorization" : `Bearer ${token}`}
-    //       })
+    //       .post(
+    //         `/api/admin/promoteToAdmin`,
+    //         {uid: "99PhxR0hoqQRvZQclvs9tKVCUZg1"},
+    //         {
+    //           headers: { Authorization: `Bearer ${token}` },
+    //         }
+    //       )
     //       .then((response) => {
     //         console.log(response);
     //       });
