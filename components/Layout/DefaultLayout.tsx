@@ -1,6 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 
 import { DefaultLayoutHeadingContextProvider } from '../../context/defaultLayoutHeadingContext';
+import Footer from '../Footer';
 import PageContent from '../PageContent';
 import PageHeader from '../PageHeader';
 
@@ -17,6 +18,7 @@ function DefaultLayout({ children, imageURL }: LayoutProps) {
         <h1>{heading}</h1>
       </PageHeader>
       <PageContent>{children}</PageContent>
+      <Footer />
     </DefaultLayoutHeadingContextProvider>
   );
 }
