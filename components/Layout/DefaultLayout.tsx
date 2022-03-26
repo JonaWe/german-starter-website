@@ -10,7 +10,7 @@ interface LayoutProps {
 }
 
 function DefaultLayout({ children, imageURL }: LayoutProps) {
-  const [heading, setHeading] = useState<React.ReactNode>(<h1>Title</h1>);
+  const [heading, setHeading] = useState<string>('Title');
   return (
     <DefaultLayoutHeadingContextProvider value={{ setHeading }}>
       <PageHeader imageURL={imageURL}>
@@ -22,7 +22,7 @@ function DefaultLayout({ children, imageURL }: LayoutProps) {
 }
 
 export function getDefaultLayout(imageURL: string) {
-  return function (page: ReactElement) {
+  return function getLayout(page: ReactElement) {
     return <DefaultLayout imageURL={imageURL}>{page}</DefaultLayout>;
   };
 }
