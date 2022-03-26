@@ -102,11 +102,11 @@ export default {
     },
   ],
   signIn: {
-    title: 'Einloggen',
+    title: 'Anmelden',
     email: 'E-Mail',
     pass: 'Passwort',
     passConf: 'Passwort bestätigen',
-    signUp: 'Anmelden'
+    signUp: 'Registrieren'
   },
   signUp: {
     success: 'Dein Profil wurde erfolgreich erstellt!'
