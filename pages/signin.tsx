@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -29,7 +30,12 @@ const schema = yup
 const SignIn: NextPage = () => {
   const [user] = useAuthState(auth);
   const [authError, setAuthError] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
   const t = useLocalization();
+
+  const router = useRouter();
+
+  const { successUrl } = router.query;
 
   const {
     register,
@@ -42,13 +48,18 @@ const SignIn: NextPage = () => {
   });
 
   const onSubmit = handleSubmit((data) => {
-    signInWithEmailAndPassword(auth, data.email, data.password).catch(
-      (error) => {
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then(() => {
+        if (successUrl) router.push('/' + successUrl);
+        else router.push('/');
+      })
+      .catch((error) => {
         if (error.message.includes(AUTH_ERRORS.USER_NOT_FOUND))
           setAuthError('User not found!');
+        else if (error.message.includes(AUTH_ERRORS.INVALID_PASSWORD))
+          setAuthError('Invalid password!');
         else setAuthError('Ups, something wrong!');
-      }
-    );
+      });
   });
 
   const authConfig = uiConfig(githubAuth, googleAuth);
@@ -91,10 +102,11 @@ const SignIn: NextPage = () => {
             )}
             <button
               type="submit"
+              disabled={loading}
               className="font-bebas text-xl py-2 px-4 flex items-center gap-1 text-sand-500 transition duration-150 bg-rust-500 hover:bg-rust-600 w-fit mx-auto"
             >
               {t.signIn.title}
-              {/* <Spinner className="fill-sand-600 text-white" /> */}
+              {loading && <Spinner className="fill-sand-600 text-white" />}
             </button>
           </div>
           <Divider className="mt-5 " />

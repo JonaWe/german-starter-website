@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import Footer from '../components/Footer';
 
 import Header from '../components/Landing/Header';
 import Benefits from '../components/Landing/Sections/Benefits/Benefits';
@@ -17,6 +18,7 @@ const Home: NextPage = () => {
         <Community />
         <Benefits />
       </PageContent>
+      <Footer />
     </div>
   );
 };

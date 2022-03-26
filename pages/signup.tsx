@@ -80,7 +80,7 @@ const SignIn: NextPage = () => {
 
   const authConfig = uiConfig(githubAuth, googleAuth);
 
-  return success ? (
+  return !success ? (
     <>
       <PageContent className="flex items-center h-[90vh]">
         <form
@@ -140,6 +140,7 @@ const SignIn: NextPage = () => {
             )}
             <button
               type="submit"
+              disabled={loading}
               className="font-bebas text-xl py-2 px-4 flex items-center gap-2 text-sand-500 transition duration-150 bg-rust-500 hover:bg-rust-600 w-fit mx-auto"
             >
               {t.signIn.signUp}
