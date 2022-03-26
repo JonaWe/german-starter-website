@@ -78,7 +78,7 @@ const SignIn: NextPage = () => {
       });
   });
 
-  const authConfig = uiConfig(githubAuth, googleAuth);
+  const authConfig = uiConfig(githubAuth, googleAuth, successUrl ? successUrl.toString() : '');
 
   return !success ? (
     <>

@@ -2,10 +2,11 @@ import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 
 export const uiConfig = (
   githubAuth: GithubAuthProvider,
-  googleAuth: GoogleAuthProvider
+  googleAuth: GoogleAuthProvider,
+  signInSuccessUrl: string
 ) => {
   return {
-    signInSuccessUrl: '/app',
+    signInSuccessUrl: '/' + signInSuccessUrl,
     signInOptions: [githubAuth.providerId, googleAuth.providerId],
   };
 };

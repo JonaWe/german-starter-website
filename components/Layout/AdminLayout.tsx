@@ -22,12 +22,12 @@ function AdminLayout({ children }: LayoutProps) {
     console.log(loading, user, tokenResult);
     if (loading) {
     } else if (!loading && !user) {
-      router.push('/signin');
+      router.push('/signin?successUrl=admin');
     } else if (user && !tokenResult) {
       user.getIdTokenResult().then((value) => setTokenResult(value));
     } else if (tokenResult) {
       if (!tokenResult.claims.admin) {
-        router.push('/signin');
+        router.push('/signin?successUrl=admin');
       }
     }
   }, [user, loading, router, tokenResult]);
