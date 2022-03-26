@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { NextPage } from 'next';
 
@@ -12,6 +12,7 @@ import * as yup from 'yup';
 
 import PageContent from '../components/PageContent';
 import PageHeader from '../components/PageHeader';
+import PasswordMeter from '../components/PasswordMeter';
 import Divider from '../components/UI/Divider';
 import Spinner from '../components/UI/Spinner';
 import { uiConfig } from '../config/firebaseAuthUI.config';
@@ -45,7 +46,7 @@ const SignIn: NextPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
+    watch,
     reset,
   } = useForm({
     resolver: yupResolver(schema),
@@ -54,8 +55,8 @@ const SignIn: NextPage = () => {
   const onSubmit = handleSubmit((data) => {
     signInWithEmailAndPassword(auth, data.email, data.password).catch(
       (error) => {
-        if (error.message.includes(AUTH_ERRORS.USER_NOT_FOUND))
-          setAuthError('User not found!');
+        if (error.message.includes(AUTH_ERRORS.EMAIL_ALREADY_EXIST))
+          setAuthError('Email allready exists!');
         else setAuthError('Ups, something wrong!');
       }
     );
@@ -114,6 +115,7 @@ const SignIn: NextPage = () => {
                 </div>
               )}
             </div>
+            <PasswordMeter password={watch().password} />
             {authError && (
               <div className="bg-red-900 p-4 text-xs">{authError}</div>
             )}
