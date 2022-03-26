@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import type { NextPage } from 'next';
+import Image from 'next/image';
 
 import axios from 'axios';
 import { getAuth, signOut } from 'firebase/auth';

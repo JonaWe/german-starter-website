@@ -3,6 +3,7 @@ import JoinButton from '../Buttons/JoinButton';
 import LanguageSelection from './LanguageSelection';
 import NavItems from './NavItems';
 import NavLogo from './NavLogo';
+import NavUserMenu from './NavUserMenu';
 
 export default function Navbar() {
   const scrollDistance = useScrollDistance();
@@ -22,8 +23,8 @@ export default function Navbar() {
         </div>
         <div className="flex flex-row place-content-between items-center gap-7">
           <NavItems />
-          <JoinButton />
         </div>
+        <NavUserMenu />
       </div>
     </header>
   );
