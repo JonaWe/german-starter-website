@@ -6,6 +6,7 @@ import { IdTokenResult } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { auth } from '../../firebase/clientApp';
+import AdminNav from '../Admin/AdminNav';
 import LoadingScreen from '../UI/LoadingScreen';
 
 interface LayoutProps {
@@ -34,7 +35,12 @@ function AdminLayout({ children }: LayoutProps) {
 
   if (!tokenResult?.claims.admin) return <LoadingScreen />;
 
-  return <>{children}</>;
+  return (
+    <div className="flex">
+      <AdminNav />
+      {children}
+    </div>
+  );
 }
 
 export function getAdminLayout(page: ReactElement) {
