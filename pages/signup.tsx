@@ -3,7 +3,10 @@ import { useEffect, useState } from 'react';
 import { NextPage } from 'next';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { useForm } from 'react-hook-form';
@@ -18,6 +21,7 @@ import Spinner from '../components/UI/Spinner';
 import { uiConfig } from '../config/firebaseAuthUI.config';
 import { auth, githubAuth, googleAuth } from '../firebase/clientApp';
 import useLocalization from '../hooks/useLocalization';
+import addAvatar from '../lib/firebase/addAvatar';
 import { AUTH_ERRORS } from '../lib/firebase/errors';
 
 const schema = yup
@@ -53,13 +57,17 @@ const SignIn: NextPage = () => {
   });
 
   const onSubmit = handleSubmit((data) => {
-    signInWithEmailAndPassword(auth, data.email, data.password).catch(
-      (error) => {
+    createUserWithEmailAndPassword(auth, data.email, data.password)
+      .then(() => {
+        console.log('creating user');
+        
+        addAvatar();
+      })
+      .catch((error) => {
         if (error.message.includes(AUTH_ERRORS.EMAIL_ALREADY_EXIST))
           setAuthError('Email allready exists!');
         else setAuthError('Ups, something wrong!');
-      }
-    );
+      });
   });
 
   const authConfig = uiConfig(githubAuth, googleAuth);
