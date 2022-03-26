@@ -3,6 +3,7 @@ import PasswordRequirement from './PasswordRequirement';
 
 interface PasswordMeterProps {
   password: string;
+  confirmPassword: string;
 }
 
 const requirements = [
@@ -24,10 +25,17 @@ const requirements = [
   },
 ];
 
-export default function PasswordMeter({ password }: PasswordMeterProps) {
+export default function PasswordMeter({
+  password,
+  confirmPassword,
+}: PasswordMeterProps) {
+
+  console.log(new RegExp(`(?=\\b${confirmPassword}\\b)(?=^\\S+$)`));
+  
+
   return (
     <div>
-      {requirements.map(req => {
+      {requirements.map((req) => {
         return (
           <PasswordRequirement
             name={req.name}
@@ -37,6 +45,11 @@ export default function PasswordMeter({ password }: PasswordMeterProps) {
           />
         );
       })}
+      {/* <PasswordRequirement
+        name="Passwords match"
+        pattern={new RegExp(`(?=\\b${confirmPassword}\\b)(?=^\\S+$)`)}
+        password={password}
+      /> */}
     </div>
   );
 }

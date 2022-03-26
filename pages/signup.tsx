@@ -4,8 +4,7 @@ import { NextPage } from 'next';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword
 } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
@@ -123,7 +122,7 @@ const SignIn: NextPage = () => {
                 </div>
               )}
             </div>
-            <PasswordMeter password={watch().password} />
+            <PasswordMeter password={watch().password} confirmPassword={watch().passwordRepeat} />
             {authError && (
               <div className="bg-red-900 p-4 text-xs">{authError}</div>
             )}
