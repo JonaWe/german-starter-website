@@ -108,4 +108,7 @@ export default {
     passConf: 'Passwort bestätigen',
     signUp: 'Anmelden'
   },
+  signUp: {
+    success: 'Dein Profil wurde erfolgreich erstellt!'
+  }
 };

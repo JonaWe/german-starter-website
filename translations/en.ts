@@ -108,4 +108,7 @@ export default {
     passConf: 'Confirm password',
     signUp: 'Sign up'
   },
+  signUp: {
+    success: 'Your account has been created successfully!'
+  }
 };

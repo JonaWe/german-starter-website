@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  createUserWithEmailAndPassword
-} from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { useForm } from 'react-hook-form';
@@ -22,6 +21,7 @@ import { auth, githubAuth, googleAuth } from '../firebase/clientApp';
 import useLocalization from '../hooks/useLocalization';
 import addAvatar from '../lib/firebase/addAvatar';
 import { AUTH_ERRORS } from '../lib/firebase/errors';
+import SuccessScreen from '../components/UI/SuccessScreen';
 
 const schema = yup
   .object({
@@ -43,6 +43,13 @@ const schema = yup
 const SignIn: NextPage = () => {
   const [user] = useAuthState(auth);
   const [authError, setAuthError] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean>(false);
+
+  const router = useRouter();
+
+  const { successUrl } = router.query;
+
   const t = useLocalization();
 
   const {
@@ -56,22 +63,24 @@ const SignIn: NextPage = () => {
   });
 
   const onSubmit = handleSubmit((data) => {
+    setLoading(true);
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
-        console.log('creating user');
-        
         addAvatar();
+        if (successUrl) router.push('/' + successUrl);
+        else setSuccess(true);
       })
       .catch((error) => {
-        if (error.message.includes(AUTH_ERRORS.EMAIL_ALREADY_EXIST))
-          setAuthError('Email allready exists!');
+        if (error.message.includes(AUTH_ERRORS.EMAIL_ALREADY_IN_USE))
+          setAuthError('Email allready in use!');
         else setAuthError('Ups, something wrong!');
+        setLoading(false);
       });
   });
 
   const authConfig = uiConfig(githubAuth, googleAuth);
 
-  return (
+  return success ? (
     <>
       <PageContent className="flex items-center h-[90vh]">
         <form
@@ -122,16 +131,19 @@ const SignIn: NextPage = () => {
                 </div>
               )}
             </div>
-            <PasswordMeter password={watch().password} confirmPassword={watch().passwordRepeat} />
+            <PasswordMeter
+              password={watch().password}
+              confirmPassword={watch().passwordRepeat}
+            />
             {authError && (
               <div className="bg-red-900 p-4 text-xs">{authError}</div>
             )}
             <button
               type="submit"
-              className="font-bebas text-xl py-2 px-4 flex items-center gap-1 text-sand-500 transition duration-150 bg-rust-500 hover:bg-rust-600 w-fit mx-auto"
+              className="font-bebas text-xl py-2 px-4 flex items-center gap-2 text-sand-500 transition duration-150 bg-rust-500 hover:bg-rust-600 w-fit mx-auto"
             >
               {t.signIn.signUp}
-              {/* <Spinner className="fill-sand-600 text-white" /> */}
+              {loading && <Spinner className="fill-sand-600 text-white" />}
             </button>
           </div>
           <Divider className="mt-5 " />
@@ -139,6 +151,8 @@ const SignIn: NextPage = () => {
         </form>
       </PageContent>
     </>
+  ) : (
+    <SuccessScreen title={t.signUp.success} />
   );
 };
 

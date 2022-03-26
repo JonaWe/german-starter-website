@@ -29,10 +29,6 @@ export default function PasswordMeter({
   password,
   confirmPassword,
 }: PasswordMeterProps) {
-
-  console.log(new RegExp(`(?=\\b${confirmPassword}\\b)(?=^\\S+$)`));
-  
-
   return (
     <div>
       {requirements.map((req) => {
