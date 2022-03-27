@@ -1,3 +1,5 @@
+import Markdown from 'markdown-to-jsx';
+
 import Badge from '../UI/Badge';
 
 interface RuleBlockProps {
@@ -15,21 +17,23 @@ export default function RuleBlock({
 }: RuleBlockProps) {
   return (
     <section
-      className="bg-background-400 relative px-14 pt-10 pb-7 max-w-screen-xl mt-20 grid gap-x-3 gap-y-4"
+      className="relative mt-20 grid max-w-screen-xl gap-x-3 gap-y-4 bg-background-400 px-14 pt-10 pb-7"
       style={{ gridTemplateColumns: 'min-content auto' }}
     >
       <Badge text={title} className="absolute -translate-y-6 translate-x-8" />
       {rules.map((rule, index) => {
         return (
           <>
-            <p className="font-bold justify-self-end" key={index}>
+            <p className="justify-self-end font-bold" key={index}>
               §{ruleIndex}.{index + 1}
             </p>{' '}
-            <p key={(index + 1) * 100}>{rule}</p>
+            <Markdown key={(index + 1) * 100} options={{ forceInline: true }}>
+              {rule}
+            </Markdown>
           </>
         );
       })}
-      {comment && <p className="italic mb-3 col-span-2">{comment}</p>}
+      {comment && <p className="col-span-2 mb-3 italic">{comment}</p>}
     </section>
   );
 }

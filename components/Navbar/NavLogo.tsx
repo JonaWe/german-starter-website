@@ -1,5 +1,17 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function NavLogo() {
-  return <Image src="/assets/images/logo.png" height={30} width={30} />;
+  return (
+    <Link href="/">
+      <a>
+        <Image
+          src="/assets/images/logo.png"
+          height={50}
+          width={50}
+          alt="German Starter Logo"
+        />
+      </a>
+    </Link>
+  );
 }

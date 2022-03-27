@@ -1,9 +1,10 @@
 import type { NextPage } from 'next';
+import Footer from '../components/Footer';
+
 import Header from '../components/Landing/Header';
+import Benefits from '../components/Landing/Sections/Benefits/Benefits';
 import Community from '../components/Landing/Sections/Community';
 import Server from '../components/Landing/Sections/Server';
-import Benefits from '../components/Landing/Sections/Benefits/Benefits';
-import Navbar from '../components/Navbar';
 import PageContent from '../components/PageContent';
 import useLocalization from '../hooks/useLocalization';
 
@@ -17,6 +18,7 @@ const Home: NextPage = () => {
         <Community />
         <Benefits />
       </PageContent>
+      <Footer />
     </div>
   );
 };

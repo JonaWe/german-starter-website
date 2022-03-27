@@ -1,31 +1,29 @@
-import useLocalization from '../hooks/useLocalization';
-import { NextPage } from 'next';
+import { getDefaultLayout } from '../components/Layout/DefaultLayout';
 import RuleBlock from '../components/Rules/RuleBlock';
-import PageHeader from '../components/PageHeader';
-import PageContent from '../components/PageContent/PageContent';
+import { useSetHeading } from '../context/defaultLayoutHeadingContext';
+import useLocalization from '../hooks/useLocalization';
+import type { NextPageWithLayout } from './_app';
 
-const Rules: NextPage = () => {
+const Rules: NextPageWithLayout = () => {
   const t = useLocalization();
+  useSetHeading(t.rulesPage.title);
   return (
     <>
-      <PageHeader imageURL="/assets/images/rules_banner.jpg">
-        <h1>{t.rulesPage.title}</h1>
-      </PageHeader>
-      <PageContent>
-        {t.rulesPage.ruleSets.map(({ title, rules, note }, ruleIndex) => {
-          return (
-            <RuleBlock
-              title={title}
-              rules={rules}
-              comment={note}
-              key={ruleIndex}
-              ruleIndex={ruleIndex + 1}
-            />
-          );
-        })}
-      </PageContent>
+      {t.rulesPage.ruleSets.map(({ title, rules, note }, ruleIndex) => {
+        return (
+          <RuleBlock
+            title={title}
+            rules={rules}
+            comment={note}
+            key={ruleIndex}
+            ruleIndex={ruleIndex + 1}
+          />
+        );
+      })}
     </>
   );
 };
+
+Rules.getLayout = getDefaultLayout('/assets/images/rules_banner.jpg');
 
 export default Rules;

@@ -1,16 +1,20 @@
-import { AnimateSharedLayout } from 'framer-motion';
+import { useEffect, useState } from 'react';
+
+import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+
+import { AnimateSharedLayout } from 'framer-motion';
+
 import useLocalization from '../../hooks/useLocalization';
 import NavLink from './NavLink';
 
-interface NavigationItem {
+export interface NavigationItem {
   id: 'home' | 'news' | 'support' | 'rules' | 'playerstats';
   href: string;
   external: boolean;
 }
 
-const navigationItems: NavigationItem[] = [
+export const navigationItems: NavigationItem[] = [
   { id: 'home', href: '/', external: false },
   { id: 'news', href: '/news', external: false },
   { id: 'support', href: '/support', external: false },
@@ -26,24 +30,51 @@ export default function NavItems() {
   const router = useRouter();
   const [activeItem, setActiveItem] = useState(router.asPath);
   const t = useLocalization();
+
+  useEffect(() => {
+    const updateActiveItem = (url: string) => {
+      const languagePrefixTrimmedURL = url.substring(url.lastIndexOf('/'));
+      setActiveItem(
+        languagePrefixTrimmedURL === '/en' ? '/' : languagePrefixTrimmedURL
+      );
+    };
+
+    router.events.on('routeChangeStart', updateActiveItem);
+
+    return () => {
+      router.events.off('routeChangeStart', updateActiveItem);
+    };
+  }, [router]);
+
+  const currentNavItem = navigationItems.find(
+    (item) => item.href === activeItem
+  );
+
   return (
-    <nav>
-      <ul className="flex flex-row gap-7 justify-self-end">
-        <AnimateSharedLayout>
-          {navigationItems.map(({ id, href, external }, index) => {
-            return (
-              <NavLink
-                text={t.navigation[id]}
-                href={href}
-                externalLink={external}
-                selected={activeItem === href}
-                key={index}
-                onClick={() => setActiveItem(href)}
-              />
-            );
-          })}
-        </AnimateSharedLayout>
-      </ul>
-    </nav>
+    <>
+      <Head>
+        <title>
+          German Starter |{' '}
+          {currentNavItem ? t.navigation[currentNavItem.id] : '404'}
+        </title>
+      </Head>
+      <nav>
+        <ul className="flex flex-row gap-7 justify-self-end">
+          <AnimateSharedLayout>
+            {navigationItems.map(({ id, href, external }, index) => {
+              return (
+                <NavLink
+                  text={t.navigation[id]}
+                  href={href}
+                  externalLink={external}
+                  selected={activeItem === href}
+                  key={index}
+                />
+              );
+            })}
+          </AnimateSharedLayout>
+        </ul>
+      </nav>
+    </>
   );
 }

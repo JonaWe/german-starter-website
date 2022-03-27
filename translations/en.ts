@@ -4,12 +4,17 @@ export default {
   joinBtn: 'Join server',
   serverDescription: `[EU] German Starter is a newbie friendly PvP Server. (that doesn't mean you won't be killed) That means if you have Questions about the game and how to play they will be answered. In case you've build wrong you can ask one of the Admins to help you removing a Wall. Full wipes are being done when Facepunch does their Monthly patches. Please read our Server rules to prevent misconceptions.`,
   headerText: `sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.`,
+  pageNotFound: 'Page not found',
   navigation: {
     home: 'Home',
     news: 'News',
     support: 'Support',
     rules: 'Rules',
     playerstats: 'Playerstats',
+  },
+  commandPallet: {
+    noResults: 'No results for ',
+    searchPlaceholder: 'Search...',
   },
   newsPage: {
     title: 'News',
@@ -23,7 +28,7 @@ export default {
       {
         title: '§1. General Rules',
         rules: [
-          `Beginner-friendly doesn't mean that beginners have special protection. It means that admins answer your questions (except on the topic of beginner-friendly) and that admins give you demolition help if you have obstructed yourself. It is up to each one himself how he plays as long as he is not cheated.`,
+          `Beginner-friendly **doesn't** mean that beginners have special protection. It **means** that admins answer your questions (except on the topic of beginner-friendly) and that admins give you demolition help if you have obstructed yourself. It is up to each one himself how he plays as long as he is not cheated.`,
           'Insults that go below the belt line are to be omitted (for example, son of a bitch, I hope your mother dies of cancer, etc.). Asshole, stupid wanker, etc. are tolerated in moderation because it can simply slip out in the affect. At the first time Players will be muted for 1 to 12 hrs, the player voilates again, there would be a 24 hrs mute.And Players who are learn resistant , would get a mute till wipe end, after 3 times of violating.',
           'Incitement is not tolerated in chat or on paintings. At the first offense the affected player receives a warning (signs / paintings are destroyed). If repeated, the player gets a mute or 24 hours ban depending on the nature of the offense.',
           'Foreign advertising has a permanent ban to follow.',
@@ -81,34 +86,29 @@ export default {
   },
   benefits: [
     {
-      id: 'uptime',
-      title:'Highest uptime',
-      text: 'With one of the highest possible uptimes we are allways up to play.',
-    },
-    {
       id: 'easy',
-      title:'Frendly for beginners',
+      title: 'Frendly for beginners',
       text: 'We and our community are here to help you get started.',
     },
     {
       id: 'activeAdmins',
-      title:'Active Admins',
+      title: 'Active Admins',
       text: 'A team of five admins is happy to help you.',
     },
     {
       id: 'reducedUpkeep',
-      title:'Reduced upkeep',
+      title: 'Reduced upkeep',
       text: 'Upkeep is reduced to onethird of the normal upkeep.',
     },
-    {
-      id: 'hardware',
-      title:'Newest hardware',
-      text: 'This is definitly a placeholder and has to be replaced later',
-    },
-    {
-      id: 'shop',
-      title:'Ingame shop.',
-      text: 'This is definitly a placeholder and has to be replaced later',
-    },
   ],
+  signIn: {
+    title: 'Sign in',
+    email: 'E-Mail',
+    pass: 'Password',
+    passConf: 'Confirm password',
+    signUp: 'Sign up'
+  },
+  signUp: {
+    success: 'Your account has been created successfully!'
+  }
 };

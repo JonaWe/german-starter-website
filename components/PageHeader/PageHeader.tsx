@@ -9,8 +9,8 @@ export default function PageHeader({ imageURL, children }: PageHeaderProps) {
   const scrollDistance = useScrollDistance();
 
   return (
-    <header className="w-screen h-[45vh] bg-cover relative flex justify-center items-end">
-      <div className="z-10 leading-none w-full max-w-screen-2xl block mb-8 2xl:ml-0 ml-8">
+    <header className="relative flex h-[45vh] w-screen items-end justify-center bg-cover">
+      <div className="z-10 mb-8 ml-8 block w-full max-w-screen-2xl leading-none 2xl:ml-0">
         {children}
       </div>
       <img
@@ -20,7 +20,7 @@ export default function PageHeader({ imageURL, children }: PageHeaderProps) {
           filter: `blur(${Math.floor(scrollDistance / 20)}px)`,
           opacity: 0.7 - 0.0015 * scrollDistance,
         }}
-        className={`object-cover w-full h-full absolute inset-0`}
+        className={`absolute inset-0 h-full w-full object-cover`}
       />
     </header>
   );

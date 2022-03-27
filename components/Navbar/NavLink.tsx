@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
 import Link from 'next/link';
+
+import { motion } from 'framer-motion';
 import { HiOutlineExternalLink } from 'react-icons/hi';
 
 interface NavLinkProps {
@@ -7,21 +8,18 @@ interface NavLinkProps {
   text: string;
   externalLink?: boolean;
   selected?: boolean;
-  onClick(): void;
 }
 export default function NavLink({
   href,
   text,
   externalLink,
   selected,
-  onClick,
 }: NavLinkProps) {
   return (
     <li>
       <Link href={href}>
         <a
-          className="font-bebas text-2xl lg:text-3xl [text-shadow:0_4px_8px_rgba(0,0,0,0.12)]"
-          onClick={externalLink ? () => 0 : onClick}
+          className="font-bebas text-2xl [text-shadow:0_4px_8px_rgba(0,0,0,0.12)] lg:text-3xl"
           target={externalLink ? '_blank' : '_self'}
         >
           <div className="relative w-fit">
@@ -32,12 +30,12 @@ export default function NavLink({
             >
               {text}
               {externalLink && (
-                <HiOutlineExternalLink className="text-xl translate-y-[-0.11rem]" />
+                <HiOutlineExternalLink className="translate-y-[-0.11rem] text-xl" />
               )}
             </div>
             {selected && (
               <motion.div
-                className="absolute bg-rust-500 opacity-85 top-full left-0 w-full h-1"
+                className="opacity-85 absolute top-full left-0 h-1 w-full bg-rust-500"
                 layoutId="underline"
               />
             )}

@@ -4,12 +4,17 @@ export default {
   joinBtn: 'Server beitreten',
   headerText: `sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takim`,
   serverDescription: `[EU] German Starter ist ein einsteigerfreundlicher PvP Server. (das heißt nicht, dass du nicht getötet wirst) Das bedeutet, wenn du Fragen zum Spiel und zur Spielweise hast, werden diese beantwortet. Solltest du falsch gebaut haben, kannst du einen der Admins bitten, dir beim Entfernen einer Mauer zu helfen. Vollständige Wipes werden durchgeführt, wenn Facepunch seine monatlichen Patches durchführt. Bitte lest unsere Serverregeln, um Missverständnisse zu vermeiden`,
+  pageNotFound: 'Seite nicht gefunden',
   navigation: {
     home: 'Home',
     news: 'News',
     support: 'Support',
     rules: 'Regeln',
     playerstats: 'Playerstats',
+  },
+  commandPallet: {
+    noResults: 'Keine Ergebnisse für ',
+    searchPlaceholder: 'Suchen...',
   },
   newsPage: {
     title: 'Neuigkeiten',
@@ -23,9 +28,9 @@ export default {
       {
         title: '§1. Allgemeine Regeln',
         rules: [
-          'Anfängerfreundlich bedeutet nicht, dass Anfänger einen besonderen Schutz haben. Es bedeutet das Admins euch Fragen beantworten (ausser zum Thema Anfängerfreundlich) und das Admins euch Abrisshilfe geben, falls ihr euch mal verbaut habt. Es ist jedem selbst überlassen, wie er spielt so lang er nicht cheated.',
+          'Anfängerfreundlich **bedeutet nicht**, dass Anfänger einen besonderen Schutz haben. Es **bedeutet** das Admins euch Fragen beantworten (ausser zum Thema Anfängerfreundlich) und das Admins euch Abrisshilfe geben, falls ihr euch mal verbaut habt. Es ist jedem selbst überlassen, wie er spielt so lang er nicht cheated.',
           'Beschimpfungen die unter die Gürtellinie gehen, sind zu unterlassen (z.B. Hurensohn, ich hoffe deine Mutter stirbt an Krebs usw). Arschloch, dummer Wichser usw. werden in Maßen geduldet da es im Affekt einfach mal raus rutschen kann. Sollte es aber ausarten bekommt der Spieler einen Mute. (Beim ersten Mal bekommt der Spieler einen Mute zwischen 1 – 12 Stunden. Verstößt er wiederholt, gibt es 24 Stunden. Spieler, die es einfach nicht lernen, bekommen bei dreimaligen Verstoß einen Mute bis Ende Wipe)',
-          'Volksverhetzung wird im Chat oder auf Gemälden nicht geduldet. Beim ersten Verstoß bekommt der betroffene Spieler eine Verwarnung (Schilder/Gemälde werden zerstört). Dies gilt auch zwecks Motiven in den Feuerwerken.Bei Wiederholung bekommt der Spieler je nach Art des Verstoßes einen mute oder 24 Stunden Ban.',
+          'Volksverhetzung wird im Chat oder auf Gemälden nicht geduldet. Beim ersten Verstoß bekommt der betroffene Spieler eine Verwarnung (Schilder/Gemälde werden zerstört). **Dies gilt auch zwecks Motiven in den Feuerwerken**. Bei Wiederholung bekommt der Spieler je nach Art des Verstoßes einen mute oder 24 Stunden Ban.',
           'Fremdwerbung hat einen permanent Ban zur folge.',
           'Auf unserem TS3 Server/Discord wird genau so ein vernünftiges Verhalten und anständiger Umgangston vorausgesetzt wie im Spiel selbst.',
           'Spam jeglicher Art, der das Spielgeschehen beeinträchtigt (Spam im Chat, laute Musik abspielen über Voice etc.) ist untersagt.',
@@ -42,9 +47,9 @@ export default {
         rules: [
           'Spieler mit einem VAC Ban/ Gameban unter 100 Tagen oder mehr wie zwei Bans werden von den Admins aussortiert. Egal in welchem Spiel diese ausgesprochen wurden.',
           'Wenn ein Spieler auf unseren Servern einen Ban durch Facepunch/ VAC bekommt liegt es in der Entscheidung der Admins ob das ganze Team gebannt wird.',
-          'Extrem auffällige Spieler müssen Videobeweis führen. Sollte sich an diese Abmachung nicht gehalten werden, wird ein Ban bis zum nächsten Fullwipe.',
+          'Extrem auffällige Spieler müssen Videobeweis führen. Sollte sich an diese Abmachung nicht gehalten werden, wird ein Ban bis zum nächsten **Fullwipe**.',
           'Die Admins entscheiden ob ein Spieler gebannt wird, sollte es ein dauerhafte Diskussion im Chat geben werden die beteiligten Spieler gemuted.',
-          'Bug using wird mit einem 24 Stunden Ban bestraft. Kommt es öfter vor, erfolgt ein Ban bis zum nächsten FullWipe.',
+          'Bug using wird mit einem 24 Stunden Ban bestraft. Kommt es öfter vor, erfolgt ein Ban bis zum nächsten **FullWipe**.',
           'Sollte ein Spieler vermehrt auffallen und des Cheatens beschuldigt werden, ist er dazu verpflichtet sein Profil (dem Admin gegenüber) offen darzulegen. Wird diese Bitte verweigert, kann dem Spieler das spielen auf dem Server "German Starter" untersagt werden.',
         ],
       },
@@ -77,38 +82,33 @@ export default {
   },
   community: {
     title: 'Purer Spass!',
-    text: `[EU] German Starter is a newbie friendly PvP Server. (that doesn't mean you won't be killed) That means if you have Questions about the game and how to play they will be answered. In case you've build wrong you can ask one of the Admins to help you removing a Wall. Full wipes are being done when Facepunch does their Monthly patches. Please read our Server rules to prevent misconceptions.`
+    text: `[EU] German Starter is a newbie friendly PvP Server. (that doesn't mean you won't be killed) That means if you have Questions about the game and how to play they will be answered. In case you've build wrong you can ask one of the Admins to help you removing a Wall. Full wipes are being done when Facepunch does their Monthly patches. Please read our Server rules to prevent misconceptions.`,
   },
   benefits: [
     {
-      id: 'uptime',
-      title:'Höchste uptime',
-      text: 'With one of the highest possible uptimes we are allways up to play.',
-    },
-    {
       id: 'easy',
-      title:'Anfängerfreundlich',
+      title: 'Anfängerfreundlich',
       text: 'We and our community are here to help you get started.',
     },
     {
       id: 'activeAdmins',
-      title:'Aktive Admins',
+      title: 'Aktive Admins',
       text: 'A team of five admins is happy to help you.',
     },
     {
       id: 'reducedUpkeep',
-      title:'Reduzierte upkeep',
+      title: 'Reduzierte upkeep',
       text: 'Upkeep is reduced to onethird of the normal upkeep.',
     },
-    {
-      id: 'hardware',
-      title:'Neuste hardware',
-      text: 'This is definitly a placeholder and has to be replaced later',
-    },
-    {
-      id: 'shop',
-      title:'Ingame shop.',
-      text: 'This is definitly a placeholder and has to be replaced later',
-    },
   ],
+  signIn: {
+    title: 'Anmelden',
+    email: 'E-Mail',
+    pass: 'Passwort',
+    passConf: 'Passwort bestätigen',
+    signUp: 'Registrieren'
+  },
+  signUp: {
+    success: 'Dein Profil wurde erfolgreich erstellt!'
+  }
 };

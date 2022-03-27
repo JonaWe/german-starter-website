@@ -1,4 +1,5 @@
 import { HiUserGroup } from 'react-icons/hi';
+
 import useLocalization from '../../../hooks/useLocalization';
 import DiscordButton from '../../Buttons/DiscordButton';
 import TeamspeakButton from '../../Buttons/TeamspeakButton';
@@ -8,17 +9,17 @@ export default function Community() {
   const t = useLocalization();
 
   return (
-    <section className="sm:mt-48 mx-auto sm:m-10 max-w-screen-xl md:flex gap-10 items-center">
-      <div className="md:h-72 w-full md:w-auto aspect-video relative">
+    <section className="mx-auto max-w-screen-xl items-center gap-10 sm:m-10 sm:mt-48 md:flex">
+      <div className="relative aspect-video w-full md:h-72 md:w-auto">
         <Badge
           text="Community"
-          className="translate-x-5 -translate-y-5 absolute"
+          className="absolute translate-x-5 -translate-y-5"
         >
           <HiUserGroup className="text-xl" />
         </Badge>
         <img
           src="/assets/images/community.png"
-          className="w-full h-full object-cover"
+          className="h-full w-full object-cover"
           alt=""
         />
       </div>

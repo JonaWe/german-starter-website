@@ -1,13 +1,15 @@
-import useLocalization from '../../../hooks/useLocalization';
-import Badge from '../../UI/Badge';
-import CopyButton from '../../Buttons/CopyButton';
-import useDocumentDataFromCollectionOnce from '../../../hooks/useDocumentDataFromCollectionOnce';
-import JoinButton from '../../Buttons/JoinButton';
-import Button from '../../UI/Button';
 import { useEffect } from 'react';
-import { useQuery } from 'react-query';
+
 import axios from 'axios';
+import { useQuery } from 'react-query';
+
+import useDocumentDataFromCollectionOnce from '../../../hooks/useDocumentDataFromCollectionOnce';
+import useLocalization from '../../../hooks/useLocalization';
+import CopyButton from '../../Buttons/CopyButton';
+import JoinButton from '../../Buttons/JoinButton';
 import PlayerCount from '../../PlayerCount';
+import Badge from '../../UI/Badge';
+import Button from '../../UI/Button';
 
 export default function Server() {
   const [serverConfig, loading, error] = useDocumentDataFromCollectionOnce(
@@ -23,8 +25,8 @@ export default function Server() {
       : '51.195.60.162:28015';
 
   return (
-    <section className="sm:mt-32 sm:m-10">
-      <div className="bg-background-400 h-full max-w-screen-md mx-auto p-5 pb-12 text-center">
+    <section className="sm:m-10 sm:mt-32">
+      <div className="mx-auto h-full max-w-screen-md bg-background-400 p-5 pb-12 text-center">
         <Badge text="Server" className="mx-auto -translate-y-10">
           <img src="/assets/icons/rust2.svg" alt="" className="w-7" />
         </Badge>
@@ -38,7 +40,7 @@ export default function Server() {
           />
         </div>
         <p>{t.serverDescription}</p>
-        <div className="flex gap-5 justify-center mt-6">
+        <div className="mt-6 flex justify-center gap-5">
           <JoinButton />
           <Button
             href="/rules"
