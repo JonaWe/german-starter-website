@@ -5,11 +5,7 @@ import type { NextPageWithLayout } from '../_app';
 
 const AdminUsers: NextPageWithLayout = () => {
   const t = useLocalization();
-  return (
-    <>
-      users
-    </>
-  );
+  return <>users</>;
 };
 
 AdminUsers.getLayout = getAdminLayout;

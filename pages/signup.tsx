@@ -16,12 +16,12 @@ import PageHeader from '../components/PageHeader';
 import PasswordMeter from '../components/PasswordMeter';
 import Divider from '../components/UI/Divider';
 import Spinner from '../components/UI/Spinner';
+import SuccessScreen from '../components/UI/SuccessScreen';
 import { uiConfig } from '../config/firebaseAuthUI.config';
 import { auth, githubAuth, googleAuth } from '../firebase/clientApp';
 import useLocalization from '../hooks/useLocalization';
 import addAvatar from '../lib/firebase/addAvatar';
 import { AUTH_ERRORS } from '../lib/firebase/errors';
-import SuccessScreen from '../components/UI/SuccessScreen';
 
 const schema = yup
   .object({
@@ -78,7 +78,11 @@ const SignIn: NextPage = () => {
       });
   });
 
-  const authConfig = uiConfig(githubAuth, googleAuth, successUrl ? successUrl.toString() : '');
+  const authConfig = uiConfig(
+    githubAuth,
+    googleAuth,
+    successUrl ? successUrl.toString() : ''
+  );
 
   return !success ? (
     <>

@@ -106,9 +106,9 @@ export default {
     email: 'E-Mail',
     pass: 'Password',
     passConf: 'Confirm password',
-    signUp: 'Sign up'
+    signUp: 'Sign up',
   },
   signUp: {
-    success: 'Your account has been created successfully!'
-  }
+    success: 'Your account has been created successfully!',
+  },
 };

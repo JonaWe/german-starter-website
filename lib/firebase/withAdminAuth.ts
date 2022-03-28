@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+
 import { auth } from '../../firebase/admin/firebaseAdmin';
 
 export default async function withAdminAuth(

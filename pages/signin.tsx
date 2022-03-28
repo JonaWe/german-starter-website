@@ -62,7 +62,11 @@ const SignIn: NextPage = () => {
       });
   });
 
-  const authConfig = uiConfig(githubAuth, googleAuth, successUrl ? successUrl.toString() : '');
+  const authConfig = uiConfig(
+    githubAuth,
+    googleAuth,
+    successUrl ? successUrl.toString() : ''
+  );
 
   return (
     <>
