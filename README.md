@@ -18,3 +18,5 @@
 </div>
 
 ## Setup
+### Database
+[Add full text search](https://www.mysqltutorial.org/activating-full-text-searching.aspx)

@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
@@ -71,6 +72,8 @@ model players {
   player_achievements    player_achievements[]
   player_wipe_stats      player_wipe_stats?
   pvelog_with_dublicates pvelog_with_dublicates[] @ignore
+
+  @@fulltext([name], map: "name")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
