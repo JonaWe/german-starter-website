@@ -1,7 +1,5 @@
 import { HiShieldCheck } from 'react-icons/hi';
 
-import useScrollDistance from '../../hooks/useScrollDistance';
-
 interface PasswordMeterProps {
   pattern: RegExp;
   password: string;

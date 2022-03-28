@@ -8,11 +8,9 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { useForm } from 'react-hook-form';
-import { MoonLoader } from 'react-spinners';
 import * as yup from 'yup';
 
 import PageContent from '../components/PageContent';
-import PageHeader from '../components/PageHeader';
 import Divider from '../components/UI/Divider';
 import Spinner from '../components/UI/Spinner';
 import { uiConfig } from '../config/firebaseAuthUI.config';

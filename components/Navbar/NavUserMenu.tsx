@@ -1,7 +1,6 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { auth } from '../../firebase/clientApp';

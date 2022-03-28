@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
@@ -8,11 +8,9 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { useForm } from 'react-hook-form';
-import { MoonLoader } from 'react-spinners';
 import * as yup from 'yup';
 
 import PageContent from '../components/PageContent';
-import PageHeader from '../components/PageHeader';
 import PasswordMeter from '../components/PasswordMeter';
 import Divider from '../components/UI/Divider';
 import Spinner from '../components/UI/Spinner';

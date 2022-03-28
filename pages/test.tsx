@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
 
 import type { NextPage } from 'next';
-import Image from 'next/image';
 
-import axios from 'axios';
-import { getAuth, signOut } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 import PageContent from '../components/PageContent';

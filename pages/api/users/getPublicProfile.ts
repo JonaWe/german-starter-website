@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { queryGameServerInfo } from 'steam-server-query';
-
 import { auth } from '../../../firebase/admin/firebaseAdmin';
 
 export default async function handler(
