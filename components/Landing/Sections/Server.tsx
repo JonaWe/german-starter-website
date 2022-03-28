@@ -1,7 +1,4 @@
-import { useEffect } from 'react';
-
-import axios from 'axios';
-import { useQuery } from 'react-query';
+import Image from 'next/image';
 
 import useDocumentDataFromCollectionOnce from '../../../hooks/useDocumentDataFromCollectionOnce';
 import useLocalization from '../../../hooks/useLocalization';
@@ -28,7 +25,14 @@ export default function Server() {
     <section className="sm:m-10 sm:mt-32">
       <div className="mx-auto h-full max-w-screen-md bg-background-400 p-5 pb-12 text-center">
         <Badge text="Server" className="mx-auto -translate-y-10">
-          <img src="/assets/icons/rust2.svg" alt="" className="w-7" />
+          <div className="relative w-7 h-7">
+            <Image
+              src="/assets/icons/rust2.svg"
+              layout="fill"
+              alt=""
+              className="absolute let-0 top-0"
+            />
+          </div>
         </Badge>
         <h2 className="text-5xl">[EU] German Starter Server</h2>
         <div className="flex justify-center gap-4">
