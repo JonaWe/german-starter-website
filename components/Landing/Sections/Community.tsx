@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { HiUserGroup } from 'react-icons/hi';
 
 import useLocalization from '../../../hooks/useLocalization';
@@ -13,15 +15,19 @@ export default function Community() {
       <div className="relative aspect-video w-full md:h-72 md:w-auto">
         <Badge
           text="Community"
-          className="absolute translate-x-5 -translate-y-5"
+          className="absolute translate-x-5 -translate-y-5 z-10"
         >
           <HiUserGroup className="text-xl" />
         </Badge>
-        <img
-          src="/assets/images/community.png"
-          className="h-full w-full object-cover"
-          alt=""
-        />
+        <div className="h-full w-full absolute">
+          <Image
+            src="/assets/images/community.png"
+            className="absolute inset-0"
+            layout="fill"
+            objectFit="cover"
+            alt=""
+          />
+        </div>
       </div>
       <div>
         <h2>{t.community.title}</h2>
