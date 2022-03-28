@@ -32,7 +32,7 @@ export default function NavUserMenu() {
   ) : (
     <>
       {user.photoURL && (
-        <Link href="#">
+        <Link href="">
           <a>
             <motion.img
               initial={{ opacity: 0 }}
