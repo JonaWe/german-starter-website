@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import useLocalization from '../../hooks/useLocalization';
 import JoinButton from '../Buttons/JoinButton';
 
@@ -11,9 +13,11 @@ export default function Header() {
         <p className="mb-6 sm:max-w-[30%]">{t.headerText}</p>
         <JoinButton />
       </div>
-      <img
+      <Image
         src="/assets/images/banner_bg.png"
         alt="banner"
+        layout="fill"
+        objectFit="cover"
         className="absolute inset-0 h-full w-full object-cover opacity-70"
       />
     </header>
