@@ -1,0 +1,150 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model achievements {
+  achievement_id      Int                   @id @default(autoincrement()) @db.UnsignedInt
+  name                String                @db.Text
+  description         String                @db.Text
+  player_achievements player_achievements[]
+
+  @@index([achievement_id], map: "achievement_id")
+}
+
+model activity {
+  pvp_events        Int
+  pve_events        Int
+  new_players       Int
+  players_on_server Int?
+  time              DateTime @id @default(now()) @db.Timestamp(0)
+}
+
+model feedback {
+  feedbackid    Int      @id @default(autoincrement()) @db.UnsignedInt
+  feedback_text String   @db.Text
+  time          DateTime @default(now()) @db.Timestamp(0)
+  client_ip     String   @db.VarChar(32)
+}
+
+model player_achievements {
+  steamid       BigInt       @db.UnsignedBigInt
+  achievment_id Int          @db.UnsignedInt
+  time          DateTime     @default(now()) @db.Timestamp(0)
+  achievements  achievements @relation(fields: [achievment_id], references: [achievement_id], onUpdate: Restrict, map: "player_achievements_ibfk_3")
+  players       players      @relation(fields: [steamid], references: [steamid], onUpdate: Restrict, map: "player_achievements_ibfk_2")
+
+  @@id([steamid, achievment_id, time])
+  @@index([achievment_id], map: "achievment_id")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model player_alias {
+  steamid BigInt   @db.UnsignedBigInt
+  alias   String   @db.VarChar(32)
+  time    DateTime @default(now()) @db.Timestamp(0)
+
+  @@ignore
+}
+
+model player_wipe_stats {
+  steamid   BigInt  @id @db.UnsignedBigInt
+  kills     Int     @db.UnsignedInt
+  pvpdeaths Int     @db.UnsignedInt
+  pvedeaths Int     @db.UnsignedInt
+  suicides  Int     @db.UnsignedInt
+  players   players @relation(fields: [steamid], references: [steamid], onUpdate: Restrict, map: "player_wipe_stats_ibfk_1")
+}
+
+model players {
+  steamid                BigInt                   @id @unique(map: "steamid") @db.UnsignedBigInt
+  name                   String                   @db.VarChar(32)
+  kills                  Int                      @db.UnsignedMediumInt
+  pvpdeaths              Int                      @db.UnsignedMediumInt
+  pvedeaths              Int                      @db.UnsignedMediumInt
+  suicides               Int                      @db.UnsignedMediumInt
+  first_time_seen        DateTime                 @default(now()) @db.Timestamp(0)
+  player_achievements    player_achievements[]
+  player_wipe_stats      player_wipe_stats?
+  pvelog_with_dublicates pvelog_with_dublicates[] @ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model pvelog {
+  steamid BigInt   @db.UnsignedBigInt
+  time    DateTime @default(now()) @db.Timestamp(0)
+  reason  String   @db.VarChar(30)
+
+  @@index([steamid], map: "steamid")
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model pvelog_with_dublicates {
+  steamid BigInt   @db.UnsignedBigInt
+  time    DateTime @default(now()) @db.Timestamp(0)
+  reason  String   @db.VarChar(30)
+  players players  @relation(fields: [steamid], references: [steamid], onDelete: Cascade, onUpdate: Restrict, map: "PVELog_ibfk_1")
+
+  @@index([steamid], map: "steamid")
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model pvplog {
+  killer_steamid BigInt   @db.UnsignedBigInt
+  target_steamid BigInt   @db.UnsignedBigInt
+  time           DateTime @default(now()) @db.Timestamp(0)
+  sleeper        Boolean
+
+  @@index([killer_steamid], map: "killer_steamid")
+  @@index([killer_steamid], map: "killer_steamid_2")
+  @@index([target_steamid], map: "target_steamid")
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model pvplog_with_dublicates {
+  killer_steamid BigInt   @db.UnsignedBigInt
+  target_steamid BigInt   @db.UnsignedBigInt
+  time           DateTime @default(now()) @db.Timestamp(0)
+  sleeper        Boolean
+
+  @@index([killer_steamid], map: "killer_steamid")
+  @@index([killer_steamid], map: "killer_steamid_2")
+  @@index([target_steamid], map: "target_steamid")
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model spotlight {
+  player_id      BigInt   @db.UnsignedBigInt
+  nemesis_id     BigInt   @db.UnsignedBigInt
+  nemesis_deaths Int
+  wert_1         Int      @db.UnsignedInt
+  bez_1          String   @db.Text
+  wert_2         Int      @db.UnsignedInt
+  bez_2          String   @db.Text
+  wert_3         Int      @db.UnsignedInt
+  bez_3          String   @db.Text
+  time           DateTime @default(now()) @db.Timestamp(0)
+
+  @@index([nemesis_id], map: "nemesis_id")
+  @@index([player_id], map: "player_id")
+  @@ignore
+}
+
+model user {
+  userid        Int    @id @default(autoincrement())
+  username      String @db.Text
+  password      String @db.VarChar(256)
+  profile_image Bytes
+}
+
+model wipes {
+  date DateTime @id @default(now()) @db.Timestamp(0)
+}
