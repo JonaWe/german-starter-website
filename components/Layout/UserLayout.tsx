@@ -37,6 +37,7 @@ function UserLayout({ children }: LayoutProps) {
           initial="hidden" // Set the initial state to variants.hidden
           animate="enter" // Animated state to variants.enter
           exit="exit" // Exit state (used later) to variants.exit
+          className="flex w-screen min-h-screen justify-center"
         >
           {children}
         </motion.div>
