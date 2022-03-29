@@ -15,9 +15,10 @@ export default async function handler(
 
   const players = await prisma.$queryRaw`
   SELECT * FROM (
-    SELECT name, MATCH (name) AGAINST (${name}) AS relevance FROM players ORDER BY relevance  DESC LIMIT 10
+    SELECT name, steamid, MATCH (name) AGAINST (${name}) AS relevance FROM players ORDER BY relevance  DESC LIMIT 10
   ) as x 
-  WHERE relevance > 0 `;
+  WHERE relevance > 0 
+ `;
 
   res.status(200).json({ players });
 }
