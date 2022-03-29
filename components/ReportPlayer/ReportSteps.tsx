@@ -44,7 +44,6 @@ export default function ReportSteps({}) {
             className="p-10 w-96 flex flex-col"
           >
             <h2 className="mb-2">{t.support.report.typeHeader}</h2>
-            {/* <p></p> */}
             <SimpleListbox
               options={t.support.report.types}
               setSelected={setSelectedType}
@@ -65,6 +64,9 @@ export default function ReportSteps({}) {
             key="step2"
           >
             <h2 className="mb-2">{t.support.report.feedbackHeader}</h2>
+            <label className="block mb-1 text-lg font-bebas">
+              Beschimpfungen
+            </label>
             <textarea rows={5}></textarea>
             <div className="flex justify-between items-center">
               <LastStep onClick={back} className="self-end mt-2" />
@@ -84,7 +86,16 @@ export default function ReportSteps({}) {
             key="step2"
           >
             <h2 className="mb-2">{t.support.report.feedbackHeader}</h2>
-            <SelectPlayer selected={selectedPlayer} setSelected={setSelectedPlayer} />
+            <label className="block mb-1 text-lg font-bebas">
+              Beschimpfungen
+            </label>
+            <SelectPlayer
+              selected={selectedPlayer}
+              setSelected={setSelectedPlayer}
+            />
+            <label className="block mb-1 text-lg font-bebas">
+              Beschimpfungen
+            </label>
             <textarea rows={5}></textarea>
             <div className="flex justify-between items-center">
               <LastStep onClick={back} className="self-end mt-2" />
