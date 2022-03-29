@@ -9,10 +9,12 @@ import isSteamId from '../../lib/steam/isSteamId';
 import { Player } from './Interfaces/Player';
 import ReportOption from './ReportOption';
 import ReportOptions from './ReportOptions';
+import useLocalization from '../../hooks/useLocalization';
 
 export default function ReportPlayer() {
   const [selectedPlayer, setSelectedPlayer] = useState<Player | null>();
   const [value, setValue] = useState<Player[]>([]);
+  const t = useLocalization();
 
   const search = async (query: string) => {
     const data = await axios.post('/api/server/searchPlayerByName', {
@@ -72,7 +74,7 @@ export default function ReportPlayer() {
               <HiSearch className="text-2xl fill-sand-500/70" />
               <Combobox.Input
                 onChange={(e) => debounced(e.target.value)}
-                placeholder="search for player..."
+                placeholder={t.support.report.search}
                 className="w-full focus-visible:ring-0 bg-transparent py-3 placeholder:text-sand-500/40"
               />
             </div>

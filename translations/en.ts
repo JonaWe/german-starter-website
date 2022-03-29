@@ -111,4 +111,9 @@ export default {
   signUp: {
     success: 'Your account has been created successfully!',
   },
+  support: {
+    report: {
+      search: 'search for player...',
+    },
+  },
 };
