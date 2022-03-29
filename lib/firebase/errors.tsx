@@ -4,4 +4,3 @@ export const AUTH_ERRORS = {
   EMAIL_ALREADY_IN_USE: 'auth/email-already-in-use',
   INVALID_PASSWORD: 'auth/invalid-password',
 };
-

@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
-import Footer from '../components/Footer';
 
+import Footer from '../components/Footer';
 import Header from '../components/Landing/Header';
 import Benefits from '../components/Landing/Sections/Benefits/Benefits';
 import Community from '../components/Landing/Sections/Community';

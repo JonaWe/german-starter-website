@@ -1,7 +1,7 @@
 import { credential } from 'firebase-admin';
+import { App, getApp, getApps, initializeApp } from 'firebase-admin/app';
 import { getAuth } from 'firebase-admin/auth';
 import { FirebaseApp } from 'firebase/app';
-import { App, getApp, getApps, initializeApp } from 'firebase-admin/app';
 
 let admin: App;
 

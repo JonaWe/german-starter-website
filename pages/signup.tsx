@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
@@ -8,20 +8,18 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { useForm } from 'react-hook-form';
-import { MoonLoader } from 'react-spinners';
 import * as yup from 'yup';
 
 import PageContent from '../components/PageContent';
-import PageHeader from '../components/PageHeader';
 import PasswordMeter from '../components/PasswordMeter';
 import Divider from '../components/UI/Divider';
 import Spinner from '../components/UI/Spinner';
+import SuccessScreen from '../components/UI/SuccessScreen';
 import { uiConfig } from '../config/firebaseAuthUI.config';
 import { auth, githubAuth, googleAuth } from '../firebase/clientApp';
 import useLocalization from '../hooks/useLocalization';
 import addAvatar from '../lib/firebase/addAvatar';
 import { AUTH_ERRORS } from '../lib/firebase/errors';
-import SuccessScreen from '../components/UI/SuccessScreen';
 
 const schema = yup
   .object({
@@ -78,7 +76,11 @@ const SignIn: NextPage = () => {
       });
   });
 
-  const authConfig = uiConfig(githubAuth, googleAuth, successUrl ? successUrl.toString() : '');
+  const authConfig = uiConfig(
+    githubAuth,
+    googleAuth,
+    successUrl ? successUrl.toString() : ''
+  );
 
   return !success ? (
     <>

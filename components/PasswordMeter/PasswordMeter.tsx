@@ -1,4 +1,3 @@
-import useScrollDistance from '../../hooks/useScrollDistance';
 import PasswordRequirement from './PasswordRequirement';
 
 interface PasswordMeterProps {
