@@ -111,9 +111,27 @@ export default {
   signUp: {
     success: 'Dein Profil wurde erfolgreich erstellt!',
   },
-  support:{
-    report:{
-      search: 'spieler suchen...'
-    }
-  }
+  support: {
+    report: {
+      search: 'spieler suchen...',
+      nextStep: 'weiter',
+      lastStep: 'zurück',
+      typeHeader: 'Report art wählen',
+      feedbackHeader: 'Deine Rückmeldung',
+      types: [
+        {
+          name: 'Rückmeldung',
+          id: 'FEEDBACK',
+        },
+        {
+          name: 'Spieler melden',
+          id: 'PLAYER_REPORT',
+        },
+        {
+          name: 'Bug',
+          id: 'BUG',
+        }
+      ],
+    },
+  },
 };
