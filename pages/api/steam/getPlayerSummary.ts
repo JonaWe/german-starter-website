@@ -7,11 +7,14 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { body } = req;
-  const { id } = body;
+  const { steamid } = body;
 
-  if (!id) return res.status(400).json({ message: 'no steamid param' });
+  if (!steamid) return res.status(400).json({ message: 'no steamid param' });
 
-  const summary = await steam.getUserSummary(id);
-
-  res.status(200).json({ summary });
+  try {
+    const summary = await steam.getUserSummary(steamid);
+    res.status(200).json({ summary });
+  } catch (err) {
+    res.status(400).json({ error: err });
+  }
 }
