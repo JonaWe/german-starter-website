@@ -1,12 +1,7 @@
-interface PageContentProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
 export default function Footer() {
   return (
-    <div className="w-full mt-40 h-64">
+    <footer className="w-full mt-40 h-64 bg-background-700">
       <p>footer</p>
-    </div>
+    </footer>
   );
 }
