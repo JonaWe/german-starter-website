@@ -5,6 +5,7 @@ import axios from 'axios';
 import { HiSearch, HiX } from 'react-icons/hi';
 import { useDebouncedCallback } from 'use-debounce';
 
+import isSteamId from '../../lib/steam/isSteamId';
 import { Player } from './Interfaces/Player';
 import ReportOption from './ReportOption';
 import ReportOptions from './ReportOptions';
@@ -20,14 +21,28 @@ export default function ReportPlayer() {
     return data;
   };
 
+  const fetchPlayer = async (steamId: string) => {
+    const data = await axios.post('/api/server/getPlayerById', {
+      steamId,
+    });
+    return data;
+  };
+
   const debounced = useDebouncedCallback((query) => {
     // if (query.length === 0) return setValue([]);
-    if (query.length < 4) return;
 
-    search(query).then((data) => {
-      setValue(data.data.players);
-    });
+    if (!isSteamId(query)) {
+      search(query).then((data) => {
+        setValue(data.data.players);
+      });
+    } else {
+      fetchPlayer(query).then((data) => {
+        setValue(data.data.player);
+      });
+    }
   }, 300);
+
+  console.log(value);
 
   return (
     <div className="p-10 w-96 flex flex-col">
