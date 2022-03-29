@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Combobox } from '@headlessui/react';
 import axios from 'axios';
-import { HiX } from 'react-icons/hi';
+import { HiSearch, HiX } from 'react-icons/hi';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { Player } from './Interfaces/Player';
@@ -53,10 +53,14 @@ export default function ReportPlayer() {
               </div>
             </>
           ) : (
-            <Combobox.Input
-              onChange={(e) => debounced(e.target.value)}
-              className="w-full focus-visible:ring-0 bg-transparent py-3"
-            />
+            <div className="flex items-center px-2">
+              <HiSearch className="text-2xl fill-sand-500/70" />
+              <Combobox.Input
+                onChange={(e) => debounced(e.target.value)}
+                placeholder="search for player..."
+                className="w-full focus-visible:ring-0 bg-transparent py-3 placeholder:text-sand-500/40"
+              />
+            </div>
           )}
         </div>
         <div className="relative my-2">
