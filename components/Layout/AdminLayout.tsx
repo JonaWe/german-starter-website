@@ -38,7 +38,7 @@ function AdminLayout({ children }: LayoutProps) {
   return (
     <div className="flex">
       <AdminNav />
-      {children}
+      <div className="mt-40">{children}</div>
     </div>
   );
 }
