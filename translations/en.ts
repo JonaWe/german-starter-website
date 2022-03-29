@@ -114,6 +114,24 @@ export default {
   support: {
     report: {
       search: 'search for player...',
+      nextStep: 'Next step',
+      lastStep: 'back',
+      feedbackHeader: 'Deine Rückmeldung',
+      typeHeader: 'Choose report type',
+      types: [
+        {
+          name: 'Feedback',
+          id: 'FEEDBACK',
+        },
+        {
+          name: 'Player report',
+          id: 'PLAYER_REPORT',
+        },
+        {
+          name: 'Bug',
+          id: 'BUG',
+        },
+      ],
     },
   },
 };

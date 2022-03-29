@@ -1,25 +1,19 @@
-import { useEffect, useState } from 'react';
-
-import { Combobox } from '@headlessui/react';
-import axios from 'axios';
-import { HiSearch, HiX } from 'react-icons/hi';
-import { useDebouncedCallback } from 'use-debounce';
+import { AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 
 import useLocalization from '../../hooks/useLocalization';
-import isSteamId from '../../lib/steam/isSteamId';
+import SimpleListbox from '../UI/Listbox';
 import { Player } from './Interfaces/Player';
-import ReportOption from './ReportOption';
-import ReportOptions from './ReportOptions';
+import ReportSteps from './ReportSteps';
 import SelectPlayer from './SelectPlayer';
 
 export default function ReportPlayer() {
-  const [selectedPlayer, setSelectedPlayer] = useState<Player | null>();
   const t = useLocalization();
 
+
   return (
-    <div className="p-10 w-96 flex flex-col">
-      moin
-      <SelectPlayer setSelected={setSelectedPlayer} selected={selectedPlayer} />
-    </div>
+    <>
+      <ReportSteps />
+    </>
   );
 }
