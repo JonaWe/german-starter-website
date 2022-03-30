@@ -111,11 +111,21 @@ export default {
   signUp: {
     success: 'Dein Profil wurde erfolgreich erstellt!',
   },
+  from: {
+    general: {
+      description: 'Beschreibung',
+    },
+  },
   support: {
     report: {
+      new:'neue rückmeldung',
+      completeHeader: 'Rückmeldung abschließen',
+      complete:'Log dich ein um deine rückmeldung erfolgreich abzuschliessen',
       search: 'spieler suchen...',
       nextStep: 'weiter',
       lastStep: 'zurück',
+      thanksHeader: 'Yeeah!',
+      thanks: 'Viele Dank für deine Rückmeldung!',
       typeHeader: 'Report art wählen',
       feedbackHeader: 'Deine Rückmeldung',
       types: [
@@ -130,8 +140,30 @@ export default {
         {
           name: 'Bug',
           id: 'BUG',
-        }
+        },
       ],
+      player: {
+        selection: 'Selact a player',
+        reason: 'Reason',
+        reasons: [
+          {
+            name: 'Hacking',
+            id: 'HACKING',
+          },
+          {
+            name: 'Glitching',
+            id: 'GLITCHING',
+          },
+          {
+            name: 'Greafing',
+            id: 'GREAFING',
+          },
+          {
+            name: 'Belästigung',
+            id: 'HARASSMENT',
+          },
+        ],
+      },
     },
   },
 };

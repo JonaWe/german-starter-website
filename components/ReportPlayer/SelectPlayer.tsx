@@ -41,8 +41,6 @@ export default function SelectPlayer({
   };
 
   const debounced = useDebouncedCallback((query) => {
-    // if (query.length === 0) return setValue([]);
-
     if (!isSteamId(query)) {
       search(query).then((data) => {
         setValue(data.data.players);
@@ -56,11 +54,11 @@ export default function SelectPlayer({
 
   return (
     <Combobox value={selected?.name} onChange={setSelected}>
-      <div className="flex bg-background-200/20 p-2 relative gap-2">
+      <div className="flex bg-background-200/20 p-2 relative gap-2 z-10">
         {selected ? (
           <>
             <img
-              className="h-14 aspect-square"
+              className="h-12 aspect-square"
               src={selected.avatar}
               alt={selected.name}
             />
@@ -72,7 +70,7 @@ export default function SelectPlayer({
                 </p>
               </div>
               <button onClick={() => setSelected(null)}>
-                <HiX className="text-xl opacity-50 hover:opacity-75 transition-opacity" />
+                <HiX className="text-md opacity-50 hover:opacity-75 transition-opacity" />
               </button>
             </div>
           </>
@@ -82,7 +80,7 @@ export default function SelectPlayer({
             <Combobox.Input
               onChange={(e) => debounced(e.target.value)}
               placeholder={t.support.report.search}
-              className="w-full focus-visible:ring-0 bg-transparent py-3 placeholder:text-sand-500/40"
+              className="w-full focus-visible:ring-0 bg-transparent py-3 placeholder:text-sand-500/40 text-sm"
             />
           </div>
         )}

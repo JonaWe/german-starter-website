@@ -111,12 +111,22 @@ export default {
   signUp: {
     success: 'Your account has been created successfully!',
   },
+  from: {
+    general: {
+      description: 'Description',
+    },
+  },
   support: {
     report: {
+      new:'new report',
+      completeHeader: 'Complete report',
+      complete: 'Please sign in to successfully completed your report',
       search: 'search for player...',
-      nextStep: 'Next step',
-      lastStep: 'back',
-      feedbackHeader: 'Deine Rückmeldung',
+      nextStep: 'next',
+      lastStep: 'previous',
+      thanksHeader: 'Yeeah!',
+      thanks: 'Thank you for your reply!',
+      feedbackHeader: 'Your feedback',
       typeHeader: 'Choose report type',
       types: [
         {
@@ -132,6 +142,28 @@ export default {
           id: 'BUG',
         },
       ],
+      player: {
+        selection: 'Spieler wählen',
+        reason: 'Grund',
+        reasons: [
+          {
+            name: 'Hacking',
+            id: 'HACKING',
+          },
+          {
+            name: 'Glitching',
+            id: 'GLITCHING',
+          },
+          {
+            name: 'Greafing',
+            id: 'GREAFING',
+          },
+          {
+            name: 'Harassment',
+            id: 'HARASSMENT',
+          },
+        ],
+      },
     },
   },
 };
