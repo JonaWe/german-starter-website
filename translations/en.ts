@@ -171,4 +171,11 @@ export default {
     title: 'Mit Steam verknüpfen',
     info:'Profile picture and username will be copied from your Steam profile.',
   },
+  user:{
+    settings: {
+      steamAccount:{
+        info: 'You can link your Steam profile with your Germanstarter account. So that other players can recognize you better.',
+      }
+    }
+  }
 };

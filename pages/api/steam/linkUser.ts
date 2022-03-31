@@ -16,9 +16,14 @@ export default withIronSessionApiRoute(async function handler(
   if (!req.session.steamUser)
     return res.status(400).json({ error: 'no steam user in session' });
 
-  await db
-    .doc(`users/${user.uid}`)
-    .set({ steamid: req.session.steamUser.steamid }, { merge: true });
+  await db.doc(`users/${user.uid}`).set(
+    {
+      settings: {
+        steamid: req.session.steamUser.steamid,
+      },
+    },
+    { merge: true }
+  );
 
   const newUser = await auth.updateUser(user.uid, {
     displayName: req.session.steamUser.username,

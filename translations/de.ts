@@ -172,4 +172,11 @@ export default {
     accept: 'Ich bin einferstanden',
     title: 'Mit Steam verknüpfen',
   },
+  user:{
+    settings: {
+      steamAccount:{
+        info: 'Du kannst dein Steam Profile mit deinem Germanstarter Account verknüpfen. Damit andere Spieler dich besser erkennen.',
+      }
+    }
+  }
 };

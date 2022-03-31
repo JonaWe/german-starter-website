@@ -2,6 +2,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { getUserLayout } from '../../components/Layout/UserLayout';
 import Tabs from '../../components/UI/Tabs';
+import UserSettings from '../../components/User/UserSettings';
 import { auth } from '../../firebase/clientApp';
 import useLocalization from '../../hooks/useLocalization';
 import type { NextPageWithLayout } from '../_app';
@@ -9,7 +10,7 @@ import type { NextPageWithLayout } from '../_app';
 const tabs = [
   { title: 'Profile', body: <div>your profile</div> },
   { title: 'Reports', body: <div>a list of my reports</div> },
-  { title: 'Settings', body: <div>settings</div> },
+  { title: 'Settings', body: <UserSettings /> },
 ];
 
 const UserHome: NextPageWithLayout = () => {
