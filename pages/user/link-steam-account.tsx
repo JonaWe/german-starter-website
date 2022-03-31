@@ -88,7 +88,7 @@ export const getServerSideProps = withIronSessionSsr(async function ({
     res.end();
     return {
       props: {
-        user: undefined,
+        user: null,
       },
     };
   }

@@ -13,7 +13,7 @@ const options: IronSessionOptions = {
 
 declare module 'iron-session' {
   interface IronSessionData {
-    steamUser?: SteamUser;
+    steamUser?: SteamUser | null;
   }
 }
 
