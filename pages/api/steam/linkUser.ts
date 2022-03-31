@@ -25,6 +25,8 @@ export default withIronSessionApiRoute(async function handler(
     photoURL: req.session.steamUser.avatar.medium,
   });
 
+  req.session.destroy();
+
   res.status(200).json({ newUser });
 },
 options);
