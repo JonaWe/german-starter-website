@@ -29,6 +29,8 @@ export default function UserSettings() {
     });
   });
 
+  //FIXME: #2 Optimize requesting steam user, it is currentli requestet on each tab chage (should use ract query)
+
   return (
     <>
       <Section title="User">
@@ -56,11 +58,12 @@ export default function UserSettings() {
                   </div>
                 </div>
               </a>
-              <Button
-                text={t.user.settings.steamAccount.change}
-                useLink
+              <a
+                className="font-bebas text-xl py-2 px-4 flex items-center gap-1 text-sand-500 transition duration-150 bg-background-300 hover:bg-background-400"
                 href="/api/steam/auth"
-              />
+              >
+                {t.user.settings.steamAccount.change}
+              </a>
             </div>
           ) : (
             <div className="flex gap-2 items-center h-12">
