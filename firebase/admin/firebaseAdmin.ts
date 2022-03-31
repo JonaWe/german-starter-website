@@ -1,6 +1,7 @@
 import { credential } from 'firebase-admin';
 import { App, getApp, getApps, initializeApp } from 'firebase-admin/app';
 import { getAuth } from 'firebase-admin/auth';
+import { getFirestore } from 'firebase-admin/firestore';
 import { FirebaseApp } from 'firebase/app';
 
 let admin: App;
@@ -22,5 +23,6 @@ try {
 }
 
 const auth = getAuth(admin as FirebaseApp);
+const db = getFirestore(admin);
 
-export { admin, auth };
+export { admin, auth, db };
