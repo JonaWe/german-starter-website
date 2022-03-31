@@ -174,6 +174,9 @@ export default {
   user:{
     settings: {
       steamAccount:{
+        change:'change',
+        noLinked: 'no profile linked',
+        linkedTitle: 'Linked profile',
         info: 'You can link your Steam profile with your Germanstarter account. So that other players can recognize you better.',
       }
     }

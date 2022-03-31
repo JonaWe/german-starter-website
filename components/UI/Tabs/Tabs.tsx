@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 
 import { Tab } from '../../../interfaces/Tab';
-import { tabs } from './tabsData';
 
 const variants = {
   enter: (direction: number) => {
