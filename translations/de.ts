@@ -113,14 +113,15 @@ export default {
   },
   from: {
     general: {
+      finally: 'Abschliessen',
       description: 'Beschreibung',
     },
   },
   support: {
     report: {
-      new:'neue rückmeldung',
+      new: 'neue rückmeldung',
       completeHeader: 'Rückmeldung abschließen',
-      complete:'Log dich ein um deine rückmeldung erfolgreich abzuschliessen',
+      complete: 'Log dich ein um deine rückmeldung erfolgreich abzuschliessen',
       search: 'spieler suchen...',
       nextStep: 'weiter',
       lastStep: 'zurück',
@@ -165,5 +166,10 @@ export default {
         ],
       },
     },
+  },
+  linkSteam: {
+    info: 'Profilebild und Benutzernamen werden von deinem Steam Profil übernommen.',
+    accept: 'Ich bin einferstanden',
+    title: 'Mit Steam verknüpfen',
   },
 };

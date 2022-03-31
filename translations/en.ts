@@ -113,12 +113,13 @@ export default {
   },
   from: {
     general: {
+      finally: 'Finish',
       description: 'Description',
     },
   },
   support: {
     report: {
-      new:'new report',
+      new: 'new report',
       completeHeader: 'Complete report',
       complete: 'Please sign in to successfully completed your report',
       search: 'search for player...',
@@ -165,5 +166,9 @@ export default {
         ],
       },
     },
+  },
+  linkSteam: {
+    title: 'Mit Steam verknüpfen',
+    info:'Profile picture and username will be copied from your Steam profile.',
   },
 };
