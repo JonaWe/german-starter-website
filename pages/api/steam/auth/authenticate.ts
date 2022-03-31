@@ -1,17 +1,28 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { withIronSessionApiRoute } from 'iron-session/next';
+
+import { options } from '../../../../lib/sessionOptions';
 import steamAuth from '../../../../lib/steam/steamAuth';
 
-export default async function handler(
+export default withIronSessionApiRoute(async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
     const user = await steamAuth.authenticate(req);
 
-    console.log(user);
-    res.status(200).json(user);
+    req.session.steamUser = {
+      steamid: user.steamid,
+      username: user.username,
+      avatar: user.avatar
+    };
+    await req.session.save();
+
+    res.redirect('/user/link-steam-account');
   } catch (error) {
-    res.status(500).json({ error });
+    console.log(error);
+    res.redirect('/api/steam/auth');
   }
-}
+},
+options);
