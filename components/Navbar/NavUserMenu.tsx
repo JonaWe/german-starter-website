@@ -38,7 +38,7 @@ export default function NavUserMenu() {
               animate={{ opacity: 1 }}
               src={user.photoURL}
               alt="avatar"
-              className="w-12 shadow-md"
+              className="w-12 shadow-md hover:scale-105 scale-100 transition-transform duration-200"
             />
           </a>
         </Link>
