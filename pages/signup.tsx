@@ -66,7 +66,7 @@ const SignIn: NextPage = () => {
       .then(() => {
         addAvatar();
         if (successUrl) router.push('/' + successUrl);
-        else setSuccess(true);
+        else router.push('/user/link-steam-account');
       })
       .catch((error) => {
         if (error.message.includes(AUTH_ERRORS.EMAIL_ALREADY_IN_USE))
