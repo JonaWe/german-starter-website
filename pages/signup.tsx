@@ -20,6 +20,7 @@ import { auth, githubAuth, googleAuth } from '../firebase/clientApp';
 import useLocalization from '../hooks/useLocalization';
 import addAvatar from '../lib/firebase/addAvatar';
 import { AUTH_ERRORS } from '../lib/firebase/errors';
+import InfoBox from '../components/UI/Info';
 
 const schema = yup
   .object({
@@ -138,7 +139,7 @@ const SignIn: NextPage = () => {
               confirmPassword={watch().passwordRepeat}
             />
             {authError && (
-              <div className="bg-red-900 p-4 text-xs">{authError}</div>
+              <InfoBox type="error" info={authError} />
             )}
             <button
               type="submit"
