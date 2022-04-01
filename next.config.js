@@ -5,4 +5,13 @@ module.exports = {
     defaultLocale: 'de',
   },
   reactStrictMode: true,
+  async redirects() {
+    return [
+      {
+        source: '/en/api/:path*',
+        destination: '/api/:path*',
+        permanent: true,
+      },
+    ];
+  },
 };
