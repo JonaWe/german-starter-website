@@ -5,6 +5,7 @@ import Header from '../components/Landing/Header';
 import Benefits from '../components/Landing/Sections/Benefits/Benefits';
 import Community from '../components/Landing/Sections/Community';
 import Server from '../components/Landing/Sections/Server';
+import Team from '../components/Landing/Sections/Team';
 import PageContent from '../components/PageContent';
 import useLocalization from '../hooks/useLocalization';
 
@@ -18,6 +19,7 @@ const Home: NextPage = () => {
         <Community />
         <Benefits />
       </PageContent>
+      <Team />
       <Footer />
     </div>
   );
