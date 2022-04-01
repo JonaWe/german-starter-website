@@ -13,7 +13,7 @@ export default function Navbar() {
         scrollDistance === 0
           ? 'bg-transparent pt-8 drop-shadow-none'
           : 'bg-background-500 pt-2 drop-shadow-xl'
-      } transition duration-[400ms]`}
+      } transition-all duration-[400ms]`}
     >
       <div className="flex w-full max-w-screen-2xl flex-row place-content-between items-center gap-4">
         <div className="flex flex-row place-content-between items-center gap-4">
