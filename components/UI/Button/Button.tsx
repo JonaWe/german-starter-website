@@ -2,6 +2,8 @@ import { MouseEventHandler } from 'react';
 
 import Link from 'next/link';
 
+import useButtonStyle from '../../../hooks/useButtonStyle';
+
 interface ButtonProps {
   text: string;
   primary?: boolean;
@@ -21,11 +23,7 @@ export default function Button({
   useLink,
   href,
 }: ButtonProps) {
-  const extendedClassName = `font-bebas text-xl py-2 px-4 flex items-center gap-1 text-sand-500 transition duration-150 ${
-    primary
-      ? 'bg-rust-500 hover:bg-rust-600'
-      : 'bg-background-300 hover:bg-background-300/40'
-  } ${className}`;
+  const extendedClassName = `${useButtonStyle(primary!)} ${className}`;
 
   return useLink ? (
     <Link href={href || '/'}>
