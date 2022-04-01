@@ -7,7 +7,6 @@ import { NextSeo } from 'next-seo';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import CommandPallet from '../components/CommandPallet';
-import Navbar from '../components/Navbar';
 import '../styles/globals.css';
 
 export type NextPageWithLayout<T = {}> = NextPage<T> & {
@@ -25,7 +24,6 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Navbar />
       <CommandPallet />
       <NextSeo
         title="German Starter Server"
