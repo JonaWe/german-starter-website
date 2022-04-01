@@ -172,6 +172,7 @@ export default {
   linkSteam: {
     title: 'Connect steam account',
     shortTitle: 'link accounts',
+    linkLater: 'Later you can do this in your profile settings',
     info:'Profile picture and username will be copied from your Steam profile.',
   },
   user:{

@@ -17,6 +17,7 @@ import { uiConfig } from '../config/firebaseAuthUI.config';
 import { auth, githubAuth, googleAuth } from '../firebase/clientApp';
 import useLocalization from '../hooks/useLocalization';
 import { AUTH_ERRORS } from '../lib/firebase/errors';
+import InfoBox from '../components/UI/Info';
 
 const schema = yup
   .object({
@@ -100,7 +101,7 @@ const SignIn: NextPage = () => {
               )}
             </div>
             {authError && (
-              <div className="bg-red-900 p-4 text-xs">{authError}</div>
+              <InfoBox type="error" className="mt-4" info={authError} />
             )}
             <button
               type="submit"

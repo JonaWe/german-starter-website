@@ -174,6 +174,7 @@ export default {
     accept: 'Ich bin einferstanden',
     title: 'Mit Steam verknüpfen',
     shortTitle: 'Verknüpfen',
+    linkLater: 'Später kanst du verknüpfungen in deinen Profileinstellungen hinzufügen',
   },
   user: {
     settings: {

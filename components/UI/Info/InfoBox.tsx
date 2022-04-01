@@ -1,6 +1,5 @@
 interface InfoProps {
   className?: string;
-  /**Tailwind color "red-500" */
   type?: 'info' | 'warning' | 'success' | 'error';
   info: string;
 }
@@ -8,20 +7,36 @@ interface InfoProps {
 export default function InfoBox({ className, type, info }: InfoProps) {
   switch (type) {
     case 'warning':
-      break;
+      return (
+        <div
+          className={` border-yellow-600 bg-yellow-600/20 border-l-4 pl-2 py-4 text-sm ${className}`}
+        >
+          {info}
+        </div>
+      );
     case 'success':
-      break;
+      return (
+        <div
+          className={` border-green-600 bg-green-600/20 border-l-4 pl-2 py-4 text-sm ${className}`}
+        >
+          {info}
+        </div>
+      );
     case 'error':
-      break;
+      return (
+        <div
+          className={` border-red-600 bg-red-600/20 border-l-4 pl-2 py-4 text-sm ${className}`}
+        >
+          {info}
+        </div>
+      );
     default:
-      break;
+      return (
+        <div
+          className={` border-blue-600 bg-blue-600/20 border-l-4 pl-2 py-4 text-sm ${className}`}
+        >
+          {info}
+        </div>
+      );
   }
-
-  return (
-    <div
-      className={`border-l-4 pl-2 py-4 border-blue-600 bg-blue-600/20 ${className} text-sm`}
-    >
-      {info}
-    </div>
-  );
 }
