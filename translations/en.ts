@@ -113,6 +113,7 @@ export default {
   },
   from: {
     general: {
+      later: 'Later',
       finally: 'Finish',
       description: 'Description',
       back: 'Back',
@@ -170,6 +171,7 @@ export default {
   },
   linkSteam: {
     title: 'Mit Steam verknüpfen',
+    shortTitle: 'link accounts',
     info:'Profile picture and username will be copied from your Steam profile.',
   },
   user:{

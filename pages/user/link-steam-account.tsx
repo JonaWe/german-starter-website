@@ -8,6 +8,7 @@ import { link } from 'fs/promises';
 import { getIronSession } from 'iron-session';
 import { withIronSessionSsr } from 'iron-session/next';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { HiLink, HiUserAdd } from 'react-icons/hi';
 
 import Badge from '../../components/UI/Badge';
 import Button from '../../components/UI/Button';
@@ -53,21 +54,46 @@ const linkStemAccount: NextPage<LinkProps> = ({ user }: LinkProps) => {
   return (
     <div className="flex w-screen h-screen items-center justify-center relative">
       <div className="bg-background-400 p-10 sm:w-96 w-full">
-        <h2>{t.linkSteam.title}</h2>
-        <div className="flex items-center gap-3 mt-6 mb-4">
-          <img src={user.avatar.medium} alt="avatar" />
-          <div className="">
-            <p className="text-lg leading-none">{user.username}</p>
-            <p className="text-sand-500/60 text-xs">{user.steamid}</p>
-          </div>
-        </div>
-        <InfoBox type="warning" info={t.linkSteam.info} />
-        <div className="flex justify-between mt-10">
-          <Button useLink href="/user/" text={t.from.general.back} />
-          <Button primary onClick={handleClick} text={t.from.general.finally}>
-            {loading && <Spinner className="fill-sand-600 text-white" />}
-          </Button>
-        </div>
+        <h2 className="flex gap-2">
+          {t.linkSteam.title} <HiLink />
+        </h2>
+        {user ? (
+          <>
+            <div className="flex items-center gap-3 mt-6 mb-4">
+              <img src={user.avatar.medium} alt="avatar" />
+              <div className="">
+                <p className="text-lg leading-none">{user.username}</p>
+                <p className="text-sand-500/60 text-xs">{user.steamid}</p>
+              </div>
+            </div>
+            <InfoBox type="warning" info={t.linkSteam.info} />
+            <div className="flex justify-between mt-10">
+              <Button useLink href="/user/" text={t.from.general.back} />
+              <Button
+                primary
+                onClick={handleClick}
+                text={t.from.general.finally}
+              >
+                {loading && <Spinner className="fill-sand-600 text-white" />}
+              </Button>
+            </div>
+          </>
+        ) : (
+          <>
+            <p className="flex text-sm text-sand-500/80">
+              {t.user.settings.steamAccount.info}
+            </p>
+            <div className="flex justify-between mt-5">
+              <Button useLink href="/user/" text={t.from.general.later} />
+              <a
+                className="font-bebas text-xl py-2 px-4 flex items-center gap-1 text-sand-500 transition duration-150 bg-rust-500 hover:bg-rust-600"
+                href="/api/steam/auth"
+              >
+                {t.linkSteam.shortTitle}
+              </a>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
@@ -80,9 +106,6 @@ export const getServerSideProps = withIronSessionSsr(async function ({
   const user = req.session.steamUser;
 
   if (!user) {
-    res.setHeader('location', '/api/steam/auth');
-    res.statusCode = 302;
-    res.end();
     return {
       props: {
         user: null,

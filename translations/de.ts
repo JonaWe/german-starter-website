@@ -113,6 +113,7 @@ export default {
   },
   from: {
     general: {
+      later: 'Später',
       finally: 'Abschliessen',
       description: 'Beschreibung',
       back: 'Zurück',
@@ -172,15 +173,16 @@ export default {
     info: 'Profilebild und Benutzernamen werden von deinem Steam Profil übernommen.',
     accept: 'Ich bin einferstanden',
     title: 'Mit Steam verknüpfen',
+    shortTitle: 'Verknüpfen',
   },
-  user:{
+  user: {
     settings: {
-      steamAccount:{
-        change:'ändern',
+      steamAccount: {
+        change: 'ändern',
         noLinked: 'keine verknüpfungen',
         linkedTitle: 'Verknüpftes Profil',
         info: 'Du kannst dein Steam Profile mit deinem Germanstarter Account verknüpfen. Damit andere Spieler dich besser erkennen.',
-      }
-    }
-  }
+      },
+    },
+  },
 };
