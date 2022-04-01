@@ -115,6 +115,7 @@ export default {
     general: {
       finally: 'Abschliessen',
       description: 'Beschreibung',
+      back: 'Zurück',
     },
   },
   support: {

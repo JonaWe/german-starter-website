@@ -46,7 +46,6 @@ const linkStemAccount: NextPage<LinkProps> = ({ user }: LinkProps) => {
           .catch((error) => {
             setError(error);
             console.log(error);
-            
           });
       });
   };
@@ -63,14 +62,12 @@ const linkStemAccount: NextPage<LinkProps> = ({ user }: LinkProps) => {
           </div>
         </div>
         <InfoBox type="warning" info={t.linkSteam.info} />
-        <Button
-          className="mt-3 ml-auto"
-          primary
-          onClick={handleClick}
-          text={t.from.general.finally}
-        >
-          {loading && <Spinner className="fill-sand-600 text-white" />}
-        </Button>
+        <div className="flex justify-between mt-10">
+          <Button useLink href="/user/" text={t.from.general.back} />
+          <Button primary onClick={handleClick} text={t.from.general.finally}>
+            {loading && <Spinner className="fill-sand-600 text-white" />}
+          </Button>
+        </div>
       </div>
     </div>
   );
