@@ -2,6 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
+import useButtonStyle from '../../hooks/useButtonStyle';
 import NewsItem from '../News/NewsItem';
 import MarkdownEditorInputItem from './MarkdownEditorInputItem';
 
@@ -32,7 +33,7 @@ export default function MarkdownEditor() {
   };
 
   return (
-    <main className="px-8">
+    <main className="px-8 h-full">
       <h1 className="text-6xl">Add a News Item</h1>
       <div className="w-full h-full grid grid-cols-2 gap-8">
         <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
@@ -48,10 +49,13 @@ export default function MarkdownEditor() {
             register={register}
             errors={errors}
             input="content"
-            className="resize-none"
+            className="resize-none h-2/5 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-background-300 scrollbar-track-background-200/20 hover:scrollbar-thumb-rust-400"
             as="textarea"
           />
-          <input type="submit" />
+          <input
+            type="submit"
+            className={`${useButtonStyle(true)} w-fit mx-auto mt-4`}
+          />
         </form>
         <NewsItem
           title={watch('title') || 'Untitled'}
