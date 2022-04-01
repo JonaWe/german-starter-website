@@ -170,7 +170,7 @@ export default {
     },
   },
   linkSteam: {
-    title: 'Mit Steam verknüpfen',
+    title: 'Connect steam account',
     shortTitle: 'link accounts',
     info:'Profile picture and username will be copied from your Steam profile.',
   },
