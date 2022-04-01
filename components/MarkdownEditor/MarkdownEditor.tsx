@@ -1,12 +1,9 @@
-import { useState } from 'react';
-
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import useDebounce from '../../hooks/useDebounce';
-import useDebounceState from '../../hooks/useDebouncedState';
 import NewsItem from '../News/NewsItem';
+import MarkdownEditorInputItem from './MarkdownEditorInputItem';
 
 const schema = yup
   .object({
@@ -15,7 +12,7 @@ const schema = yup
   })
   .required();
 
-interface FormInput {
+export interface FormInput {
   title: string;
   content: string;
 }
@@ -35,30 +32,34 @@ export default function MarkdownEditor() {
   };
 
   return (
-    <div className="w-full h-full grid grid-cols-2">
-      <form className="flex flex-col px-8" onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="title">Title</label>
-        <input id="title" {...register('title')} />
-        {errors.title && (
-          <span className="text-red-500">{errors.title.message}</span>
-        )}
-        <label htmlFor="content">Content</label>
-        <textarea
-          id="content"
-          className="resize-none"
-          {...register('content')}
+    <main className="px-8">
+      <h1 className="text-6xl">Add a News Item</h1>
+      <div className="w-full h-full grid grid-cols-2 gap-8">
+        <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
+          <MarkdownEditorInputItem
+            title="Titel"
+            register={register}
+            errors={errors}
+            input="title"
+            as="input"
+          />
+          <MarkdownEditorInputItem
+            title="Content"
+            register={register}
+            errors={errors}
+            input="content"
+            className="resize-none"
+            as="textarea"
+          />
+          <input type="submit" />
+        </form>
+        <NewsItem
+          title={watch('title') || 'Untitled'}
+          content={watch('content') || 'No content'}
+          releaseDate={new Date()}
+          className="h-fit mt-6"
         />
-        {errors.content && (
-          <span className="text-red-500">{errors.content.message}</span>
-        )}
-        <input type="submit" />
-      </form>
-      <NewsItem
-        title={watch('title') || 'Untitled'}
-        content={watch('content') || 'No content'}
-        releaseDate={new Date()}
-        className="h-fit"
-      />
-    </div>
+      </div>
+    </main>
   );
 }
