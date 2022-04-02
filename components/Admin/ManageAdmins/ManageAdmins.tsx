@@ -13,6 +13,9 @@ import InfoBox from '../../UI/Info';
 const schema = yup
   .object({
     email: yup.string().required().email(),
+    agree: yup
+      .boolean()
+      .oneOf([true], 'You must agree to the terms and conditions'),
   })
   .required();
 
@@ -62,8 +65,12 @@ export default function ManageAdmins() {
 
   return (
     <div className="">
-      <form className="w-fit" onSubmit={onSubmit}>
+      <form className="w-64" onSubmit={onSubmit}>
         <h2>Promote user to admin</h2>
+        <InfoBox
+          type={'warning'}
+          info="All admins have full access to the Database users Users and this Dashbord"
+        />
         <div>
           <label className="block mb-1 text-xl font-bebas">E-Mail</label>
           <input type="email" {...register('email')} />
@@ -73,6 +80,22 @@ export default function ManageAdmins() {
             </div>
           )}
         </div>
+        <div className="flex gap-3 mt-3">
+          <input
+            type="checkbox"
+            {...register('agree')}
+            className="accent-rust-500"
+          />
+          <span className="text-xs">
+            I'm sure I want to grant this user
+            <b className="text-rust-500"> full access</b>!
+          </span>
+        </div>
+        {errors.agree && (
+          <div className={`text-red-400 text-xs mt-2`}>
+            {errors.agree.message}
+          </div>
+        )}
         {info && <InfoBox className="mt-3" type={info.type} info={info.info} />}
         <button
           type="submit"
