@@ -14,16 +14,15 @@ export default function AdminNav() {
         <AdminNavLinks />
       </div>
       <div>
-        <Link href="/">
-          <a className="w-full hover:bg-background-800/50 px-5 py-2 hover:cursor-pointer hover:opacity-80 flex items-center gap-2 transition group">
-            <MdOutlinePowerSettingsNew className="text-xl group-hover:fill-red-600 transition-all" />
-            <p className="group-hover:ml-1 transition-all group-hover:text-red-600">
-              Exit Admin Panel
-            </p>
-          </a>
-        </Link>
+        <a className="w-full hover:bg-background-800/50 px-5 py-2 hover:cursor-pointer hover:opacity-80 flex items-center gap-2 transition group" onClick={() => window.close()}>
+          <MdOutlinePowerSettingsNew className="text-xl group-hover:fill-red-600 transition-all" />
+          <p className="group-hover:ml-1 transition-all group-hover:text-red-600">
+            Exit Admin Panel
+          </p>
+        </a>
         <span className="flex items-center justify-between px-5 border-t-2 border-background-400/20 pt-3">
-          <Button text="logout" onClick={() => logout()} /> <LanguageSelection />
+          <Button text="logout" onClick={() => logout()} />{' '}
+          <LanguageSelection />
         </span>
       </div>
     </div>

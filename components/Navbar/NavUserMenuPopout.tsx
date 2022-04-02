@@ -13,8 +13,10 @@ export default function NavUserMenuPopout({ user }: { user: User }) {
         <a>Profile</a>
       </Link>
       {admin && (
-        <Link href="/admin">
-          <a>Admin</a>
+        <Link href="/admin" passHref>
+          <a target="_blank" rel="noopener noreferrer">
+            Admin
+          </a>
         </Link>
       )}
     </div>
