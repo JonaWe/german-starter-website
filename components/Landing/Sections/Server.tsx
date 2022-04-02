@@ -23,7 +23,7 @@ export default function Server() {
 
   return (
     <section className="sm:m-10 sm:mt-32">
-      <div className="mx-auto h-full max-w-screen-md bg-background-400 p-5 pb-12 text-center">
+      <div className="mx-auto h-full max-w-screen-md bg-background-400/60 p-5 pb-12 text-center">
         <Badge text="Server" className="mx-auto -translate-y-10">
           <div className="relative w-7 h-7">
             <Image
