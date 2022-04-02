@@ -4,7 +4,7 @@ import { Listbox, Transition } from '@headlessui/react';
 import { HiChevronDown } from 'react-icons/hi';
 
 interface DropdownProps {
-  options: [{ name: string; id: string }];
+  options: { name: string; id: string }[];
   selected: { name: string; id: string };
   setSelected: any;
 }

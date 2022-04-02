@@ -56,7 +56,7 @@ export default function NavUserMenu() {
           leaveTo="opacity-0 -translate-y-3"
         >
           <Popover.Panel className="absolute z-10 right-0" as="div">
-            <NavUserMenuPopout />
+            <NavUserMenuPopout user={user} />
           </Popover.Panel>
         </Transition>
       </Popover>
