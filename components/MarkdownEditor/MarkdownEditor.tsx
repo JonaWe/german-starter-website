@@ -54,7 +54,10 @@ export default function MarkdownEditor() {
           />
           <input
             type="submit"
-            className={`${useButtonStyle(true)} w-fit mx-auto mt-4`}
+            className={`${useButtonStyle(
+              true
+            )} w-fit mx-auto mt-4 hover:cursor-pointer`}
+            value="Publish"
           />
         </form>
         <NewsItem
