@@ -1,15 +1,29 @@
-import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
+import {
+  Query,
+  collection,
+  getDocs,
+  orderBy,
+  query,
+  where,
+} from 'firebase/firestore';
 
 import { db } from '../../firebase/clientApp';
 import { NewsItem } from '../../pages/news';
 
-export default async function getPublicNewsArticle() {
+export default async function getPublicNewsArticle(
+  onlyPublished: boolean = true
+) {
   const collectionRef = collection(db, 'news');
-  const q = query(
-    collectionRef,
-    orderBy('releaseDate', 'desc'),
-    where('published', '==', true)
-  );
+  let q: Query;
+  if (onlyPublished) {
+    q = query(
+      collectionRef,
+      orderBy('releaseDate', 'desc'),
+      where('published', '==', true)
+    );
+  } else {
+    q = query(collectionRef, orderBy('releaseDate', 'desc'));
+  }
 
   const docs = await getDocs(q);
 
@@ -20,7 +34,7 @@ export default async function getPublicNewsArticle() {
       de: docData.de,
       en: docData.en,
       authors: docData.authors,
-      releaseDate: JSON.stringify(docData.releaseDate),
+      releaseDate: docData.releaseDate,
       published: docData.published,
       id: doc.id,
     });
