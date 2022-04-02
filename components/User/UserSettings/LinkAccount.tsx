@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { HiUserAdd } from 'react-icons/hi';
 
 import useLocalization from '../../../hooks/useLocalization';
@@ -11,12 +13,11 @@ export default function LinkAccount() {
           {t.user.settings.steamAccount.noLinked}
         </p>
       </div>
-      <a
-        href="/api/steam/auth"
-        className="bg-green-600/60 transition-colors hover:bg-green-600 h-full aspect-square flex justify-center items-center"
-      >
-        <HiUserAdd className="fill-sand-500/50 text-xl" />
-      </a>
+      <Link href="/api/steam/auth">
+        <a className="bg-green-600/60 transition-colors hover:bg-green-600 h-full aspect-square flex justify-center items-center">
+          <HiUserAdd className="fill-sand-500/50 text-xl" />
+        </a>
+      </Link>
     </div>
   );
 }

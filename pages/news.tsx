@@ -16,7 +16,8 @@ export interface NewsItem {
   en: NewsItemContent;
   releaseDate: string;
   authors: string[];
-  published?: boolean;
+  published: boolean;
+  id: string;
 }
 
 interface NewsPageProps {

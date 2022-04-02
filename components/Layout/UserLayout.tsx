@@ -7,6 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { auth } from '../../firebase/clientApp';
 import Footer from '../Footer';
+import Navbar from '../Navbar';
 import LoadingScreen from '../UI/LoadingScreen';
 
 interface LayoutProps {
@@ -31,7 +32,9 @@ function UserLayout({ children }: LayoutProps) {
   }, [user, loading, router]);
 
   return (
-    <AnimatePresence exitBeforeEnter>
+    <>
+      <Navbar />
+      <AnimatePresence exitBeforeEnter>
         {user ? (
           <motion.div
             variants={variants} // Pass the variant object into Framer Motion
@@ -53,7 +56,8 @@ function UserLayout({ children }: LayoutProps) {
           </motion.div>
         )}
         <Footer />
-    </AnimatePresence>
+      </AnimatePresence>
+    </>
   );
 }
 

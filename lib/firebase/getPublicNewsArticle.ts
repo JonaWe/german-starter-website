@@ -15,12 +15,14 @@ export default async function getPublicNewsArticle() {
 
   let newsItems: NewsItem[] = [];
   docs.forEach((doc) => {
-    const docData = doc.data() as NewsItem;
+    const docData = doc.data();
     newsItems.push({
       de: docData.de,
       en: docData.en,
       authors: docData.authors,
       releaseDate: JSON.stringify(docData.releaseDate),
+      published: docData.published,
+      id: doc.id,
     });
   });
 
