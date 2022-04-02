@@ -9,7 +9,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`left-0 top-0 fixed z-50 flex w-screen justify-center overflow-hidden px-6 py-2 ${
+      className={`left-0 top-0 fixed z-50 flex w-screen justify-center px-6 py-2 ${
         scrollDistance === 0
           ? 'bg-transparent pt-8 drop-shadow-none'
           : 'bg-background-500 pt-2 drop-shadow-xl'
@@ -20,9 +20,7 @@ export default function Navbar() {
           <NavLogo />
           <LanguageSelection />
         </div>
-        <div className="flex flex-row place-content-between items-center gap-7">
-          <NavItems />
-        </div>
+        <NavItems />
         <NavUserMenu />
       </div>
     </header>
