@@ -87,7 +87,7 @@ export default function ManageAdmins() {
             className="accent-rust-500"
           />
           <span className="text-xs">
-            I'm sure I want to grant this user
+            I&apos;m sure I want to grant this user
             <b className="text-rust-500"> full access</b>!
           </span>
         </div>

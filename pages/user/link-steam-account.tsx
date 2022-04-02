@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { NextPage } from 'next';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import axios from 'axios';
@@ -23,7 +24,7 @@ interface LinkProps {
   user: SteamUser;
 }
 
-const linkStemAccount: NextPage<LinkProps> = ({ user }: LinkProps) => {
+const LinkStemAccount: NextPage<LinkProps> = ({ user }: LinkProps) => {
   const t = useLocalization();
   const router = useRouter();
 
@@ -83,15 +84,18 @@ const linkStemAccount: NextPage<LinkProps> = ({ user }: LinkProps) => {
             <p className="flex text-sm text-sand-500/80">
               {t.user.settings.steamAccount.info}
             </p>
-            <InfoBox type="warning" info={t.linkSteam.linkLater} className="mt-3" />
+            <InfoBox
+              type="warning"
+              info={t.linkSteam.linkLater}
+              className="mt-3"
+            />
             <div className="flex justify-between mt-5">
               <Button useLink href="/user/" text={t.from.general.later} />
-              <a
-                className="font-bebas text-xl py-2 px-4 flex items-center gap-1 text-sand-500 transition duration-150 bg-rust-500 hover:bg-rust-600"
-                href="/api/steam/auth"
-              >
-                {t.linkSteam.shortTitle}
-              </a>
+              <Link href="/api/steam/auth">
+                <a className="font-bebas text-xl py-2 px-4 flex items-center gap-1 text-sand-500 transition duration-150 bg-rust-500 hover:bg-rust-600">
+                  {t.linkSteam.shortTitle}
+                </a>
+              </Link>
             </div>
           </>
         )}
@@ -119,4 +123,4 @@ export const getServerSideProps = withIronSessionSsr(async function ({
 },
 options);
 
-export default linkStemAccount;
+export default LinkStemAccount;
