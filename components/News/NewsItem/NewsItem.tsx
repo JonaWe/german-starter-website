@@ -1,10 +1,11 @@
+import { Timestamp } from '@firebase/firestore';
 import Markdown from 'markdown-to-jsx';
 
 import Badge from '../../UI/Badge';
 
 interface NewsItemProps {
   title: string;
-  releaseDate: Date;
+  releaseDate: Timestamp;
   content: string;
   className?: string;
 }

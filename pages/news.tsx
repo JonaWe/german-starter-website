@@ -1,5 +1,8 @@
 import { useRouter } from 'next/router';
 
+import { Timestamp } from '@firebase/firestore';
+import { Item } from 'framer-motion/types/components/Reorder/Item';
+
 import { getDefaultLayout } from '../components/Layout/DefaultLayout';
 import NewsItem from '../components/News/NewsItem';
 import { useSetHeading } from '../context/defaultLayoutHeadingContext';
@@ -14,14 +17,22 @@ export interface NewsItemContent {
 export interface NewsItem {
   de: NewsItemContent;
   en: NewsItemContent;
-  releaseDate: string;
+  releaseDate: Timestamp;
   authors: string[];
   published: boolean;
   id: string;
 }
 
+export interface NewsItemSerialisiert {
+  de: NewsItemContent;
+  en: NewsItemContent;
+  releaseDate: string;
+  authors: string[];
+  published: boolean;
+  id: string;
+}
 interface NewsPageProps {
-  newsItems: NewsItem[];
+  newsItems: NewsItemSerialisiert[];
 }
 
 const News: NextPageWithLayout<NewsPageProps> = ({
@@ -36,11 +47,12 @@ const News: NextPageWithLayout<NewsPageProps> = ({
       {newsItems &&
         newsItems.map(({ en, de, releaseDate }, index) => {
           const { title, content } = locale === 'de' ? de : en;
+          const { seconds, nanoseconds } = JSON.parse(releaseDate);
           return (
             <NewsItem
               title={title}
               content={content}
-              releaseDate={JSON.parse(releaseDate)}
+              releaseDate={new Timestamp(seconds, nanoseconds)}
               key={index}
             />
           );
@@ -54,7 +66,9 @@ News.getLayout = getDefaultLayout('/assets/images/news_banner.jpg');
 export async function getStaticProps() {
   return {
     props: {
-      newsItems: await getPublicNewsArticle(),
+      newsItems: (await getPublicNewsArticle()).map((item) => {
+        return { ...item, releaseDate: JSON.stringify(item.releaseDate) };
+      }),
     },
   };
 }
