@@ -1,6 +1,6 @@
 interface InfoProps {
   className?: string;
-  type?: 'info' | 'warning' | 'success' | 'error';
+  type?: 'info' | 'warning' | 'success' | 'error' | null;
   info: string;
 }
 
