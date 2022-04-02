@@ -12,7 +12,7 @@ export default async function handler(
   const user = await withAdminAuth(req, res);
   if (!user) return;
 
-  if (!req.body.uid && req.body.email)
+  if (!req.body.uid && !req.body.email)
     return res.status(400).json({ error: 'no user id or email provided' });
 
   let userToChange: UserRecord;
