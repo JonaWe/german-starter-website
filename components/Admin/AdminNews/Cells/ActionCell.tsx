@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { doc, setDoc } from '@firebase/firestore';
+import { deleteDoc, doc, setDoc } from '@firebase/firestore';
 import { HiEye, HiEyeOff, HiOutlineTrash, HiPencil } from 'react-icons/hi';
 
 import { db } from '../../../../firebase/clientApp';
@@ -14,7 +14,10 @@ interface ActionCellProps {
 export default function ActionCell({ value: id, row }: ActionCellProps) {
   const published = row.original.published;
 
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    const newsRef = doc(db, `news/${id}`);
+    deleteDoc(newsRef);
+  };
 
   const changePublished = () => {
     const newsItemRef = doc(db, `news/${id}`);
