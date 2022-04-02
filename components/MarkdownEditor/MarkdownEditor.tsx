@@ -1,3 +1,4 @@
+import { Timestamp } from '@firebase/firestore';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -63,7 +64,7 @@ export default function MarkdownEditor() {
         <NewsItem
           title={watch('title') || 'Untitled'}
           content={watch('content') || 'No content'}
-          releaseDate={new Date()}
+          releaseDate={new Timestamp(new Date().getSeconds(), 0)}
           className="h-fit mt-6"
         />
       </div>
