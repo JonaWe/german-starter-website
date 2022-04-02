@@ -10,24 +10,25 @@ interface CardProps {
 
 export default function Card({ title, text, id }: CardProps) {
   let icon: React.ReactNode;
+  const className = 'text-6xl';
 
   switch (id) {
     case 'easy':
-      icon = <HiAcademicCap className="-translate-y-[2px]" />;
+      icon = <HiAcademicCap className={className} />;
       break;
     case 'activeAdmins':
-      icon = <HiPhone className="-translate-y-[2px]" />;
+      icon = <HiPhone className={className} />;
       break;
     case 'reducedUpkeep':
-      icon = <HiAdjustments className="-translate-y-[2px]" />;
+      icon = <HiAdjustments className={className} />;
       break;
   }
 
   return (
-    <div className="relative mx-0 h-auto w-full bg-background-400 px-6 pt-14 sm:mx-5 sm:h-60 sm:w-64">
-      <Badge className="absolute -top-7 left-5 aspect-square">{icon}</Badge>
-      <h2>{title}</h2>
-      <p>{text}</p>
+    <div className="h-auto w-full sm:w-64 bg-background-400 p-6 sm:h-60 flex flex-col items-center justify-start gap-6 group hover:-translate-y-1 hover:shadow-xl transition">
+      {icon}
+      <h2 className="">{title}</h2>
+      <p className="text-center">{text}</p>
     </div>
   );
 }
