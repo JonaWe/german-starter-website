@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { IdTokenResult } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
+import { DefaultLayoutHeadingContextProvider } from '../../context/defaultLayoutHeadingContext';
 import { auth } from '../../firebase/clientApp';
 import AdminNav from '../Admin/AdminNav';
 import LoadingScreen from '../UI/LoadingScreen';
@@ -16,6 +17,7 @@ interface LayoutProps {
 function AdminLayout({ children }: LayoutProps) {
   const [user, loading] = useAuthState(auth);
   const [tokenResult, setTokenResult] = useState<IdTokenResult>();
+  const [heading, setHeading] = useState<string>('Title');
 
   const router = useRouter();
 
@@ -35,10 +37,15 @@ function AdminLayout({ children }: LayoutProps) {
   if (!tokenResult?.claims.admin) return <LoadingScreen />;
 
   return (
-    <div className="flex">
-      <AdminNav />
-      <div className="mt-12 w-full">{children}</div>
-    </div>
+    <DefaultLayoutHeadingContextProvider value={{ setHeading }}>
+      <div className="flex">
+        <AdminNav />
+        <div className="mt-12 mx-8 w-full">
+          <h1 className="text-6xl mb-4">{heading}</h1>
+          {children}
+        </div>
+      </div>
+    </DefaultLayoutHeadingContextProvider>
   );
 }
 
