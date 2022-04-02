@@ -69,7 +69,7 @@ export default function ManageAdmins() {
         <h2>Promote user to admin</h2>
         <InfoBox
           type={'warning'}
-          info="All admins have full access to the Database users Users and this Dashbord"
+          info="All admins have full access to the Database, Users and this Dashbord"
         />
         <div>
           <label className="block mb-1 text-xl font-bebas">E-Mail</label>
