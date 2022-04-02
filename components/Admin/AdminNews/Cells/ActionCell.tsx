@@ -1,5 +1,7 @@
+import Link from 'next/link';
+
 import { doc, setDoc } from '@firebase/firestore';
-import { HiEye, HiEyeOff, HiOutlineTrash } from 'react-icons/hi';
+import { HiEye, HiEyeOff, HiOutlineTrash, HiPencil } from 'react-icons/hi';
 
 import { db } from '../../../../firebase/clientApp';
 import Tooltip from '../../../UI/Tooltip';
@@ -27,6 +29,16 @@ export default function ActionCell({ value: id, row }: ActionCellProps) {
           onClick={handleDelete}
         />
       </Tooltip>
+      <Link href={`/admin/news/${id}`}>
+        <a>
+          <Tooltip text="Edit">
+            <HiPencil
+              className="fill-sand-500/75 hover:fill-sand-500 text-2xl transition hover:cursor-pointer"
+              onClick={handleDelete}
+            />
+          </Tooltip>
+        </a>
+      </Link>
       {published ? (
         <Tooltip text="Make Private">
           <HiEyeOff

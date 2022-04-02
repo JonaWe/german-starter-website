@@ -1,10 +1,12 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import {
   Timestamp,
   addDoc,
   collection,
+  doc,
   serverTimestamp,
+  setDoc,
 } from '@firebase/firestore';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -27,6 +29,7 @@ const schema = yup
 export interface FormInput {
   title: string;
   content: string;
+  published: boolean;
 }
 
 interface MarkdownEditorProps {
@@ -44,12 +47,13 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
     resolver: yupResolver(schema),
   });
 
-  if (newsItem) {
+  useEffect(() => {
+    if (!newsItem) return;
+
     setValue('title', newsItem.de.title);
     setValue('content', newsItem.de.content);
-  }
-
-  const [publish, setPublished] = useState(newsItem?.published ?? true);
+    setValue('published', newsItem.published);
+  }, [newsItem, setValue]);
 
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -65,11 +69,17 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
         title: data.title,
         content: data.content,
       },
-      published: publish,
+      published: data.published,
       releaseDate: newsItem?.releaseDate ?? serverTimestamp(),
       authors: [auth.currentUser?.uid],
     };
-    addDoc(newsRef, newItem);
+
+    if (newsItem) {
+      const newsItemRef = doc(newsRef, newsItem.__id);
+      setDoc(newsItemRef, newItem, { merge: true });
+    } else {
+      addDoc(newsRef, newItem);
+    }
   };
 
   return (
@@ -78,7 +88,9 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
         <form
           ref={formRef}
           className="flex flex-col"
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={(e) => {
+            handleSubmit(onSubmit)(e);
+          }}
         >
           <MarkdownEditorInputItem
             title="Titel"
@@ -98,9 +110,8 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
           <div className="flex justify-end gap-6 mt-4">
             <Button
               onClick={() => {
-                setPublished(false);
                 formRef.current?.dispatchEvent(
-                  new Event('submit', { cancelable: true, bubbles: true })
+                  new Event('submit', { cancelable: true, bubbles: false })
                 );
               }}
               text="Save"
@@ -108,8 +119,18 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
             />
             <input
               type="submit"
-              className={`${useButtonStyle(true)} w-fit hover:cursor-pointer`}
+              className={`${useButtonStyle(
+                true
+              )} w-fit hover:cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-rust-500`}
               value="Publish"
+              disabled={watch('published')}
+              // onClick={(e) => {
+              //   e.preventDefault();
+              //   setValue('published', true);
+              //   formRef.current?.dispatchEvent(
+              //     new Event('submit', { cancelable: true, bubbles: false })
+              //   );
+              // }}
             />
           </div>
         </form>
