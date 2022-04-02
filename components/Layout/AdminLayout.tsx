@@ -20,7 +20,6 @@ function AdminLayout({ children }: LayoutProps) {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(loading, user, tokenResult);
     if (loading) {
     } else if (!loading && !user) {
       router.push('/signin?successUrl=admin');
