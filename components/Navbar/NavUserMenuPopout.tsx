@@ -1,23 +1,24 @@
 import Link from 'next/link';
 
+import { Menu } from '@headlessui/react';
 import { User } from 'firebase/auth';
 
 import useAdmin from '../../hooks/useAdmin';
+import NavUserMenuPopoutItem from './NavUserMenuPopoutItem';
 
 export default function NavUserMenuPopout({ user }: { user: User }) {
   const [admin] = useAdmin(user);
 
   return (
-    <div className="bg-background-800/95 py-4 px-6 mt-2 flex flex-col gap-2">
-      <Link href="/user">
-        <a>Profile</a>
-      </Link>
+    <div className="bg-background-800/95 mt-2 flex flex-col gap-2 p-2">
+      <NavUserMenuPopoutItem href="/user" title="Profile" />
+      <NavUserMenuPopoutItem href="/logout" title="Logout" />
       {admin && (
-        <Link href="/admin" passHref>
-          <a target="_blank" rel="noopener noreferrer">
-            Admin
-          </a>
-        </Link>
+        <NavUserMenuPopoutItem
+          href="/admin"
+          title="Admin"
+          options={{ target: '_blank', rel: 'noopener noreferrer' }}
+        />
       )}
     </div>
   );

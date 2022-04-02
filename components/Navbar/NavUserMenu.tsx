@@ -2,7 +2,7 @@ import React from 'react';
 
 import Link from 'next/link';
 
-import { Popover, Transition } from '@headlessui/react';
+import { Menu, Transition } from '@headlessui/react';
 import { motion } from 'framer-motion';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
@@ -36,8 +36,8 @@ export default function NavUserMenu() {
     );
   } else if (user.photoURL) {
     return (
-      <Popover className="relative">
-        <Popover.Button>
+      <Menu className="relative" as="div">
+        <Menu.Button>
           <motion.img
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -45,7 +45,7 @@ export default function NavUserMenu() {
             alt="avatar"
             className="w-12 shadow-md hover:scale-105 scale-100 transition-transform duration-200"
           />
-        </Popover.Button>
+        </Menu.Button>
         <Transition
           as={React.Fragment}
           enter="transition ease-out duration-175"
@@ -55,11 +55,11 @@ export default function NavUserMenu() {
           leaveFrom="opacity-100 translate-y-0"
           leaveTo="opacity-0 -translate-y-3"
         >
-          <Popover.Panel className="absolute z-10 right-0" as="div">
+          <Menu.Items className="absolute z-10 right-0" as="div">
             <NavUserMenuPopout user={user} />
-          </Popover.Panel>
+          </Menu.Items>
         </Transition>
-      </Popover>
+      </Menu>
     );
   } else {
     return null;
