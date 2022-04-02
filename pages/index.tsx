@@ -22,7 +22,6 @@ const Home: NextPageWithLayout = () => {
         <Benefits />
       </PageContent>
       <Team />
-      <Footer />
     </div>
   );
 };
