@@ -63,8 +63,9 @@ export default function ManageAdmins() {
   return (
     <div className="">
       <form className="w-fit" onSubmit={onSubmit}>
+        <h2>Promote user to admin</h2>
         <div>
-          <label className="block mb-1 text-2xl font-bebas">E-Mail</label>
+          <label className="block mb-1 text-xl font-bebas">E-Mail</label>
           <input type="email" {...register('email')} />
           {errors.email && (
             <div className={`text-red-400 text-xs mt-2`}>

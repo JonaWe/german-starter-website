@@ -6,9 +6,9 @@ import type { NextPageWithLayout } from '../_app';
 const AdminUsers: NextPageWithLayout = () => {
   const t = useLocalization();
   return (
-    <>
+    <section className="mx-5">
       <ManageAdmins />
-    </>
+    </section>
   );
 };
 
