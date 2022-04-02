@@ -8,6 +8,7 @@
   h5,
   h6 {
     @apply font-bebas;
+    @apply tracking-wide;
   }
   html {
     @apply w-screen overflow-x-hidden bg-background-500;
