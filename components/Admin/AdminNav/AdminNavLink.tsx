@@ -11,9 +11,9 @@ export default function AdminNavLink({ link, name, icon }: AdminNavLinkProps) {
 
   return (
     <Link href={`/admin/${link}`}>
-      <a className="w-full hover:bg-background-800/50 px-5 py-2 hover:cursor-pointer hover:opacity-80 flex items-center gap-2 transition">
+      <a className="w-full hover:bg-background-800/50 px-5 py-2 hover:cursor-pointer hover:opacity-80 flex items-center gap-2 transition group">
         {icon}
-        {name}
+        <p className="group-hover:ml-1 transition-all">{name}</p>
       </a>
     </Link>
   );
