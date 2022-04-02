@@ -67,7 +67,7 @@ const LinkStemAccount: NextPage<LinkProps> = ({ user }: LinkProps) => {
                 <p className="text-sand-500/60 text-xs">{user.steamid}</p>
               </div>
             </div>
-            <InfoBox type="warning" info={t.linkSteam.info} />
+            <InfoBox type="info" info={t.linkSteam.info} />
             <div className="flex justify-between mt-10">
               <Button useLink href="/user/" text={t.from.general.back} />
               <Button
@@ -85,7 +85,7 @@ const LinkStemAccount: NextPage<LinkProps> = ({ user }: LinkProps) => {
               {t.user.settings.steamAccount.info}
             </p>
             <InfoBox
-              type="warning"
+              type="info"
               info={t.linkSteam.linkLater}
               className="mt-3"
             />
