@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
+import { useRouter } from 'next/router';
+
 import {
   Timestamp,
   addDoc,
@@ -14,6 +16,7 @@ import * as yup from 'yup';
 
 import { auth, db } from '../../firebase/clientApp';
 import useButtonStyle from '../../hooks/useButtonStyle';
+import publishNews from '../../lib/firebase/publishNews';
 import { NewsItemWithId } from '../../pages/admin/news';
 import NewsItem from '../News/NewsItem';
 import Button from '../UI/Button';
@@ -41,11 +44,15 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
     handleSubmit,
     register,
     watch,
+    getValues,
     setValue,
+    trigger,
     formState: { errors },
   } = useForm<FormInput>({
     resolver: yupResolver(schema),
   });
+
+  const router = useRouter();
 
   useEffect(() => {
     if (!newsItem) return;
@@ -55,9 +62,14 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
     setValue('published', newsItem.published);
   }, [newsItem, setValue]);
 
-  const formRef = useRef<HTMLFormElement>(null);
+  const onSubmit: SubmitHandler<FormInput> = async (data) => {
+    const doc = await addNews(data);
 
-  const onSubmit: SubmitHandler<FormInput> = (data) => {
+    if (newsItem) return;
+    router.push('/admin/news/' + doc?.id);
+  };
+
+  const addNews = async (data: FormInput) => {
     const newsRef = collection(db, 'news');
 
     const newItem = {
@@ -69,29 +81,24 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
         title: data.title,
         content: data.content,
       },
-      published: data.published,
       releaseDate: newsItem?.releaseDate ?? serverTimestamp(),
       authors: [auth.currentUser?.uid],
     };
 
     if (newsItem) {
+      //leafe published as it is
       const newsItemRef = doc(newsRef, newsItem.__id);
-      setDoc(newsItemRef, newItem, { merge: true });
+      return await setDoc(newsItemRef, newItem, { merge: true });
     } else {
-      addDoc(newsRef, newItem);
+      //If creating new doc set published to flase
+      return await addDoc(newsRef, { ...newItem, published: false });
     }
   };
 
   return (
     <main className="px-8 h-full">
       <div className="w-full h-full grid grid-cols-2 gap-8">
-        <form
-          ref={formRef}
-          className="flex flex-col"
-          onSubmit={(e) => {
-            handleSubmit(onSubmit)(e);
-          }}
-        >
+        <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
           <MarkdownEditorInputItem
             title="Titel"
             register={register}
@@ -108,30 +115,24 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
             as="textarea"
           />
           <div className="flex justify-end gap-6 mt-4">
-            <Button
-              onClick={() => {
-                formRef.current?.dispatchEvent(
-                  new Event('submit', { cancelable: true, bubbles: false })
-                );
-              }}
-              text="Save"
-              className="w-fit"
-            />
             <input
               type="submit"
               className={`${useButtonStyle(
-                true
-              )} w-fit hover:cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-rust-500`}
-              value="Publish"
-              disabled={watch('published')}
-              // onClick={(e) => {
-              //   e.preventDefault();
-              //   setValue('published', true);
-              //   formRef.current?.dispatchEvent(
-              //     new Event('submit', { cancelable: true, bubbles: false })
-              //   );
-              // }}
+                false
+              )} w-fit cursor-pointer`}
+              value="save"
             />
+            {newsItem && (
+              <Button
+                onClick={() => {
+                  publishNews(newsItem.__id);
+                }}
+                text="publish"
+                primary
+                disabled={watch('published') && newsItem ? true : false}
+                className="w-fit disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-rust-500"
+              />
+            )}
           </div>
         </form>
         <NewsItem
