@@ -4,6 +4,11 @@ interface InfoProps {
   info: string;
 }
 
+export interface Info {
+  type: 'info' | 'warning' | 'success' | 'error';
+  info: string;
+}
+
 export default function InfoBox({ className, type, info }: InfoProps) {
   switch (type) {
     case 'warning':

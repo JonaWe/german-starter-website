@@ -9,6 +9,7 @@ import * as yup from 'yup';
 
 import { auth } from '../../../firebase/clientApp';
 import InfoBox from '../../UI/Info';
+import { Info } from '../../UI/Info/InfoBox';
 
 const schema = yup
   .object({
@@ -18,11 +19,6 @@ const schema = yup
       .oneOf([true], 'You must agree to the terms and conditions'),
   })
   .required();
-
-interface Info {
-  type: 'info' | 'warning' | 'success' | 'error';
-  info: string;
-}
 
 export default function ManageAdmins() {
   const {
@@ -64,7 +60,7 @@ export default function ManageAdmins() {
   });
 
   return (
-    <div className="">
+    <>
       <form className="w-64" onSubmit={onSubmit}>
         <h2>Promote user to admin</h2>
         <InfoBox
@@ -104,6 +100,6 @@ export default function ManageAdmins() {
           Promote user
         </button>
       </form>
-    </div>
+    </>
   );
 }
