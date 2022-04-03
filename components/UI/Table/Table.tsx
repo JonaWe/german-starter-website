@@ -1,8 +1,17 @@
-import { useTable } from 'react-table';
+import { HiChevronDown, HiChevronUp, HiFilter } from 'react-icons/hi';
+import { useSortBy, useTable } from 'react-table';
 
 export default function Table({ columns, data }: { columns: any; data: any }) {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns: columns as any, data: data });
+    useTable(
+      {
+        columns: columns as any,
+        data: data,
+      },
+      useSortBy
+    );
+
+    //FIXME: #3 Find solution for (column as any) with sorting (types for sorting not suportet at the moment)
 
   return (
     <table
@@ -14,11 +23,26 @@ export default function Table({ columns, data }: { columns: any; data: any }) {
           <tr {...headerGroup.getHeaderGroupProps()} key={headerGroupIndex}>
             {headerGroup.headers.map((column, columnIndex) => (
               <th
-                {...column.getHeaderProps()}
+                {...column.getHeaderProps(
+                  (column as any).getSortByToggleProps()
+                )}
                 key={columnIndex}
-                className="text-left font-bold bg-background-400/60 py-3 px-4 uppercase"
+                className="text-left font-bold bg-background-400/60 py-3 px-4 uppercase group"
               >
-                {column.render('Header')}
+                <div className="flex items-center justify-between">
+                  {column.render('Header')}
+                  <span>
+                    {(column as any).isSorted ? (
+                      (column as any).isSortedDesc ? (
+                        <HiChevronDown className="text-xl fill-sand-400/50" />
+                      ) : (
+                        <HiChevronUp className="text-xl fill-sand-400/50" />
+                      )
+                    ) : (
+                      <HiFilter className="w-4 h-4 fill-sand-400/50 opacity-0 group-hover:opacity-100 transition" />
+                    )}
+                  </span>
+                </div>
               </th>
             ))}
           </tr>
