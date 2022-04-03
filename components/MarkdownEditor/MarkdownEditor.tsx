@@ -96,7 +96,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
   };
 
   return (
-    <main className="px-8 h-full">
+    <main className="h-full">
       <div className="w-full h-full grid grid-cols-2 gap-8">
         <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
           <MarkdownEditorInputItem
