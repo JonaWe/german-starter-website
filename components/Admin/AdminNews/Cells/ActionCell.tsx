@@ -37,7 +37,6 @@ export default function ActionCell({ value: id, row }: ActionCellProps) {
           <Tooltip text="Edit">
             <HiPencil
               className="fill-sand-500/75 hover:fill-sand-500 text-2xl transition hover:cursor-pointer"
-              onClick={handleDelete}
             />
           </Tooltip>
         </a>
