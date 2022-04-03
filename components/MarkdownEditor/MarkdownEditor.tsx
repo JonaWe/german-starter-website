@@ -53,6 +53,8 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
   });
 
   const router = useRouter();
+  const [saved, setSaved] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!newsItem) return;
@@ -63,7 +65,14 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
   }, [newsItem, setValue]);
 
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
+    setLoading(true);
+
     const doc = await addNews(data);
+
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
+
+    setLoading(false);
 
     if (newsItem) return;
     router.push('/admin/news/' + doc?.id);
@@ -117,10 +126,8 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
           <div className="flex justify-end gap-6 mt-4">
             <input
               type="submit"
-              className={`${useButtonStyle(
-                false
-              )} w-fit cursor-pointer`}
-              value="save"
+              className={`${useButtonStyle(false)} w-fit cursor-pointer ${saved && '!bg-green-800'}`}
+              value={saved ? 'saved' : 'save'}
             />
             {newsItem && (
               <Button
