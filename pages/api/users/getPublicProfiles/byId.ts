@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { auth } from '../../../../firebase/admin/firebaseAdmin';
 
-import { auth } from '../../../firebase/admin/firebaseAdmin';
 
 export default async function handler(
   req: NextApiRequest,
