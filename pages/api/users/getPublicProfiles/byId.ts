@@ -23,5 +23,7 @@ export default async function handler(
   res.status(200).json({
     displayName: user?.displayName,
     photoURL: user?.photoURL,
+    email: user?.email,
+    uid: user?.uid,
   });
 }

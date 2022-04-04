@@ -11,6 +11,7 @@ import {
   setDoc,
 } from '@firebase/firestore';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
 import { HiUserAdd } from 'react-icons/hi';
@@ -59,6 +60,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
   const router = useRouter();
   const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [user] = useAuthState(auth);
 
   useEffect(() => {
     if (!newsItem) return;
@@ -66,6 +68,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
     setValue('title', newsItem.de.title);
     setValue('content', newsItem.de.content);
     setValue('published', newsItem.published);
+    setValue('authors', newsItem.authors);
   }, [newsItem, setValue]);
 
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
@@ -95,7 +98,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
         content: data.content,
       },
       releaseDate: newsItem?.releaseDate ?? serverTimestamp(),
-      authors: [auth.currentUser?.uid],
+      authors: data.authors,
     };
 
     if (newsItem) {
@@ -131,7 +134,10 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
           <label className="text-sand-500 pb-1 mt-4" htmlFor={'author'}>
             Authors
           </label>
-          <AddUsers onChange={(authors) => setValue('authors', authors)} />
+          <AddUsers
+            value={watch('authors') || [user?.uid]}
+            onChange={(authors) => setValue('authors', authors)}
+          />
           <div className="flex justify-end gap-6 mt-4">
             <input
               type="submit"
