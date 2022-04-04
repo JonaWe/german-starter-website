@@ -44,6 +44,11 @@ interface MarkdownEditorProps {
   newsItem?: NewsItemWithId;
 }
 
+const alertUser = (e: Event) => {
+  e.preventDefault();
+  e.returnValue = false;
+};
+
 export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
   const {
     handleSubmit,
@@ -52,7 +57,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
     getValues,
     setValue,
     trigger,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<FormInput>({
     resolver: yupResolver(schema),
   });
@@ -61,6 +66,13 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
   const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(false);
   const [user] = useAuthState(auth);
+
+  useEffect(() => {
+    if (isDirty) window.addEventListener('beforeunload', alertUser);
+    return () => {
+      window.removeEventListener('beforeunload', alertUser);
+    };
+  }, [isDirty]);
 
   useEffect(() => {
     if (!newsItem) return;
@@ -141,9 +153,10 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
           <div className="flex justify-end gap-6 mt-4">
             <input
               type="submit"
+              disabled={!isDirty}
               className={`${useButtonStyle(false)} w-fit cursor-pointer ${
                 saved && '!bg-green-800'
-              }`}
+              } disabled:opacity-30 disabled:cursor-not-allowed `}
               value={saved ? 'saved' : 'save'}
             />
             {newsItem && (
