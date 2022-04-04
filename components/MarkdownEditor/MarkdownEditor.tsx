@@ -21,6 +21,7 @@ import { NewsItemWithId } from '../../pages/admin/news';
 import NewsItem from '../News/NewsItem';
 import Button from '../UI/Button';
 import MarkdownEditorInputItem from './MarkdownEditorInputItem';
+import toast, { Toaster } from 'react-hot-toast';
 
 const schema = yup
   .object({
@@ -106,6 +107,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
 
   return (
     <main className="h-full">
+      <Toaster />
       <div className="w-full h-full grid grid-cols-2 gap-8">
         <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
           <MarkdownEditorInputItem
@@ -126,12 +128,15 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
           <div className="flex justify-end gap-6 mt-4">
             <input
               type="submit"
-              className={`${useButtonStyle(false)} w-fit cursor-pointer ${saved && '!bg-green-800'}`}
+              className={`${useButtonStyle(false)} w-fit cursor-pointer ${
+                saved && '!bg-green-800'
+              }`}
               value={saved ? 'saved' : 'save'}
             />
             {newsItem && (
               <Button
                 onClick={() => {
+                  toast.success('Published');
                   publishNews(newsItem.__id);
                 }}
                 text="publish"

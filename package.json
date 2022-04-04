@@ -27,6 +27,7 @@
     "react-firebase-hooks": "^5.0.3",
     "react-firebaseui": "^6.0.0",
     "react-hook-form": "^7.28.1",
+    "react-hot-toast": "^2.2.0",
     "react-icons": "^4.3.1",
     "react-parallax": "^3.3.0",
     "react-query": "^3.34.16",
