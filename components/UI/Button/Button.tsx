@@ -12,6 +12,7 @@ interface ButtonProps {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   useLink?: boolean;
   href?: string;
+  disabled?: boolean;
 }
 
 export default function Button({
@@ -22,8 +23,11 @@ export default function Button({
   onClick,
   useLink,
   href,
+  disabled,
 }: ButtonProps) {
-  const extendedClassName = `${useButtonStyle(primary!)} ${className}`;
+  const extendedClassName = `${useButtonStyle(primary!)} ${
+    disabled && 'opacity-30 cursor-not-allowed'
+  } ${className}`;
 
   return useLink ? (
     <Link href={href || '/'}>
@@ -33,7 +37,7 @@ export default function Button({
       </a>
     </Link>
   ) : (
-    <button className={extendedClassName} onClick={onClick}>
+    <button className={extendedClassName} onClick={onClick} disabled={disabled}>
       {text}
       {children}
     </button>

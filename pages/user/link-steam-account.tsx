@@ -5,13 +5,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import axios from 'axios';
-import { link } from 'fs/promises';
-import { getIronSession } from 'iron-session';
 import { withIronSessionSsr } from 'iron-session/next';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { HiLink, HiUserAdd } from 'react-icons/hi';
+import { HiLink } from 'react-icons/hi';
 
-import Badge from '../../components/UI/Badge';
 import Button from '../../components/UI/Button';
 import InfoBox from '../../components/UI/Info';
 import Spinner from '../../components/UI/Spinner';
@@ -47,7 +44,6 @@ const LinkStemAccount: NextPage<LinkProps> = ({ user }: LinkProps) => {
           })
           .catch((error) => {
             setError(error);
-            console.log(error);
           });
       });
   };

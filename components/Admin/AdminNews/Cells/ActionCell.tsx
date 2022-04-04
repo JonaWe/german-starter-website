@@ -1,5 +1,7 @@
-import { doc, setDoc } from '@firebase/firestore';
-import { HiEye, HiEyeOff, HiOutlineTrash } from 'react-icons/hi';
+import Link from 'next/link';
+
+import { deleteDoc, doc, setDoc } from '@firebase/firestore';
+import { HiEye, HiEyeOff, HiOutlineTrash, HiPencil } from 'react-icons/hi';
 
 import { db } from '../../../../firebase/clientApp';
 import Tooltip from '../../../UI/Tooltip';
@@ -12,7 +14,10 @@ interface ActionCellProps {
 export default function ActionCell({ value: id, row }: ActionCellProps) {
   const published = row.original.published;
 
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    const newsRef = doc(db, `news/${id}`);
+    deleteDoc(newsRef);
+  };
 
   const changePublished = () => {
     const newsItemRef = doc(db, `news/${id}`);
@@ -27,6 +32,15 @@ export default function ActionCell({ value: id, row }: ActionCellProps) {
           onClick={handleDelete}
         />
       </Tooltip>
+      <Link href={`/admin/news/${id}`}>
+        <a>
+          <Tooltip text="Edit">
+            <HiPencil
+              className="fill-sand-500/75 hover:fill-sand-500 text-2xl transition hover:cursor-pointer"
+            />
+          </Tooltip>
+        </a>
+      </Link>
       {published ? (
         <Tooltip text="Make Private">
           <HiEyeOff
