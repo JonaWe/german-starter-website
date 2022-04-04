@@ -12,16 +12,18 @@ import {
 } from '@firebase/firestore';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import toast, { Toaster } from 'react-hot-toast';
+import { HiUserAdd } from 'react-icons/hi';
 import * as yup from 'yup';
 
 import { auth, db } from '../../firebase/clientApp';
 import useButtonStyle from '../../hooks/useButtonStyle';
 import publishNews from '../../lib/firebase/publishNews';
 import { NewsItemWithId } from '../../pages/admin/news';
+import AddUsers from '../AddUsers';
 import NewsItem from '../News/NewsItem';
 import Button from '../UI/Button';
 import MarkdownEditorInputItem from './MarkdownEditorInputItem';
-import toast, { Toaster } from 'react-hot-toast';
 
 const schema = yup
   .object({
@@ -33,6 +35,7 @@ const schema = yup
 export interface FormInput {
   title: string;
   content: string;
+  authors: string[];
   published: boolean;
 }
 
@@ -125,6 +128,10 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
             className="resize-none h-2/5 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-background-300 scrollbar-track-background-200/20 hover:scrollbar-thumb-rust-400"
             as="textarea"
           />
+          <label className="text-sand-500 pb-1 mt-4" htmlFor={'author'}>
+            Authors
+          </label>
+          <AddUsers onChange={(authors) => setValue('authors', authors)} />
           <div className="flex justify-end gap-6 mt-4">
             <input
               type="submit"
