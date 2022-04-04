@@ -19,6 +19,15 @@
 
 ## Setup
 
+### Secrets
+
+* **PROJECT_ID**: firebase-admin project id
+* **CLIENT_EMAIL**: firebase-admin client id
+* **PRIVATE_KEY**: firebase admin private key
+* **STEAM_API_KEY**: Steam API key
+* **SESSION_KEY**: Random secret with a min leght of 32 for [iron session](https://github.com/vvo/iron-session)
+* **DATABASE_URL**: Databse URL for Prisma
+
 ### Database
 
 [Add full text search](https://www.mysqltutorial.org/activating-full-text-searching.aspx)
