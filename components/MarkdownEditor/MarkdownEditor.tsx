@@ -153,7 +153,6 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
           <div className="flex justify-end gap-6 mt-4">
             <input
               type="submit"
-              disabled={!isDirty}
               className={`${useButtonStyle(false)} w-fit cursor-pointer ${
                 saved && '!bg-green-800'
               } disabled:opacity-30 disabled:cursor-not-allowed `}
