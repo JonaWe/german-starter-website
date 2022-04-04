@@ -4,7 +4,7 @@ interface AuthorProps {
   id: string;
 }
 
-export default function Author({ id }: AuthorProps) {
+export default function AuthorPill({ id }: AuthorProps) {
   const [author] = usePublicUser(id);
 
   console.log(author);

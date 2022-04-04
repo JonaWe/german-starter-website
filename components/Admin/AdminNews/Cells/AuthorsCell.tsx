@@ -1,4 +1,4 @@
-import Author from '../Author';
+import AuthorPill from '../AuthorPill';
 
 interface AuthorsCellProps {
   value: string[];
@@ -9,7 +9,7 @@ export default function AuthorsCell({ value: authors }: AuthorsCellProps) {
     <>
       {authors.map((id) => (
         <span key={id}>
-          <Author id={id} />
+          <AuthorPill id={id} />
         </span>
       ))}
     </>
