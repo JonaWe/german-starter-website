@@ -156,7 +156,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
               className={`${useButtonStyle(false)} w-fit cursor-pointer ${
                 saved && '!bg-green-800'
               } disabled:opacity-30 disabled:cursor-not-allowed `}
-              value={saved ? 'saved' : 'save'}
+              value={newsItem ? (saved ? 'saved' : 'save') : 'add'}
             />
             {newsItem && (
               <Button
