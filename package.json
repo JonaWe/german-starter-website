@@ -12,6 +12,7 @@
     "@hookform/resolvers": "^2.8.8",
     "@prisma/client": "^3.11.1",
     "@tailwindcss/typography": "^0.5.2",
+    "@tippyjs/react": "^4.2.6",
     "axios": "^0.26.1",
     "firebase": "^9.6.9",
     "firebase-admin": "^10.0.2",
