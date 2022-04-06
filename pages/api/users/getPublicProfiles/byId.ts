@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { UserRecord } from 'firebase-admin/auth';
 
-import { auth } from '../../../../firebase/admin/firebaseAdmin';
+import { auth, db } from '../../../../firebase/admin/firebaseAdmin';
 
 export default async function handler(
   req: NextApiRequest,
@@ -20,10 +20,13 @@ export default async function handler(
     return res.status(500).send('user not found');
   }
 
+  const userAttributes = (await db.doc(`users/${req.body.uid}`).get()).data();
+  
   res.status(200).json({
     displayName: user?.displayName,
     photoURL: user?.photoURL,
     email: user?.email,
     uid: user?.uid,
+    steamId: userAttributes?.settigns?.steamid || null
   });
 }
