@@ -18,6 +18,10 @@ export default {
   },
   newsPage: {
     title: 'Neuigkeiten',
+    comments: {
+      showMore: 'Mehr anzeigen',
+      showLess: 'Weniger anzeigen',
+    },
   },
   supportPage: {
     title: 'Support',
@@ -175,7 +179,8 @@ export default {
     accept: 'Ich bin einferstanden',
     title: 'Mit Steam verknüpfen',
     shortTitle: 'Verknüpfen',
-    linkLater: 'Später kanst du verknüpfungen in deinen Profileinstellungen hinzufügen',
+    linkLater:
+      'Später kanst du verknüpfungen in deinen Profileinstellungen hinzufügen',
   },
   user: {
     settings: {
