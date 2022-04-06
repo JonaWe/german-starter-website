@@ -21,7 +21,8 @@ export default {
     comments: {
       showMore: 'Show more',
       showLess: 'Show less',
-      noComments: 'No comments'
+      noComments: 'No comments',
+      mustSignIn: 'Sign in to write comments',
     },
   },
   supportPage: {
