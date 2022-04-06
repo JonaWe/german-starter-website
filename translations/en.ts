@@ -117,6 +117,7 @@ export default {
       finally: 'Finish',
       description: 'Description',
       back: 'Back',
+      submit: 'Submit',
     },
   },
   support: {

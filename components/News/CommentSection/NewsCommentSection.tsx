@@ -16,9 +16,9 @@ interface CommentSectionProps {
 
 export default function NewsCommentSection({ id }: CommentSectionProps) {
   return (
-    <>
+    <div className="mt-10">
       <NewsAddComment id={id} />
       <NewsComments id={id} />
-    </>
+    </div>
   );
 }

@@ -24,10 +24,8 @@ export default function NewsComment({ uid, date, comment }: NewsCommentProps) {
 
   const { locale } = useRouter();
 
-  console.log(steamUser);
-
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 mb-6">
       <img
         src={steamUser ? steamUser.avatar.medium : user?.photoURL}
         alt="avatar"
@@ -46,7 +44,7 @@ export default function NewsComment({ uid, date, comment }: NewsCommentProps) {
             )}
           </span>
           <span className="text-xs font-thin">
-            {date.toDate().toLocaleString(locale, dateFormatOptions)}
+            {date?.toDate().toLocaleString(locale, dateFormatOptions)}
           </span>
         </div>
         <p>{comment}</p>

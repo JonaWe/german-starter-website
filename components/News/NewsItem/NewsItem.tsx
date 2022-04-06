@@ -6,7 +6,7 @@ import Markdown from 'markdown-to-jsx';
 import { checkIfSameDay } from '../../../lib/checkIfSameDay';
 import Badge from '../../UI/Badge';
 import Divider from '../../UI/Divider';
-import NewsCommentSection from './NewsCommentSection';
+import NewsCommentSection from '../CommentSection/NewsCommentSection';
 
 interface NewsItemProps {
   title: string;
