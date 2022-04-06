@@ -21,6 +21,7 @@ export default {
     comments: {
       showMore: 'Show more',
       showLess: 'Show less',
+      noComments: 'No comments'
     },
   },
   supportPage: {

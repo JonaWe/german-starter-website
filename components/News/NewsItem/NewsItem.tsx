@@ -39,7 +39,7 @@ export default function NewsItem({
   return (
     <article className={`${className} mb-10`}>
       <div className="border-b-2 pb-7 border-background-150">
-        <h2 className="leading-none">{title}</h2>
+        <h2 className="leading-none text-5xl">{title}</h2>
         <p className="text-xs text-sand-500/80">
           {checkIfSameDay(releaseDate.toDate())
             ? locale === 'en'
