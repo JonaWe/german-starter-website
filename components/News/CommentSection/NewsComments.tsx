@@ -30,7 +30,7 @@ export default function NewsComments({ id }: NewsCommentsProps) {
 
   const q = query(
     commentsRef,
-    orderBy('createdAt', 'asc'),
+    orderBy('createdAt', 'desc'),
     showAll ? startAfter(null) : limit(3)
   );
 
