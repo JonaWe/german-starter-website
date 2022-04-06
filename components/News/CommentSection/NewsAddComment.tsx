@@ -17,7 +17,7 @@ interface CommentSectionProps {
 
 const schema = yup
   .object({
-    comment: yup.string().required().max(30),
+    comment: yup.string().required().max(100),
   })
   .required();
 
@@ -52,6 +52,7 @@ export default function NewsAddComment({ id }: CommentSectionProps) {
           name="hidden"
           type="text"
           className="hidden"
+          maxLength={70}
         ></input>
         <div className="flex gap-5 ">
           <img

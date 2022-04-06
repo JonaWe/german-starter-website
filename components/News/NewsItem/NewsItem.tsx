@@ -14,7 +14,8 @@ interface NewsItemProps {
   releaseDate: Timestamp;
   content: string;
   authors: string[];
-  id: string;
+  //**If id is not specified, commentsection wont be displayed*/
+  id?: string;
   className?: string;
 }
 
@@ -58,11 +59,7 @@ export default function NewsItem({
             })}
         </div>
       </div>
-      <NewsCommentSection id={id} />
-      {/* Display authors of Post */}
-      {/* Authors have accounts and one Post can have multiple authors */}
-      {/* Add editor for admin accounts to create posts */}
-      {/* Add user accounts for comments on news posts */}
+      {id && <NewsCommentSection id={id} />}
       {/* Connect to steam account to link to server statistics in forum */}
     </article>
   );

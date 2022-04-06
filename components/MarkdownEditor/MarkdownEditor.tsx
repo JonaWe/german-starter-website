@@ -172,12 +172,10 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
             )}
           </div>
         </form>
-        {/* FIXME: Add preview option to NesItem Compontnet or render different component */}
         <NewsItem
           title={watch('title') || 'Untitled'}
           content={watch('content') || 'No content'}
           authors={watch('authors') || [user?.uid]}
-          id={"newsItem?.__id"}
           releaseDate={new Timestamp(new Date().getSeconds(), 0)}
           className="h-fit mt-6"
         />
