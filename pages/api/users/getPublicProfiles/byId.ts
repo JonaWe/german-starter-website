@@ -27,6 +27,6 @@ export default async function handler(
     photoURL: user?.photoURL,
     email: user?.email,
     uid: user?.uid,
-    steamId: userAttributes?.settigns?.steamid || null
+    steamid: userAttributes?.settings?.steamid || null
   });
 }
