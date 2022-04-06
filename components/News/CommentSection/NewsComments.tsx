@@ -54,7 +54,7 @@ export default function NewsComments({ id }: NewsCommentsProps) {
           })}
         </div>
       </div>
-      {comments ? (
+      {comments.length !== 0 ? (
         <button
           className="text-rust-500/60 hover:text-rust-500 transition"
           onClick={() => setShowAll(!showAll)}
