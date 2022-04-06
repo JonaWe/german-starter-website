@@ -37,7 +37,7 @@ export default function NewsItem({
   const { locale } = useRouter();
 
   return (
-    <article className={`${className} mb-10`}>
+    <article className={`${className} mb-10 scroll-m-36`} id={id}>
       <div className="border-b-2 pb-7 border-background-150">
         <h2 className="leading-none text-5xl">{title}</h2>
         <p className="text-xs text-sand-500/80">
