@@ -1,3 +1,6 @@
+import { useRouter } from 'next/router';
+
+import { Timestamp } from 'firebase/firestore';
 import { HiBadgeCheck } from 'react-icons/hi';
 
 import usePublicUser from '../../../hooks/usePublicUser';
@@ -6,12 +9,19 @@ import useSteamUser from '../../../hooks/useSteamUser';
 interface NewsCommentProps {
   uid: string;
   comment: string;
-  date: string;
+  date: Timestamp;
 }
+
+const dateFormatOptions: Intl.DateTimeFormatOptions = {
+  dateStyle: 'long',
+  timeStyle: 'short',
+};
 
 export default function NewsComment({ uid, date, comment }: NewsCommentProps) {
   const [user] = usePublicUser(uid);
   const [steamUser] = useSteamUser(user?.steamid);
+
+  const { locale } = useRouter();
 
   console.log(steamUser);
 
@@ -33,7 +43,7 @@ export default function NewsComment({ uid, date, comment }: NewsCommentProps) {
             )}
           </span>
           <span className="text-xs font-thin">
-              long time ago
+            {date.toDate().toLocaleString(locale, dateFormatOptions)}
           </span>
         </div>
         <p>{comment}</p>
