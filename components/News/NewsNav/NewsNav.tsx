@@ -8,6 +8,7 @@ import { AnimateSharedLayout, motion } from 'framer-motion';
 
 import { checkIfSameDay } from '../../../lib/checkIfSameDay';
 import { NewsItemSerialisiert } from '../../../pages/news';
+import { NewsNavItem } from './NewsNavItem';
 
 const dateFormatOptions: Intl.DateTimeFormatOptions = {
   weekday: 'long',
@@ -31,34 +32,23 @@ export default function NewsNav({
             const { title, content } = locale === 'de' ? de : en;
             const { seconds, nanoseconds } = JSON.parse(releaseDate);
             const release = new Timestamp(seconds, nanoseconds);
+            const releasTime = checkIfSameDay(release.toDate())
+              ? locale === 'en'
+                ? 'Today'
+                : 'Heute'
+              : release.toDate().toLocaleDateString(locale, dateFormatOptions);
+
             const isActive = id === current;
+
             return (
-              <li key={i} className="relative h-10">
-                {isActive && (
-                  <motion.div
-                    className="h-full w-[2px] bg-rust-500 z-10 absolute -left-3"
-                    layoutId="underline"
-                  />
-                )}
-                <Link href={`/news#${id}`}>
-                  <a onClick={() => setCurrent(id)} className="">
-                    <h4
-                      className={`group-hover:text-sand-500 transition-colors text-2xl leading-none`}
-                    >
-                      {title}
-                    </h4>
-                    <p className="text-xs text-sand-500/60">
-                      {checkIfSameDay(release.toDate())
-                        ? locale === 'en'
-                          ? 'Today'
-                          : 'Heute'
-                        : release
-                            .toDate()
-                            .toLocaleDateString(locale, dateFormatOptions)}
-                    </p>
-                  </a>
-                </Link>
-              </li>
+              <NewsNavItem
+                key={i}
+                title={title}
+                id={id}
+                setCurrent={setCurrent}
+                releaseDate={releasTime}
+                isActive={isActive}
+              />
             );
           })}
           <div className="h-full w-[2px] bg-background-400/30 absolute -left-3"></div>
