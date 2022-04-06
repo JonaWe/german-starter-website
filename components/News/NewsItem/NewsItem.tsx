@@ -1,29 +1,68 @@
+import { useRouter } from 'next/router';
+
 import { Timestamp } from '@firebase/firestore';
 import Markdown from 'markdown-to-jsx';
 
+import { checkIfSameDay } from '../../../lib/checkIfSameDay';
 import Badge from '../../UI/Badge';
+import Divider from '../../UI/Divider';
+import NewsCommentSection from './NewsCommentSection';
 
 interface NewsItemProps {
   title: string;
   releaseDate: Timestamp;
   content: string;
+  authors: string[];
+  id: string;
   className?: string;
 }
+
+const dateFormatOptions: Intl.DateTimeFormatOptions = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+};
 
 export default function NewsItem({
   title,
   content,
   releaseDate,
+  authors,
+  id,
   className,
 }: NewsItemProps) {
+  const { locale } = useRouter();
+
   return (
-    <article
-      className={`relative inline-block bg-background-600 px-10 pb-10 pt-14 sm:w-4/6 w-full max-w-screen-2xl ${className}`}
-    >
-      <Badge className="absolute -top-6 left-6">{title}</Badge>
-      <div className="prose prose-invert prose-red">
-        <Markdown>{content}</Markdown>
+    <article className={`${className} mb-10`}>
+      <div className="border-b-2 pb-5 border-background-150">
+        <h2 className="leading-none">{title}</h2>
+        <p className="text-xs text-sand-500/80">
+          {checkIfSameDay(releaseDate.toDate())
+            ? locale === 'en'
+              ? 'Today'
+              : 'Heute'
+            : releaseDate
+                .toDate()
+                .toLocaleDateString(locale, dateFormatOptions)}
+        </p>
+        <div className="prose prose-invert prose-red">
+          <Markdown>{content}</Markdown>
+        </div>
+        <div className="flex gap-3">
+          {authors.map((author) => {
+            return (
+              <Badge
+                key={author}
+                className="text-xs text-sand-500/80"
+                text={author}
+              />
+            );
+          })}
+        </div>
       </div>
+      <NewsCommentSection id={id} />
       {/* Display authors of Post */}
       {/* Authors have accounts and one Post can have multiple authors */}
       {/* Add editor for admin accounts to create posts */}

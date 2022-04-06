@@ -42,21 +42,25 @@ const News: NextPageWithLayout<NewsPageProps> = ({
   const { locale } = useRouter();
   useSetHeading(t.newsPage.title);
   return (
-    <section className="flex justify-center">
+    <section className="flex justify-center w-full max-w-screen-2xl sm:w-4/6">
       {(!newsItems || newsItems.length === 0) && <p>No News found!</p>}
-      {newsItems &&
-        newsItems.map(({ en, de, releaseDate }, index) => {
-          const { title, content } = locale === 'de' ? de : en;
-          const { seconds, nanoseconds } = JSON.parse(releaseDate);
-          return (
-            <NewsItem
-              title={title}
-              content={content}
-              releaseDate={new Timestamp(seconds, nanoseconds)}
-              key={index}
-            />
-          );
-        })}
+      <div className="w-full">
+        {newsItems &&
+          newsItems.map(({ en, de, releaseDate, authors, id }, index) => {
+            const { title, content } = locale === 'de' ? de : en;
+            const { seconds, nanoseconds } = JSON.parse(releaseDate);
+            return (
+              <NewsItem
+                title={title}
+                id={id}
+                content={content}
+                authors={authors}
+                releaseDate={new Timestamp(seconds, nanoseconds)}
+                key={index}
+              />
+            );
+          })}
+      </div>
     </section>
   );
 };
