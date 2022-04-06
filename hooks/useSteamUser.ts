@@ -17,5 +17,5 @@ export default function useSteamUser(steamid: string) {
     }
   );
 
-  return [data?.data.summary, isLoading];
+  return [data?.data.summary ? data.data.summary : null, isLoading];
 }
