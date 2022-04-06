@@ -51,15 +51,16 @@ export default function NewsItem({
           <Markdown>{content}</Markdown>
         </div>
         <div className="flex gap-3">
-          {authors.map((author) => {
-            return (
-              <Badge
-                key={author}
-                className="text-xs text-sand-500/80"
-                text={author}
-              />
-            );
-          })}
+          {authors &&
+            authors.map((author) => {
+              return (
+                <Badge
+                  key={author}
+                  className="text-xs text-sand-500/80"
+                  text={author}
+                />
+              );
+            })}
         </div>
       </div>
       <NewsCommentSection id={id} />

@@ -5,6 +5,7 @@ import { HiBadgeCheck } from 'react-icons/hi';
 
 import usePublicUser from '../../../hooks/usePublicUser';
 import useSteamUser from '../../../hooks/useSteamUser';
+import Tooltip from '../../UI/Tooltip';
 
 interface NewsCommentProps {
   uid: string;
@@ -39,7 +40,9 @@ export default function NewsComment({ uid, date, comment }: NewsCommentProps) {
               {steamUser ? steamUser.nickname : user?.displayName}
             </p>
             {steamUser && (
-              <HiBadgeCheck className="fill-blue-600 inline text-xl" />
+              <Tooltip text="Verified Steam Account">
+                <HiBadgeCheck className="fill-blue-600 inline text-xl" />
+              </Tooltip>
             )}
           </span>
           <span className="text-xs font-thin">
