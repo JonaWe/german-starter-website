@@ -124,6 +124,8 @@ export default {
       description: 'Beschreibung',
       back: 'Zurück',
       submit: 'Senden',
+      haveAccount: 'ich habe bereits ein Konto',
+      noAccount: 'ich habe noch kein Konto',
     },
   },
   support: {

@@ -124,6 +124,8 @@ export default {
       description: 'Description',
       back: 'Back',
       submit: 'Submit',
+      noAccount: "I don't have an account",
+      haveAccount: 'I allready have an account',
     },
   },
   support: {
