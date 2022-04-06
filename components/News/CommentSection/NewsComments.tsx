@@ -20,13 +20,16 @@ export default function NewsComments({ id }: NewsCommentsProps) {
   const comments = getDataWithId(data);
 
   return (
-    <>
-      {comments &&
-        comments.map(({ author, createdAt, comment }) => {
-          return (
-            <NewsComment uid={author} date={createdAt} comment={comment} />
-          );
-        })}
-    </>
+    <div className="relative">
+      <div className="border-l-4 absolute h-full translate-x-6 border-background-150 z-[1]" />
+      <div className="relative z-[2]">
+        {comments &&
+          comments.map(({ author, createdAt, comment }) => {
+            return (
+              <NewsComment uid={author} date={createdAt} comment={comment} />
+            );
+          })}
+      </div>
+    </div>
   );
 }
