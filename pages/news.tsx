@@ -55,6 +55,7 @@ const News: NextPageWithLayout<NewsPageProps> = ({
                 id={id}
                 content={content}
                 authors={authors}
+                className="mb-44"
                 releaseDate={new Timestamp(seconds, nanoseconds)}
                 key={index}
               />

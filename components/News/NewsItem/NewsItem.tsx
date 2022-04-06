@@ -7,6 +7,7 @@ import { checkIfSameDay } from '../../../lib/checkIfSameDay';
 import Badge from '../../UI/Badge';
 import Divider from '../../UI/Divider';
 import NewsCommentSection from '../CommentSection/NewsCommentSection';
+import NewsAuthor from './NewsAuthor';
 
 interface NewsItemProps {
   title: string;
@@ -36,7 +37,7 @@ export default function NewsItem({
 
   return (
     <article className={`${className} mb-10`}>
-      <div className="border-b-2 pb-5 border-background-150">
+      <div className="border-b-2 pb-7 border-background-150">
         <h2 className="leading-none">{title}</h2>
         <p className="text-xs text-sand-500/80">
           {checkIfSameDay(releaseDate.toDate())
@@ -50,16 +51,10 @@ export default function NewsItem({
         <div className="prose prose-invert prose-red">
           <Markdown>{content}</Markdown>
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-3 mt-10">
           {authors &&
             authors.map((author) => {
-              return (
-                <Badge
-                  key={author}
-                  className="text-xs text-sand-500/80"
-                  text={author}
-                />
-              );
+              return <NewsAuthor key={author} uid={author} />;
             })}
         </div>
       </div>

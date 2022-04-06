@@ -16,17 +16,18 @@ export default async function handler(
   try {
     if (req.body.uid) user = await auth.getUser(req.body.uid);
     if (req.body.email) user = await auth.getUserByEmail(req.body.email);
-  }catch(e){
+  } catch (e) {
     return res.status(500).send('user not found');
   }
 
   const userAttributes = (await db.doc(`users/${req.body.uid}`).get()).data();
-  
+
   res.status(200).json({
     displayName: user?.displayName,
     photoURL: user?.photoURL,
     email: user?.email,
     uid: user?.uid,
-    steamid: userAttributes?.settings?.steamid || null
+    steamid: userAttributes?.settings?.steamid || null,
+    role: userAttributes?.role || null,
   });
 }

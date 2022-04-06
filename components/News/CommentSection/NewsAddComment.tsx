@@ -44,24 +44,27 @@ export default function NewsAddComment({ id }: CommentSectionProps) {
   });
 
   return (
-    <form autoComplete="off" className="mb-6" onSubmit={onSubmit}>
-      <input
-        autoComplete="false"
-        name="hidden"
-        type="text"
-        className="hidden"
-      ></input>
-      <div className="flex gap-5 ">
-        <img
-          src={steamUser ? steamUser.avatar.medium : user?.photoURL}
-          alt="avatar"
-          className="h-12 aspect-square"
-        />
-        <input type="text" className="w-full" {...register('comment')} />
+    <form autoComplete="off" className="relative" onSubmit={onSubmit}>
+      <div className="border-l-4 absolute h-full translate-x-6 border-background-150 z-[1]" />
+      <div className="z-[2] relative">
+        <input
+          autoComplete="false"
+          name="hidden"
+          type="text"
+          className="hidden"
+        ></input>
+        <div className="flex gap-5 ">
+          <img
+            src={steamUser ? steamUser.avatar.medium : user?.photoURL}
+            alt="avatar"
+            className="h-12 aspect-square"
+          />
+          <input type="text" className="w-full" {...register('comment')} />
+        </div>
+        <button className={`${useButtonStyle(true)} ml-auto mt-3`}>
+          {t.from.general.submit}
+        </button>
       </div>
-      <button className={`${useButtonStyle(true)} ml-auto mt-3`}>
-        {t.from.general.submit}
-      </button>
     </form>
   );
 }
