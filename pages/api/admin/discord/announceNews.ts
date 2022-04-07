@@ -11,6 +11,8 @@ export default async function handler(
   const user = await withAdminAuth(req, res);
   if (!user) return;
 
+  const { author, titleDe, titleEn } = req.body;
+
   const HOOK_URL = process.env.DISCORD_WEBHOOK_URL;
 
   if (!HOOK_URL)
@@ -19,18 +21,15 @@ export default async function handler(
   const hook = new Webhook(HOOK_URL);
 
   const embed = new MessageBuilder()
-    .setTitle('My title here')
+    .setTitle('Es gibt neuse!')
     .setAuthor(
       'Author here',
       'https://cdn.discordapp.com/embed/avatars/0.png',
       'https://www.google.com'
     )
-
-    .addField('First field', 'this is inline', true)
-    .addField('Second field', 'this is not inline')
-    .setColor(parseInt('#00b0f4', 16))
+    .setColor(parseInt('CD412B', 16))
     .setThumbnail('https://cdn.discordapp.com/embed/avatars/0.png')
-    .setDescription('Oh look a description :)')
+    .setDescription('Read more here :)')
     .setImage('https://cdn.discordapp.com/embed/avatars/0.png')
     .setFooter(
       'Hey its a footer',
