@@ -9,6 +9,7 @@ import useButtonStyle from '../../../hooks/useButtonStyle';
 import useLocalization from '../../../hooks/useLocalization';
 import usePublicUser from '../../../hooks/usePublicUser';
 import useSteamUser from '../../../hooks/useSteamUser';
+import Avatar from '../../UI/Avatar';
 
 interface CommentSectionProps {
   id: string;
@@ -55,10 +56,9 @@ export default function NewsAddComment({ id }: CommentSectionProps) {
           maxLength={70}
         ></input>
         <div className="flex gap-5 ">
-          <img
-            src={steamUser ? steamUser.avatar.medium : user?.photoURL}
-            alt="avatar"
-            className="h-12 aspect-square"
+          <Avatar
+            className="w-12 h-12"
+            url={steamUser ? steamUser.avatar.medium : user?.photoURL}
           />
           <input type="text" className="w-full" {...register('comment')} />
         </div>

@@ -3,13 +3,14 @@ import { useRouter } from 'next/router';
 
 import { Timestamp } from 'firebase/firestore';
 import { HiBadgeCheck } from 'react-icons/hi';
+import Skeleton from 'react-loading-skeleton';
 
 import usePublicUser from '../../../hooks/usePublicUser';
 import useSteamUser from '../../../hooks/useSteamUser';
 import WithLink from '../../OptionalLink';
 import Avatar from '../../UI/Avatar';
 import Tooltip from '../../UI/Tooltip';
-
+import 'react-loading-skeleton/dist/skeleton.css'
 interface NewsCommentProps {
   uid: string;
   comment: string;
@@ -33,13 +34,18 @@ export default function NewsComment({ uid, date, comment }: NewsCommentProps) {
 
   return (
     <div className="flex gap-2 mb-6">
-      <Avatar url={steamUser ? steamUser.avatar.medium : user?.photoURL} />
+      <Avatar
+        className="w-12 h-12"
+        url={steamUser ? steamUser.avatar.medium : user?.photoURL}
+      />
       <div>
         <div className="flex items-end gap-3">
           <span className="flex items-center gap-1">
             <WithLink link={link} className="cursor-pointer">
               <p className="font-bold leading-none">
-                {steamUser ? steamUser.nickname : user?.displayName}
+                {steamUser
+                  ? steamUser.nickname
+                  : user?.displayName || <Skeleton />}
               </p>
             </WithLink>
             {steamUser && (
