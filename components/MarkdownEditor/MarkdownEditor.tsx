@@ -30,12 +30,16 @@ const schema = yup
   .object({
     title: yup.string().required('Title is required').min(5).max(35),
     content: yup.string().required('Content is required').min(10).max(10000),
+    titleEn: yup.string().required('Title is required').min(5).max(35),
+    contentEn: yup.string().required('Content is required').min(10).max(10000),
   })
   .required();
 
 export interface FormInput {
   title: string;
+  titleEn: string;
   content: string;
+  contentEn: string;
   authors: string[];
   published: boolean;
 }
@@ -78,7 +82,9 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
     if (!newsItem) return;
 
     setValue('title', newsItem.de.title);
+    setValue('titleEn', newsItem.en.title);
     setValue('content', newsItem.de.content);
+    setValue('contentEn', newsItem.en.content);
     setValue('published', newsItem.published);
     setValue('authors', newsItem.authors);
   }, [newsItem, setValue]);
@@ -106,8 +112,8 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
         content: data.content,
       },
       en: {
-        title: data.title,
-        content: data.content,
+        title: data.titleEn,
+        content: data.contentEn,
       },
       releaseDate: newsItem?.releaseDate ?? serverTimestamp(),
       authors: data.authors,
@@ -124,7 +130,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
   };
 
   return (
-    <main className="h-full">
+    <main className="min-h-screen h-full mb-10">
       <Toaster />
       <div className="w-full h-full grid grid-cols-2 gap-8">
         <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
@@ -136,10 +142,25 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
             as="input"
           />
           <MarkdownEditorInputItem
+            title="Titel [EN]"
+            register={register}
+            errors={errors}
+            input="titleEn"
+            as="input"
+          />
+          <MarkdownEditorInputItem
             title="Content"
             register={register}
             errors={errors}
             input="content"
+            className="resize-none h-2/5 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-background-300 scrollbar-track-background-200/20 hover:scrollbar-thumb-rust-400"
+            as="textarea"
+          />
+          <MarkdownEditorInputItem
+            title="Content [EN]"
+            register={register}
+            errors={errors}
+            input="contentEn"
             className="resize-none h-2/5 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-background-300 scrollbar-track-background-200/20 hover:scrollbar-thumb-rust-400"
             as="textarea"
           />
