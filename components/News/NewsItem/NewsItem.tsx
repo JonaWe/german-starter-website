@@ -1,8 +1,12 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { Timestamp } from '@firebase/firestore';
 import Markdown from 'markdown-to-jsx';
+import { HiPencil } from 'react-icons/hi';
 
+import { auth } from '../../../firebase/clientApp';
+import useAdmin from '../../../hooks/useAdmin';
 import { checkIfSameDay } from '../../../lib/checkIfSameDay';
 import Badge from '../../UI/Badge';
 import Divider from '../../UI/Divider';
@@ -14,7 +18,7 @@ interface NewsItemProps {
   releaseDate: Timestamp;
   content: string;
   authors: string[];
-  //**If id is not specified, commentsection wont be displayed*/
+  //** If id is not specified, this component is used as a priview (commentsection wont be displayed)*/
   id?: string;
   className?: string;
 }
@@ -36,10 +40,23 @@ export default function NewsItem({
 }: NewsItemProps) {
   const { locale } = useRouter();
 
+  const [admin] = useAdmin(auth.currentUser);
+
   return (
     <article className={`${className} mb-10 scroll-m-36`} id={id}>
       <div className="border-b-2 pb-7 border-background-150">
-        <h2 className="leading-none text-5xl">{title}</h2>
+        <div className="flex justify-between items-center">
+          <h2 className="leading-none text-5xl">{title}</h2>
+          {admin && id && (
+            <>
+              <Link href={`/admin/news/${id}`}>
+                <a>
+                  <HiPencil className="opacity-40 text-3xl hover:opacity-100 transition-opacity" />
+                </a>
+              </Link>
+            </>
+          )}
+        </div>
         <p className="text-xs text-sand-500/80">
           {checkIfSameDay(releaseDate.toDate())
             ? locale === 'en'
