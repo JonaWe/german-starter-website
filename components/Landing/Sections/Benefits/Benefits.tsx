@@ -10,7 +10,7 @@ interface Benefit {
 export default function Benefits() {
   const t = useLocalization();
   return (
-    <section className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-around gap-10 gap-y-20 p-5 sm:mt-48 sm:p-0">
+    <section className="mx-auto flex max-w-screen-xl items-stretch flex-wrap justify-around gap-10 gap-y-20 p-5 sm:mt-48 sm:p-0">
       {t.benefits.map((b) => {
         const benefit = b as Benefit;
         return (

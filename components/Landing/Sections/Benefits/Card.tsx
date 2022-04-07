@@ -9,7 +9,7 @@ interface CardProps {
 export default function Card({ title, text, id }: CardProps) {
   let icon: React.ReactNode;
   const className =
-    'text-6xl group-hover:fill-rust-500 fill-sand-500 transition';
+    'h-10 w-10 group-hover:fill-rust-500 fill-sand-500 transition flex-none';
 
   switch (id) {
     case 'easy':
@@ -24,9 +24,9 @@ export default function Card({ title, text, id }: CardProps) {
   }
 
   return (
-    <div className="h-auto w-full sm:w-64 bg-background-400/60 p-6 sm:h-60 flex flex-col items-center justify-start gap-6 group hover:-translate-y-1 hover:shadow-xl shadow-md transition">
+    <div className="w-full sm:w-64 bg-background-400/60 p-6 flex flex-col items-center justify-start gap-6 group hover:-translate-y-1 hover:shadow-xl shadow-md transition">
       {icon}
-      <h2 className="">{title}</h2>
+      <h2 className="text-center">{title}</h2>
       <p className="text-center text-sand-600">{text}</p>
     </div>
   );
