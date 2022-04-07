@@ -27,6 +27,7 @@
 * **STEAM_API_KEY**: Steam API key
 * **SESSION_KEY**: Random secret with a min leght of 32 for [iron session](https://github.com/vvo/iron-session)
 * **DATABASE_URL**: Databse URL for Prisma
+* **DISCORD_WEBHOOK_URL**: Webhook URL from discord
 
 ### Database
 
