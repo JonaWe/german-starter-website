@@ -14,6 +14,7 @@
     "@tailwindcss/typography": "^0.5.2",
     "@tippyjs/react": "^4.2.6",
     "axios": "^0.26.1",
+    "discord-webhook-node": "^1.1.8",
     "firebase": "^9.6.9",
     "firebase-admin": "^10.0.2",
     "framer-motion": "^6.2.8",

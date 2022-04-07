@@ -79,6 +79,8 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
   }, [isDirty]);
 
   useEffect(() => {
+    if (user) setValue('authors', [user?.uid]);
+
     if (!newsItem) return;
 
     setValue('title', newsItem.de.title);
