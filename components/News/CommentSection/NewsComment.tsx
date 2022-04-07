@@ -7,6 +7,7 @@ import { HiBadgeCheck } from 'react-icons/hi';
 import usePublicUser from '../../../hooks/usePublicUser';
 import useSteamUser from '../../../hooks/useSteamUser';
 import WithLink from '../../OptionalLink';
+import Avatar from '../../UI/Avatar';
 import Tooltip from '../../UI/Tooltip';
 
 interface NewsCommentProps {
@@ -32,11 +33,7 @@ export default function NewsComment({ uid, date, comment }: NewsCommentProps) {
 
   return (
     <div className="flex gap-2 mb-6">
-      <img
-        src={steamUser ? steamUser.avatar.medium : user?.photoURL}
-        alt="avatar"
-        className="aspect-square w-12"
-      />
+      <Avatar url={steamUser ? steamUser.avatar.medium : user?.photoURL} />
       <div>
         <div className="flex items-end gap-3">
           <span className="flex items-center gap-1">
