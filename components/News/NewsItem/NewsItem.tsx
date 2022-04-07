@@ -49,7 +49,7 @@ export default function NewsItem({
                 .toDate()
                 .toLocaleDateString(locale, dateFormatOptions)}
         </p>
-        <div className="prose prose-invert prose-red">
+        <div className="prose prose-invert prose-blue">
           <Markdown>{content}</Markdown>
         </div>
         <div className="flex gap-3 mt-10">
