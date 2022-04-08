@@ -17,6 +17,9 @@
   </p>
 </div>
 
+## Maintenance
+### Domain change
+If the domain is changed it must also be changed in the CONSTANTS file. Some functionality may be dependent on this setting.
 ## Setup
 
 ### Secrets
@@ -28,7 +31,7 @@
 * **SESSION_KEY**: Random secret with a min leght of 32 for [iron session](https://github.com/vvo/iron-session)
 * **DATABASE_URL**: Databse URL for Prisma
 * **DISCORD_WEBHOOK_URL**: Webhook URL from discord
-
+  
 ### Database
 
 [Add full text search](https://www.mysqltutorial.org/activating-full-text-searching.aspx)
