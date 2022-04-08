@@ -28,8 +28,8 @@ If the domain is changed it must also be changed in the CONSTANTS file. Some fun
 * **CLIENT_EMAIL**: firebase-admin client id
 * **PRIVATE_KEY**: firebase admin private key
 * **STEAM_API_KEY**: Steam API key
-* **SESSION_KEY**: Random secret with a min leght of 32 for [iron session](https://github.com/vvo/iron-session)
-* **DATABASE_URL**: Databse URL for Prisma
+* **SESSION_KEY**: Random secret with a min length of 32 for [iron session](https://github.com/vvo/iron-session)
+* **DATABASE_URL**: Database URL for Prisma
 * **DISCORD_WEBHOOK_URL**: Webhook URL from discord
   
 ### Database
