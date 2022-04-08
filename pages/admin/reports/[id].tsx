@@ -4,6 +4,7 @@ import { collection, doc } from '@firebase/firestore';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 
 import { Ticket, TicketWithId } from '.';
+import TicketManger from '../../../components/Admin/AdminReports/TicketManager';
 import { getAdminLayout } from '../../../components/Layout/AdminLayout';
 import MarkdownEditor from '../../../components/MarkdownEditor';
 import Spinner from '../../../components/UI/Spinner';
@@ -32,7 +33,7 @@ const ManageTicket: NextPageWithLayout = () => {
   if (loading && !error) {
     return <Spinner />;
   } else if (ticket) {
-    return <>{id}</>;
+    return <TicketManger ticket={ticketWithId} />;
   } else {
     router.push('/admin/reports');
     return null;
