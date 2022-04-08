@@ -13,7 +13,7 @@ export default async function handler(
   const user = await withAdminAuth(req, res);
   if (!user) return;
 
-  const { author, titleDe, titleEn, id } = req.body;
+  const { author, titleDe, titleEn, id, imageURL } = req.body;
 
   const HOOK_URL = process.env.DISCORD_WEBHOOK_URL;
 
@@ -38,7 +38,7 @@ export default async function handler(
       We have just released a new article! [Read more](${CONSTANTS.DOMAIN}/en/news/${id})
       `
     )
-    // .setImage('https://cdn.discordapp.com/embed/avatars/0.png')
+    .setImage(imageURL || '')
     .setFooter(author.name, author.photoURL)
     .setTimestamp();
 
