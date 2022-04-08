@@ -37,7 +37,7 @@ export default function Button({
       </a>
     </Link>
   ) : (
-    <button className={extendedClassName} onClick={onClick} disabled={disabled}>
+    <button type="button" className={extendedClassName} onClick={onClick} disabled={disabled}>
       {text}
       {children}
     </button>

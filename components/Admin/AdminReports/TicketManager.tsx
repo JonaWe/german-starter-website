@@ -39,9 +39,10 @@ export default function TicketManger({ ticket }: { ticket: TicketWithId }) {
           )}
           <Button
             text="Resolve"
-            className="mt-4"
+            className="mt-4 disabled:hover:bg-rust-500"
             primary
             onClick={() => setModalOpen(true)}
+            disabled={ticket.status === 'resolved'}
           />
         </div>
         <AuthorInfo steamUser={steamUser} author={author} />
