@@ -2,6 +2,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { MessageBuilder, Webhook } from 'discord-webhook-node';
 
+import constants from '../../../../lib/constatns';
+import CONSTANTS from '../../../../lib/constatns';
 import withAdminAuth from '../../../../lib/firebase/withAdminAuth';
 
 export default async function handler(
@@ -11,7 +13,7 @@ export default async function handler(
   const user = await withAdminAuth(req, res);
   if (!user) return;
 
-  const { author, titleDe, titleEn } = req.body;
+  const { author, titleDe, titleEn, id } = req.body;
 
   const HOOK_URL = process.env.DISCORD_WEBHOOK_URL;
 
@@ -21,20 +23,23 @@ export default async function handler(
   const hook = new Webhook(HOOK_URL);
 
   const embed = new MessageBuilder()
-    .setTitle('Es gibt neuse!')
-    .setAuthor(
-      'Author here',
-      'https://cdn.discordapp.com/embed/avatars/0.png',
-      'https://www.google.com'
-    )
+    .setTitle(titleDe + ' | ' + titleEn)
+    .setAuthor("Germen Starter News", "https://i.pinimg.com/originals/cc/40/6a/cc406a8382d8df7eb5f395ec884d3c95.png", CONSTANTS.DOMAIN)
     .setColor(parseInt('CD412B', 16))
-    .setThumbnail('https://cdn.discordapp.com/embed/avatars/0.png')
-    .setDescription('Read more here :)')
-    .setImage('https://cdn.discordapp.com/embed/avatars/0.png')
-    .setFooter(
-      'Hey its a footer',
-      'https://cdn.discordapp.com/embed/avatars/0.png'
+
+    .setDescription(
+      `
+      @everyone
+
+      **[DE]**
+      Wir haben gerade soeben einen neuen Artikel veröffentlicht! [Mehr lesen](${CONSTANTS.DOMAIN}/de/news/${id})
+      
+      **[EN]**
+      We have just released a new article! [Read more](${CONSTANTS.DOMAIN}/en/news/${id})
+      `
     )
+    // .setImage('https://cdn.discordapp.com/embed/avatars/0.png')
+    .setFooter(author.name, author.photoURL)
     .setTimestamp();
 
   hook.send(embed);
