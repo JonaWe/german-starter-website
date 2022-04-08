@@ -32,7 +32,7 @@ export default async function handler(
       @everyone
 
       **[DE]**
-      Wir haben gerade soeben einen neuen Artikel veröffentlicht! [Mehr lesen](${CONSTANTS.DOMAIN}/de/news/${id})
+      Wir haben gerade einen neuen Artikel veröffentlicht! [Mehr lesen](${CONSTANTS.DOMAIN}/de/news/${id})
       
       **[EN]**
       We have just released a new article! [Read more](${CONSTANTS.DOMAIN}/en/news/${id})
