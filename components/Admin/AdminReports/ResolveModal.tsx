@@ -37,7 +37,7 @@ export default function ResolveModal({
   const onSubmit = handleSubmit(async (data) => {
     const ticketsRef = collection(db, 'tickets');
     const ticketRef = doc(ticketsRef, ticketId);
-    await setDoc(ticketRef, { status: 'resolved' }, { merge: true });
+    await setDoc(ticketRef, { status: 'resolved', resolveMessage: data.message }, { merge: true });
     closeModal()
     //TODO: send email to user with message
   });
