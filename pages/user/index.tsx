@@ -23,7 +23,11 @@ const UserHome: NextPageWithLayout = () => {
       <div className="max-w-screen-lg w-screen overflow-hidden h-full sm:m-10 m-1 p-3">
         <div className="flex items-center gap-4 mb-5">
           <div className="w-16 aspect-square overflow-hidden">
-            <img src={user?.photoURL || ''} alt="" className="object-fit scale-100 hover:scale-105 transition-all opacity-100 hover:opacity-75 cursor-pointer" />
+            <img
+              src={user?.photoURL || ''}
+              alt=""
+              className="object-fit scale-100 hover:scale-105 transition-all opacity-100 hover:opacity-75 cursor-pointer"
+            />
           </div>
           <div>
             <p className="leading-none">{user?.displayName}</p>

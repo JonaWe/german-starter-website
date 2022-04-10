@@ -4,12 +4,9 @@ import {
   DocumentData,
   Query,
   collection,
-  doc,
   limit,
   orderBy,
   query,
-  startAfter,
-  startAt,
 } from 'firebase/firestore';
 import { useCollection } from 'react-firebase-hooks/firestore';
 

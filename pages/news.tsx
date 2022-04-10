@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 
 import { Timestamp } from '@firebase/firestore';
-import { Item } from 'framer-motion/types/components/Reorder/Item';
 
 import { getDefaultLayout } from '../components/Layout/DefaultLayout';
 import NewsItem from '../components/News/NewsItem';

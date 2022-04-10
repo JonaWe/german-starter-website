@@ -1,7 +1,5 @@
 import { useMemo } from 'react';
 
-import { useTable } from 'react-table';
-
 import { NewsItemWithId } from '../../../pages/admin/news';
 import Table from '../../UI/Table/Table';
 import ActionCell from './Cells/ActionCell';

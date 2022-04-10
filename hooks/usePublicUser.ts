@@ -9,13 +9,9 @@ export default function usePublicUser(uid: string) {
     return data;
   };
 
-  const { data, isLoading } = useQuery(
-    ['user', uid],
-    () => fetchPlayer(uid),
-    {
-      retry: false,
-    }
-  );
+  const { data, isLoading } = useQuery(['user', uid], () => fetchPlayer(uid), {
+    retry: false,
+  });
 
   return [data?.data, isLoading];
 }

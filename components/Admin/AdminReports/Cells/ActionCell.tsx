@@ -1,9 +1,7 @@
 import Link from 'next/link';
 
-import { deleteDoc, doc, setDoc } from '@firebase/firestore';
-import { HiEye, HiEyeOff, HiOutlineTrash, HiPencil } from 'react-icons/hi';
+import { HiPencil } from 'react-icons/hi';
 
-import { db } from '../../../../firebase/clientApp';
 import Tooltip from '../../../UI/Tooltip';
 
 interface ActionCellProps {

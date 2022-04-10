@@ -2,10 +2,7 @@ interface StatusCellProps {
   value: 'open' | 'resolved';
 }
 
-export default function StatusCell({
-  value: status,
-}: StatusCellProps) {
-
+export default function StatusCell({ value: status }: StatusCellProps) {
   return (
     <span
       className={`${

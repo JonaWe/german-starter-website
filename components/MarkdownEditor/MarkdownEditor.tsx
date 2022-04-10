@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
@@ -14,7 +14,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
-import { HiUserAdd } from 'react-icons/hi';
 import * as yup from 'yup';
 
 import { auth, db } from '../../firebase/clientApp';

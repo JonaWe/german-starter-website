@@ -9,7 +9,17 @@ const AdminHome: NextPageWithLayout = () => {
   const t = useLocalization();
   return (
     <>
-      <Button text="announceNews" onClick={() => announceNews(auth, "English title", "Deutschr Titel", "0QCvQjOt6tgrfVETSlDO")} />
+      <Button
+        text="announceNews"
+        onClick={() =>
+          announceNews(
+            auth,
+            'English title',
+            'Deutschr Titel',
+            '0QCvQjOt6tgrfVETSlDO'
+          )
+        }
+      />
     </>
   );
 };

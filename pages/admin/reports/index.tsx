@@ -5,7 +5,6 @@ import { useCollection } from 'react-firebase-hooks/firestore';
 
 import ReportsTable from '../../../components/Admin/AdminReports/ReportsTable';
 import { getAdminLayout } from '../../../components/Layout/AdminLayout';
-import Table from '../../../components/UI/Table/Table';
 import { db } from '../../../firebase/clientApp';
 import useLocalization from '../../../hooks/useLocalization';
 import getDataWithId from '../../../lib/firebase/getDataWithId';

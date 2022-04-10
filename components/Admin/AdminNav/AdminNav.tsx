@@ -16,13 +16,13 @@ export default function AdminNav() {
     <div className="h-screen w-96 bg-background-600 py-8 flex flex-col justify-between">
       <div>
         <Link href="/user">
-        <a className="p-5 flex items-center gap-4 cursor-pointer hover:bg-background-800/50">
-          <img src={user?.photoURL || ''} alt="" />
-          <div className="flex flex-col">
-            <p className="leading-none">{user?.displayName || user?.email}</p>
-            <p className="text-sand-500/70 text-xs">{user?.email}</p>
-          </div>
-        </a>
+          <a className="p-5 flex items-center gap-4 cursor-pointer hover:bg-background-800/50">
+            <img src={user?.photoURL || ''} alt="" />
+            <div className="flex flex-col">
+              <p className="leading-none">{user?.displayName || user?.email}</p>
+              <p className="text-sand-500/70 text-xs">{user?.email}</p>
+            </div>
+          </a>
         </Link>
         <div className="flex flex-col gap-8">
           <AdminNavLinks />

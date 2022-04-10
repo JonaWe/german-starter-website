@@ -11,7 +11,7 @@
     @apply tracking-wide;
   }
   html {
-    @apply w-screen overflow-x-hidden bg-background-500 scroll-smooth;
+    @apply w-screen overflow-x-hidden scroll-smooth bg-background-500;
   }
   h1 {
     @apply text-8xl sm:text-[10rem];

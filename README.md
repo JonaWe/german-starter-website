@@ -18,20 +18,23 @@
 </div>
 
 ## Maintenance
+
 ### Domain change
+
 If the domain is changed it must also be changed in the CONSTANTS file. Some functionality may be dependent on this setting.
+
 ## Setup
 
 ### Secrets
 
-* **PROJECT_ID**: firebase-admin project id
-* **CLIENT_EMAIL**: firebase-admin client id
-* **PRIVATE_KEY**: firebase admin private key
-* **STEAM_API_KEY**: Steam API key
-* **SESSION_KEY**: Random secret with a min length of 32 for [iron session](https://github.com/vvo/iron-session)
-* **DATABASE_URL**: Database URL for Prisma
-* **DISCORD_WEBHOOK_URL**: Webhook URL from discord
-  
+- **PROJECT_ID**: firebase-admin project id
+- **CLIENT_EMAIL**: firebase-admin client id
+- **PRIVATE_KEY**: firebase admin private key
+- **STEAM_API_KEY**: Steam API key
+- **SESSION_KEY**: Random secret with a min length of 32 for [iron session](https://github.com/vvo/iron-session)
+- **DATABASE_URL**: Database URL for Prisma
+- **DISCORD_WEBHOOK_URL**: Webhook URL from discord
+
 ### Database
 
 [Add full text search](https://www.mysqltutorial.org/activating-full-text-searching.aspx)
