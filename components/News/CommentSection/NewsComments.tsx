@@ -49,7 +49,12 @@ export default function NewsComments({ id }: NewsCommentsProps) {
         <div className="relative z-[2]">
           {comments.map(({ author, createdAt, comment }) => {
             return (
-              <NewsComment uid={author} date={createdAt} comment={comment} />
+              <NewsComment
+                uid={author}
+                date={createdAt}
+                comment={comment}
+                key={`${author}-${createdAt.toDate().getTime()}`}
+              />
             );
           })}
         </div>
