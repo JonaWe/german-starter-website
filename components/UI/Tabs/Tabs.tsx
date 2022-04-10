@@ -50,12 +50,20 @@ export default function Tabs({ tabs }: TabProps) {
             return (
               <li
                 key={i}
-                className={`${isActive ? 'text-white' : ''} w-fit cursor-pointer group`}
+                className={`${
+                  isActive ? 'text-white' : ''
+                } w-fit cursor-pointer group`}
                 onClick={() => {
                   setPage([i, i - page]);
                 }}
               >
-                <h4 className={`font-sans group-hover:text-sand-500 transition-colors ${isActive ? 'text-sand-500' : 'text-sand-500/40 '}`}>{title}</h4>
+                <h4
+                  className={`font-sans group-hover:text-sand-500 transition-colors ${
+                    isActive ? 'text-sand-500' : 'text-sand-500/40 '
+                  }`}
+                >
+                  {title}
+                </h4>
                 {isActive && (
                   <motion.div
                     className="w-full h-[2px] bg-rust-500 relative z-10"

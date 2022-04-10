@@ -15,7 +15,7 @@ export default withIronSessionApiRoute(async function handler(
     req.session.steamUser = {
       steamid: user.steamid,
       username: user.username,
-      avatar: user.avatar
+      avatar: user.avatar,
     };
     await req.session.save();
 

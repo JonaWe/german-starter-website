@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { Dialog } from '@headlessui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { collection, doc, setDoc } from 'firebase/firestore';
@@ -37,8 +35,12 @@ export default function ResolveModal({
   const onSubmit = handleSubmit(async (data) => {
     const ticketsRef = collection(db, 'tickets');
     const ticketRef = doc(ticketsRef, ticketId);
-    await setDoc(ticketRef, { status: 'resolved', resolveMessage: data.message }, { merge: true });
-    closeModal()
+    await setDoc(
+      ticketRef,
+      { status: 'resolved', resolveMessage: data.message },
+      { merge: true }
+    );
+    closeModal();
     //TODO: send email to user with message
   });
 

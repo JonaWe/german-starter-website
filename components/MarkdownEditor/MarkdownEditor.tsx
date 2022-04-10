@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
@@ -14,7 +14,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
-import { HiUserAdd } from 'react-icons/hi';
 import * as yup from 'yup';
 
 import { auth, db } from '../../firebase/clientApp';
@@ -58,9 +57,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
     handleSubmit,
     register,
     watch,
-    getValues,
     setValue,
-    trigger,
     formState: { errors, isDirty },
   } = useForm<FormInput>({
     resolver: yupResolver(schema),
@@ -122,11 +119,11 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
     };
 
     if (newsItem) {
-      //leafe published as it is
+      //leave published as it is
       const newsItemRef = doc(newsRef, newsItem.__id);
       return await setDoc(newsItemRef, newItem, { merge: true });
     } else {
-      //If creating new doc set published to flase
+      //If creating new doc set published to false
       return await addDoc(newsRef, { ...newItem, published: false });
     }
   };

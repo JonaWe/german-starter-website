@@ -17,7 +17,12 @@ export default async function announceNews(
 
   const res = await axios.post(
     `/api/admin/discord/announceNews`,
-    { author: { name: user.displayName, photoURL: user.photoURL }, titleEn, titleDe, id },
+    {
+      author: { name: user.displayName, photoURL: user.photoURL },
+      titleEn,
+      titleDe,
+      id,
+    },
     {
       headers: { Authorization: `Bearer ${token}` },
     }

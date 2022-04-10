@@ -8,8 +8,6 @@ import { HiPencil } from 'react-icons/hi';
 import { auth } from '../../../firebase/clientApp';
 import useAdmin from '../../../hooks/useAdmin';
 import { checkIfSameDay } from '../../../lib/checkIfSameDay';
-import Badge from '../../UI/Badge';
-import Divider from '../../UI/Divider';
 import NewsCommentSection from '../CommentSection/NewsCommentSection';
 import NewsAuthor from './NewsAuthor';
 

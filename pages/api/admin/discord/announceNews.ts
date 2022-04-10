@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { MessageBuilder, Webhook } from 'discord-webhook-node';
 
-import constants from '../../../../lib/constatns';
 import CONSTANTS from '../../../../lib/constatns';
 import withAdminAuth from '../../../../lib/firebase/withAdminAuth';
 
@@ -24,7 +23,11 @@ export default async function handler(
 
   const embed = new MessageBuilder()
     .setTitle(titleDe + ' | ' + titleEn)
-    .setAuthor("Germen Starter News", "https://i.pinimg.com/originals/cc/40/6a/cc406a8382d8df7eb5f395ec884d3c95.png", CONSTANTS.DOMAIN)
+    .setAuthor(
+      'Germen Starter News',
+      'https://i.pinimg.com/originals/cc/40/6a/cc406a8382d8df7eb5f395ec884d3c95.png',
+      CONSTANTS.DOMAIN
+    )
     .setColor(parseInt('CD412B', 16))
 
     .setDescription(

@@ -1,10 +1,9 @@
 import { useState } from 'react';
 
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { Timestamp } from 'firebase/firestore';
-import { AnimateSharedLayout, motion } from 'framer-motion';
+import { AnimateSharedLayout } from 'framer-motion';
 
 import { checkIfSameDay } from '../../../lib/checkIfSameDay';
 import { NewsItemSerialisiert } from '../../../pages/news';

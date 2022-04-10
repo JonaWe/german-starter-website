@@ -11,7 +11,6 @@ import SimpleListbox from '../UI/Listbox';
 import { Player } from './Interfaces/Player';
 import LastStep from './LastStep';
 import NextStep from './NextStep';
-import ReportStep from './ReportStep';
 import SelectPlayer from './SelectPlayer';
 
 export default function ReportSteps({}) {
@@ -163,10 +162,21 @@ export default function ReportSteps({}) {
           >
             <h2 className="mb-2">{t.support.report.completeHeader}</h2>
             <div className="flex items-center justify-center flex-col bg-background-150 p-3 gap-1">
-              <p className="text-sm text-center mb-3">{t.support.report.complete}</p>
+              <p className="text-sm text-center mb-3">
+                {t.support.report.complete}
+              </p>
               <div className="flex gap-5">
-                <Button text={t.signIn.title} primary useLink href='/signin?successUrl=support' />
-                <Button text={t.signIn.signUp} useLink href='/signin?successUrl=support' />
+                <Button
+                  text={t.signIn.title}
+                  primary
+                  useLink
+                  href="/signin?successUrl=support"
+                />
+                <Button
+                  text={t.signIn.signUp}
+                  useLink
+                  href="/signin?successUrl=support"
+                />
               </div>
             </div>
             <LastStep onClick={back} className="self-end mt-2 mr-auto" />

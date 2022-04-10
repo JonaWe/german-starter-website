@@ -48,7 +48,14 @@ module.exports = {
           900: '#333231',
         },
       },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
     },
   },
-  plugins: [require('@tailwindcss/typography'), require('tailwind-scrollbar'), require('tailwind-scrollbar-hide')],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('tailwind-scrollbar'),
+    require('tailwind-scrollbar-hide'),
+  ],
 };

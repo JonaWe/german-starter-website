@@ -1,10 +1,4 @@
-import { MouseEventHandler } from 'react';
-
-import Link from 'next/link';
-
 import { motion } from 'framer-motion';
-
-import useButtonStyle from '../../../hooks/useButtonStyle';
 
 interface AvatarProps {
   className?: string;

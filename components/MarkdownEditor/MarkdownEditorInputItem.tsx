@@ -35,7 +35,7 @@ export default function MarkdownEditorInputItem<T extends keyof FormInput>({
       })}
       {errors[input] && (
         <span className="text-red-500" id={`${input}-error`}>
-          {errors[input].message}
+          {(errors[input] as any).message}
         </span>
       )}
     </>

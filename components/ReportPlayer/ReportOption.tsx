@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import { Combobox } from '@headlessui/react';
 import axios from 'axios';
 import { AnimatePresence, motion } from 'framer-motion';

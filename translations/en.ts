@@ -194,4 +194,12 @@ export default {
       },
     },
   },
+  team: {
+    title: 'The Server Team',
+    roles: {
+      owner: 'Owner',
+      admin: 'Admin',
+      developer: 'Developer',
+    },
+  },
 };

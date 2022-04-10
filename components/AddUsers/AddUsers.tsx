@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
@@ -11,10 +11,7 @@ interface AddUserPorps {
   onChange: (user: string[]) => void;
 }
 
-export default function AddUsers({
-  onChange,
-  value: users,
-}: AddUserPorps) {
+export default function AddUsers({ onChange, value: users }: AddUserPorps) {
   const [input, setInput] = useState('');
 
   const fetchUser = async (email: string) => {
@@ -45,7 +42,7 @@ export default function AddUsers({
   };
 
   const removeUser = async (id: string) => {
-    if (users.length === 1) return toast.error('User must be one');;
+    if (users.length === 1) return toast.error('User must be one');
     onChange(
       users.filter((uid: string) => {
         return uid !== id;
@@ -60,7 +57,7 @@ export default function AddUsers({
       <div>
         {users.map((uid: string) => {
           return (
-            <span className="inline-block mr-2 mb-2">
+            <span className="inline-block mr-2 mb-2" key={uid}>
               <UserPill id={uid} onClick={(uid) => removeUser(uid)} />
             </span>
           );

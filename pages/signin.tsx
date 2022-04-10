@@ -113,7 +113,9 @@ const SignIn: NextPage = () => {
               {loading && <Spinner className="fill-sand-600 text-white" />}
             </button>
             <Link href="/signup">
-              <a className="text-rust-500/80 hover:text-rust-500 underline text-center transition-colors" >{t.from.general.noAccount}</a>
+              <a className="text-rust-500/80 hover:text-rust-500 underline text-center transition-colors">
+                {t.from.general.noAccount}
+              </a>
             </Link>
           </div>
           <Divider className="mt-5 " />

@@ -1,9 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+
 import { auth } from '../../../../firebase/admin/firebaseAdmin';
 
-interface PublicUser{
-    displayName: string | undefined;
-    photoURL: string | undefined;
+interface PublicUser {
+  displayName: string | undefined;
+  photoURL: string | undefined;
 }
 
 export default async function handler(
@@ -16,7 +17,7 @@ export default async function handler(
   if (!Array.isArray(uids))
     return res.status(400).json({ message: 'no uid param' });
 
-  let users:PublicUser[] = [];
+  let users: PublicUser[] = [];
 
   for (const uid of uids) {
     const user = await auth.getUser(uid);

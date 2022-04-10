@@ -1,16 +1,16 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { Timestamp } from 'firebase/firestore';
 import { HiBadgeCheck } from 'react-icons/hi';
 import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 import usePublicUser from '../../../hooks/usePublicUser';
 import useSteamUser from '../../../hooks/useSteamUser';
 import WithLink from '../../OptionalLink';
 import Avatar from '../../UI/Avatar';
 import Tooltip from '../../UI/Tooltip';
-import 'react-loading-skeleton/dist/skeleton.css'
+
 interface NewsCommentProps {
   uid: string;
   comment: string;
