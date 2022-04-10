@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
 
+import Spinner from '../UI/Spinner';
+
 interface PlayerCountProps {
   serverIp: string;
   className?: string;
@@ -12,18 +14,20 @@ export default function PlayerCount({
   className,
   title,
 }: PlayerCountProps) {
-  const fetchPlayerCount = async () => {
-    const data = await axios.post('/api/server/playerCount', {
+  const fetchPlayerCount = () => {
+    return axios.post('/api/server/playerCount', {
       ip: serverIp,
     });
-    return data;
   };
 
-  const { data } = useQuery('serverInfo', fetchPlayerCount);
+  const { data, error, isLoading } = useQuery('serverInfo', fetchPlayerCount);
 
   return (
     <span className={`flex items-center gap-1 ${className}`} title={title}>
-      <p className="font-bebas text-sand-600">{data?.data.playerCount}</p>
+      <p className="font-bebas text-sand-600">
+        {isLoading && <Spinner />}
+        {error ? '?' : data?.data.playerCount}
+      </p>
       <div className="anima h-2 w-2 animate-pulse rounded-full bg-green-600"></div>
     </span>
   );
