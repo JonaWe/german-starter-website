@@ -20,6 +20,18 @@ export default function ReportPlayer() {
         description="Report a player"
         href="/report/player"
       />
+      <ReportTypeCard
+        image="/assets/images/oilrig_ak.png"
+        title="Report"
+        description="Report a player"
+        href="/report/player"
+      />
+      <ReportTypeCard
+        image="/assets/images/oilrig_ak.png"
+        title="Report"
+        description="Report a player"
+        href="/report/player"
+      />
       {/* <ReportSteps /> */}
     </>
   );
