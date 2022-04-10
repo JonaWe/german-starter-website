@@ -1,3 +1,4 @@
+// @ts-ignore
 import SteamAuth from 'node-steam-openid';
 
 const steamAuth = new SteamAuth({
