@@ -57,9 +57,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
     handleSubmit,
     register,
     watch,
-    getValues,
     setValue,
-    trigger,
     formState: { errors, isDirty },
   } = useForm<FormInput>({
     resolver: yupResolver(schema),
@@ -121,11 +119,11 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
     };
 
     if (newsItem) {
-      //leafe published as it is
+      //leave published as it is
       const newsItemRef = doc(newsRef, newsItem.__id);
       return await setDoc(newsItemRef, newItem, { merge: true });
     } else {
-      //If creating new doc set published to flase
+      //If creating new doc set published to false
       return await addDoc(newsRef, { ...newItem, published: false });
     }
   };
