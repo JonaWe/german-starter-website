@@ -13,11 +13,11 @@ interface Type {
 const types = {
   FEEDBACK: { link: '/support/feedback', image: '/assets/images/bear.png' },
   PLAYER_REPORT: {
-    link: '/support/report-player',
+    link: '/support/player-report',
     image: '/assets/images/oilrig_ak.png',
   },
   BUG: {
-    link: '/support/report-bug',
+    link: '/support/bug-report',
     image: '/assets/images/ice_compound.png',
   },
 } as Types;
