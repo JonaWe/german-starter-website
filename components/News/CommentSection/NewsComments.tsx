@@ -50,7 +50,7 @@ export default function NewsComments({ id }: NewsCommentsProps) {
                 uid={author}
                 date={createdAt}
                 comment={comment}
-                key={`${author}-${createdAt.toDate().getTime()}`}
+                key={`${author}-${createdAt?.toDate().getTime()}`}
               />
             );
           })}
