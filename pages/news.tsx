@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 
 import { Timestamp } from '@firebase/firestore';
+import StickyBox from 'react-sticky-box';
 
 import { getDefaultLayout } from '../components/Layout/DefaultLayout';
 import NewsItem from '../components/News/NewsItem';
@@ -44,9 +45,12 @@ const News: NextPageWithLayout<NewsPageProps> = ({
   return (
     <section className="flex justify-center">
       {(!newsItems || newsItems.length === 0) && <p>No News found!</p>}
-      <div className="w-full max-w-screen-2xl sm:w-5/6 flex relative">
-        <NewsNav newsItems={newsItems} />
-        <div className="sm:ml-72 ml-0 w-full">
+      <div className="w-full max-w-screen-2xl sm:w-5/6 flex relative items-start gap-10">
+        {/* FIXME: Fix offsetTop not working */}
+        <StickyBox offsetTop={10} offsetBottom={10}>
+          <NewsNav newsItems={newsItems} />
+        </StickyBox>
+        <div className="w-full">
           {newsItems &&
             newsItems.map(({ en, de, releaseDate, authors, id }, index) => {
               const { title, content } = locale === 'de' ? de : en;
