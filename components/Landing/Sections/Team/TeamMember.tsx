@@ -11,7 +11,7 @@ export default function TeamMember({ name, src, link }: TeamMemberProps) {
   return (
     <Link href={link}>
       <a
-        className="w-24 h-24 lg:w-36 lg:h-36 relative hover:scale-105 transition"
+        className="w-24 h-24 lg:w-32 lg:h-32 relative hover:scale-[102%] transition"
         target="_blank"
       >
         <Image src={src} alt={`${name}'s avatar`} layout="fill" />
