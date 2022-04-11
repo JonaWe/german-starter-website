@@ -45,9 +45,9 @@ const News: NextPageWithLayout<NewsPageProps> = ({
   return (
     <section className="flex justify-center">
       {(!newsItems || newsItems.length === 0) && <p>No News found!</p>}
-      <div className="w-full max-w-screen-2xl sm:w-5/6 flex relative items-start gap-10">
+      <div className="w-full max-w-screen-2xl sm:w-5/6 flex items-start gap-10">
         {/* FIXME: Fix offsetTop not working */}
-        <StickyBox offsetTop={10} offsetBottom={10}>
+        <StickyBox offsetTop={0} offsetBottom={0}>
           <NewsNav newsItems={newsItems} />
         </StickyBox>
         <div className="w-full">

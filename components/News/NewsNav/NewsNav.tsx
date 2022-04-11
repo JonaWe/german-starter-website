@@ -26,7 +26,7 @@ export default function NewsNav({
   return (
     <nav className="hidden sm:block">
       <AnimateSharedLayout>
-        <ul className="flex relative gap-5 flex-col flex-none w-64 mt-28">
+        <ul className="flex relative gap-5 flex-col flex-none w-64 mt-20">
           {newsItems.map(({ en, de, releaseDate, id }, i) => {
             const { title, content } = locale === 'de' ? de : en;
             const { seconds, nanoseconds } = JSON.parse(releaseDate);
