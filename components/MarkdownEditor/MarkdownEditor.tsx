@@ -23,6 +23,7 @@ import { NewsItemWithId } from '../../pages/admin/news';
 import AddUsers from '../AddUsers';
 import NewsItem from '../News/NewsItem';
 import Button from '../UI/Button';
+import LanguagePill from './LanguagePill';
 import MarkdownEditorInputItem from './MarkdownEditorInputItem';
 
 const schema = yup
@@ -141,12 +142,14 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
             as="input"
           />
           <MarkdownEditorInputItem
-            title="Titel [EN]"
+            title="Titel"
             register={register}
             errors={errors}
             input="titleEn"
             as="input"
-          />
+          >
+            <LanguagePill text="EN" />
+          </MarkdownEditorInputItem>
           <MarkdownEditorInputItem
             title="Content"
             register={register}
@@ -156,13 +159,15 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
             as="textarea"
           />
           <MarkdownEditorInputItem
-            title="Content [EN]"
+            title="Content"
             register={register}
             errors={errors}
             input="contentEn"
             className="resize-none h-2/5 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-background-300 scrollbar-track-background-200/20 hover:scrollbar-thumb-rust-400"
             as="textarea"
-          />
+          >
+            <LanguagePill text="EN" />
+          </MarkdownEditorInputItem>
           <label className="text-sand-500 pb-1 mt-4" htmlFor={'author'}>
             Authors
           </label>
