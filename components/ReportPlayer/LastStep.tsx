@@ -4,10 +4,11 @@ import useLocalization from '../../hooks/useLocalization';
 
 interface NextStepProps {
   onClick(): void;
+  name?: string;
   className?: string;
 }
 
-export default function LastStep({ onClick, className }: NextStepProps) {
+export default function LastStep({ onClick, className, name }: NextStepProps) {
   const t = useLocalization();
   return (
     <a
@@ -15,7 +16,7 @@ export default function LastStep({ onClick, className }: NextStepProps) {
       className={`font-sans text-sm flex items-center group cursor-pointer hover:text-sand-700 transition-all text-sand-500/80 gap-1 ${className}`}
     >
       <HiArrowLeft className="group-hover:ml-0 group-hover:mr-3 ml-3 transition-all group-hover:fill-sand-700" />
-      {t.support.report.lastStep}
+      {name ? name : t.support.report.lastStep}
     </a>
   );
 }

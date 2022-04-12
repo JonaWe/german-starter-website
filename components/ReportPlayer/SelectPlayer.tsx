@@ -11,7 +11,7 @@ import { Player } from './Interfaces/Player';
 import ReportOptions from './ReportOptions';
 
 interface SelectPlayerProps {
-  setSelected: any;
+  setSelected: (player: string | null) => void;
   selected: Player | null | undefined;
 }
 

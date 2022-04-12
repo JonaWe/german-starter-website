@@ -6,7 +6,7 @@ import { HiChevronDown } from 'react-icons/hi';
 interface DropdownProps {
   options: { name: string; id: string }[];
   selected: { name: string; id: string };
-  setSelected: any;
+  setSelected: (reason: { id: string; name: string } | null) => void;
 }
 
 export default function SimpleListbox({
