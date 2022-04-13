@@ -201,7 +201,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
           title={watch('title') || 'Untitled'}
           content={watch('content') || 'No content'}
           authors={watch('authors') || [user?.uid]}
-          releaseDate={new Timestamp(new Date().getSeconds(), 0)}
+          releaseDate={Timestamp.fromDate(new Date())}
           className="h-fit mt-6"
         />
       </div>
