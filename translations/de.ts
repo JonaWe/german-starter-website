@@ -143,14 +143,17 @@ export default {
       types: [
         {
           name: 'Rückmeldung',
+          description: 'Deine Meinung ist uns wichtig',
           id: 'FEEDBACK',
         },
         {
           name: 'Spieler melden',
+          description: 'Melde einen Spieler',
           id: 'PLAYER_REPORT',
         },
         {
           name: 'Bug',
+          description: 'Melde einen Bug',
           id: 'BUG',
         },
       ],

@@ -24,14 +24,14 @@ export default function NewsNav({
   const [current, setCurrent] = useState(newsItems[0].id);
   const { locale } = useRouter();
   return (
-    <nav className="fixed hidden sm:block">
+    <nav className="hidden sm:block">
       <AnimateSharedLayout>
-        <ul className="flex relative gap-5 flex-col">
+        <ul className="flex relative gap-5 flex-col flex-none w-64 mt-20">
           {newsItems.map(({ en, de, releaseDate, id }, i) => {
             const { title, content } = locale === 'de' ? de : en;
             const { seconds, nanoseconds } = JSON.parse(releaseDate);
             const release = new Timestamp(seconds, nanoseconds);
-            const releasTime = checkIfSameDay(release.toDate())
+            const releaseTime = checkIfSameDay(release.toDate())
               ? locale === 'en'
                 ? 'Today'
                 : 'Heute'
@@ -45,7 +45,7 @@ export default function NewsNav({
                 title={title}
                 id={id}
                 setCurrent={setCurrent}
-                releaseDate={releasTime}
+                releaseDate={releaseTime}
                 isActive={isActive}
               />
             );

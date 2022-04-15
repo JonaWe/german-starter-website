@@ -130,7 +130,7 @@ export default {
   },
   support: {
     report: {
-      new: 'new report',
+      new: 'back to support',
       completeHeader: 'Complete report',
       complete: 'Please sign in to successfully completed your report',
       search: 'search for player...',
@@ -143,14 +143,17 @@ export default {
       types: [
         {
           name: 'Feedback',
+          description: 'Send us feedback',
           id: 'FEEDBACK',
         },
         {
           name: 'Player report',
+          description: 'Report a player',
           id: 'PLAYER_REPORT',
         },
         {
           name: 'Bug',
+          description: 'Report a bug',
           id: 'BUG',
         },
       ],
