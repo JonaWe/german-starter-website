@@ -27,6 +27,8 @@ If the domain is changed it must also be changed in the CONSTANTS file. Some fun
 
 ### Secrets
 
+The following secrets must be set as environment variables.
+
 - **PROJECT_ID**: firebase-admin project id
 - **CLIENT_EMAIL**: firebase-admin client id
 - **PRIVATE_KEY**: firebase admin private key
