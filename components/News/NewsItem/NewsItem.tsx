@@ -8,7 +8,7 @@ import { HiPencil } from 'react-icons/hi';
 import { auth } from '../../../firebase/clientApp';
 import useAdmin from '../../../hooks/useAdmin';
 import { checkIfSameDay } from '../../../lib/checkIfSameDay';
-import NewsCommentSection from '../CommentSection/NewsCommentSection';
+import NewsCommentSection from '../CommentSection/CommentSection';
 import NewsAuthor from './NewsAuthor';
 
 interface NewsItemProps {
@@ -16,7 +16,7 @@ interface NewsItemProps {
   releaseDate: Timestamp;
   content: string;
   authors: string[];
-  //** If id is not specified, this component is used as a priview (commentsection wont be displayed)*/
+  //** If id is not specified, this component is used as a preview (commentsection wont be displayed)*/
   id?: string;
   className?: string;
 }
@@ -74,7 +74,7 @@ export default function NewsItem({
             })}
         </div>
       </div>
-      {id && <NewsCommentSection id={id} />}
+      {id && <NewsCommentSection path={`news/${id}/comments`} />}
       {/* Connect to steam account to link to server statistics in forum */}
     </article>
   );

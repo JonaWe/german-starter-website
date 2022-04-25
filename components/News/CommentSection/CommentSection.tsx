@@ -7,11 +7,11 @@ import NewsAddComment from './NewsAddComment';
 import NewsComments from './NewsComments';
 
 interface CommentSectionProps {
-  id: string;
+  path: string;
   className?: string;
 }
 
-export default function NewsCommentSection({ id }: CommentSectionProps) {
+export default function CommentSection({ path }: CommentSectionProps) {
   const [user] = useAuthState(auth);
 
   const t = useLocalization();
@@ -19,7 +19,7 @@ export default function NewsCommentSection({ id }: CommentSectionProps) {
   return (
     <div className="mt-10">
       {user ? (
-        <NewsAddComment path="news" id={id} />
+        <NewsAddComment path={path} />
       ) : (
         <div className="bg-background-150 mb-3 p-4 flex justify-between items-center">
           <p className="text-sand-500/30">{t.newsPage.comments.mustSignIn}</p>
@@ -31,7 +31,7 @@ export default function NewsCommentSection({ id }: CommentSectionProps) {
           />
         </div>
       )}
-      <NewsComments path="news" id={id} />
+      <NewsComments path={path} />
     </div>
   );
 }

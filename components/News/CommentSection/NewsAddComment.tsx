@@ -11,8 +11,7 @@ import useSteamUser from '../../../hooks/useSteamUser';
 import Avatar from '../../UI/Avatar';
 
 interface CommentSectionProps {
-  id: string;
-  path?: string;
+  path: string;
   className?: string;
 }
 
@@ -22,7 +21,7 @@ const schema = yup
   })
   .required();
 
-export default function NewsAddComment({ id, path = '' }: CommentSectionProps) {
+export default function NewsAddComment({ path }: CommentSectionProps) {
   const [user] = usePublicUser(auth?.currentUser?.uid || '');
   const [steamUser] = useSteamUser(user?.stemaid);
 
@@ -33,7 +32,7 @@ export default function NewsAddComment({ id, path = '' }: CommentSectionProps) {
   });
 
   const onSubmit = handleSubmit((data) => {
-    const commentsRef = collection(db, path, id, 'comments');
+    const commentsRef = collection(db, path);
 
     addDoc(commentsRef, {
       author: auth?.currentUser?.uid,

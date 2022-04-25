@@ -1,1 +1,1 @@
-export { default } from './NewsCommentSection';
+export { default } from './CommentSection';

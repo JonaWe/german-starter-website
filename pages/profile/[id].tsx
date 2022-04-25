@@ -1,8 +1,10 @@
 import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 
 import { PrismaClient } from '@prisma/client';
 
 import { getDefaultLayout } from '../../components/Layout/DefaultLayout';
+import CommentSection from '../../components/News/CommentSection';
 import useLocalization from '../../hooks/useLocalization';
 import { NextPageWithLayout } from '../_app';
 
@@ -49,7 +51,16 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 const Home: NextPageWithLayout = (props: any) => {
   console.log(props);
   const t = useLocalization();
-  return <div className="">Playerstats</div>;
+  const router = useRouter();
+
+  const { id } = router.query;
+
+  return (
+    <div className="">
+      Playerstats
+      <CommentSection path={`users/${id}/comments`} />
+    </div>
+  );
 };
 
 Home.getLayout = getDefaultLayout();
