@@ -19,7 +19,7 @@ export default function NewsCommentSection({ id }: CommentSectionProps) {
   return (
     <div className="mt-10">
       {user ? (
-        <NewsAddComment id={id} />
+        <NewsAddComment path="news" id={id} />
       ) : (
         <div className="bg-background-150 mb-3 p-4 flex justify-between items-center">
           <p className="text-sand-500/30">{t.newsPage.comments.mustSignIn}</p>
@@ -31,7 +31,7 @@ export default function NewsCommentSection({ id }: CommentSectionProps) {
           />
         </div>
       )}
-      <NewsComments id={id} />
+      <NewsComments path="news" id={id} />
     </div>
   );
 }

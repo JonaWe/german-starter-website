@@ -17,10 +17,11 @@ import NewsComment from './NewsComment';
 
 interface NewsCommentsProps {
   id: string;
+  path: string;
 }
 
-export default function NewsComments({ id }: NewsCommentsProps) {
-  const newsRef = collection(db, 'news');
+export default function NewsComments({ path, id }: NewsCommentsProps) {
+  const newsRef = collection(db, path);
   const commentsRef = collection(newsRef, id, 'comments');
   const c: DocumentData[] = [];
   const [comments, setComments] = useState(c);
