@@ -10,7 +10,7 @@ import useSteamUser from '../../../hooks/useSteamUser';
 import WithLink from '../../OptionalLink';
 import Avatar from '../../UI/Avatar';
 import Tooltip from '../../UI/Tooltip';
-
+import Filter from 'bad-words';
 interface NewsCommentProps {
   uid: string;
   comment: string;
@@ -21,6 +21,8 @@ const dateFormatOptions: Intl.DateTimeFormatOptions = {
   dateStyle: 'long',
   timeStyle: 'short',
 };
+
+const filter = new Filter();
 
 export default function NewsComment({ uid, date, comment }: NewsCommentProps) {
   const [user] = usePublicUser(uid);
@@ -58,7 +60,7 @@ export default function NewsComment({ uid, date, comment }: NewsCommentProps) {
             {date?.toDate().toLocaleString(locale, dateFormatOptions)}
           </span>
         </div>
-        <p>{comment}</p>
+        <p>{filter.clean(comment)}</p>
       </div>
     </div>
   );
