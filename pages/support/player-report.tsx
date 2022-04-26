@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { NextPage } from 'next';
 import Router, { useRouter } from 'next/router';
 
 import { yupResolver } from '@hookform/resolvers/yup';
+import axios from 'axios';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -39,12 +40,19 @@ const schema = yup
   })
   .required();
 
+const variants = {
+  hidden: { opacity: 0, x: -200 },
+  enter: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: 200 },
+};
+
 const PlayerReport: NextPage = () => {
   const [step, setStep] = useState(1);
   const t = useLocalization();
   const [user] = useAuthState(auth);
 
   const router = useRouter();
+  const { playerId } = router.query;
 
   const {
     register,
@@ -56,12 +64,6 @@ const PlayerReport: NextPage = () => {
     resolver: yupResolver(schema),
   });
 
-  const variants = {
-    hidden: { opacity: 0, x: -200 },
-    enter: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: 200 },
-  };
-
   const nextStep = () => {
     setStep(step + 1);
   };
@@ -69,6 +71,30 @@ const PlayerReport: NextPage = () => {
   const back = () => {
     setStep(step - 1);
   };
+
+  const fetchPlayer = async (steamid: string) => {
+    try {
+      const data = await axios.post('/api/server/getPlayerById', {
+        steamId: steamid,
+      });
+      return data;
+    } catch (err) {
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    if (!playerId) return;
+    fetchPlayer(playerId as string).then((data) => {
+      const [player] = data?.data.player;
+     
+      if (!player) return;
+      setValue('player', {
+        steamid: player.steamid,
+        name: player.name,
+      });
+    });
+  }, [router]);
 
   const onSubmit = handleSubmit(async (data) => {
     console.log(data);
