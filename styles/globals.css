@@ -14,7 +14,7 @@
     @apply w-screen overflow-x-hidden scroll-smooth bg-background-500;
   }
   h1 {
-    @apply text-8xl sm:text-[10rem];
+    @apply text-7xl sm:text-[10rem];
   }
   h2 {
     @apply text-3xl;
