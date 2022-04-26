@@ -15,8 +15,8 @@ export interface Option {
 export default function MenuPopout({ options }: MenuPopoutItemProps) {
   return (
     <div className="bg-background-800/95 mt-2 flex flex-col">
-      {options.map((option) => {
-        return <MenuPopoutItem option={option} />;
+      {options.map((option, i) => {
+        return <MenuPopoutItem key={i} option={option} />;
       })}
     </div>
   );
