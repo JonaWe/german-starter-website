@@ -3,13 +3,18 @@ import { useRouter } from 'next/router';
 import Filter from 'bad-words';
 import { Timestamp } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { HiBadgeCheck, HiDotsVertical } from 'react-icons/hi';
+import { HiBadgeCheck, HiDotsVertical, HiTrash } from 'react-icons/hi';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 import { auth } from '../../../firebase/clientApp';
+import useAdmin from '../../../hooks/useAdmin';
+import useLocalization from '../../../hooks/useLocalization';
 import usePublicUser from '../../../hooks/usePublicUser';
 import useSteamUser from '../../../hooks/useSteamUser';
+import deleteComment from '../../../lib/firebase/deleteDocByPath';
+import BasicMenu from '../../Menu';
+import { Option } from '../../Menu/MenuPopout';
 import WithLink from '../../OptionalLink';
 import Avatar from '../../UI/Avatar';
 import Tooltip from '../../UI/Tooltip';
@@ -18,6 +23,7 @@ interface NewsCommentProps {
   uid: string;
   comment: string;
   date: Timestamp;
+  path: string;
 }
 
 const dateFormatOptions: Intl.DateTimeFormatOptions = {
@@ -27,10 +33,30 @@ const dateFormatOptions: Intl.DateTimeFormatOptions = {
 
 const filter = new Filter();
 
-export default function NewsComment({ uid, date, comment }: NewsCommentProps) {
+export default function NewsComment({
+  uid,
+  date,
+  comment,
+  path,
+}: NewsCommentProps) {
   const [user] = usePublicUser(uid);
   const [steamUser] = useSteamUser(user?.steamid);
   const [currentUser] = useAuthState(auth);
+  const [admin] = useAdmin(currentUser ?? null);
+
+  const t = useLocalization();
+
+  const options = [
+    {
+      labelCell: (
+        <span className="flex items-center gap-1">
+          <HiTrash className="-translate-y-0.5" />
+          {t.from.general.delete}
+        </span>
+      ),
+      onClick: () => deleteComment(path),
+    },
+  ] as Option[];
 
   const link = user
     ? `https://playerstats.german-starter.de/player?playerid=${user.steamid}`
@@ -68,10 +94,12 @@ export default function NewsComment({ uid, date, comment }: NewsCommentProps) {
           <p>{filter.clean(comment)}</p>
         </div>
       </div>
-      {currentUser?.uid === uid && (
-        <button>
-          <HiDotsVertical className="group-hover:opacity-40 opacity-0 text-lg hover:opacity-100 transition-opacity mr-2" />
-        </button>
+      {(currentUser?.uid === uid || admin) && (
+        <div className="group-hover:opacity-100 opacity-0">
+          <BasicMenu options={options}>
+            <HiDotsVertical className="group-hover:opacity-40 opacity-0 text-lg hover:opacity-100 transition-opacity mr-2" />
+          </BasicMenu>
+        </div>
       )}
     </div>
   );

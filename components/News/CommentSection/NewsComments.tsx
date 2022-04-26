@@ -43,12 +43,13 @@ export default function NewsComments({ path }: NewsCommentsProps) {
       <div className="relative">
         <div className="border-l-4 absolute h-full translate-x-6 border-background-150 z-[1]" />
         <div className="relative z-[2]">
-          {comments.map(({ author, createdAt, comment }) => {
+          {comments.map(({ author, createdAt, comment, __id }) => {
             return (
               <NewsComment
                 uid={author}
                 date={createdAt}
                 comment={comment}
+                path={`${path}/${__id}`}
                 key={`${author}-${createdAt?.toDate().getTime()}`}
               />
             );

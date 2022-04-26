@@ -126,6 +126,7 @@ export default {
       submit: 'Submit',
       noAccount: "I don't have an account",
       haveAccount: 'I allready have an account',
+      delete: 'Delete',
     },
   },
   support: {

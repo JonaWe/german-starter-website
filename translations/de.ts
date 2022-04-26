@@ -126,6 +126,7 @@ export default {
       submit: 'Senden',
       haveAccount: 'ich habe bereits ein Konto',
       noAccount: 'ich habe noch kein Konto',
+      delete: 'Löschen',
     },
   },
   support: {
