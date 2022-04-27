@@ -24,7 +24,7 @@ export default function TicketManger({ ticket }: { ticket: TicketWithId }) {
         closeModal={() => setModalOpen(false)}
       />
       <div className="flex w-full justify-between">
-        <div className="max-w-[50%]">
+        <div className="max-w-[50%] min-w-[30%]">
           <h3 className="mb-1">Type</h3>
           <TypePill type={ticket.type} />
           <h3 className="mt-5">Description</h3>
