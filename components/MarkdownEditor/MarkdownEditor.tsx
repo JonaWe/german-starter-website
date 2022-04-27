@@ -142,7 +142,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
 
     const token = await user?.getIdToken();
 
-    if (text.length === 0) return setContentTranslation("");
+    if (text.length === 0) return setContentTranslation('');
 
     const res = await axios.post(
       '/api/admin/translate',
@@ -221,26 +221,29 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
             value={watch('authors') || [user?.uid]}
             onChange={(authors) => setValue('authors', authors)}
           />
-          <div className="flex justify-end gap-6 mt-4">
-            <input
-              type="submit"
-              className={`${useButtonStyle(false)} w-fit cursor-pointer ${
-                saved && '!bg-green-800'
-              } disabled:opacity-30 disabled:cursor-not-allowed `}
-              value={newsItem ? (saved ? 'saved' : 'save') : 'add'}
-            />
-            {newsItem && (
-              <Button
-                onClick={() => {
-                  toast.success('Published');
-                  publishNews(newsItem.__id);
-                }}
-                text="publish"
-                primary
-                disabled={watch('published') && newsItem ? true : false}
-                className="w-fit disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-rust-500"
+          <div className="mt-4 flex justify-between">
+            <Button useLink href="/admin/news/" text={"cancel"} />
+            <div className="flex justify-end gap-6">
+              <input
+                type="submit"
+                className={`${useButtonStyle(false)} w-fit cursor-pointer ${
+                  saved && '!bg-green-800'
+                } disabled:opacity-30 disabled:cursor-not-allowed `}
+                value={newsItem ? (saved ? 'saved' : 'save') : 'add'}
               />
-            )}
+              {newsItem && (
+                <Button
+                  onClick={() => {
+                    toast.success('Published');
+                    publishNews(newsItem.__id);
+                  }}
+                  text="publish"
+                  primary
+                  disabled={watch('published') && newsItem ? true : false}
+                  className="w-fit disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-rust-500"
+                />
+              )}
+            </div>
           </div>
         </form>
         <NewsItem
