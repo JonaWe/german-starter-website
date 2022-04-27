@@ -142,7 +142,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
 
     const token = await user?.getIdToken();
 
-    if (text.length === 0) return;
+    if (text.length === 0) return setContentTranslation("");
 
     const res = await axios.post(
       '/api/admin/translate',
@@ -154,7 +154,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
       }
     );
     setContentTranslation(res.data.text);
-  }, 1000);
+  }, 500);
 
   useEffect(() => {
     translateContent();
