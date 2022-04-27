@@ -8,7 +8,7 @@ interface EmailCellProps {
 export default function EmailCell({ value: email }: EmailCellProps) {
   return (
     <>
-      <p>{email || <Skeleton />}</p>
+      <p className="text-xs text-sand-600">{email || <Skeleton />}</p>
     </>
   );
 }

@@ -12,6 +12,7 @@ interface MarkdownEditorInputItemProps<T> {
   as: keyof ReactHTML;
   className?: string;
   children?: React.ReactNode;
+  placeholder?: string;
 }
 
 export default function MarkdownEditorInputItem<T extends keyof FormInput>({
@@ -22,6 +23,7 @@ export default function MarkdownEditorInputItem<T extends keyof FormInput>({
   as,
   className,
   children,
+  placeholder,
 }: MarkdownEditorInputItemProps<T>) {
   return (
     <>
@@ -31,6 +33,7 @@ export default function MarkdownEditorInputItem<T extends keyof FormInput>({
       </label>
       {React.createElement(as, {
         ...register(input),
+        placeholder,
         className,
         id: input,
         'aria-describedby': `${input}-error`,

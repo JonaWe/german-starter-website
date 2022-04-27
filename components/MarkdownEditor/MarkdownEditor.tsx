@@ -11,9 +11,12 @@ import {
   setDoc,
 } from '@firebase/firestore';
 import { yupResolver } from '@hookform/resolvers/yup';
+import axios from 'axios';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
+import { HiSparkles } from 'react-icons/hi';
+import { useDebouncedCallback } from 'use-debounce';
 import * as yup from 'yup';
 
 import { auth, db } from '../../firebase/clientApp';
@@ -23,6 +26,7 @@ import { NewsItemWithId } from '../../pages/admin/news';
 import AddUsers from '../AddUsers';
 import NewsItem from '../News/NewsItem';
 import Button from '../UI/Button';
+import Tooltip from '../UI/Tooltip';
 import LanguagePill from './LanguagePill';
 import MarkdownEditorInputItem from './MarkdownEditorInputItem';
 
@@ -59,6 +63,8 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
     register,
     watch,
     setValue,
+    getValues,
+    control,
     formState: { errors, isDirty },
   } = useForm<FormInput>({
     resolver: yupResolver(schema),
@@ -68,6 +74,8 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
   const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(false);
   const [user] = useAuthState(auth);
+  const [contentTranslation, setContentTranslation] = useState('');
+  const content = useWatch({ control, name: 'content' });
 
   useEffect(() => {
     if (isDirty) window.addEventListener('beforeunload', alertUser);
@@ -129,6 +137,29 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
     }
   };
 
+  const translateContent = useDebouncedCallback(async () => {
+    const text = getValues('content');
+
+    const token = await user?.getIdToken();
+
+    if (text.length === 0) return;
+
+    const res = await axios.post(
+      '/api/admin/translate',
+      {
+        text,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    setContentTranslation(res.data.text);
+  }, 1000);
+
+  useEffect(() => {
+    translateContent();
+  }, [content]);
+
   return (
     <main className="min-h-screen h-full mb-10">
       <Toaster />
@@ -155,7 +186,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
             register={register}
             errors={errors}
             input="content"
-            className="resize-none h-2/5 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-background-300 scrollbar-track-background-200/20 hover:scrollbar-thumb-rust-400"
+            className="resize-none h-2/5 overflow-y-auto scrollbar-thin scrollbar-thumb-background-300 scrollbar-track-background-200/20 hover:scrollbar-thumb-rust-400"
             as="textarea"
           />
           <MarkdownEditorInputItem
@@ -163,10 +194,25 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
             register={register}
             errors={errors}
             input="contentEn"
-            className="resize-none h-2/5 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-background-300 scrollbar-track-background-200/20 hover:scrollbar-thumb-rust-400"
+            placeholder={contentTranslation}
+            className="resize-none h-2/5 overflow-y-auto scrollbar-thin scrollbar-thumb-background-300 scrollbar-track-background-200/20 hover:scrollbar-thumb-rust-400"
             as="textarea"
           >
             <LanguagePill text="EN" />
+            {watch('content')?.length > 0 &&
+              watch('contentEn').length === 0 &&
+              contentTranslation && (
+                <span>
+                  <Tooltip text="Accept translation">
+                    <button
+                      type="button"
+                      onClick={() => setValue('contentEn', contentTranslation)}
+                    >
+                      <HiSparkles className="text-2xl fill-yellow-300/80 hover:fill-yellow-300 animate-pulse ml-auto -m-2" />
+                    </button>
+                  </Tooltip>
+                </span>
+              )}
           </MarkdownEditorInputItem>
           <label className="text-sand-500 pb-1 mt-4" htmlFor={'author'}>
             Authors
