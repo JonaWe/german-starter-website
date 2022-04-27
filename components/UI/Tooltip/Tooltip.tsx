@@ -10,7 +10,7 @@ export default function Tooltip({ children, text }: TooltipProps) {
     <Tippy
       render={(attrs) => (
         <span
-          className="bg-background-700 px-4 py-2 rounded z-100"
+          className="bg-background-700 px-4 py-2 rounded z-100 text-sm"
           tabIndex={-1}
           {...attrs}
         >
