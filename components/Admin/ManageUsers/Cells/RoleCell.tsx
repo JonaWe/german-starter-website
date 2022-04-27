@@ -11,6 +11,7 @@ interface RoleCellProps {
 export default function RoleCell({ row }: RoleCellProps) {
   const docRef = doc(db, 'users', row.original.uid || '_');
 
+  //FIXME: #6 Not all admins showing up as admins
   const [userData] = useDocumentData(docRef);
 
   return (
