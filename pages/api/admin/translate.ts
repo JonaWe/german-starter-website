@@ -16,17 +16,20 @@ export default async function handler(
 
   if (!text) return res.status(400).json({ message: 'no text param' });
 
-  const translationRes = await axios.post(
-    'https://libretranslate.de/translate',
-    {
-      q: text,
-      source: body.source || 'de',
-      target: body.target || 'en',
-      format: 'text',
-    }
-  );
-
-  const { translatedText } = translationRes.data;
-
-  res.status(200).json({ text: translatedText });
+  try {
+    const translationRes = await axios.post(
+      'https://libretranslate.de/translate',
+      {
+        q: text,
+        source: body.source || 'de',
+        target: body.target || 'en',
+        format: 'text',
+      }
+    );
+    const { translatedText } = translationRes.data;
+    res.status(200).json({ text: translatedText });
+  } catch (err) {
+    console.log(err);
+    res.status(200).json({ text: '', message: (err as Error).message });
+  }
 }
