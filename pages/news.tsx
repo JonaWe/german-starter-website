@@ -22,6 +22,7 @@ export interface NewsItem {
   authors: string[];
   published: boolean;
   id: string;
+  announced: boolean;
 }
 
 export interface NewsItemSerialisiert {

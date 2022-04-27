@@ -36,6 +36,7 @@ const schema = yup
     content: yup.string().required('Content is required').min(10).max(10000),
     titleEn: yup.string().required('Title is required').min(5).max(35),
     contentEn: yup.string().required('Content is required').min(10).max(10000),
+    announce: yup.boolean(),
   })
   .required();
 
@@ -46,6 +47,7 @@ export interface FormInput {
   contentEn: string;
   authors: string[];
   published: boolean;
+  announce: boolean;
 }
 
 interface MarkdownEditorProps {
@@ -95,6 +97,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
     setValue('contentEn', newsItem.en.content);
     setValue('published', newsItem.published);
     setValue('authors', newsItem.authors);
+    setValue('announce', !newsItem.announced);
   }, [newsItem, setValue]);
 
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
@@ -108,7 +111,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
     setLoading(false);
 
     if (newsItem) return;
-    router.push('/admin/news/' + doc?.id);
+    router.push(`/admin/news/${doc?.id}`);
   };
 
   const addNews = async (data: FormInput) => {
@@ -221,8 +224,27 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
             value={watch('authors') || [user?.uid]}
             onChange={(authors) => setValue('authors', authors)}
           />
+          {newsItem && !watch('published') && (
+            <>
+              <label className="text-sand-500 pb-1 mt-4" htmlFor={'announce'}>
+                Announcement
+              </label>
+              <div className="flex gap-3 items-center">
+                <input
+                  type="checkbox"
+                  checked={watch('announce')}
+                  {...register('announce')}
+                  id="announce"
+                  className="accent-rust-500"
+                />
+                <span className="text-sm">
+                  Announce article in Discord when published
+                </span>
+              </div>
+            </>
+          )}
           <div className="mt-4 flex justify-between">
-            <Button useLink href="/admin/news/" text={"cancel"} />
+            <Button useLink href="/admin/news/" text={'cancel'} />
             <div className="flex justify-end gap-6">
               <input
                 type="submit"
@@ -235,7 +257,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
                 <Button
                   onClick={() => {
                     toast.success('Published');
-                    publishNews(newsItem.__id);
+                    publishNews(newsItem.__id, watch('announce'));
                   }}
                   text="publish"
                   primary
