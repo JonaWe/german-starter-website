@@ -26,10 +26,10 @@
     @apply text-sand-500;
   }
   input {
-    @apply bg-background-200/20 p-3 text-lg shadow-sm focus-visible:outline-none focus-visible:ring focus-visible:ring-sand-500/40;
+    @apply bg-background-200/20 p-3 text-lg shadow-sm focus-visible:outline-none focus-visible:ring focus-visible:ring-sand-500/40 placeholder:text-sand-500/20;
   }
   textarea {
-    @apply bg-background-200/20 p-1 shadow-sm focus-visible:outline-none focus-visible:ring focus-visible:ring-sand-500/40;
+    @apply bg-background-200/20 p-1 shadow-sm focus-visible:outline-none focus-visible:ring focus-visible:ring-sand-500/40 placeholder:text-sand-500/20;
   }
 }
 
