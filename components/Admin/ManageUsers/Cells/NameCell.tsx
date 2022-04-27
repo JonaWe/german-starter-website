@@ -5,10 +5,10 @@ interface NameCellProps {
   row: any;
 }
 
-export default function NameCell({ value: name }: NameCellProps) {
+export default function NameCell({ value: name, row }: NameCellProps) {
   return (
     <>
-      <p>{name || <Skeleton />}</p>
+      <p>{row.original.uid ? name || '-' : <Skeleton />}</p>
     </>
   );
 }

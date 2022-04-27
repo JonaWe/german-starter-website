@@ -7,15 +7,16 @@ import { useQuery } from 'react-query';
 import { auth } from '../../../firebase/clientApp';
 import { NewsItemWithId } from '../../../pages/admin/news';
 import Table from '../../UI/Table/Table';
+import EmailCell from './Cells/EmailCell';
 import NameCell from './Cells/NameCell';
+import RoleCell from './Cells/RoleCell';
 
 export default function UsersTable() {
   const columns = useMemo(
     () => [
       { Header: 'Name', accessor: `displayName`, Cell: NameCell },
-      { Header: 'E-Mail', accessor: `email` },
-      { Header: 'Published', accessor: `published` },
-      { Header: 'Authors', accessor: 'authors' },
+      { Header: 'E-Mail', accessor: `email`, Cell: EmailCell },
+      { Header: 'Role', Cell: RoleCell },
       { Header: 'Actions', accessor: '__id' },
     ],
     []
