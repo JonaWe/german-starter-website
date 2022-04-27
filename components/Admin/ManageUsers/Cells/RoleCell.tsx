@@ -14,8 +14,20 @@ export default function RoleCell({ row }: RoleCellProps) {
   const [userData] = useDocumentData(docRef);
 
   return (
-    <>
-      <p>{row.original.uid ? userData?.role || 'user' : <Skeleton />}</p>
-    </>
+    <p>
+      {row.original.uid ? (
+        <span
+          className={`text-xs px-2.5 py-1.5 rounded-full border ${
+            userData?.role === 'admin'
+              ? 'border-green-500/80 text-green-500/80 bg-green-400/10'
+              : 'border-sand-500/50 text-sand-500/50 bg-sand-500/10'
+          } uppercase mr-2`}
+        >
+          {userData?.role || 'user'}
+        </span>
+      ) : (
+        <Skeleton />
+      )}
+    </p>
   );
 }

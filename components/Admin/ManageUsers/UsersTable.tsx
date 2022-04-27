@@ -16,7 +16,7 @@ export default function UsersTable() {
     () => [
       { Header: 'Name', accessor: `displayName`, Cell: NameCell },
       { Header: 'E-Mail', accessor: `email`, Cell: EmailCell },
-      { Header: 'Role', Cell: RoleCell },
+      { Header: 'Role', accessor: '_', Cell: RoleCell },
       { Header: 'Actions', accessor: '__id' },
     ],
     []
