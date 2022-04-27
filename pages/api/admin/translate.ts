@@ -29,7 +29,7 @@ export default async function handler(
     const { translatedText } = translationRes.data;
     res.status(200).json({ text: translatedText });
   } catch (err) {
-    console.log(err);
+    console.log((err as Error).message);
     res.status(200).json({ text: '', message: (err as Error).message });
   }
 }
