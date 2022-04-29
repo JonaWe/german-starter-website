@@ -87,14 +87,14 @@ const PlayerReport: NextPage = () => {
     if (!playerId) return;
     fetchPlayer(playerId as string).then((data) => {
       const [player] = data?.data.player;
-     
+
       if (!player) return;
       setValue('player', {
         steamid: player.steamid,
         name: player.name,
       });
     });
-  }, [router]);
+  }, [router, playerId, setValue]);
 
   const onSubmit = handleSubmit(async (data) => {
     console.log(data);

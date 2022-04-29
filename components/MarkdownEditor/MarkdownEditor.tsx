@@ -98,7 +98,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
     setValue('published', newsItem.published);
     setValue('authors', newsItem.authors);
     setValue('announce', !newsItem.announced);
-  }, [newsItem, setValue]);
+  }, [newsItem, setValue, user]);
 
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
     setLoading(true);
@@ -161,7 +161,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
 
   useEffect(() => {
     translateContent();
-  }, [content]);
+  }, [content, translateContent]);
 
   return (
     <main className="min-h-screen h-full mb-10">

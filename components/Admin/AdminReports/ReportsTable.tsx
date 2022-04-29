@@ -22,7 +22,7 @@ export default function ReportsTable({ tickets, local }: ReportsTableProps) {
       { Header: 'Status', accessor: `status`, Cell: StatusCell },
       { Header: 'Actions', accessor: '__id', Cell: ActionCell },
     ],
-    [local]
+    []
   );
 
   return <Table columns={columns} data={tickets} />;
