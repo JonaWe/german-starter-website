@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router';
 
 import { Timestamp } from '@firebase/firestore';
-import { Item } from 'framer-motion/types/components/Reorder/Item';
+import StickyBox from 'react-sticky-box';
 
 import { getDefaultLayout } from '../components/Layout/DefaultLayout';
 import NewsItem from '../components/News/NewsItem';
+import NewsNav from '../components/News/NewsNav';
 import { useSetHeading } from '../context/defaultLayoutHeadingContext';
 import useLocalization from '../hooks/useLocalization';
 import getPublicNewsArticle from '../lib/firebase/getPublicNewsArticle';
@@ -21,6 +22,7 @@ export interface NewsItem {
   authors: string[];
   published: boolean;
   id: string;
+  announced: boolean;
 }
 
 export interface NewsItemSerialisiert {
@@ -44,19 +46,30 @@ const News: NextPageWithLayout<NewsPageProps> = ({
   return (
     <section className="flex justify-center">
       {(!newsItems || newsItems.length === 0) && <p>No News found!</p>}
-      {newsItems &&
-        newsItems.map(({ en, de, releaseDate }, index) => {
-          const { title, content } = locale === 'de' ? de : en;
-          const { seconds, nanoseconds } = JSON.parse(releaseDate);
-          return (
-            <NewsItem
-              title={title}
-              content={content}
-              releaseDate={new Timestamp(seconds, nanoseconds)}
-              key={index}
-            />
-          );
-        })}
+      <div className="w-full max-w-screen-2xl sm:w-5/6 flex items-start sm:gap-10 p-3 sm:p-0">
+        {/* FIXME: Fix offsetTop not working */}
+        <StickyBox offsetTop={0} offsetBottom={0}>
+          <NewsNav newsItems={newsItems} />
+        </StickyBox>
+        <div className="w-full">
+          {newsItems &&
+            newsItems.map(({ en, de, releaseDate, authors, id }, index) => {
+              const { title, content } = locale === 'de' ? de : en;
+              const { seconds, nanoseconds } = JSON.parse(releaseDate);
+              return (
+                <NewsItem
+                  title={title}
+                  id={id}
+                  content={content}
+                  authors={authors}
+                  className="mb-44"
+                  releaseDate={new Timestamp(seconds, nanoseconds)}
+                  key={index}
+                />
+              );
+            })}
+        </div>
+      </div>
     </section>
   );
 };
@@ -67,6 +80,7 @@ export async function getStaticProps() {
   return {
     props: {
       newsItems: (await getPublicNewsArticle()).map((item) => {
+        item.announced = item.announced ? item.announced : false;
         return { ...item, releaseDate: JSON.stringify(item.releaseDate) };
       }),
     },

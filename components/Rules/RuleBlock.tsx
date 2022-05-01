@@ -17,7 +17,7 @@ export default function RuleBlock({
 }: RuleBlockProps) {
   return (
     <section
-      className="relative mt-20 grid max-w-screen-xl gap-x-3 gap-y-4 bg-background-400 px-14 pt-10 pb-7"
+      className="relative mt-20 grid max-w-screen-xl md:gap-x-3 gap-x-1 gap-y-4 bg-background-400 md:px-14 px-3 pt-10 pb-7"
       style={{ gridTemplateColumns: 'min-content auto' }}
     >
       <Badge text={title} className="absolute -translate-y-6 translate-x-8" />
@@ -33,7 +33,7 @@ export default function RuleBlock({
           </>
         );
       })}
-      {comment && <p className="col-span-2 mb-3 italic">{comment}</p>}
+      {comment && <p className="col-span-2 mb-3 italic opacity-80">{comment}</p>}
     </section>
   );
 }

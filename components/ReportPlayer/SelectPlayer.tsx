@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Combobox } from '@headlessui/react';
 import axios from 'axios';
@@ -11,7 +11,7 @@ import { Player } from './Interfaces/Player';
 import ReportOptions from './ReportOptions';
 
 interface SelectPlayerProps {
-  setSelected: any;
+  setSelected: (player: string | null) => void;
   selected: Player | null | undefined;
 }
 

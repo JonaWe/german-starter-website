@@ -11,7 +11,7 @@ export default function Table({ columns, data }: { columns: any; data: any }) {
       useSortBy
     );
 
-    //FIXME: #3 Find solution for (column as any) with sorting (types for sorting not suportet at the moment)
+  //FIXME: #3 Find solution for (column as any) with sorting (types for sorting not suportet at the moment)
 
   return (
     <table

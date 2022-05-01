@@ -11,6 +11,8 @@ interface MarkdownEditorInputItemProps<T> {
   errors: FieldErrors<FormInput>;
   as: keyof ReactHTML;
   className?: string;
+  children?: React.ReactNode;
+  placeholder?: string;
 }
 
 export default function MarkdownEditorInputItem<T extends keyof FormInput>({
@@ -20,14 +22,18 @@ export default function MarkdownEditorInputItem<T extends keyof FormInput>({
   errors,
   as,
   className,
+  children,
+  placeholder,
 }: MarkdownEditorInputItemProps<T>) {
   return (
     <>
       <label className="text-sand-500 pb-1 mt-4" htmlFor={input}>
         {title}
+        {children}
       </label>
       {React.createElement(as, {
         ...register(input),
+        placeholder,
         className,
         id: input,
         'aria-describedby': `${input}-error`,
@@ -35,7 +41,7 @@ export default function MarkdownEditorInputItem<T extends keyof FormInput>({
       })}
       {errors[input] && (
         <span className="text-red-500" id={`${input}-error`}>
-          {errors[input].message}
+          {(errors[input] as any).message}
         </span>
       )}
     </>

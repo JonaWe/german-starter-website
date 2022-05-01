@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 
 import { Listbox, Transition } from '@headlessui/react';
 import { HiChevronDown } from 'react-icons/hi';
@@ -6,7 +6,7 @@ import { HiChevronDown } from 'react-icons/hi';
 interface DropdownProps {
   options: { name: string; id: string }[];
   selected: { name: string; id: string };
-  setSelected: any;
+  setSelected: (reason: { id: string; name: string } | null) => void;
 }
 
 export default function SimpleListbox({

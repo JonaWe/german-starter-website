@@ -22,7 +22,7 @@ export default function Header() {
       </header>
       <Background className="w-screen h-screen">
         <Image
-          src="/assets/images/banner_bg.png"
+          src="/assets/images/banner.jpg"
           alt="banner"
           layout="fill"
           objectFit="cover"

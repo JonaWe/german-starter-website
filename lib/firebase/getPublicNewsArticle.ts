@@ -36,6 +36,7 @@ export default async function getPublicNewsArticle(
       authors: docData.authors,
       releaseDate: docData.releaseDate,
       published: docData.published,
+      announced: docData.announced,
       id: doc.id,
     });
   });

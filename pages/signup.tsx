@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { NextPage } from 'next';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,6 +14,7 @@ import * as yup from 'yup';
 import PageContent from '../components/PageContent';
 import PasswordMeter from '../components/PasswordMeter';
 import Divider from '../components/UI/Divider';
+import InfoBox from '../components/UI/Info';
 import Spinner from '../components/UI/Spinner';
 import SuccessScreen from '../components/UI/SuccessScreen';
 import { uiConfig } from '../config/firebaseAuthUI.config';
@@ -20,7 +22,6 @@ import { auth, githubAuth, googleAuth } from '../firebase/clientApp';
 import useLocalization from '../hooks/useLocalization';
 import addAvatar from '../lib/firebase/addAvatar';
 import { AUTH_ERRORS } from '../lib/firebase/errors';
-import InfoBox from '../components/UI/Info';
 
 const schema = yup
   .object({
@@ -138,9 +139,7 @@ const SignIn: NextPage = () => {
               password={watch().password}
               confirmPassword={watch().passwordRepeat}
             />
-            {authError && (
-              <InfoBox type="error" info={authError} />
-            )}
+            {authError && <InfoBox type="error" info={authError} />}
             <button
               type="submit"
               disabled={loading}
@@ -149,6 +148,11 @@ const SignIn: NextPage = () => {
               {t.signIn.signUp}
               {loading && <Spinner className="fill-sand-600 text-white" />}
             </button>
+            <Link href="/signin">
+              <a className="text-rust-500/80 hover:text-rust-500 underline text-center transition-colors">
+                {t.from.general.haveAccount}
+              </a>
+            </Link>
           </div>
           <Divider className="mt-5 " />
           <StyledFirebaseAuth uiConfig={authConfig} firebaseAuth={auth} />

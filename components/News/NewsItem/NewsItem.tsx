@@ -1,33 +1,80 @@
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+
 import { Timestamp } from '@firebase/firestore';
 import Markdown from 'markdown-to-jsx';
+import { HiPencil } from 'react-icons/hi';
 
-import Badge from '../../UI/Badge';
+import { auth } from '../../../firebase/clientApp';
+import useAdmin from '../../../hooks/useAdmin';
+import { checkIfSameDay } from '../../../lib/checkIfSameDay';
+import NewsCommentSection from '../CommentSection/CommentSection';
+import NewsAuthor from './NewsAuthor';
 
 interface NewsItemProps {
   title: string;
   releaseDate: Timestamp;
   content: string;
+  authors: string[];
+  //** If id is not specified, this component is used as a preview (commentsection wont be displayed)*/
+  id?: string;
   className?: string;
 }
+
+const dateFormatOptions: Intl.DateTimeFormatOptions = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+};
 
 export default function NewsItem({
   title,
   content,
   releaseDate,
+  authors,
+  id,
   className,
 }: NewsItemProps) {
+  const { locale } = useRouter();
+
+  const [admin] = useAdmin(auth.currentUser);
+
   return (
-    <article
-      className={`relative inline-block bg-background-600 px-10 pb-10 pt-14 sm:w-4/6 w-full max-w-screen-2xl ${className}`}
-    >
-      <Badge className="absolute -top-6 left-6">{title}</Badge>
-      <div className="prose prose-invert prose-red">
-        <Markdown>{content}</Markdown>
+    <article className={`${className} mb-10 scroll-m-36`} id={id}>
+      <div className="border-b-2 pb-7 border-background-150">
+        <div className="flex justify-between items-center">
+          <h2 className="leading-none text-5xl">{title}</h2>
+          {admin && id && (
+            <>
+              <Link href={`/admin/news/${id}`}>
+                <a>
+                  <HiPencil className="opacity-40 text-3xl hover:opacity-100 transition-opacity" />
+                </a>
+              </Link>
+            </>
+          )}
+        </div>
+        <p className="text-xs text-sand-500/80">
+          {checkIfSameDay(releaseDate.toDate())
+            ? locale === 'en'
+              ? 'Today'
+              : 'Heute'
+            : releaseDate
+                .toDate()
+                .toLocaleDateString(locale, dateFormatOptions)}
+        </p>
+        <div className="prose prose-invert prose-blockquote:border-background-150 prose-a:text-blue-500 prose-li:marker:text-background-150">
+          <Markdown>{content}</Markdown>
+        </div>
+        <div className="flex gap-3 mt-10">
+          {authors &&
+            authors.map((author) => {
+              return <NewsAuthor key={author} uid={author} />;
+            })}
+        </div>
       </div>
-      {/* Display authors of Post */}
-      {/* Authors have accounts and one Post can have multiple authors */}
-      {/* Add editor for admin accounts to create posts */}
-      {/* Add user accounts for comments on news posts */}
+      {id && <NewsCommentSection path={`news/${id}/comments`} />}
       {/* Connect to steam account to link to server statistics in forum */}
     </article>
   );

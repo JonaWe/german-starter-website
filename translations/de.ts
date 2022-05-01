@@ -18,6 +18,12 @@ export default {
   },
   newsPage: {
     title: 'Neuigkeiten',
+    comments: {
+      showMore: 'Mehr anzeigen',
+      showLess: 'Weniger anzeigen',
+      noComments: 'Keine Komentare',
+      mustSignIn: 'Melde dich an um Komentare zu schreiben',
+    },
   },
   supportPage: {
     title: 'Support',
@@ -117,6 +123,10 @@ export default {
       finally: 'Abschliessen',
       description: 'Beschreibung',
       back: 'Zurück',
+      submit: 'Senden',
+      haveAccount: 'ich habe bereits ein Konto',
+      noAccount: 'ich habe noch kein Konto',
+      delete: 'Löschen',
     },
   },
   support: {
@@ -134,14 +144,17 @@ export default {
       types: [
         {
           name: 'Rückmeldung',
+          description: 'Deine Meinung ist uns wichtig',
           id: 'FEEDBACK',
         },
         {
           name: 'Spieler melden',
+          description: 'Melde einen Spieler',
           id: 'PLAYER_REPORT',
         },
         {
           name: 'Bug',
+          description: 'Melde einen Bug',
           id: 'BUG',
         },
       ],
@@ -174,7 +187,8 @@ export default {
     accept: 'Ich bin einferstanden',
     title: 'Mit Steam verknüpfen',
     shortTitle: 'Verknüpfen',
-    linkLater: 'Später kanst du verknüpfungen in deinen Profileinstellungen hinzufügen',
+    linkLater:
+      'Später kanst du verknüpfungen in deinen Profileinstellungen hinzufügen',
   },
   user: {
     settings: {
@@ -184,6 +198,14 @@ export default {
         linkedTitle: 'Verknüpftes Profil',
         info: 'Du kannst dein Steam Profile mit deinem Germanstarter Account verknüpfen. Damit andere Spieler dich besser erkennen.',
       },
+    },
+  },
+  team: {
+    title: 'Das Server Team',
+    roles: {
+      owner: 'Owner',
+      admin: 'Admin',
+      developer: 'Entwickler',
     },
   },
 };

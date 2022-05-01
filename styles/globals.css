@@ -11,10 +11,10 @@
     @apply tracking-wide;
   }
   html {
-    @apply w-screen overflow-x-hidden bg-background-500;
+    @apply w-screen overflow-x-hidden scroll-smooth bg-background-500;
   }
   h1 {
-    @apply text-8xl sm:text-[10rem];
+    @apply text-7xl sm:text-[10rem];
   }
   h2 {
     @apply text-3xl;
@@ -26,10 +26,10 @@
     @apply text-sand-500;
   }
   input {
-    @apply bg-background-200/20 p-3 text-lg shadow-sm focus-visible:outline-none focus-visible:ring focus-visible:ring-sand-500/40;
+    @apply bg-background-200/20 p-3 text-lg shadow-sm focus-visible:outline-none focus-visible:ring focus-visible:ring-sand-500/40 placeholder:text-sand-500/20;
   }
   textarea {
-    @apply bg-background-200/20 p-1 shadow-sm focus-visible:outline-none focus-visible:ring focus-visible:ring-sand-500/40;
+    @apply bg-background-200/20 p-1 shadow-sm focus-visible:outline-none focus-visible:ring focus-visible:ring-sand-500/40 placeholder:text-sand-500/20;
   }
 }
 

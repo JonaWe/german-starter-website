@@ -43,13 +43,12 @@ model player_achievements {
   @@index([achievment_id], map: "achievment_id")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model player_alias {
   steamid BigInt   @db.UnsignedBigInt
   alias   String   @db.VarChar(32)
   time    DateTime @default(now()) @db.Timestamp(0)
 
-  @@ignore
+  @@id([steamid, time])
 }
 
 model player_wipe_stats {
@@ -62,18 +61,17 @@ model player_wipe_stats {
 }
 
 model players {
-  steamid                BigInt                   @id @unique(map: "steamid") @db.UnsignedBigInt
-  name                   String                   @db.VarChar(32)
-  kills                  Int                      @db.UnsignedMediumInt
-  pvpdeaths              Int                      @db.UnsignedMediumInt
-  pvedeaths              Int                      @db.UnsignedMediumInt
-  suicides               Int                      @db.UnsignedMediumInt
-  first_time_seen        DateTime                 @default(now()) @db.Timestamp(0)
-  player_achievements    player_achievements[]
-  player_wipe_stats      player_wipe_stats?
-  pvelog_with_dublicates pvelog_with_dublicates[] @ignore
-
-  @@fulltext([name], map: "name")
+  steamid                                 BigInt                @id @unique(map: "steamid") @db.UnsignedBigInt
+  name                                    String                @db.VarChar(32)
+  kills                                   Int                   @db.UnsignedMediumInt
+  pvpdeaths                               Int                   @db.UnsignedMediumInt
+  pvedeaths                               Int                   @db.UnsignedMediumInt
+  suicides                                Int                   @db.UnsignedMediumInt
+  first_time_seen                         DateTime              @default(now()) @db.Timestamp(0)
+  player_achievements                     player_achievements[]
+  player_wipe_stats                       player_wipe_stats?
+  spotlight_playersTospotlight_nemesis_id spotlight[]           @relation("playersTospotlight_nemesis_id") @ignore
+  spotlight_playersTospotlight_player_id  spotlight[]           @relation("playersTospotlight_player_id") @ignore
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -82,19 +80,9 @@ model pvelog {
   time    DateTime @default(now()) @db.Timestamp(0)
   reason  String   @db.VarChar(30)
 
+  // @@ignore
+  @@id([steamid, time, reason])
   @@index([steamid], map: "steamid")
-  @@ignore
-}
-
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
-model pvelog_with_dublicates {
-  steamid BigInt   @db.UnsignedBigInt
-  time    DateTime @default(now()) @db.Timestamp(0)
-  reason  String   @db.VarChar(30)
-  players players  @relation(fields: [steamid], references: [steamid], onDelete: Cascade, onUpdate: Restrict, map: "PVELog_ibfk_1")
-
-  @@index([steamid], map: "steamid")
-  @@ignore
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -111,30 +99,19 @@ model pvplog {
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
-model pvplog_with_dublicates {
-  killer_steamid BigInt   @db.UnsignedBigInt
-  target_steamid BigInt   @db.UnsignedBigInt
-  time           DateTime @default(now()) @db.Timestamp(0)
-  sleeper        Boolean
-
-  @@index([killer_steamid], map: "killer_steamid")
-  @@index([killer_steamid], map: "killer_steamid_2")
-  @@index([target_steamid], map: "target_steamid")
-  @@ignore
-}
-
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model spotlight {
-  player_id      BigInt   @db.UnsignedBigInt
-  nemesis_id     BigInt   @db.UnsignedBigInt
-  nemesis_deaths Int
-  wert_1         Int      @db.UnsignedInt
-  bez_1          String   @db.Text
-  wert_2         Int      @db.UnsignedInt
-  bez_2          String   @db.Text
-  wert_3         Int      @db.UnsignedInt
-  bez_3          String   @db.Text
-  time           DateTime @default(now()) @db.Timestamp(0)
+  player_id                             BigInt   @db.UnsignedBigInt
+  nemesis_id                            BigInt   @db.UnsignedBigInt
+  nemesis_deaths                        Int
+  wert_1                                Int      @db.UnsignedInt
+  bez_1                                 String   @db.Text
+  wert_2                                Int      @db.UnsignedInt
+  bez_2                                 String   @db.Text
+  wert_3                                Int      @db.UnsignedInt
+  bez_3                                 String   @db.Text
+  time                                  DateTime @default(now()) @db.Timestamp(0)
+  players_playersTospotlight_nemesis_id players  @relation("playersTospotlight_nemesis_id", fields: [nemesis_id], references: [steamid], onUpdate: Restrict, map: "spotlight_ibfk_3")
+  players_playersTospotlight_player_id  players  @relation("playersTospotlight_player_id", fields: [player_id], references: [steamid], onUpdate: Restrict, map: "spotlight_ibfk_2")
 
   @@index([nemesis_id], map: "nemesis_id")
   @@index([player_id], map: "player_id")

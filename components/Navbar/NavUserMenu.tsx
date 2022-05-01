@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Menu, Transition } from '@headlessui/react';
 import { motion } from 'framer-motion';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { HiChevronDown } from 'react-icons/hi';
 
 import { auth } from '../../firebase/clientApp';
 import useLocalization from '../../hooks/useLocalization';
@@ -37,7 +38,8 @@ export default function NavUserMenu() {
   } else if (user.photoURL) {
     return (
       <Menu className="relative" as="div">
-        <Menu.Button>
+        <Menu.Button className="flex items-center gap-1 md:flex-row flex-row-reverse">
+          <HiChevronDown className="fill-sand-500 text-xl" />
           <motion.img
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

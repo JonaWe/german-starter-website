@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { UserRecord } from 'firebase-admin/auth';
 
-import { auth } from '../../../firebase/admin/firebaseAdmin';
+import { auth, db } from '../../../firebase/admin/firebaseAdmin';
 import withAdminAuth from '../../../lib/firebase/withAdminAuth';
 
 export default async function handler(
@@ -26,6 +26,8 @@ export default async function handler(
   }
 
   if (!userToChange) return res.status(400).send({ error: 'invalid uid' });
+
+  db.doc(`users/${userToChange.uid}`).set({ role: 'admin' }, { merge: true });
 
   auth.setCustomUserClaims(userToChange.uid, { admin: true });
 

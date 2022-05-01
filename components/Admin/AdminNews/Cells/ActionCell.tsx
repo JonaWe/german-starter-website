@@ -35,9 +35,7 @@ export default function ActionCell({ value: id, row }: ActionCellProps) {
       <Link href={`/admin/news/${id}`}>
         <a>
           <Tooltip text="Edit">
-            <HiPencil
-              className="fill-sand-500/75 hover:fill-sand-500 text-2xl transition hover:cursor-pointer"
-            />
+            <HiPencil className="fill-sand-500/75 hover:fill-sand-500 text-2xl transition hover:cursor-pointer" />
           </Tooltip>
         </a>
       </Link>

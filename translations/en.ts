@@ -18,6 +18,12 @@ export default {
   },
   newsPage: {
     title: 'News',
+    comments: {
+      showMore: 'Show more',
+      showLess: 'Show less',
+      noComments: 'No comments',
+      mustSignIn: 'Sign in to write comments',
+    },
   },
   supportPage: {
     title: 'Support',
@@ -117,11 +123,15 @@ export default {
       finally: 'Finish',
       description: 'Description',
       back: 'Back',
+      submit: 'Submit',
+      noAccount: "I don't have an account",
+      haveAccount: 'I allready have an account',
+      delete: 'Delete',
     },
   },
   support: {
     report: {
-      new: 'new report',
+      new: 'back to support',
       completeHeader: 'Complete report',
       complete: 'Please sign in to successfully completed your report',
       search: 'search for player...',
@@ -134,14 +144,17 @@ export default {
       types: [
         {
           name: 'Feedback',
+          description: 'Send us feedback',
           id: 'FEEDBACK',
         },
         {
           name: 'Player report',
+          description: 'Report a player',
           id: 'PLAYER_REPORT',
         },
         {
           name: 'Bug',
+          description: 'Report a bug',
           id: 'BUG',
         },
       ],
@@ -173,16 +186,24 @@ export default {
     title: 'Connect steam account',
     shortTitle: 'link accounts',
     linkLater: 'Later you can do this in your profile settings',
-    info:'Profile picture and username will be copied from your Steam profile.',
+    info: 'Profile picture and username will be copied from your Steam profile.',
   },
-  user:{
+  user: {
     settings: {
-      steamAccount:{
-        change:'change',
+      steamAccount: {
+        change: 'change',
         noLinked: 'no profile linked',
         linkedTitle: 'Linked profile',
         info: 'You can link your Steam profile with your Germanstarter account. So that other players can recognize you better.',
-      }
-    }
-  }
+      },
+    },
+  },
+  team: {
+    title: 'The Server Team',
+    roles: {
+      owner: 'Owner',
+      admin: 'Admin',
+      developer: 'Developer',
+    },
+  },
 };

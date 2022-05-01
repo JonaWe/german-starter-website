@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { User } from 'firebase/auth';
 
-
-export default function useAdmin(user: User) {
+export default function useAdmin(user: User | null) {
   const [admin, setAdmin] = useState<null | User>(null);
   const [loading, setLoading] = useState(true);
 

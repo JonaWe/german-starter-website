@@ -11,6 +11,10 @@ export default async function handler(
 
   if (!ip) return res.status(404).json({ message: 'no ip param' });
 
-  const info = await queryGameServerPlayer(ip);
-  res.status(200).json({ playerCount: info.playerCount });
+  try {
+    const info = await queryGameServerPlayer(ip);
+    res.status(200).json({ playerCount: info.playerCount });
+  } catch {
+    res.status(503).json({});
+  }
 }

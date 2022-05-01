@@ -1,14 +1,8 @@
-import { useEffect, useState } from 'react';
-
-import axios from 'axios';
 import { motion } from 'framer-motion';
-import { HiUserAdd } from 'react-icons/hi';
-import { useQuery } from 'react-query';
 
 import useLocalization from '../../../hooks/useLocalization';
 import useSteamUser from '../../../hooks/useSteamUser';
 import useUserSettigns from '../../../hooks/useUserSettigns';
-import Button from '../../UI/Button';
 import Info from '../../UI/Info';
 import LinkAccount from './LinkAccount';
 import LinkedAccount from './LinkedAccount';

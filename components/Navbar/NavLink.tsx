@@ -33,6 +33,7 @@ export default function NavLink({
                 <HiOutlineExternalLink className="translate-y-[-0.11rem] text-xl" />
               )}
             </div>
+            {/* FIXME: #8 Selected bar not showing in desktop view */}
             {selected && (
               <motion.div
                 className="opacity-85 absolute top-full left-0 h-1 w-full bg-rust-500"
