@@ -22,7 +22,7 @@ export default function Server() {
       : '51.195.60.162:28015';
 
   return (
-    <section className="sm:m-10 sm:mt-32">
+    <section className="sm:m-10 sm:mt-32 mb-20 sm:mb-0">
       <div className="mx-auto h-full max-w-screen-md bg-background-400/60 p-5 pb-12 text-center">
         <Badge text="Server" className="mx-auto -translate-y-10">
           <div className="relative w-7 h-7">

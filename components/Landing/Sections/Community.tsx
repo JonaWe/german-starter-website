@@ -29,7 +29,7 @@ export default function Community() {
           />
         </div>
       </div>
-      <div>
+      <div className="sm:p-0 p-3">
         <h2>{t.community.title}</h2>
         <p className="mb-4">{t.community.text}</p>
         <div className="flex gap-4">
