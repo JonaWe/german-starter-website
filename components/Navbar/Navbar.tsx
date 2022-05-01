@@ -10,7 +10,7 @@ import NavUserMenu from './NavUserMenu';
 
 export default function Navbar() {
   const scrollDistance = useScrollDistance();
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(false);
 
   return (
     <header
