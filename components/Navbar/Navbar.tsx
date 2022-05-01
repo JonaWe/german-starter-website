@@ -30,7 +30,7 @@ export default function Navbar() {
         <div
           className={`flex md:items-center md:gap-0 gap-4 flex-col-reverse md:flex-row justify-between w-2/3 bg-background-500 md:bg-transparent md:relative absolute right-0 top-0 md:w-full md:h-fit h-screen p-5 md:p-0 ${
             !active ? 'translate-x-full md:translate-x-0' : 'translate-x-0'
-          } transition-all duration-[400ms]`}
+          } transition-all duration-[400ms] z-50`}
         >
           <NavItems />
           <NavUserMenu />
@@ -45,6 +45,12 @@ export default function Navbar() {
           <HiMenuAlt3 className="text-3xl fill-sand-500 md:hidden" />
         </button>
       </div>
+      <div
+        className={`md:hidden block absolute inset-0 h-screen bg-background-500/50 ${
+          active ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        } transition-all duration-[400ms]`}
+        onClick={() => setActive(false)}
+      />
     </header>
   );
 }
