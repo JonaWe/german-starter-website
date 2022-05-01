@@ -58,8 +58,8 @@ export default function NavItems() {
           {currentNavItem ? t.navigation[currentNavItem.id] : '404'}
         </title>
       </Head>
-      <nav className="flex flex-row place-content-between items-center gap-7 h-full overflow-hidden">
-        <ul className="flex flex-row gap-7 justify-self-end">
+      <nav className="md:flex flex-row place-content-between items-center gap-7 h-full overflow-hidden md:mx-auto">
+        <ul className="md:flex flex-row gap-7 justify-self-end">
           <AnimateSharedLayout>
             {navigationItems.map(({ id, href, external }, index) => {
               return (

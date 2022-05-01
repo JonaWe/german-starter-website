@@ -38,7 +38,7 @@ export default function NavUserMenu() {
   } else if (user.photoURL) {
     return (
       <Menu className="relative" as="div">
-        <Menu.Button className="flex items-center gap-1">
+        <Menu.Button className="flex items-center gap-1 md:flex-row flex-row-reverse">
           <HiChevronDown className="fill-sand-500 text-xl" />
           <motion.img
             initial={{ opacity: 0 }}

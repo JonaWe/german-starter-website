@@ -1,3 +1,7 @@
+import { useState } from 'react';
+
+import { HiMenuAlt1, HiMenuAlt3, HiX } from 'react-icons/hi';
+
 import useScrollDistance from '../../hooks/useScrollDistance';
 import LanguageSelection from './LanguageSelection';
 import NavItems from './NavItems';
@@ -6,6 +10,7 @@ import NavUserMenu from './NavUserMenu';
 
 export default function Navbar() {
   const scrollDistance = useScrollDistance();
+  const [active, setActive] = useState(true);
 
   return (
     <header
@@ -18,10 +23,27 @@ export default function Navbar() {
       <div className="flex w-full max-w-screen-2xl flex-row place-content-between items-center gap-4">
         <div className="flex flex-row place-content-between items-center gap-4">
           <NavLogo />
-          <LanguageSelection />
+          <span className="hidden md:block">
+            <LanguageSelection />
+          </span>
         </div>
-        <NavItems />
-        <NavUserMenu />
+        <div
+          className={`flex md:items-center md:gap-0 gap-4 flex-col-reverse md:flex-row justify-between w-2/3 bg-background-500 md:bg-transparent md:relative absolute right-0 top-0 md:w-full md:h-fit h-screen p-5 md:p-0 ${
+            !active ? 'translate-x-full md:translate-x-0' : 'translate-x-0'
+          } transition-all duration-[400ms]`}
+        >
+          <NavItems />
+          <NavUserMenu />
+          <div className="flex items-center justify-between mb-[10vh] md:hidden">
+            <button onClick={() => setActive(false)}>
+              <HiX className="text-3xl fill-sand-500/80" />
+            </button>
+            <LanguageSelection />
+          </div>
+        </div>
+        <button onClick={() => setActive(true)}>
+          <HiMenuAlt3 className="text-3xl fill-sand-500 md:hidden" />
+        </button>
       </div>
     </header>
   );

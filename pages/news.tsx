@@ -80,6 +80,7 @@ export async function getStaticProps() {
   return {
     props: {
       newsItems: (await getPublicNewsArticle()).map((item) => {
+        item.announced = item.announced ? item.announced : false;
         return { ...item, releaseDate: JSON.stringify(item.releaseDate) };
       }),
     },
