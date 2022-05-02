@@ -20,6 +20,8 @@ export default async function handler(
     take: take || 100,
   });
 
+  const count = await prisma.players.count();
+
   //TODO: Cleanup this code
   const data = JSON.parse(
     JSON.stringify(stats, (key, value) =>
@@ -30,6 +32,7 @@ export default async function handler(
   res.status(200).json({
     skip: skip || 0,
     take: take || 100,
+    count,
     data,
   });
 }
