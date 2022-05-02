@@ -1,5 +1,5 @@
 //FIXME: #9 Fix type errors for react table https://stackoverflow.com/questions/64608974/react-table-pagination-properties-doesnt-exist-on-type-tableinstance
-
+// @ts-nocheck
 import { useEffect, useReducer } from 'react';
 import { HiChevronDown, HiChevronUp, HiFilter } from 'react-icons/hi';
 import { useQuery } from 'react-query';
