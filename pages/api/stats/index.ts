@@ -7,7 +7,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { body } = req;
-  const { skip, take } = body;
+  const { skip, take, query } = body;
 
   const prisma = new PrismaClient();
   const MAX_TAKE = 1000;
@@ -18,9 +18,16 @@ export default async function handler(
   const stats = await prisma.players.findMany({
     skip: skip || 0,
     take: take || 100,
+    where: {
+      name: { search: query },
+    },
   });
 
-  const count = await prisma.players.count();
+  const count = await prisma.players.count({
+    where: {
+      name: { search: query },
+    },
+  });
 
   //TODO: Cleanup this code
   const data = JSON.parse(
