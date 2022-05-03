@@ -1,6 +1,7 @@
 //FIXME: #9 Fix type errors for react table https://stackoverflow.com/questions/64608974/react-table-pagination-properties-doesnt-exist-on-type-tableinstance
 // @ts-nocheck
 import { useEffect, useReducer } from 'react';
+
 import { HiChevronDown, HiChevronUp, HiFilter } from 'react-icons/hi';
 import { useQuery } from 'react-query';
 import { usePagination, useTable } from 'react-table';
@@ -111,10 +112,23 @@ export default function BigDataTable({
 
   return (
     <>
-      <table
-        {...getTableProps()}
-        className="border-collapse w-full max-w-screen-2xl"
-      >
+      <div className="flex justify-between mb-2">
+        <select
+          className="bg-background-150"
+          value={pageSize}
+          onChange={(e) => {
+            setPageSize(Number(e.target.value));
+          }}
+        >
+          {[10, 20, 30, 40, 50].map((pageSize) => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
+        <input placeholder="search" />
+      </div>
+      <table {...getTableProps()} className="border-collapse w-full">
         <thead>
           {headerGroups.map((headerGroup, headerGroupIndex) => (
             <tr {...headerGroup.getHeaderGroupProps()} key={headerGroupIndex}>
@@ -202,18 +216,6 @@ export default function BigDataTable({
             style={{ width: '100px' }}
           />
         </span>{' '}
-        <select
-          value={pageSize}
-          onChange={(e) => {
-            setPageSize(Number(e.target.value));
-          }}
-        >
-          {[10, 20, 30, 40, 50].map((pageSize) => (
-            <option key={pageSize} value={pageSize}>
-              Show {pageSize}
-            </option>
-          ))}
-        </select>
       </div>
     </>
   );
