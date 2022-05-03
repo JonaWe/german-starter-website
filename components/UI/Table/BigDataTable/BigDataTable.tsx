@@ -2,7 +2,15 @@
 // @ts-nocheck
 import { useEffect, useReducer, useState } from 'react';
 
-import { HiChevronDown, HiChevronUp, HiFilter } from 'react-icons/hi';
+import {
+  HiChevronDoubleLeft,
+  HiChevronDoubleRight,
+  HiChevronDown,
+  HiChevronLeft,
+  HiChevronRight,
+  HiChevronUp,
+  HiFilter,
+} from 'react-icons/hi';
 import { useQuery } from 'react-query';
 import { usePagination, useSortBy, useTable } from 'react-table';
 import { useDebounce } from 'use-debounce';
@@ -236,37 +244,40 @@ export default function BigDataTable({
           })}
         </tbody>
       </table>
-      <div className="pagination">
-        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-          {'<<'}
-        </button>{' '}
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          {'<'}
-        </button>{' '}
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
-          {'>'}
-        </button>{' '}
-        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-          {'>>'}
-        </button>{' '}
-        <span>
-          Page{' '}
-          <strong>
-            {pageIndex + 1} of {pageOptions.length}
-          </strong>{' '}
+      <div className="flex justify-between mt-3">
+        <span className="text-sm text-background-150">
+          Page {pageIndex + 1} of {pageOptions.length}
         </span>
-        <span>
-          | Go to page:{' '}
-          <input
-            type="number"
-            value={pageIndex + 1}
-            onChange={(e) => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0;
-              gotoPage(page);
-            }}
-            style={{ width: '100px' }}
-          />
-        </span>{' '}
+        <div>
+          <button
+            className="text-2xl disabled:opacity-25 px-1 py-1.5"
+            onClick={() => gotoPage(0)}
+            disabled={!canPreviousPage}
+          >
+            <HiChevronDoubleLeft className="hover:fill-sand-500 fill-sand-500/75 transition-colors" />
+          </button>
+          <button
+            className="text-2xl disabled:opacity-25 px-1 py-1.5"
+            onClick={() => previousPage()}
+            disabled={!canPreviousPage}
+          >
+            <HiChevronLeft className="hover:fill-sand-500 fill-sand-500/75 transition-colors" />
+          </button>
+          <button
+            className="text-2xl disabled:opacity-25 px-1 py-1.5"
+            onClick={() => nextPage()}
+            disabled={!canNextPage}
+          >
+            <HiChevronRight className="hover:fill-sand-500 fill-sand-500/75 transition-colors" />
+          </button>
+          <button
+            className="text-2xl disabled:opacity-25 px-1 py-1.5"
+            onClick={() => gotoPage(pageCount - 1)}
+            disabled={!canNextPage}
+          >
+            <HiChevronDoubleRight className="hover:fill-sand-500 fill-sand-500/75 transition-colors" />
+          </button>
+        </div>
       </div>
     </>
   );
