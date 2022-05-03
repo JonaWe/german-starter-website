@@ -108,7 +108,7 @@ export default function BigDataTable({
   } = useTable(
     {
       columns,
-      data: data?.data || [],
+      data: isLoading ? Array(10).fill({}) : data.data,
       initialState: {
         pageIndex: queryPageIndex,
         pageSize: queryPageSize,

@@ -38,13 +38,13 @@ function AdminLayout({ children }: LayoutProps) {
 
   return (
     <DefaultLayoutHeadingContextProvider value={{ setHeading }}>
-        <div className="flex h-screen overflow-hidden">
-          <AdminNav />
-          <div className="pt-12 px-8 w-full h-full overflow-auto scrollbar-thin scrollbar-thumb-background-400">
-            <h1 className="text-6xl mb-4">{heading}</h1>
-            {children}
-          </div>
+      <div className="flex h-screen overflow-hidden">
+        <AdminNav />
+        <div className="pt-12 px-8 w-full h-full overflow-auto scrollbar-thin scrollbar-thumb-background-400">
+          <h1 className="text-6xl mb-4">{heading}</h1>
+          {children}
         </div>
+      </div>
     </DefaultLayoutHeadingContextProvider>
   );
 }
