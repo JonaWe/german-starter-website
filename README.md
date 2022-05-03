@@ -40,3 +40,8 @@ The following secrets must be set as environment variables.
 ### Database
 
 [Add full text search](https://www.mysqltutorial.org/activating-full-text-searching.aspx)
+
+## Ideas
+
+- [ ] Show if player is in the rise or on the fall indicated with a red/green arrow in stats table and user plage.
+- [ ] Show top player of the day instead of random player in spotlight on the stats page. Maybe indicated with a flame.
