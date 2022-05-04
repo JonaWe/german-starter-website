@@ -13,7 +13,7 @@
     <a href="https://github.com/JonaWe/german-starter-website"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://german-starter.de">View Website</a>
+    <a href="https://german-starter-website.vercel.app/">View Website (Preview)</a>
   </p>
 </div>
 
