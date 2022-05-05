@@ -206,4 +206,7 @@ export default {
       developer: 'Developer',
     },
   },
+  stats: {
+    playerOfTheDay: 'Plyer of the day',
+  },
 };
