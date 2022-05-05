@@ -27,6 +27,7 @@ export default async function handler(
     return res.status(200).json({ playerOfTheDay: { ...playerOfTheDay } });
 
   //Get player of the day from db
+  //TODO: Convert raw query to efficient prisma query
   const [newPlayerOfTheDay]: { killer_steamid: string; kills: number }[] =
     await prisma.$queryRaw`
       SELECT Count(killer_steamid) AS kills,
