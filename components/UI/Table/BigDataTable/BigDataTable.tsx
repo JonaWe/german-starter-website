@@ -15,6 +15,8 @@ import { useQuery } from 'react-query';
 import { usePagination, useSortBy, useTable } from 'react-table';
 import { useDebounce } from 'use-debounce';
 
+import SearchFiled from './SearchField';
+
 const initialState = {
   queryPageIndex: 0,
   queryPageSize: 10,
@@ -184,11 +186,7 @@ export default function BigDataTable({
             </option>
           ))}
         </select>
-        <input
-          placeholder="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
+        <SearchFiled value={query} onChange={setQuery} />
       </div>
       <table {...getTableProps()} className="border-collapse w-full">
         <thead>
@@ -196,7 +194,11 @@ export default function BigDataTable({
             <tr {...headerGroup.getHeaderGroupProps()} key={headerGroupIndex}>
               {headerGroup.headers.map((column, columnIndex) => (
                 <th
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
+                  {...column.getHeaderProps({
+                    minWidth: column.minWidth,
+                    width: column.width,
+                    ...column.getSortByToggleProps(),
+                  })}
                   key={columnIndex}
                   className="text-left font-bold bg-background-400/60 py-3 px-4 uppercase group"
                 >

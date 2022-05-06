@@ -37,7 +37,7 @@ export default function PlayerCell({ value: name, row }: CellProps) {
       </div>
       {id === data?.player && (
         <Tooltip text={t.stats.playerOfTheDay}>
-          <HiFire className="text-2xl fill-rust-500 hover:fill-rust-600 hover:scale-105 transition-all" />
+          <HiFire className="text-2xl fill-rust-500 hover:animate-pulse hover:scale-105 transition-all" />
         </Tooltip>
       )}
     </div>
