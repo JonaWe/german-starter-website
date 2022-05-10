@@ -3,15 +3,16 @@ import { useMemo } from 'react';
 import axios from 'axios';
 
 import BigDataTable from '../../UI/Table/BigDataTable/BigDataTable';
+import NumberCell from './Cells/NumberCell';
 import PlayerCell from './Cells/PlayerCell';
 
 export default function PlayerStatsTable() {
   const columns = useMemo(
     () => [
       { Header: 'Player', accessor: 'name', Cell: PlayerCell },
-      { Header: 'Kills', accessor: 'kills' },
-      { Header: 'PVP Deaths', accessor: 'pvpdeaths' },
-      { Header: 'PVE Deaths', accessor: 'pvedeaths' },
+      { Header: 'Kills', accessor: 'kills', Cell: NumberCell },
+      { Header: 'PVP Deaths', accessor: 'pvpdeaths', Cell: NumberCell },
+      { Header: 'PVE Deaths', accessor: 'pvedeaths', Cell: NumberCell },
     ],
     []
   );

@@ -28,9 +28,9 @@ export default function PlayerCell({ value: name, row }: CellProps) {
 
   return (
     <div className="flex items-center justify-between">
-      <div className="flex gap-2 w-fit">
-        <Avatar url={player?.avatar.medium} className="w-10 h-10" />
-        <div className="flex flex-col justify-center">
+      <div className="flex gap-2 w-fit min-w-full">
+        <Avatar url={player?.avatar.medium} className="w-10 h-10 flex-none" />
+        <div className="flex flex-col justify-center min-w-[30%]">
           <p className="font-medium leading-none">{id ? name : <Skeleton />}</p>
           <p className="text-xs text-sand-500/40">{id || <Skeleton />}</p>
         </div>

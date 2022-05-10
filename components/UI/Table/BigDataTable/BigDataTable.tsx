@@ -15,6 +15,7 @@ import { useQuery } from 'react-query';
 import { usePagination, useSortBy, useTable } from 'react-table';
 import { useDebounce } from 'use-debounce';
 
+import SimpleListbox from '../../Listbox';
 import SearchFiled from './SearchField';
 
 const initialState = {
@@ -35,6 +36,29 @@ const PAGE_SIZE_CHANGED = 'PAGE_SIZE_CHANGED';
 const TOTAL_COUNT_CHANGED = 'TOTAL_COUNT_CHANGED';
 const PAGE_FILTER_CHANGED = 'PAGE_FILTER_CHANGED';
 const PAGE_SORT_CHANGED = 'PAGE_SORT_CHANGED';
+
+const pageSelectionOptions = [
+  {
+    name: '10',
+    id: '10',
+  },
+  {
+    name: '20',
+    id: '20',
+  },
+  {
+    name: '30',
+    id: '30',
+  },
+  {
+    name: '40',
+    id: '40',
+  },
+  {
+    name: '50',
+    id: '50',
+  },
+];
 
 const reducer = (state, { type, payload }) => {
   switch (type) {
@@ -172,9 +196,16 @@ export default function BigDataTable({
 
   return (
     <>
-      <div className="flex justify-between mb-2">
+      <div className="flex justify-between mb-2 items-center">
+        {/* <SimpleListbox
+          options={pageSelectionOptions}
+          setSelected={(selected) => {
+            setPageSize(Number(selected.id));
+          }}
+          selected={pageSize}
+        /> */}
         <select
-          className="bg-background-150"
+          className="bg-background-150 h-fit p-2"
           value={pageSize}
           onChange={(e) => {
             setPageSize(Number(e.target.value));
