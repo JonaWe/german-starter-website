@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import {
@@ -16,6 +17,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
 import { HiSparkles } from 'react-icons/hi';
+import { SiGoogletranslate } from 'react-icons/si';
 import { useDebouncedCallback } from 'use-debounce';
 import * as yup from 'yup';
 
@@ -217,6 +219,19 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
                 </span>
               )}
           </MarkdownEditorInputItem>
+          <span className="w-fit ml-auto mt-2">
+            <Tooltip text="Open in Google Translator">
+              <a
+                href={`https://translate.google.com/?hl=de&tab=TT&sl=de&tl=en&op=translate&text=${encodeURI(
+                  watch('content')
+                )}`}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <SiGoogletranslate className="text-xl fill-sand-500/70 hover:fill-sand-500 transition-colors cursor-pointer" />
+              </a>
+            </Tooltip>
+          </span>
           <label className="text-sand-500 pb-1 mt-4" htmlFor={'author'}>
             Authors
           </label>
