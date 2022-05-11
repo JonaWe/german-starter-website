@@ -279,7 +279,8 @@ export default function BigDataTable({
       </table>
       <div className="flex justify-between mt-3">
         <span className="text-sm text-background-150">
-          Page {pageIndex + 1} of {pageOptions.length}
+          Page {pageIndex + 1} of {pageOptions.length} (
+          {(pageIndex + 1) * pageSize} of {totalCount})
         </span>
         <div>
           <button
