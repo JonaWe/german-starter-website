@@ -2,6 +2,7 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
 import { PrismaClient } from '@prisma/client';
+import { Pie, PieChart } from 'recharts';
 
 import { getDefaultLayout } from '../../../components/Layout/DefaultLayout';
 import CommentSection from '../../../components/News/CommentSection';
@@ -23,7 +24,15 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     where: { steamid: BigInt(steamId) },
   });
 
-  const pve_events = await prisma.pvelog.findMany({
+  // const pve_events = await prisma.pvelog.findMany({
+  //   where: { steamid: BigInt(steamId) },
+  // });
+
+  const pve_events = await prisma.pvelog.groupBy({
+    by: ['reason'],
+    _count: {
+      steamid: true,
+    },
     where: { steamid: BigInt(steamId) },
   });
 
@@ -41,8 +50,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       })),
       pve_events: pve_events.map((e) => ({
         ...e,
-        steamid: String(e.steamid),
-        time: e.time.getTime(),
       })),
     },
   };
@@ -54,11 +61,15 @@ const Home: NextPageWithLayout = (props: any) => {
   const router = useRouter();
 
   const { id } = router.query;
+  const { pve_events } = props;
 
   return (
-    <div className="mt-32">
+    <div className="m-32">
       Playerstats
-      <pre>{JSON.stringify(props, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
+      <PieChart width={730} height={250}>
+        <Pie data={pve_events} dataKey={'_count.steamid'} />
+      </PieChart>
       <CommentSection path={`users/${id}/comments`} />
     </div>
   );
