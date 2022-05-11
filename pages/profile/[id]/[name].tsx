@@ -2,12 +2,26 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
 import { PrismaClient } from '@prisma/client';
-import { Pie, PieChart } from 'recharts';
+import { Pie, PieChart, Tooltip } from 'recharts';
 
 import { getDefaultLayout } from '../../../components/Layout/DefaultLayout';
 import CommentSection from '../../../components/News/CommentSection';
 import useLocalization from '../../../hooks/useLocalization';
 import { NextPageWithLayout } from '../../_app';
+
+const CHART_COLORS = [
+  '#f1c5be',
+  '#ecafa5',
+  '#e7988c',
+  '#e18172',
+  '#dc6b59',
+  '#cd412b',
+  '#b43926',
+  '#9a3120',
+  '#81291b',
+  '#682116',
+  '#4f1910',
+];
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const steamId = BigInt(params?.id as string);
@@ -68,7 +82,10 @@ const Home: NextPageWithLayout = (props: any) => {
       Playerstats
       {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
       <PieChart width={730} height={250}>
-        <Pie data={pve_events} dataKey={'_count.steamid'} />
+        <Pie data={pve_events} dataKey={'_count.steamid'} fill={'#cd412b'} />
+        <Tooltip
+          separator={': '}
+        />
       </PieChart>
       <CommentSection path={`users/${id}/comments`} />
     </div>
