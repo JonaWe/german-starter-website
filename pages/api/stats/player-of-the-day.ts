@@ -39,11 +39,11 @@ export default async function handler(
       LIMIT  1; 
     `;
 
-  //Add new player of the day to firebase
-  db.doc('stats/playerOfTheDay').set({
-    player: newPlayerOfTheDay.killer_steamid,
-    date: new Date(),
-  });
+    //Add new player of the day to firebase
+    db.doc('stats/playerOfTheDay').set({
+      player: newPlayerOfTheDay.killer_steamid,
+      date: new Date(),
+    });
 
   return res.status(200).json({ playerOfTheDay: await getPLayerOfTheDay(res) });
 }
