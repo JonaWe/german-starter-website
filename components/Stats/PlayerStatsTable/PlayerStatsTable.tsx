@@ -41,8 +41,8 @@ export default function PlayerStatsTable() {
   };
 
   return (
-    <>
+    <div className="w-full">
       <BigDataTable columns={columns} fetchData={fetchPlayerData} />
-    </>
+    </div>
   );
 }
