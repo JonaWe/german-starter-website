@@ -35,7 +35,11 @@ const SignIn: NextPage = () => {
 
   const router = useRouter();
 
-  const { successUrl } = router.query;
+  const returnParams = Object.keys(router.query)
+    .map((key) => key + '=' + router.query[key])
+    .join('&');
+
+  const successUrl = router.query.successUrl + '?' + returnParams;
 
   const {
     register,

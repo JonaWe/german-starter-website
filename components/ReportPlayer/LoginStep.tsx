@@ -10,8 +10,27 @@ const variants = {
   exit: { opacity: 0, x: 200 },
 };
 
-export default function LoginStep({ back }: { back: () => void }) {
+export default function LoginStep({
+  back,
+  playerId,
+  description,
+  type,
+  reason,
+}: {
+  back: () => void;
+  playerId: string;
+  description: string;
+  type: string;
+  reason: { id: string; name: string };
+}) {
   const t = useLocalization();
+
+  const returnUrlParams = encodeURI(
+    `successUrl=${'support/' + type}&reasonId=${reason.id}&reasonName=${
+      reason.name
+    }&playerId=${playerId}&description=${description}`
+  );
+
   return (
     <motion.div
       variants={variants} // Pass the variant object into Framer Motion
@@ -31,12 +50,12 @@ export default function LoginStep({ back }: { back: () => void }) {
             text={t.signIn.title}
             primary
             useLink
-            href="/signin?successUrl=support"
+            href={`/signin?${returnUrlParams}`}
           />
           <Button
             text={t.signIn.signUp}
             useLink
-            href="/signin?successUrl=support"
+            href={`/signup?${returnUrlParams}`}
           />
         </div>
       </div>
