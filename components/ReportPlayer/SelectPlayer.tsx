@@ -80,6 +80,7 @@ export default function SelectPlayer({
             <Combobox.Input
               onChange={(e) => debounced(e.target.value)}
               placeholder={t.support.report.search}
+              autoComplete="off"
               className="w-full focus-visible:ring-0 bg-transparent py-3 placeholder:text-sand-500/40 text-sm"
             />
           </div>
