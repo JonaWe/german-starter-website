@@ -21,7 +21,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     redirect: {
       permanent: false,
       destination:
-        steamId && player ? `/profile/${steamId}/${player.name}` : '/404',
+        steamId && player
+          ? encodeURI(`/profile/${steamId}/${player.name}`)
+          : '/404',
     },
     props: {},
   };
