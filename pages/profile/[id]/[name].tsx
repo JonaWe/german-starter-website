@@ -87,7 +87,7 @@ const Home: NextPageWithLayout = (props: any) => {
           separator={': '}
         />
       </PieChart>
-      <CommentSection path={`users/${id}/comments`} />
+      <CommentSection path={`steam_users/${id}/comments`} />
     </div>
   );
 };
