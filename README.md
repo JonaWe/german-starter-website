@@ -41,7 +41,7 @@ The following secrets must be set as environment variables.
 
 [Add full text search](https://www.mysqltutorial.org/activating-full-text-searching.aspx)
 
-```sql
+```mysql
 CREATE FULLTEXT INDEX text_search ON players(name)
 ```
 
