@@ -41,6 +41,10 @@ The following secrets must be set as environment variables.
 
 [Add full text search](https://www.mysqltutorial.org/activating-full-text-searching.aspx)
 
+```sql
+CREATE FULLTEXT INDEX text_search ON players(name)
+```
+
 ## Ideas
 
 - [ ] Show if player is in the rise or on the fall indicated with a red/green arrow in stats table and user plage.
