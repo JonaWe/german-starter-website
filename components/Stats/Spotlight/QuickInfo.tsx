@@ -11,9 +11,11 @@ export interface Item {
 
 export default function QuickInfo({ items }: QuickInfoProps) {
   return (
-    <div className='flex justify-between'>
+    <div className="flex justify-between">
       {items.map((item) => {
-        return <QuickInfoItem name={item.name} value={item.value} />;
+        return (
+          <QuickInfoItem name={item.name} value={item.value} key={item.name} />
+        );
       })}
     </div>
   );

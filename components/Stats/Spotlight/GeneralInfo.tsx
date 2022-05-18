@@ -14,7 +14,9 @@ export default function GeneralInfo({ items }: GeneralInfoProps) {
   return (
     <div className="">
       {items.map(({ name, value, Icon }) => {
-        return <GeneralInfoItem name={name} value={value} Icon={Icon} />;
+        return (
+          <GeneralInfoItem name={name} value={value} Icon={Icon} key={name} />
+        );
       })}
     </div>
   );
