@@ -40,3 +40,14 @@ The following secrets must be set as environment variables.
 ### Database
 
 [Add full text search](https://www.mysqltutorial.org/activating-full-text-searching.aspx)
+
+```mysql
+CREATE FULLTEXT INDEX text_search ON players(name)
+```
+
+## Ideas
+
+- [ ] Show if player is in the rise or on the fall indicated with a red/green arrow in stats table and user plage.
+- [ ] Show top player of the day instead of random player in spotlight on the stats page. Maybe indicated with a flame.
+- [ ] Send state from Py Script to this page via Webhook and then save in firebase. For example last Player Update SUCCESS/ERROR or Can not Update Player data. Also show the state from the user table to the user (Uptodate / updating and show last update)
+- [ ] Calendar that shows wipes. Automatically show forced Wipes and option to add custom wipes in Dashboard

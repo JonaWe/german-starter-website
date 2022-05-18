@@ -7,6 +7,7 @@ import JoinButton from '../../Buttons/JoinButton';
 import PlayerCount from '../../PlayerCount';
 import Badge from '../../UI/Badge';
 import Button from '../../UI/Button';
+import Tooltip from '../../UI/Tooltip';
 
 export default function Server() {
   const [serverConfig, loading, error] = useDocumentDataFromCollectionOnce(
@@ -36,12 +37,12 @@ export default function Server() {
         </Badge>
         <h2 className="text-5xl">[EU] German Starter Server</h2>
         <div className="flex justify-center gap-4">
-          <CopyButton text={serverIP} title="Click to copy server IP" />
-          <PlayerCount
-            serverIp={serverIP}
-            className="text-sand-600"
-            title="Players on server"
-          />
+          <Tooltip text="Click to copy server ip">
+            <CopyButton text={serverIP} title="Click to copy server IP" />
+          </Tooltip>
+          <Tooltip text="Players on server">
+            <PlayerCount serverIp={serverIP} className="text-sand-600" />
+          </Tooltip>
         </div>
         <p>{t.serverDescription}</p>
         <div className="mt-6 flex justify-center gap-5">

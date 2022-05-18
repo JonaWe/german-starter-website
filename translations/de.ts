@@ -208,4 +208,7 @@ export default {
       developer: 'Entwickler',
     },
   },
+  stats: {
+    playerOfTheDay: 'Spieler des Tages',
+  },
 };

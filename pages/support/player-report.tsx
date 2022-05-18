@@ -46,13 +46,24 @@ const variants = {
   exit: { opacity: 0, x: 200 },
 };
 
+const fetchPlayer = async (steamid: string) => {
+  try {
+    const data = await axios.post('/api/server/getPlayerById', {
+      steamId: steamid,
+    });
+    return data;
+  } catch (err) {
+    return null;
+  }
+};
+
 const PlayerReport: NextPage = () => {
   const [step, setStep] = useState(1);
   const t = useLocalization();
   const [user] = useAuthState(auth);
 
   const router = useRouter();
-  const { playerId } = router.query;
+  const { playerId, description, reasonId, reasonName } = router.query;
 
   const {
     register,
@@ -72,23 +83,22 @@ const PlayerReport: NextPage = () => {
     setStep(step - 1);
   };
 
-  const fetchPlayer = async (steamid: string) => {
-    try {
-      const data = await axios.post('/api/server/getPlayerById', {
-        steamId: steamid,
-      });
-      return data;
-    } catch (err) {
-      return null;
-    }
-  };
-
   useEffect(() => {
+    //Grab params from URL and fill values in
+    if (reasonName && reasonId)
+      setValue('reason', {
+        id: reasonId,
+        name: reasonName,
+      });
+
+    setValue('description', description);
+
     if (!playerId) return;
     fetchPlayer(playerId as string).then((data) => {
       const [player] = data?.data.player;
 
       if (!player) return;
+
       setValue('player', {
         steamid: player.steamid,
         name: player.name,
@@ -97,13 +107,11 @@ const PlayerReport: NextPage = () => {
   }, [router, playerId, setValue]);
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
-
-    if (!user) return;
+    if (!user) return nextStep();
 
     const ticketsRef = collection(db, 'tickets');
 
-    const doc = await addDoc(ticketsRef, {
+    await addDoc(ticketsRef, {
       author: user.uid,
       reportedPlayer: data.player.steamid,
       reason: data.reason.id || t.support.report.player.reasons[0],
@@ -175,7 +183,15 @@ const PlayerReport: NextPage = () => {
           {/*Success with user signed in */}
           {step === 2 && user && <SuccessStep back={back} />}
           {/* No user on step 3 */}
-          {step === 2 && !user && <LoginStep back={back} />}
+          {step === 2 && !user && (
+            <LoginStep
+              back={back}
+              description={watch('description')}
+              playerId={watch('player').steamid}
+              reason={watch('reason')}
+              type="player-report"
+            />
+          )}
         </AnimatePresence>
       </form>
     </section>

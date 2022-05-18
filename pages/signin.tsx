@@ -35,7 +35,11 @@ const SignIn: NextPage = () => {
 
   const router = useRouter();
 
-  const { successUrl } = router.query;
+  const returnParams = Object.keys(router.query)
+    .map((key) => key + '=' + router.query[key])
+    .join('&');
+
+  const successUrl = router.query.successUrl + '?' + returnParams;
 
   const {
     register,
@@ -50,8 +54,8 @@ const SignIn: NextPage = () => {
   const onSubmit = handleSubmit((data) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
-        if (successUrl) router.push('/' + successUrl);
-        else router.push('/');
+        if (!router.query.successUrl) router.push('/');
+        else router.push('/' + successUrl);
       })
       .catch((error) => {
         if (error.message.includes(AUTH_ERRORS.USER_NOT_FOUND))

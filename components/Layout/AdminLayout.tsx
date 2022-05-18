@@ -4,8 +4,6 @@ import { useRouter } from 'next/router';
 
 import { IdTokenResult } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { SkeletonTheme } from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
 
 import { DefaultLayoutHeadingContextProvider } from '../../context/defaultLayoutHeadingContext';
 import { auth } from '../../firebase/clientApp';
@@ -40,15 +38,13 @@ function AdminLayout({ children }: LayoutProps) {
 
   return (
     <DefaultLayoutHeadingContextProvider value={{ setHeading }}>
-      <SkeletonTheme baseColor="#373737" highlightColor="#555">
-        <div className="flex h-screen overflow-hidden">
-          <AdminNav />
-          <div className="pt-12 px-8 w-full h-full overflow-auto scrollbar-thin scrollbar-thumb-background-400">
-            <h1 className="text-6xl mb-4">{heading}</h1>
-            {children}
-          </div>
+      <div className="flex h-screen overflow-hidden">
+        <AdminNav />
+        <div className="pt-12 px-8 w-full h-full overflow-auto scrollbar-thin scrollbar-thumb-background-400">
+          <h1 className="text-6xl mb-4">{heading}</h1>
+          {children}
         </div>
-      </SkeletonTheme>
+      </div>
     </DefaultLayoutHeadingContextProvider>
   );
 }

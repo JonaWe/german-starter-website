@@ -73,7 +73,18 @@ const Feedback: NextPage = () => {
         {/*Success with user signd in */}
         {step === 2 && user && <SuccessStep back={back} />}
         {/* No user on step 3 */}
-        {step === 2 && !user && <LoginStep back={back} />}
+        {step === 2 && !user && (
+          <LoginStep
+            back={back}
+            playerId={''}
+            description={''}
+            type={''}
+            reason={{
+              id: '',
+              name: '',
+            }}
+          />
+        )}
       </AnimatePresence>
     </section>
   );

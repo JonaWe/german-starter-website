@@ -4,6 +4,8 @@ import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 
 import { NextSeo } from 'next-seo';
+import { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import CommandPallet from '../components/CommandPallet';
@@ -24,27 +26,29 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <CommandPallet />
-      <NextSeo
-        title="German Starter Server"
-        description="German Starter Server"
-        canonical="https://www.german-starter.de"
-        openGraph={{
-          url: 'https://www.german-starter.de',
-          title: 'German Starter Server',
-          description: 'German Starter Server',
-          images: [
-            {
-              url: 'https://www.german-starter.de/assets/images/banner_bg.png',
-              width: 1920,
-              height: 1080,
-              alt: 'German Starter Banner',
-              type: 'image/png',
-            },
-          ],
-        }}
-      />
-      {getLayout(<Component {...pageProps} />)}
+      <SkeletonTheme baseColor="#373737" highlightColor="#555">
+        <CommandPallet />
+        <NextSeo
+          title="German Starter Server"
+          description="German Starter Server"
+          canonical="https://www.german-starter.de"
+          openGraph={{
+            url: 'https://www.german-starter.de',
+            title: 'German Starter Server',
+            description: 'German Starter Server',
+            images: [
+              {
+                url: 'https://www.german-starter.de/assets/images/banner_bg.png',
+                width: 1920,
+                height: 1080,
+                alt: 'German Starter Banner',
+                type: 'image/png',
+              },
+            ],
+          }}
+        />
+        {getLayout(<Component {...pageProps} />)}
+      </SkeletonTheme>
     </QueryClientProvider>
   );
 }
