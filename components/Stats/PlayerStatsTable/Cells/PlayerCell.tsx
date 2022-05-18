@@ -6,6 +6,7 @@ import Skeleton from 'react-loading-skeleton';
 import { useQuery } from 'react-query';
 
 import useLocalization from '../../../../hooks/useLocalization';
+import usePlayerOfTheDay from '../../../../hooks/usePlayerOfTheDay';
 import useSteamUser from '../../../../hooks/useSteamUser';
 import Avatar from '../../../UI/Avatar';
 import Tooltip from '../../../UI/Tooltip';
@@ -15,17 +16,10 @@ interface CellProps {
   row: any;
 }
 
-const PLAYER_OF_THE_DAY = 'PLAYER_OF_THE_DAY';
-
-const fetchPLayerOfTheDay = async () => {
-  const { data } = await axios.post('/api/stats/player-of-the-day');
-  return data.playerOfTheDay;
-};
-
 export default function PlayerCell({ value: name, row }: CellProps) {
   const id = row.original.steamid;
   const [player] = useSteamUser(id);
-  const { data } = useQuery(PLAYER_OF_THE_DAY, fetchPLayerOfTheDay);
+  const data = usePlayerOfTheDay();
   const t = useLocalization();
 
   return (
