@@ -39,8 +39,6 @@ export default function UsersTable() {
 
   const { data, isLoading } = useQuery(['users'], () => fetchUsers());
 
-  console.log(data);
-
   return (
     <Table
       columns={columns}
