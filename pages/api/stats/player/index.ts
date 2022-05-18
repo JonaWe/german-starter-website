@@ -2,14 +2,14 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { PrismaClient } from '@prisma/client';
 
+import { STEAM_ID_LENGTH } from '../../../../lib/constatns';
+
 interface Nemesis {
   nem_id: string;
   nem_name: string;
   nem_kills: number;
   nem_deaths: number;
 }
-
-const STEAM_ID_LENGTH = 17;
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,7 +19,7 @@ export default async function handler(
   const steamid = req.query.steamid.toString();
 
   if (!steamid) return res.status(400).send('no steamid param');
-  
+
   if (isNaN(parseInt(steamid)) || steamid.length !== STEAM_ID_LENGTH)
     return res.status(400).send('invalid steamid');
 
