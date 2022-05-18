@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, players } from '@prisma/client';
 
 import { STEAM_ID_LENGTH } from '../../../../lib/constatns';
 
@@ -9,6 +9,11 @@ interface Nemesis {
   nem_name: string;
   nem_kills: number;
   nem_deaths: number;
+}
+
+export interface PlayerStats extends Omit<players, 'steamid'> {
+  nemesis: Nemesis;
+  steamid: string;
 }
 
 export default async function handler(
@@ -49,11 +54,11 @@ export default async function handler(
 
   if (!player) return res.status(500).send('could not get player');
 
-  return res.status(200).json({
-    player: {
-      ...player,
-      steamid: String(player.steamid),
-      nemesis: nemesis[0],
-    },
-  });
+  const stats: PlayerStats = {
+    ...player,
+    steamid: String(player.steamid),
+    nemesis: nemesis[0],
+  };
+
+  return res.status(200).json({ player: stats });
 }
