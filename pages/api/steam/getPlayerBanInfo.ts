@@ -12,8 +12,8 @@ export default async function handler(
   if (!steamid) return res.status(400).json({ message: 'no steamid param' });
 
   try {
-    const summary = await steam.getUserSummary(steamid);
-    res.status(200).json({ summary });
+    const info = await steam.getUserBans(steamid);
+    res.status(200).json(info);
   } catch (err) {
     res.status(500).json((err as Error).message);
   }
