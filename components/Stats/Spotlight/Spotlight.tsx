@@ -113,7 +113,7 @@ export default function Spotlight() {
           className="w-full h-full object-cover absolute z-[1]"
         />
         <img
-          src={player.avatar.large}
+          src={player?.avatar?.large}
           className="w-full h-full object-cover relative"
         />
       </div>
