@@ -16,7 +16,11 @@ import {
 } from 'recharts';
 
 import { db } from '../../../firebase/clientApp';
+import usePlayerOfTheDay from '../../../hooks/usePlayerOfTheDay';
+import usePlayerStats from '../../../hooks/usePlayerStats';
 import useSteamUser from '../../../hooks/useSteamUser';
+import GeneralInfo from './GeneralInfo';
+import GeneralInfoItem from './GeneralInfoItem';
 import QuickInfo from './QuickInfo';
 
 const sampleData = [
@@ -65,17 +69,46 @@ const sampleData = [
 ];
 
 export default function Spotlight() {
-  const statsRef = collection(db, 'stats');
-  const playerOfTheDayRef = doc(statsRef, 'playerOfTheDay');
+  const playerOfTheDay = usePlayerOfTheDay();
 
-  const [data] = useDocumentData(playerOfTheDayRef);
-
-  const { player: steamid } = data || {};
+  const steamid = playerOfTheDay?.player;
 
   const [player] = useSteamUser(steamid);
+  const stats = usePlayerStats(steamid);
+
+  console.log(stats);
+
+  const quickInfoItems = [
+    {
+      value: playerOfTheDay?.kills,
+      name: 'Kills in 24h',
+    },
+    {
+      value: stats?.pvpdeaths,
+      name: 'PvP Deaths',
+    },
+    {
+      value: stats?.kills,
+      name: 'Total kills',
+    },
+    {
+      value: stats?.nemesis.nem_name,
+      name: 'Nemesis',
+    },
+  ];
+
+  const generalInfo = [
+    {
+      value: 34,
+      Icon: <HiFire className="text-2xl -mb-1" />,
+      name: 'Level',
+    },
+  ];
+
+  console.log(stats);
 
   return (
-    <div>
+    <div className="mb-14">
       <header>
         <div className="flex items-center gap-3">
           <h2 className="text-5xl leading-[0]">
@@ -87,9 +120,9 @@ export default function Spotlight() {
       </header>
       <div>
         <div className="w-full h-96 grid grid-cols-2">
-          <div className=""></div>
-          <div className="">
-            <ResponsiveContainer width={'100%'} height="100%">
+          <GeneralInfo items={generalInfo} />
+          <div className="flex justify-between flex-col">
+            <ResponsiveContainer width={'100%'} height={'75%'}>
               <AreaChart data={sampleData}>
                 <defs>
                   <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -109,7 +142,7 @@ export default function Spotlight() {
                 />
               </AreaChart>
             </ResponsiveContainer>
-            {/* <QuickInfo /> */}
+            <QuickInfo items={quickInfoItems} />
           </div>
         </div>
       </div>
