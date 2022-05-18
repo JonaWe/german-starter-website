@@ -70,7 +70,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 };
 
 const Home: NextPageWithLayout = (props: any) => {
-  console.log(props);
   const t = useLocalization();
   const router = useRouter();
 
