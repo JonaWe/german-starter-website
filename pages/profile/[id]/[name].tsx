@@ -77,11 +77,6 @@ const Home: NextPageWithLayout = (props: any) => {
 
   const t = useLocalization();
 
-  const { data: friendsOnServer, error: friendsError } = useFriendsOnServer(
-    stats.steamid
-  );
-
-  console.log(friendsOnServer);
 
   return (
     <div className="m-32">
