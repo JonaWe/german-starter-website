@@ -1,11 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, players } from '@prisma/client';
 
-import { STEAM_APPID_RUST } from '../../../lib/constatns';
 import { steam } from '../../../lib/steam/steamClient';
 
-const prisma = new PrismaClient();
+export interface Friend extends Omit<players, 'steamid'> {
+  steamid: string;
+  friendsSince: number;
+  friendedAt: Date;
+  relationship: string;
+}
 
 export default async function handler(
   req: NextApiRequest,
@@ -13,6 +17,7 @@ export default async function handler(
 ) {
   const { body } = req;
   const { steamid } = body;
+  const prisma = new PrismaClient();
 
   if (!steamid) return res.status(400).json({ message: 'no steamid param' });
 
@@ -25,10 +30,11 @@ export default async function handler(
 
     const friendsOnServer = await prisma.players.findMany({
       where: { steamid: { in: friendIds } },
+      take: 20,
     });
 
-    res.status(200).json(
-      friendsOnServer.map((friend) => {
+    res.status(200).json({
+      friendsOnServer: friendsOnServer.map((friend) => {
         const steamid = String(friend.steamid);
         const friendAttributes = friends.find((f) => f.steamID === steamid);
 
@@ -39,10 +45,10 @@ export default async function handler(
           steamid,
           friendedAt: friendAttributes.friendedAt,
           friendsSince: friendAttributes.friendSince,
-          relationship: friendAttributes.relationship,
-        };
-      })
-    );
+          relationship: friendAttributes.relationship.toString(),
+        } as Friend;
+      }),
+    });
   } catch (err) {
     res.status(500).json((err as Error).message);
   }

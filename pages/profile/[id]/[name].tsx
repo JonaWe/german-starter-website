@@ -6,6 +6,7 @@ import { Pie, PieChart, Tooltip } from 'recharts';
 
 import { getDefaultLayout } from '../../../components/Layout/DefaultLayout';
 import CommentSection from '../../../components/News/CommentSection';
+import useFriendsOnServer from '../../../hooks/useFriendsOnServer';
 import useLocalization from '../../../hooks/useLocalization';
 import { NextPageWithLayout } from '../../_app';
 
@@ -70,11 +71,17 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 };
 
 const Home: NextPageWithLayout = (props: any) => {
-  const t = useLocalization();
   const router = useRouter();
-
   const { id } = router.query;
-  const { pve_events } = props;
+  const { pve_events, stats } = props;
+
+  const t = useLocalization();
+
+  const { data: friendsOnServer, error: friendsError } = useFriendsOnServer(
+    stats.steamid
+  );
+
+  console.log(friendsOnServer);
 
   return (
     <div className="m-32">
@@ -82,9 +89,7 @@ const Home: NextPageWithLayout = (props: any) => {
       {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
       <PieChart width={730} height={250}>
         <Pie data={pve_events} dataKey={'_count.steamid'} fill={'#cd412b'} />
-        <Tooltip
-          separator={': '}
-        />
+        <Tooltip separator={': '} />
       </PieChart>
       <CommentSection path={`steam_users/${id}/comments`} />
     </div>
