@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
 
-export default function useSteamUser(steamid: string) {
-  const fetchPlayer = async (steamid: string) => {
-    const data = await axios.post('/api/steam/getPlayerSummary', {
-      steamid,
-    });
-    return data;
-  };
+export const fetchPlayer = async (steamid: string) => {
+  const data = await axios.post('/api/steam/getPlayerSummary', {
+    steamid,
+  });
+  return data;
+};
 
+export default function useSteamUser(steamid: string) {
   const { data, isLoading } = useQuery(
     ['steamUser', steamid],
     () => fetchPlayer(steamid),

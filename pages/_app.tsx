@@ -3,7 +3,7 @@ import type { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 
-import { NextSeo } from 'next-seo';
+import { DefaultSeo } from 'next-seo';
 import { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     <QueryClientProvider client={queryClient}>
       <SkeletonTheme baseColor="#373737" highlightColor="#555">
         <CommandPallet />
-        <NextSeo
+        <DefaultSeo
           title="German Starter Server"
           description="German Starter Server"
           canonical="https://www.german-starter.de"
