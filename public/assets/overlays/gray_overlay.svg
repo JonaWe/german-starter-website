@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" width="1423.504" height="552.514" viewBox="0 0 1423.504 552.514">
+    <defs>
+        <radialGradient id="radial-gradient" cx="0.5" cy="0.5" r="0.5" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#1b1b1b" stop-opacity="0"/>
+            <stop offset="1" stop-color="#1b1b1b"/>
+        </radialGradient>
+    </defs>
+    <rect id="Rechteck_87" data-name="Rechteck 87" width="552.514" height="1423.504" transform="translate(0 552.514) rotate(-90)" fill="url(#radial-gradient)"/>
+</svg>

@@ -76,8 +76,6 @@ export default function Spotlight() {
   const [player] = useSteamUser(steamid);
   const stats = usePlayerStats(steamid);
 
-  console.log(stats);
-
   const quickInfoItems = [
     {
       value: playerOfTheDay?.kills,
@@ -105,11 +103,21 @@ export default function Spotlight() {
     },
   ];
 
-  console.log(stats);
+  console.log(player);
 
   return (
-    <div className="mb-14">
-      <header>
+    <div className="mb-14 relative">
+      <div className="w-full h-full absolute opacity-20 blur-lg">
+        <img
+          src={'/assets/overlays/gray_overlay.svg'}
+          className="w-full h-full object-cover absolute z-[1]"
+        />
+        <img
+          src={player?.avatar?.large}
+          className="w-full h-full object-cover relative"
+        />
+      </div>
+      <header className="relative z-10">
         <div className="flex items-center gap-3">
           <h2 className="text-5xl leading-[0]">
             {player?.nickname || <Skeleton />}
@@ -118,7 +126,7 @@ export default function Spotlight() {
         </div>
         <p className="opacity-75">Spotlight</p>
       </header>
-      <div>
+      <div className="relative z-10">
         <div className="w-full h-96 grid grid-cols-2">
           <GeneralInfo items={generalInfo} />
           <div className="flex justify-between flex-col">

@@ -27,6 +27,4 @@ export default async function announceNews(
       headers: { Authorization: `Bearer ${token}` },
     }
   );
-
-  console.log(res);
 }
