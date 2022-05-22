@@ -8,6 +8,7 @@ import { Pie, PieChart, Tooltip } from 'recharts';
 
 import { getDefaultLayout } from '../../../components/Layout/DefaultLayout';
 import CommentSection from '../../../components/News/CommentSection';
+import FriendCards from '../../../components/Stats/PlayerPage/FriendsOnServer/FriendCards';
 import useFriendsOnServer from '../../../hooks/useFriendsOnServer';
 import useLocalization from '../../../hooks/useLocalization';
 import useSteamUser, { fetchPlayer } from '../../../hooks/useSteamUser';
@@ -120,6 +121,7 @@ const Home: NextPageWithLayout = (props: any) => {
           <Pie data={pve_events} dataKey={'_count.steamid'} fill={'#cd412b'} />
           <Tooltip separator={': '} />
         </PieChart>
+        <FriendCards steamid={stats.steamid} />
         <CommentSection path={`steam_users/${id}/comments`} />
       </div>
     </>
