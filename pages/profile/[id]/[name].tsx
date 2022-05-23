@@ -9,6 +9,7 @@ import { Pie, PieChart, Tooltip } from 'recharts';
 import { getDefaultLayout } from '../../../components/Layout/DefaultLayout';
 import CommentSection from '../../../components/News/CommentSection';
 import RecommendedPlayerCards from '../../../components/Stats/PlayerPage/FriendsOnServer/RecommendedPlayerCards';
+import PlayerPageSEO from '../../../components/Stats/PlayerPage/PlayerPageSEO';
 import useFriendsOnServer from '../../../hooks/useFriendsOnServer';
 import useLocalization from '../../../hooks/useLocalization';
 import useSteamUser, { fetchPlayer } from '../../../hooks/useSteamUser';
@@ -85,47 +86,11 @@ const Home: NextPageWithLayout = (props: any) => {
   const { id } = router.query;
   const { pve_events, stats, steam } = props;
 
-  const ogParams = {
-    name: stats.name,
-    steamid: stats.steamid,
-    avatar: steam?.avatar.large,
-    local: router.locale || 'de',
-  };
-
-  const ogBaseUrl = 'https://og.noekrebs.ch/api/rust?';
-
-  const ogUrlParams = new URLSearchParams(ogParams).toString();
-
-  const additionalLinkTags = [
-    {
-      rel: 'icon',
-      href: steam?.avatar.small,
-    },
-  ];
-
   const t = useLocalization();
 
   return (
     <>
-      <NextSeo
-        additionalLinkTags={additionalLinkTags}
-        title={`${stats?.name} - German Starter Server`}
-        openGraph={{
-          url: 'https://www.german-starter.de',
-          title: `${stats?.name} - German Starter Server`,
-          description: 'German Starter Server',
-          site_name: 'German Starter Server',
-          images: [
-            {
-              url: ogBaseUrl + ogUrlParams,
-              width: 1200,
-              height: 630,
-              alt: 'German Starter Banner',
-              type: 'image/png',
-            },
-          ],
-        }}
-      />
+      <PlayerPageSEO player={steam} locale={router.locale || 'de'} />
       <div className="m-32">
         Playerstats
         {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
