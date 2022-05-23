@@ -1,1 +1,1 @@
-export { default } from './FriendCards';
+export { default } from './RecommendedPlayerCards';

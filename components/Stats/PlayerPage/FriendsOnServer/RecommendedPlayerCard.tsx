@@ -7,9 +7,28 @@ import Skeleton from 'react-loading-skeleton';
 import useLocalization from '../../../../hooks/useLocalization';
 import useSteamUser from '../../../../hooks/useSteamUser';
 import { Friend } from '../../../../pages/api/steam/getPlayerFriendsOnServer';
+import ArrowButton from '../../../UI/ArrowButton';
 import Avatar from '../../../UI/Avatar';
+import Pill from '../../../UI/Pill';
 
-export default function FriendCard({ name, steamid, relationship }: Friend) {
+interface RecommendedPlayerCardProps {
+  name: string;
+  steamid: string;
+  tags: Tag[];
+}
+
+interface Tag {
+  name: string;
+  color: Color;
+}
+
+export type Color = 'green' | 'yellow';
+
+export default function RecommendedPlayerCard({
+  name,
+  steamid,
+  tags,
+}: RecommendedPlayerCardProps) {
   const [player] = useSteamUser(steamid);
   const t = useLocalization();
 
@@ -43,29 +62,18 @@ export default function FriendCard({ name, steamid, relationship }: Friend) {
                 <div className="mt-2">
                   <h3 className="font-sans font-bold mb-1">Tags</h3>
                   {player && (
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className={`bg-green-500/10 rounded-full border border-green-500/80 text-green-500/80 uppercase text-xs px-2.5 py-1`}
-                    >
-                      {relationship}
-                    </motion.span>
+                    <Pill
+                      name={tags[0].name}
+                      className={
+                        tags[0].color === 'yellow'
+                          ? `pill-yellow`
+                          : `pill-green`
+                      }
+                    />
                   )}
                 </div>
               </div>
-              {player && (
-                <motion.span
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ ease: 'backIn', duration: 1 }}
-                  className={`font-sans text-sm flex items-center cursor-pointer group-hover:text-rust-500 transition-all text-rust-500/80 gap-1`}
-                >
-                  {t.stats.viewProfile}
-                  <HiArrowRight className="group-hover:mr-0 group-hover:ml-3 mr-3 transition-all group-hover:fill-rust-500 fill-rust-500/80" />
-                </motion.span>
-              )}
+              {player && <ArrowButton text={t.stats.viewProfile} />}
             </div>
           </div>
           <div className="bg-gradient-to-t from-background-700 to-background-700/90 absolute inset-0 z-[1]" />
