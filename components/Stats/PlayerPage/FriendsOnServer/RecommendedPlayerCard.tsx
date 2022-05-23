@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import Link from 'next/link';
 
 import { AnimatePresence, motion } from 'framer-motion';
@@ -10,6 +12,7 @@ import { Friend } from '../../../../pages/api/steam/getPlayerFriendsOnServer';
 import ArrowButton from '../../../UI/ArrowButton';
 import Avatar from '../../../UI/Avatar';
 import Pill from '../../../UI/Pill';
+import RecommendedPlayerTags from './RecommendedPlayerTags';
 
 interface RecommendedPlayerCardProps {
   name: string;
@@ -17,12 +20,12 @@ interface RecommendedPlayerCardProps {
   tags: Tag[];
 }
 
-interface Tag {
+export interface Tag {
   name: string;
   color: Color;
 }
 
-export type Color = 'green' | 'yellow';
+export type Color = 'green' | 'yellow' | 'sand' | 'blue' | 'rust';
 
 export default function RecommendedPlayerCard({
   name,
@@ -30,6 +33,20 @@ export default function RecommendedPlayerCard({
   tags,
 }: RecommendedPlayerCardProps) {
   const [player] = useSteamUser(steamid);
+  const [allTags, setAllTags] = useState<Tag[]>(tags);
+
+  useEffect(() => {
+    console.log(tags);
+    if (!player || player.visibilityState !== 3) return;
+    setAllTags([
+      ...tags,
+      {
+        name: 'Public',
+        color: 'blue',
+      },
+    ]);
+  }, [player]);
+
   const t = useLocalization();
 
   return (
@@ -61,16 +78,7 @@ export default function RecommendedPlayerCard({
                 </div>
                 <div className="mt-2">
                   <h3 className="font-sans font-bold mb-1">Tags</h3>
-                  {player && (
-                    <Pill
-                      name={tags[0].name}
-                      className={
-                        tags[0].color === 'yellow'
-                          ? `pill-yellow`
-                          : `pill-green`
-                      }
-                    />
-                  )}
+                  {player && <RecommendedPlayerTags tags={allTags} />}
                 </div>
               </div>
               {player && <ArrowButton text={t.stats.viewProfile} />}

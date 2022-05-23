@@ -4,7 +4,8 @@ const fetchPlayersStats = async (
   page: number,
   pageSize: number,
   query: string | null = null,
-  sortBy: { desc: boolean; id: string }[]
+  sortBy: { desc: boolean; id: string }[],
+  timeOut?: number
 ) => {
   const offset = page * pageSize;
 

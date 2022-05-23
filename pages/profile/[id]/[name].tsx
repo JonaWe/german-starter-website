@@ -99,7 +99,10 @@ const Home: NextPageWithLayout = (props: any) => {
           <Tooltip separator={': '} />
         </PieChart>
         <h2 className="mb-3">Related profiles</h2>
-        <RecommendedPlayerCards steamid={stats.steamid} />
+        <RecommendedPlayerCards
+          steamid={stats.steamid}
+          publicProfile={steam.visibilityState === 3}
+        />
         <CommentSection path={`steam_users/${id}/comments`} />
       </div>
     </>

@@ -47,5 +47,8 @@
   .pill-rust {
     @apply border-rust-500/80 bg-rust-500/10 text-rust-500/80;
   }
+  .pill-sand {
+    @apply border-sand-500/80 bg-sand-500/10 text-sand-500/80;
+  }
 }
 @tailwind utilities;
