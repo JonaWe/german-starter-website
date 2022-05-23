@@ -12,6 +12,7 @@ import RecommendedPlayerCards from '../../../components/Stats/PlayerPage/Friends
 import useFriendsOnServer from '../../../hooks/useFriendsOnServer';
 import useLocalization from '../../../hooks/useLocalization';
 import useSteamUser, { fetchPlayer } from '../../../hooks/useSteamUser';
+import { steam } from '../../../lib/steam/steamClient';
 import { NextPageWithLayout } from '../../_app';
 
 const CHART_COLORS = [
@@ -55,8 +56,13 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     where: { steamid: BigInt(steamId) },
   });
 
+  const steamInfo = JSON.parse(
+    JSON.stringify(await steam.getUserSummary(String(steamId)))
+  );
+
   return {
     props: {
+      steam: steamInfo,
       stats: {
         ...playerStats,
         steamid: String(playerStats?.steamid),
@@ -77,14 +83,12 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 const Home: NextPageWithLayout = (props: any) => {
   const router = useRouter();
   const { id } = router.query;
-  const { pve_events, stats } = props;
-
-  const [playerInfo] = useSteamUser(stats.steamid);
+  const { pve_events, stats, steam } = props;
 
   const ogParams = {
     name: stats.name,
     steamid: stats.steamid,
-    avatar: playerInfo?.avatar.large,
+    avatar: steam?.avatar.large,
     local: router.locale || 'de',
   };
 
@@ -92,11 +96,19 @@ const Home: NextPageWithLayout = (props: any) => {
 
   const ogUrlParams = new URLSearchParams(ogParams).toString();
 
+  const additionalLinkTags = [
+    {
+      rel: 'icon',
+      href: steam?.avatar.small,
+    },
+  ];
+
   const t = useLocalization();
 
   return (
     <>
       <NextSeo
+        additionalLinkTags={additionalLinkTags}
         title={`${stats?.name} - German Starter Server`}
         openGraph={{
           url: 'https://www.german-starter.de',
