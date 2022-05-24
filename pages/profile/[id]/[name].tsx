@@ -2,7 +2,6 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { PrismaClient } from '@prisma/client';
 import { NextSeo } from 'next-seo';
 import { Pie, PieChart, Tooltip } from 'recharts';
 
@@ -13,6 +12,7 @@ import PlayerPageSEO from '../../../components/Stats/PlayerPage/PlayerPageSEO';
 import useFriendsOnServer from '../../../hooks/useFriendsOnServer';
 import useLocalization from '../../../hooks/useLocalization';
 import useSteamUser, { fetchPlayer } from '../../../hooks/useSteamUser';
+import { prisma } from '../../../lib/stats/db';
 import { steam } from '../../../lib/steam/steamClient';
 import { NextPageWithLayout } from '../../_app';
 
@@ -32,8 +32,6 @@ const CHART_COLORS = [
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const steamId = BigInt(params?.id as string);
-
-  const prisma = new PrismaClient();
 
   const playerStats = await prisma.players.findUnique({
     where: {
@@ -98,7 +96,7 @@ const Home: NextPageWithLayout = (props: any) => {
           <Pie data={pve_events} dataKey={'_count.steamid'} fill={'#cd412b'} />
           <Tooltip separator={': '} />
         </PieChart> */}
-        <div className='h-96'>placehoder</div>
+        <div className="h-96">placehoder</div>
         <h2 className="mb-3">Related profiles</h2>
         <RecommendedPlayerCards
           steamid={stats.steamid}

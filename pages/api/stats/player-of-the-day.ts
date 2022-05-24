@@ -5,6 +5,7 @@ import { Timestamp } from 'firebase/firestore';
 
 import { db } from '../../../firebase/admin/firebaseAdmin';
 import { checkIfSameDay } from '../../../lib/checkIfSameDay';
+import { prisma } from '../../../lib/stats/db';
 
 async function getPLayerOfTheDay(res: NextApiResponse) {
   const playerOfTheDaySnap = await db.doc(`stats/playerOfTheDay`).get();
@@ -19,7 +20,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const prisma = new PrismaClient();
   const playerOfTheDay = await getPLayerOfTheDay(res);
 
   //Check if player in firebase is from the current day

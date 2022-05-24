@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../../lib/stats/db';
 
 interface IDictionary<TValue> {
   [id: string]: TValue;
@@ -25,7 +25,6 @@ export default async function handler(
 
   let orderOptions: any = [];
 
-  const prisma = new PrismaClient();
   const MAX_TAKE = 1000;
 
   if (take > MAX_TAKE)

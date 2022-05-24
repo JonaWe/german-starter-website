@@ -1,12 +1,10 @@
 import { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
 
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../lib/stats/db';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const steamId = BigInt(params?.id as string);
-
-  const prisma = new PrismaClient();
 
   const player = await prisma.players.findUnique({
     where: {
