@@ -8,7 +8,7 @@ import { fetchPlayersStats } from '../../../../lib/stats/fetch/fetchPlayersStats
 import RecommendedPlayerCard from './RecommendedPlayerCard';
 
 const fetchTopPlayers = async (rand: any) => {
-  return await fetchPlayersStats(rand, 10, null, [
+  return await fetchPlayersStats(rand, 5, null, [
     {
       desc: true,
       id: 'kills',
