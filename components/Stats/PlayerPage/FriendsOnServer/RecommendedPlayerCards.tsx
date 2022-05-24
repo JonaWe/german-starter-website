@@ -7,15 +7,6 @@ import useFriendsOnServer from '../../../../hooks/useFriendsOnServer';
 import { fetchPlayersStats } from '../../../../lib/stats/fetch/fetchPlayersStats';
 import RecommendedPlayerCard from './RecommendedPlayerCard';
 
-const fetchTopPlayers = async (rand: any) => {
-  return await fetchPlayersStats(rand, 5, null, [
-    {
-      desc: true,
-      id: 'kills',
-    },
-  ]);
-};
-
 const EXIT_DELAY = 0.1;
 
 export default function RecommendedPlayerCards({
@@ -27,6 +18,15 @@ export default function RecommendedPlayerCards({
   publicProfile?: boolean;
   cardCount?: number;
 }) {
+  const fetchTopPlayers = async (rand: any) => {
+    return await fetchPlayersStats(rand, cardCount + 1, null, [
+      {
+        desc: true,
+        id: 'kills',
+      },
+    ]);
+  };
+
   const {
     data: friendsOnServer,
     error: friendsError,
@@ -74,7 +74,7 @@ export default function RecommendedPlayerCards({
 
   return (
     <SkeletonTheme baseColor="#161616" highlightColor="#1b1b1b">
-      <ul className="h-52 flex gap-6">
+      <motion.ul className="h-56 flex gap-6 w-full overflow-x-auto scrollbar-thin hover:scrollbar-thumb-background-600 transition-all snap-x md:snap-none pb-4">
         <AnimatePresence>
           {cardItems?.slice(0, cardCount).map((item, i) => (
             <motion.li
@@ -86,6 +86,7 @@ export default function RecommendedPlayerCards({
                 duration: 0.2,
                 delay: (cardCount - (i + 1)) * EXIT_DELAY,
               }}
+              className="snap-start"
             >
               <RecommendedPlayerCard
                 key={item.steamid}
@@ -100,7 +101,7 @@ export default function RecommendedPlayerCards({
             </motion.li>
           ))}
         </AnimatePresence>
-      </ul>
+      </motion.ul>
     </SkeletonTheme>
   );
 }

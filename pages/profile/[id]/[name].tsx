@@ -7,6 +7,7 @@ import { Pie, PieChart, Tooltip } from 'recharts';
 
 import { getDefaultLayout } from '../../../components/Layout/DefaultLayout';
 import CommentSection from '../../../components/News/CommentSection';
+import PageContent from '../../../components/PageContent';
 import RecommendedPlayerCards from '../../../components/Stats/PlayerPage/FriendsOnServer/RecommendedPlayerCards';
 import PlayerPageSEO from '../../../components/Stats/PlayerPage/PlayerPageSEO';
 import useFriendsOnServer from '../../../hooks/useFriendsOnServer';
@@ -87,24 +88,25 @@ const Home: NextPageWithLayout = (props: any) => {
   const t = useLocalization();
 
   return (
-    <>
+    <PageContent>
       <PlayerPageSEO player={steam} locale={router.locale || 'de'} />
-      <div className="m-32">
-        Playerstats
-        {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
-        {/* <PieChart width={730} height={250}>
+      Playerstats
+      {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
+      {/* <PieChart width={730} height={250}>
           <Pie data={pve_events} dataKey={'_count.steamid'} fill={'#cd412b'} />
           <Tooltip separator={': '} />
         </PieChart> */}
-        <div className="h-96">placehoder</div>
-        <h2 className="mb-3">Related profiles</h2>
+      <div className="h-96">placehoder</div>
+      <h2 className="mb-3">Related profiles</h2>
+      <div className="w-full">
         <RecommendedPlayerCards
           steamid={stats.steamid}
+          cardCount={10}
           publicProfile={steam ? steam.visibilityState === 3 : false}
         />
-        <CommentSection path={`steam_users/${id}/comments`} />
       </div>
-    </>
+      <CommentSection path={`steam_users/${id}/comments`} />
+    </PageContent>
   );
 };
 
