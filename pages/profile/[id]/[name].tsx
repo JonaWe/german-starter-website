@@ -94,14 +94,15 @@ const Home: NextPageWithLayout = (props: any) => {
       <div className="m-32">
         Playerstats
         {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
-        <PieChart width={730} height={250}>
+        {/* <PieChart width={730} height={250}>
           <Pie data={pve_events} dataKey={'_count.steamid'} fill={'#cd412b'} />
           <Tooltip separator={': '} />
-        </PieChart>
+        </PieChart> */}
+        <div className='h-96'>placehoder</div>
         <h2 className="mb-3">Related profiles</h2>
         <RecommendedPlayerCards
           steamid={stats.steamid}
-          publicProfile={steam.visibilityState === 3}
+          publicProfile={steam ? steam.visibilityState === 3 : false}
         />
         <CommentSection path={`steam_users/${id}/comments`} />
       </div>
