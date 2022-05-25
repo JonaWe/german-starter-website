@@ -6,6 +6,7 @@ export default function RecommendedPlayerTags({ tags }: { tags: Tag[] }) {
     <div className="flex gap-2">
       {tags.map(({ name, color }) => (
         <Pill
+          key={name}
           name={name}
           className={
             color === 'yellow'
