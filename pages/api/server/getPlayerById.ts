@@ -19,7 +19,6 @@ export default async function handler(
     res.status(200).json({ player });
   } catch (err) {
     console.log(err);
-
     res.status(400).json({ error: err });
   }
 }
