@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { PrismaClient, players } from '@prisma/client';
+import { players } from '@prisma/client';
 
 import { STEAM_ID_LENGTH } from '../../../../lib/constatns';
+import { prisma } from '../../../../lib/stats/db';
 
 interface Nemesis {
   nem_id: string;
@@ -20,7 +21,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const prisma = new PrismaClient();
   const steamid = req.query.steamid.toString();
 
   if (!steamid) return res.status(400).send('no steamid param');

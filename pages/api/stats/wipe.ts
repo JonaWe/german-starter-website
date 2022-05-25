@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../../lib/stats/db';
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,7 +9,6 @@ export default async function handler(
   const { body } = req;
   const { skip, take } = body;
 
-  const prisma = new PrismaClient();
   const MAX_TAKE = 1000;
 
   if (take > MAX_TAKE)

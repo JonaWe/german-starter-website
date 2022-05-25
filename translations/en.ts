@@ -208,5 +208,6 @@ export default {
   },
   stats: {
     playerOfTheDay: 'Plyer of the day',
+    viewProfile: 'View profile',
   },
 };

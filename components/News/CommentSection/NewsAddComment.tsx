@@ -56,7 +56,7 @@ export default function NewsAddComment({ path }: CommentSectionProps) {
         ></input>
         <div className="flex gap-5 ">
           <Avatar
-            className="w-12 h-12"
+            className="w-14 h-14"
             url={steamUser ? steamUser.avatar.medium : user?.photoURL}
           />
           <input type="text" className="w-full" {...register('comment')} />

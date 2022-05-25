@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { PrismaClient, players } from '@prisma/client';
+import { players } from '@prisma/client';
 
+import { prisma } from '../../../lib/stats/db';
 import { steam } from '../../../lib/steam/steamClient';
 
 export interface Friend extends Omit<players, 'steamid'> {
@@ -17,7 +18,6 @@ export default async function handler(
 ) {
   const { body } = req;
   const { steamid } = body;
-  const prisma = new PrismaClient();
 
   if (!steamid) return res.status(400).json({ message: 'no steamid param' });
 

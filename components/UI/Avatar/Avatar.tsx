@@ -18,7 +18,7 @@ export default function Avatar({ className, url }: AvatarProps) {
           animate={{ opacity: 1 }}
           src={url}
           alt="avatar"
-          className="object-fit relative z-10"
+          className="object-cover relative z-10 w-full h-full"
         />
       )}
       <span className="absolute inset-0 bg-background-700 animate-pulse z-[5]" />

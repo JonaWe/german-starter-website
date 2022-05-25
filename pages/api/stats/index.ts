@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../../lib/stats/db';
 
 interface IDictionary<TValue> {
   [id: string]: TValue;
@@ -25,13 +25,12 @@ export default async function handler(
 
   let orderOptions: any = [];
 
-  const prisma = new PrismaClient();
   const MAX_TAKE = 1000;
 
   if (take > MAX_TAKE)
     return res.status(400).send(`"take" to large. MAX: ${MAX_TAKE}`);
 
-  //COnvert format of orderBy from react-table fromat to prisma format
+  //COnvert format of orderBy from react-table format to prisma format
   if (orderBy)
     orderBy.forEach(({ id, desc }) => {
       let entry: { [key: string]: string } = {};
@@ -44,13 +43,13 @@ export default async function handler(
     take: take || 100,
     orderBy: orderOptions,
     where: {
-      name: { search: query.length > 0 ? query : undefined },
+      name: { search: query && query.length > 0 ? query : undefined },
     },
   });
 
   const count = await prisma.players.count({
     where: {
-      name: { search: query.length > 0 ? query : undefined },
+      name: { search: query && query.length > 0 ? query : undefined },
     },
   });
 

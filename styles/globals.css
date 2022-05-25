@@ -26,12 +26,29 @@
     @apply text-sand-500;
   }
   input {
-    @apply bg-background-200/20 p-3 text-lg shadow-sm focus-visible:outline-none focus-visible:ring focus-visible:ring-sand-500/40 placeholder:text-sand-500/20;
+    @apply bg-background-200/20 p-3 text-lg shadow-sm placeholder:text-sand-500/20 focus-visible:outline-none focus-visible:ring focus-visible:ring-sand-500/40;
   }
   textarea {
-    @apply bg-background-200/20 p-1 shadow-sm focus-visible:outline-none focus-visible:ring focus-visible:ring-sand-500/40 placeholder:text-sand-500/20;
+    @apply bg-background-200/20 p-1 shadow-sm placeholder:text-sand-500/20 focus-visible:outline-none focus-visible:ring focus-visible:ring-sand-500/40;
   }
 }
 
 @tailwind components;
+@layer components {
+  .pill-green {
+    @apply border-green-500/80 bg-green-500/10 text-green-500/80;
+  }
+  .pill-blue {
+    @apply border-blue-500/80 bg-blue-500/10 text-blue-500/80;
+  }
+  .pill-yellow {
+    @apply border-yellow-500/80 bg-yellow-500/10 text-yellow-500/80;
+  }
+  .pill-rust {
+    @apply border-rust-500/80 bg-rust-500/10 text-rust-500/80;
+  }
+  .pill-sand {
+    @apply border-sand-500/80 bg-sand-500/10 text-sand-500/80;
+  }
+}
 @tailwind utilities;

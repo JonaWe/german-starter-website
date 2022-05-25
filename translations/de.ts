@@ -210,5 +210,6 @@ export default {
   },
   stats: {
     playerOfTheDay: 'Spieler des Tages',
+    viewProfile: 'Profil ansehen',
   },
 };
