@@ -77,11 +77,13 @@ export default function RecommendedPlayerCard({
               </div>
             </div>
             <div className="mt-2">
-              <h3 className="font-sans font-bold mb-1">Tags</h3>
+              <h3 className={`font-sans font-bold mb-1 transition-opacity ${player ? 'opacity-100' : 'opacity-10 animate-pulse'}`}>Tags</h3>
               {player && <RecommendedPlayerTags tags={tags} />}
             </div>
           </div>
-          {player && <ArrowButton delay={animationDelay} text={t.stats.viewProfile} />}
+          {player && (
+            <ArrowButton delay={animationDelay} text={t.stats.viewProfile} />
+          )}
         </div>
       </div>
       <div className="bg-gradient-to-t from-background-700 to-background-700/90 absolute inset-0 z-[1]" />
