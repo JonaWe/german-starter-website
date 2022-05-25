@@ -19,6 +19,7 @@ interface RecommendedPlayerCardProps {
   name: string;
   steamid: string;
   key: string;
+  animationDelay?: number;
   tags: Tag[];
 }
 
@@ -34,6 +35,7 @@ export default function RecommendedPlayerCard({
   steamid,
   key,
   tags: defaultTags,
+  animationDelay = 0,
 }: RecommendedPlayerCardProps) {
   const [player] = useSteamUser(steamid);
   const [tags, setTags] = useState<Tag[]>(defaultTags);
@@ -79,7 +81,7 @@ export default function RecommendedPlayerCard({
               {player && <RecommendedPlayerTags tags={tags} />}
             </div>
           </div>
-          {player && <ArrowButton text={t.stats.viewProfile} />}
+          {player && <ArrowButton delay={animationDelay} text={t.stats.viewProfile} />}
         </div>
       </div>
       <div className="bg-gradient-to-t from-background-700 to-background-700/90 absolute inset-0 z-[1]" />

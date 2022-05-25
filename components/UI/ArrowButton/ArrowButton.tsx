@@ -5,11 +5,13 @@ interface ArrowButtonProps {
   orientation?: 'left' | 'right';
   onClick?: () => void;
   text: string;
+  delay?: number;
 }
 
 export default function Avatar({
   orientation = 'right',
   onClick = () => void 0,
+  delay = 0,
   text,
 }: ArrowButtonProps) {
   return (
@@ -18,7 +20,7 @@ export default function Avatar({
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0 }}
-      transition={{ ease: 'backIn', duration: 1 }}
+      transition={{ ease: 'backIn', duration: 1, delay }}
       className={`font-sans text-sm flex items-center cursor-pointer group-hover:text-rust-500 transition-all text-rust-500/80 gap-1`}
     >
       {text}

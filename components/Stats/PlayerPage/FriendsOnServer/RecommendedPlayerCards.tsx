@@ -7,7 +7,7 @@ import useFriendsOnServer from '../../../../hooks/useFriendsOnServer';
 import { fetchPlayersStats } from '../../../../lib/stats/fetch/fetchPlayersStats';
 import RecommendedPlayerCard from './RecommendedPlayerCard';
 
-const EXIT_DELAY = 0.1;
+const DELAY_FACTOR = 0.1;
 
 export default function RecommendedPlayerCards({
   steamid,
@@ -76,30 +76,34 @@ export default function RecommendedPlayerCards({
     <SkeletonTheme baseColor="#161616" highlightColor="#1b1b1b">
       <motion.ul className="h-56 flex gap-6 w-full overflow-x-auto scrollbar-thin hover:scrollbar-thumb-background-600 transition-all snap-x md:snap-none pb-4">
         <AnimatePresence>
-          {cardItems?.slice(0, cardCount).map((item, i) => (
-            <motion.li
-              key={i}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: 100, opacity: 0 }}
-              transition={{
-                ease: 'easeOut',
-                duration: 0.2,
-                delay: (cardCount - (i + 1)) * EXIT_DELAY,
-              }}
-              className="snap-start"
-            >
-              <RecommendedPlayerCard
-                key={item.steamid}
-                name={item.name}
-                steamid={item.steamid}
-                tags={
-                  item.tags
-                    ? item.tags
-                    : [{ name: item.relationship, color: 'green' }]
-                }
-              />
-            </motion.li>
-          ))}
+          {cardItems?.slice(0, cardCount).map((item, i) => {
+            const delay = (cardCount - (i + 1)) * DELAY_FACTOR;
+            return (
+              <motion.li
+                key={i}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: 100, opacity: 0 }}
+                transition={{
+                  ease: 'easeOut',
+                  duration: 0.2,
+                  delay,
+                }}
+                className="snap-start"
+              >
+                <RecommendedPlayerCard
+                  key={item.steamid}
+                  name={item.name}
+                  steamid={item.steamid}
+                  animationDelay={delay}
+                  tags={
+                    item.tags
+                      ? item.tags
+                      : [{ name: item.relationship, color: 'green' }]
+                  }
+                />
+              </motion.li>
+            );
+          })}
         </AnimatePresence>
       </motion.ul>
     </SkeletonTheme>
