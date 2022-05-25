@@ -32,7 +32,19 @@ const CHART_COLORS = [
 ];
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const steamId = BigInt(params?.id as string);
+  let steamId: bigint;
+
+  try {
+    steamId = BigInt(params?.id as string);
+  } catch {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/404',
+      },
+      props: {},
+    };
+  }
 
   const playerStats = await prisma.players.findUnique({
     where: {

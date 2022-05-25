@@ -4,7 +4,19 @@ import Link from 'next/link';
 import { prisma } from '../../lib/stats/db';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const steamId = BigInt(params?.id as string);
+  let steamId: bigint;
+
+  try {
+    steamId = BigInt(params?.id as string);
+  } catch {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/404',
+      },
+      props: {},
+    };
+  }
 
   const player = await prisma.players.findUnique({
     where: {
