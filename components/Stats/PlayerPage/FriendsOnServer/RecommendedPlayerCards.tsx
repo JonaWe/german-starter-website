@@ -94,7 +94,7 @@ export default function RecommendedPlayerCards({
                   key={item.steamid}
                   name={item.name}
                   steamid={item.steamid}
-                  animationDelay={delay}
+                  animationDelay={i * DELAY_FACTOR}
                   tags={
                     item.tags
                       ? item.tags
