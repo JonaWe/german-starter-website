@@ -14,6 +14,7 @@ import useFriendsOnServer from '../../../hooks/useFriendsOnServer';
 import useLocalization from '../../../hooks/useLocalization';
 import useSteamUser, { fetchPlayer } from '../../../hooks/useSteamUser';
 import { prisma } from '../../../lib/stats/db';
+import { CommunityVisibilityState } from '../../../lib/steam/interfaces/CommunityVisibilityState';
 import { steam } from '../../../lib/steam/steamClient';
 import { NextPageWithLayout } from '../../_app';
 
@@ -114,7 +115,11 @@ const Home: NextPageWithLayout = (props: any) => {
         <RecommendedPlayerCards
           steamid={stats.steamid}
           cardCount={10}
-          publicProfile={steam ? steam.visibilityState === 3 : false}
+          publicProfile={
+            steam
+              ? steam.visibilityState === CommunityVisibilityState.Public
+              : false
+          }
         />
       </div>
       <CommentSection path={`steam_users/${id}/comments`} />
