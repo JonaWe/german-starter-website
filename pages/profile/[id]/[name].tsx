@@ -1,33 +1,18 @@
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
-import { Pie, PieChart, Tooltip } from 'recharts';
-
 import { getDefaultLayout } from '../../../components/Layout/DefaultLayout';
 import CommentSection from '../../../components/News/CommentSection';
 import PageContent from '../../../components/PageContent';
 import AliasTable from '../../../components/Stats/PlayerPage/AliasTable';
 import RecommendedPlayerCards from '../../../components/Stats/PlayerPage/FriendsOnServer/RecommendedPlayerCards';
 import PlayerPageSEO from '../../../components/Stats/PlayerPage/PlayerPageSEO';
+import PvEChart from '../../../components/Stats/PlayerPage/PvEChart';
 import useLocalization from '../../../hooks/useLocalization';
 import { prisma } from '../../../lib/stats/db';
 import { CommunityVisibilityState } from '../../../lib/steam/interfaces/CommunityVisibilityState';
 import { steam } from '../../../lib/steam/steamClient';
 import { NextPageWithLayout } from '../../_app';
-
-const CHART_COLORS = [
-  '#f1c5be',
-  '#ecafa5',
-  '#e7988c',
-  '#e18172',
-  '#dc6b59',
-  '#cd412b',
-  '#b43926',
-  '#9a3120',
-  '#81291b',
-  '#682116',
-  '#4f1910',
-];
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   let steamId: bigint;
@@ -106,11 +91,8 @@ const Home: NextPageWithLayout = (props: any) => {
         {"'"}s Playerstats
       </h1>
       <AliasTable aliases={aliases} />
-      {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
-      <PieChart width={730} height={250}>
-        <Pie data={pve_events} dataKey={'_count.steamid'} fill={'#cd412b'} />
-        <Tooltip separator={': '} />
-      </PieChart>
+      <PvEChart data={pve_events} />
+      <pre>{JSON.stringify(props, null, 2)}</pre>
       <h2 className="mb-3">Related profiles</h2>
       <div className="w-full">
         <RecommendedPlayerCards
