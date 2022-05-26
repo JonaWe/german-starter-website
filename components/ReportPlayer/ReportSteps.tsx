@@ -1,17 +1,10 @@
 import { useState } from 'react';
 
-import { AnimatePresence, motion } from 'framer-motion';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { HiCheckCircle } from 'react-icons/hi';
 
 import { auth } from '../../firebase/clientApp';
 import useLocalization from '../../hooks/useLocalization';
-import Button from '../UI/Button';
-import SimpleListbox from '../UI/Listbox';
 import { Player } from './Interfaces/Player';
-import LastStep from './LastStep';
-import NextStep from './NextStep';
-import SelectPlayer from './SelectPlayer';
 
 export default function ReportSteps({}) {
   const [step, setStep] = useState(1);

@@ -15,7 +15,6 @@ import { useQuery } from 'react-query';
 import { usePagination, useSortBy, useTable } from 'react-table';
 import { useDebounce } from 'use-debounce';
 
-import SimpleListbox from '../../Listbox';
 import SearchFiled from './SearchField';
 
 const initialState = {

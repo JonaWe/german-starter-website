@@ -1,26 +1,19 @@
-import { collection, doc } from 'firebase/firestore';
-import {
-  useDocumentData,
-  useDocumentDataOnce,
-} from 'react-firebase-hooks/firestore';
 import { HiFire } from 'react-icons/hi';
 import Skeleton from 'react-loading-skeleton';
 import {
   Area,
   AreaChart,
-  CartesianGrid,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from 'recharts';
 
-import { db } from '../../../firebase/clientApp';
 import usePlayerOfTheDay from '../../../hooks/usePlayerOfTheDay';
 import usePlayerStats from '../../../hooks/usePlayerStats';
+import useStatsPerDay from '../../../hooks/useStatsPerDay';
 import useSteamUser from '../../../hooks/useSteamUser';
 import GeneralInfo from './GeneralInfo';
-import GeneralInfoItem from './GeneralInfoItem';
 import QuickInfo from './QuickInfo';
 
 const sampleData = [
@@ -75,6 +68,9 @@ export default function Spotlight() {
 
   const [player] = useSteamUser(steamid);
   const stats = usePlayerStats(steamid);
+  const data = useStatsPerDay(steamid);
+
+  console.log(data);
 
   const quickInfoItems = [
     {
@@ -103,8 +99,6 @@ export default function Spotlight() {
     },
   ];
 
-  console.log(player);
-
   return (
     <div className="mb-14 relative">
       <div className="w-full h-full absolute opacity-20 blur-lg">
@@ -131,22 +125,28 @@ export default function Spotlight() {
           <GeneralInfo items={generalInfo} />
           <div className="flex justify-between flex-col">
             <ResponsiveContainer width={'100%'} height={'75%'}>
-              <AreaChart data={sampleData}>
+              <AreaChart data={data}>
                 <defs>
                   <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#CD412B" stopOpacity={0.5} />
                     <stop offset="95%" stopColor="#CD412B" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <XAxis dataKey="name" />
-                <YAxis />
+                <XAxis dataKey="time" />
+                <YAxis dataKey="kills" />
                 <Tooltip />
                 <Area
                   type="monotone"
-                  dataKey="uv"
+                  dataKey="kills"
                   stroke="#CD412B"
                   fillOpacity={1}
                   fill="url(#colorUv)"
+                />
+                <Area
+                  type="monotone"
+                  dataKey="deaths"
+                  fillOpacity={0}
+                  stroke="#373737"
                 />
               </AreaChart>
             </ResponsiveContainer>

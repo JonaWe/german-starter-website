@@ -1,18 +1,14 @@
 import { useEffect, useState } from 'react';
 
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { AnimatePresence, motion } from 'framer-motion';
-import { HiArrowLeft, HiArrowRight } from 'react-icons/hi';
+import { motion } from 'framer-motion';
 import Skeleton from 'react-loading-skeleton';
 
 import useLocalization from '../../../../hooks/useLocalization';
 import useSteamUser from '../../../../hooks/useSteamUser';
-import { Friend } from '../../../../pages/api/steam/getPlayerFriendsOnServer';
 import ArrowButton from '../../../UI/ArrowButton';
 import Avatar from '../../../UI/Avatar';
-import Pill from '../../../UI/Pill';
 import RecommendedPlayerTags from './RecommendedPlayerTags';
 
 interface RecommendedPlayerCardProps {
@@ -50,7 +46,7 @@ export default function RecommendedPlayerCard({
         color: 'blue',
       },
     ]);
-  }, [player]);
+  }, [player, defaultTags]);
 
   const t = useLocalization();
 
@@ -77,7 +73,13 @@ export default function RecommendedPlayerCard({
               </div>
             </div>
             <div className="mt-2">
-              <h3 className={`font-sans font-bold mb-1 transition-opacity ${player ? 'opacity-100' : 'opacity-10 animate-pulse'}`}>Tags</h3>
+              <h3
+                className={`font-sans font-bold mb-1 transition-opacity ${
+                  player ? 'opacity-100' : 'opacity-10 animate-pulse'
+                }`}
+              >
+                Tags
+              </h3>
               {player && <RecommendedPlayerTags tags={tags} />}
             </div>
           </div>

@@ -1,7 +1,5 @@
 import { useMemo } from 'react';
 
-import axios from 'axios';
-
 import { fetchPlayersStats } from '../../../lib/stats/fetch/fetchPlayersStats';
 import BigDataTable from '../../UI/Table/BigDataTable/BigDataTable';
 import KDCell from './Cells/KDCell';

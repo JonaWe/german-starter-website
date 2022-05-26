@@ -1,36 +1,18 @@
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
-
-import { NextSeo } from 'next-seo';
-import { Pie, PieChart, Tooltip } from 'recharts';
 
 import { getDefaultLayout } from '../../../components/Layout/DefaultLayout';
 import CommentSection from '../../../components/News/CommentSection';
 import PageContent from '../../../components/PageContent';
+import AliasTable from '../../../components/Stats/PlayerPage/AliasTable';
 import RecommendedPlayerCards from '../../../components/Stats/PlayerPage/FriendsOnServer/RecommendedPlayerCards';
 import PlayerPageSEO from '../../../components/Stats/PlayerPage/PlayerPageSEO';
-import useFriendsOnServer from '../../../hooks/useFriendsOnServer';
+import PvEChart from '../../../components/Stats/PlayerPage/PvEChart';
 import useLocalization from '../../../hooks/useLocalization';
-import useSteamUser, { fetchPlayer } from '../../../hooks/useSteamUser';
 import { prisma } from '../../../lib/stats/db';
 import { CommunityVisibilityState } from '../../../lib/steam/interfaces/CommunityVisibilityState';
 import { steam } from '../../../lib/steam/steamClient';
 import { NextPageWithLayout } from '../../_app';
-
-const CHART_COLORS = [
-  '#f1c5be',
-  '#ecafa5',
-  '#e7988c',
-  '#e18172',
-  '#dc6b59',
-  '#cd412b',
-  '#b43926',
-  '#9a3120',
-  '#81291b',
-  '#682116',
-  '#4f1910',
-];
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   let steamId: bigint;
@@ -57,14 +39,15 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     where: { steamid: BigInt(steamId) },
   });
 
-  // const pve_events = await prisma.pvelog.findMany({
-  //   where: { steamid: BigInt(steamId) },
-  // });
-
   const pve_events = await prisma.pvelog.groupBy({
     by: ['reason'],
     _count: {
       steamid: true,
+    },
+    orderBy: {
+      _count: {
+        steamid: 'desc',
+      },
     },
     where: { steamid: BigInt(steamId) },
   });
@@ -96,20 +79,20 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 const Home: NextPageWithLayout = (props: any) => {
   const router = useRouter();
   const { id } = router.query;
-  const { pve_events, stats, steam } = props;
+  const { pve_events, stats, steam, aliases } = props;
 
   const t = useLocalization();
 
   return (
     <PageContent>
       <PlayerPageSEO player={steam} locale={router.locale || 'de'} />
-      Playerstats
-      {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
-      {/* <PieChart width={730} height={250}>
-          <Pie data={pve_events} dataKey={'_count.steamid'} fill={'#cd412b'} />
-          <Tooltip separator={': '} />
-        </PieChart> */}
-      <div className="h-96">placehoder</div>
+      <h1 className="mt-10">
+        {steam.nickname}
+        {"'"}s Playerstats
+      </h1>
+      <AliasTable aliases={aliases} />
+      <PvEChart data={pve_events} />
+      <pre>{JSON.stringify(props, null, 2)}</pre>
       <h2 className="mb-3">Related profiles</h2>
       <div className="w-full">
         <RecommendedPlayerCards

@@ -1,20 +1,15 @@
 import { useState } from 'react';
 
 import { NextPage } from 'next';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { HiCheckCircle } from 'react-icons/hi';
 
-import { Player } from '../../components/ReportPlayer/Interfaces/Player';
 import LastStep from '../../components/ReportPlayer/LastStep';
 import LoginStep from '../../components/ReportPlayer/LoginStep';
 import NextStep from '../../components/ReportPlayer/NextStep';
-import SelectPlayer from '../../components/ReportPlayer/SelectPlayer';
 import SuccessStep from '../../components/ReportPlayer/SuccessStep';
-import Button from '../../components/UI/Button';
-import SimpleListbox from '../../components/UI/Listbox';
 import { auth } from '../../firebase/clientApp';
 import useLocalization from '../../hooks/useLocalization';
 

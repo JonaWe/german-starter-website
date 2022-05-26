@@ -5,7 +5,7 @@ import { Timestamp } from '@firebase/firestore';
 import { checkIfSameDay } from '../../../../lib/checkIfSameDay';
 
 interface DateCellProps {
-  value: Timestamp;
+  value: Timestamp | number;
 }
 
 const dateFormatOptions: Intl.DateTimeFormatOptions = {
@@ -17,6 +17,9 @@ const dateFormatOptions: Intl.DateTimeFormatOptions = {
 
 export default function DateCell({ value: timestamp }: DateCellProps) {
   const { locale } = useRouter();
+  if (typeof timestamp === 'number') {
+    timestamp = Timestamp.fromMillis(timestamp);
+  }
   return (
     <span>
       {checkIfSameDay(timestamp.toDate())

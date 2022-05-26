@@ -14,12 +14,14 @@ export default async function handler(
   if (isNaN(parseInt(steamid)) || steamid.length !== STEAM_ID_LENGTH)
     return res.status(400).send('invalid steamid');
 
-  const pvplog =
-    await prisma.$queryRaw`SELECT * FROM pvplog WHERE killer_steamid = ${steamid}`;
+  //`SELECT count(*) as kills, time FROM pvplog WHERE killer_steamid = ${steamid} GROUP BY date(time) ORDER BY time ASC`;
 
-  if (!pvplog) return res.status(500).send('could not get player');
+  const killsPerDay =
+    await prisma.$queryRaw`SELECT count(*) as kills,time as kill_time, (SELECT count(*) as deaths FROM pvplog WHERE target_steamid = 76561197960276119 AND date(time) = date(kill_time)) as deaths FROM pvplog WHERE killer_steamid = 76561197960276119 GROUP BY date(kill_time);`;
+
+  if (!killsPerDay) return res.status(500).send('could not get player');
 
   return res.status(200).json({
-    pvplog,
+    killsPerDay,
   });
 }

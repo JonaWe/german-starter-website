@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { NextPage } from 'next';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
@@ -9,11 +9,9 @@ import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
-import { HiCheckCircle } from 'react-icons/hi';
 import * as yup from 'yup';
 
 import FinalStepButton from '../../components/ReportPlayer/FinalStepButton';
-import { Player } from '../../components/ReportPlayer/Interfaces/Player';
 import LastStep from '../../components/ReportPlayer/LastStep';
 import LoginStep from '../../components/ReportPlayer/LoginStep';
 import SelectPlayer from '../../components/ReportPlayer/SelectPlayer';
@@ -104,7 +102,7 @@ const PlayerReport: NextPage = () => {
         name: player.name,
       });
     });
-  }, [router, playerId, setValue]);
+  }, [router, playerId, setValue, reasonName, reasonId, description]);
 
   const onSubmit = handleSubmit(async (data) => {
     if (!user) return nextStep();

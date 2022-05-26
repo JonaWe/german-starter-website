@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { PrismaClient } from '@prisma/client';
-
 import { prisma } from '../../../lib/stats/db';
 
 export default async function handler(
@@ -19,7 +17,6 @@ export default async function handler(
     res.status(200).json({ player });
   } catch (err) {
     console.log(err);
-
     res.status(400).json({ error: err });
   }
 }

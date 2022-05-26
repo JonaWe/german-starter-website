@@ -1,9 +1,7 @@
 import Link from 'next/link';
 
-import axios from 'axios';
 import { HiFire } from 'react-icons/hi';
 import Skeleton from 'react-loading-skeleton';
-import { useQuery } from 'react-query';
 
 import useLocalization from '../../../../hooks/useLocalization';
 import usePlayerOfTheDay from '../../../../hooks/usePlayerOfTheDay';

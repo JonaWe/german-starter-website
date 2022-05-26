@@ -1,5 +1,3 @@
-import { Menu, Transition } from '@headlessui/react';
-
 import MenuPopoutItem from './MenuPopoutItem';
 
 interface MenuPopoutItemProps {

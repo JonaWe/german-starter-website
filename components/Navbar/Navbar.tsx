@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { HiMenuAlt1, HiMenuAlt3, HiX } from 'react-icons/hi';
+import { HiMenuAlt3, HiX } from 'react-icons/hi';
 
 import useScrollDistance from '../../hooks/useScrollDistance';
 import LanguageSelection from './LanguageSelection';
