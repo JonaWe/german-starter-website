@@ -102,7 +102,7 @@ const PlayerReport: NextPage = () => {
         name: player.name,
       });
     });
-  }, [router, playerId, setValue]);
+  }, [router, playerId, setValue, reasonName, reasonId, description]);
 
   const onSubmit = handleSubmit(async (data) => {
     if (!user) return nextStep();

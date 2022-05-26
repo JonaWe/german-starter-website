@@ -46,7 +46,7 @@ export default function RecommendedPlayerCard({
         color: 'blue',
       },
     ]);
-  }, [player]);
+  }, [player, defaultTags]);
 
   const t = useLocalization();
 
