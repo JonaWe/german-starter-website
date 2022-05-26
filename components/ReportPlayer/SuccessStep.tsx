@@ -4,8 +4,6 @@ import { motion } from 'framer-motion';
 import { HiCheckCircle } from 'react-icons/hi';
 
 import useLocalization from '../../hooks/useLocalization';
-import Button from '../UI/Button';
-import LastStep from './LastStep';
 import NextStep from './NextStep';
 
 const variants = {

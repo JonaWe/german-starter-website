@@ -18,7 +18,7 @@ export default async function handler(
     await prisma.$queryRaw`SELECT * FROM pvplog WHERE killer_steamid = ${steamid}`;
 
   if (!pvplog) return res.status(500).send('could not get player');
-  
+
   return res.status(200).json({
     pvplog,
   });

@@ -1,6 +1,4 @@
-import Link from 'next/link';
-
-import { Menu, Transition } from '@headlessui/react';
+import { Menu } from '@headlessui/react';
 
 import { Option } from './MenuPopout';
 

@@ -33,7 +33,9 @@ export default function RuleBlock({
           </>
         );
       })}
-      {comment && <p className="col-span-2 mb-3 italic opacity-80">{comment}</p>}
+      {comment && (
+        <p className="col-span-2 mb-3 italic opacity-80">{comment}</p>
+      )}
     </section>
   );
 }

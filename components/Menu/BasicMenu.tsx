@@ -1,7 +1,5 @@
 import { Menu, Transition } from '@headlessui/react';
-import { HiTrash } from 'react-icons/hi';
 
-import useLocalization from '../../hooks/useLocalization';
 import MenuPopout, { Option } from './MenuPopout';
 
 interface BasicMenuProps {
@@ -9,7 +7,7 @@ interface BasicMenuProps {
   options: Option[];
 }
 
-export default function BasicMenu({ children, options}: BasicMenuProps) {
+export default function BasicMenu({ children, options }: BasicMenuProps) {
   return (
     <Menu className="relative" as="div">
       <Menu.Button className="flex items-center gap-1">{children}</Menu.Button>

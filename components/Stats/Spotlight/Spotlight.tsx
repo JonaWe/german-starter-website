@@ -1,27 +1,19 @@
-import { collection, doc } from 'firebase/firestore';
-import {
-  useDocumentData,
-  useDocumentDataOnce,
-} from 'react-firebase-hooks/firestore';
 import { HiFire } from 'react-icons/hi';
 import Skeleton from 'react-loading-skeleton';
 import {
   Area,
   AreaChart,
-  CartesianGrid,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from 'recharts';
 
-import { db } from '../../../firebase/clientApp';
 import usePlayerOfTheDay from '../../../hooks/usePlayerOfTheDay';
 import usePlayerStats from '../../../hooks/usePlayerStats';
 import useStatsPerDay from '../../../hooks/useStatsPerDay';
 import useSteamUser from '../../../hooks/useSteamUser';
 import GeneralInfo from './GeneralInfo';
-import GeneralInfoItem from './GeneralInfoItem';
 import QuickInfo from './QuickInfo';
 
 const sampleData = [

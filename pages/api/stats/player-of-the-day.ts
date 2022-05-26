@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { PrismaClient } from '@prisma/client';
 import { Timestamp } from 'firebase/firestore';
 
 import { db } from '../../../firebase/admin/firebaseAdmin';

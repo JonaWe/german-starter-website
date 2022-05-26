@@ -1,18 +1,12 @@
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
-
-import { NextSeo } from 'next-seo';
-import { Pie, PieChart, Tooltip } from 'recharts';
 
 import { getDefaultLayout } from '../../../components/Layout/DefaultLayout';
 import CommentSection from '../../../components/News/CommentSection';
 import PageContent from '../../../components/PageContent';
 import RecommendedPlayerCards from '../../../components/Stats/PlayerPage/FriendsOnServer/RecommendedPlayerCards';
 import PlayerPageSEO from '../../../components/Stats/PlayerPage/PlayerPageSEO';
-import useFriendsOnServer from '../../../hooks/useFriendsOnServer';
 import useLocalization from '../../../hooks/useLocalization';
-import useSteamUser, { fetchPlayer } from '../../../hooks/useSteamUser';
 import { prisma } from '../../../lib/stats/db';
 import { CommunityVisibilityState } from '../../../lib/steam/interfaces/CommunityVisibilityState';
 import { steam } from '../../../lib/steam/steamClient';
