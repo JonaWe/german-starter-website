@@ -56,3 +56,4 @@ CREATE FULLTEXT INDEX text_search ON players(name)
 - [ ] show overall rust stats. If not public show demo graphs blured like vercel
 - [ ] Add image to discord annoumce. Default grab first url from text.
 - [ ] show player log with nice design like github ink name changes, kills, deaths, pve deaths.
+- [ ] Calculate skill value or levle for player based of stats 
