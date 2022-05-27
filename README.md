@@ -53,3 +53,6 @@ CREATE FULLTEXT INDEX text_search ON players(name)
 - [ ] Calendar that shows wipes. Automatically show forced Wipes and option to add custom wipes in Dashboard
 - [x] Show related profiles on user profile page (Social Media like) and show friends on server
 - [ ] Show highest kill streak.
+- [ ] show overall rust stats. If not public show demo graphs blured like vercel
+- [ ] Add image to discord annoumce. Default grab first url from text.
+- [ ] show player log with nice design like github ink name changes, kills, deaths, pve deaths.
