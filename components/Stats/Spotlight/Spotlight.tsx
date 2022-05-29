@@ -8,11 +8,14 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+import { number } from 'yup';
 
 import usePlayerOfTheDay from '../../../hooks/usePlayerOfTheDay';
 import usePlayerStats from '../../../hooks/usePlayerStats';
 import useStatsPerDay from '../../../hooks/useStatsPerDay';
 import useSteamUser from '../../../hooks/useSteamUser';
+import ChartTooltip from '../../UI/Charts/Tooltip';
+import DeathsKillsChartTooltip from '../Charts/PlayerDeathsKillsChart/DeathsKillsChartTooltip';
 import GeneralInfo from './GeneralInfo';
 import QuickInfo from './QuickInfo';
 
@@ -134,7 +137,14 @@ export default function Spotlight() {
                 </defs>
                 <XAxis dataKey="time" />
                 <YAxis dataKey="kills" />
-                <Tooltip />
+                <Tooltip
+                  isAnimationActive={false}
+                  content={({ payload, active }) => (
+                    <ChartTooltip active={active}>
+                      <DeathsKillsChartTooltip payload={payload} />
+                    </ChartTooltip>
+                  )}
+                />
                 <Area
                   type="monotone"
                   dataKey="kills"
