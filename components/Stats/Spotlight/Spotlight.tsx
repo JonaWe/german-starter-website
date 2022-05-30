@@ -1,4 +1,7 @@
-import { HiFire } from 'react-icons/hi';
+import { GetServerSideProps } from 'next';
+
+import axios from 'axios';
+import { HiEye, HiFire } from 'react-icons/hi';
 import Skeleton from 'react-loading-skeleton';
 import {
   Area,
@@ -13,64 +16,17 @@ import usePlayerOfTheDay from '../../../hooks/usePlayerOfTheDay';
 import usePlayerStats from '../../../hooks/usePlayerStats';
 import useStatsPerDay from '../../../hooks/useStatsPerDay';
 import useSteamUser from '../../../hooks/useSteamUser';
+import ChartTooltip from '../../UI/Charts/Tooltip';
+import DeathsKillsChartTooltip from '../Charts/PlayerDeathsKillsChart/DeathsKillsChartTooltip';
 import GeneralInfo from './GeneralInfo';
 import QuickInfo from './QuickInfo';
 
-const sampleData = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
-
-export default function Spotlight() {
-  const playerOfTheDay = usePlayerOfTheDay();
-
+export default function Spotlight({ playerOfTheDay }: any) {
   const steamid = playerOfTheDay?.player;
 
   const [player] = useSteamUser(steamid);
   const stats = usePlayerStats(steamid);
   const data = useStatsPerDay(steamid);
-
-  console.log(data);
 
   const quickInfoItems = [
     {
@@ -94,13 +50,13 @@ export default function Spotlight() {
   const generalInfo = [
     {
       value: 34,
-      Icon: <HiFire className="text-2xl -mb-1" />,
-      name: 'Level',
+      Icon: <HiEye className="text-2xl -mb-1" />,
+      name: 'Profile status',
     },
   ];
-
+  
   return (
-    <div className="mb-14 relative">
+    <article className="mb-14 relative scroll-m-32" id="spotlight">
       <div className="w-full h-full absolute opacity-20 blur-lg">
         <img
           src={'/assets/overlays/gray_overlay.svg'}
@@ -134,7 +90,14 @@ export default function Spotlight() {
                 </defs>
                 <XAxis dataKey="time" />
                 <YAxis dataKey="kills" />
-                <Tooltip />
+                <Tooltip
+                  isAnimationActive={false}
+                  content={({ payload, active }) => (
+                    <ChartTooltip active={active}>
+                      <DeathsKillsChartTooltip payload={payload} />
+                    </ChartTooltip>
+                  )}
+                />
                 <Area
                   type="monotone"
                   dataKey="kills"
@@ -154,6 +117,6 @@ export default function Spotlight() {
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

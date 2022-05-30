@@ -56,7 +56,9 @@ export default function PlayerCell({ value: name, row }: CellProps) {
       </Link>
       {id && id === data?.player && (
         <Tooltip text={t.stats.playerOfTheDay}>
-          <HiFire className="text-2xl fill-rust-500 hover:animate-pulse hover:scale-105 transition-all" />
+          <Link href={"#spotlight"}>
+            <HiFire className="text-2xl fill-rust-500 hover:animate-pulse hover:scale-105 transition-all cursor-pointer" />
+          </Link>
         </Tooltip>
       )}
     </div>

@@ -1,25 +1,14 @@
 import { getAdminLayout } from '../../components/Layout/AdminLayout';
-import Button from '../../components/UI/Button';
-import { auth } from '../../firebase/clientApp';
+import { useSetHeading } from '../../context/defaultLayoutHeadingContext';
 import useLocalization from '../../hooks/useLocalization';
-import announceNews from '../../lib/discord/announceNews';
 import type { NextPageWithLayout } from '../_app';
 
 const AdminHome: NextPageWithLayout = () => {
   const t = useLocalization();
+  useSetHeading('Dashboard');
   return (
     <>
-      <Button
-        text="announceNews"
-        onClick={() =>
-          announceNews(
-            auth,
-            'English title',
-            'Deutschr Titel',
-            '0QCvQjOt6tgrfVETSlDO'
-          )
-        }
-      />
+      <p>Dashboi</p>
     </>
   );
 };
