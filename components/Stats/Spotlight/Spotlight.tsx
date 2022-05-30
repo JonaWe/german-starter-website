@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 
 import axios from 'axios';
-import { HiFire } from 'react-icons/hi';
+import { HiEye, HiFire } from 'react-icons/hi';
 import Skeleton from 'react-loading-skeleton';
 import {
   Area,
@@ -50,13 +50,13 @@ export default function Spotlight({ playerOfTheDay }: any) {
   const generalInfo = [
     {
       value: 34,
-      Icon: <HiFire className="text-2xl -mb-1" />,
-      name: 'Level',
+      Icon: <HiEye className="text-2xl -mb-1" />,
+      name: 'Profile status',
     },
   ];
-
+  
   return (
-    <div className="mb-14 relative">
+    <article className="mb-14 relative scroll-m-32" id="spotlight">
       <div className="w-full h-full absolute opacity-20 blur-lg">
         <img
           src={'/assets/overlays/gray_overlay.svg'}
@@ -117,6 +117,6 @@ export default function Spotlight({ playerOfTheDay }: any) {
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
