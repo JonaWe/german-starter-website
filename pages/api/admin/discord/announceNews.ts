@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { MessageBuilder, Webhook } from 'discord-webhook-node';
 
-import CONSTANTS from '../../../../lib/constatns';
+import { BASE_DOMAIN } from '../../../../lib/constants';
 import withAdminAuth from '../../../../lib/firebase/withAdminAuth';
 
 export default async function handler(
@@ -26,7 +26,7 @@ export default async function handler(
     .setAuthor(
       'Germen Starter News',
       'https://i.pinimg.com/originals/cc/40/6a/cc406a8382d8df7eb5f395ec884d3c95.png',
-      CONSTANTS.DOMAIN
+      BASE_DOMAIN
     )
     .setColor(parseInt('CD412B', 16))
 
@@ -35,10 +35,10 @@ export default async function handler(
       @everyone
 
       **[DE]**
-      Wir haben gerade einen neuen Artikel veröffentlicht! [Mehr lesen](${CONSTANTS.DOMAIN}/de/news/${id})
+      Wir haben gerade einen neuen Artikel veröffentlicht! [Mehr lesen](${BASE_DOMAIN}/de/news/${id})
       
       **[EN]**
-      We have just released a new article! [Read more](${CONSTANTS.DOMAIN}/en/news/${id})
+      We have just released a new article! [Read more](${BASE_DOMAIN}/en/news/${id})
       `
     )
     .setImage(imageURL || '')

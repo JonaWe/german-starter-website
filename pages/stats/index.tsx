@@ -6,12 +6,12 @@ import { getDefaultLayout } from '../../components/Layout/DefaultLayout';
 import PlayerStatsTable from '../../components/Stats/PlayerStatsTable';
 import Spotlight from '../../components/Stats/Spotlight';
 import { useSetHeading } from '../../context/defaultLayoutHeadingContext';
-import CONSTANTS from '../../lib/constatns';
+import { BASE_DOMAIN } from '../../lib/constants';
 import { NextPageWithLayout } from '../_app';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { data } = await axios.post(
-    `${CONSTANTS.DOMAIN}/api/stats/player-of-the-day`
+    `${BASE_DOMAIN}/api/stats/player-of-the-day`
   );
 
   return {

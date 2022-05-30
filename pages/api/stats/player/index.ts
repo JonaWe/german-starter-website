@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { players } from '@prisma/client';
 
-import { STEAM_ID_LENGTH } from '../../../../lib/constatns';
+import { STEAM_ID_LENGTH } from '../../../../lib/constants';
 import { prisma } from '../../../../lib/stats/db';
 
 interface Nemesis {

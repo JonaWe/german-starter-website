@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { STEAM_APPID_RUST } from '../../../lib/constatns';
+import { STEAM_APPID_RUST } from '../../../lib/constants';
 import { steam } from '../../../lib/steam/steamClient';
 
 export default async function handler(

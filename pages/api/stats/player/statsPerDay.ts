@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { STEAM_ID_LENGTH } from '../../../../lib/constatns';
+import { STEAM_ID_LENGTH } from '../../../../lib/constants';
 import { prisma } from '../../../../lib/stats/db';
 
 export default async function handler(

@@ -16,7 +16,6 @@ import usePlayerOfTheDay from '../../../hooks/usePlayerOfTheDay';
 import usePlayerStats from '../../../hooks/usePlayerStats';
 import useStatsPerDay from '../../../hooks/useStatsPerDay';
 import useSteamUser from '../../../hooks/useSteamUser';
-import CONSTANTS from '../../../lib/constatns';
 import ChartTooltip from '../../UI/Charts/Tooltip';
 import DeathsKillsChartTooltip from '../Charts/PlayerDeathsKillsChart/DeathsKillsChartTooltip';
 import GeneralInfo from './GeneralInfo';
