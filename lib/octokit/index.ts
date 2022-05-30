@@ -1,7 +1,5 @@
 import { Octokit } from 'octokit';
 
-const octokit = new Octokit({
-  auth: process.env.GITHUB_PRIVATE_ACCESS_TOKEN,
-});
+const octokit = new Octokit();
 
 export { octokit };

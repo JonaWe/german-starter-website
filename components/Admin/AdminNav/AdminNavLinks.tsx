@@ -23,7 +23,7 @@ export default function AdminNavLinks() {
         name="Reports"
         icon={<HiAnnotation className="text-xl" />}
       />
-      <AdminNavLink name="Doc" icon={<HiSupport className="text-xl" />} />
+      <AdminNavLink name="Docs" icon={<HiSupport className="text-xl" />} />
       <AdminNavLink
         secondary
         name="Experimental"
