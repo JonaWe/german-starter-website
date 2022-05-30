@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
 
 import { auth, db } from '../../../../firebase/admin/firebaseAdmin';
-import { PY_LOG_PATH } from '../../../../lib/constatns';
+import { PY_LOG_PATH } from '../../../../lib/constants';
 import withAdminAuth from '../../../../lib/firebase/withAdminAuth';
 
 export default async function handler(
@@ -12,7 +12,7 @@ export default async function handler(
 ) {
   const user = await withAdminAuth(req, res);
   if (!user) return;
-  
+
   const DELIMITER = '\n';
 
   const { data } = await axios.get(PY_LOG_PATH);

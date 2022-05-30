@@ -2,6 +2,7 @@ import {
   HiAnnotation,
   HiBeaker,
   HiChartBar,
+  HiCog,
   HiNewspaper,
   HiSupport,
   HiUser,
@@ -24,6 +25,7 @@ export default function AdminNavLinks() {
         icon={<HiAnnotation className="text-xl" />}
       />
       <AdminNavLink name="Docs" icon={<HiSupport className="text-xl" />} />
+      <AdminNavLink name="Settings" icon={<HiCog className="text-xl" />} />
       <AdminNavLink
         secondary
         name="Experimental"
