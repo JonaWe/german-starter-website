@@ -1,4 +1,11 @@
-import { HiAnnotation, HiChartBar, HiNewspaper, HiUser } from 'react-icons/hi';
+import {
+  HiAnnotation,
+  HiBeaker,
+  HiChartBar,
+  HiNewspaper,
+  HiSupport,
+  HiUser,
+} from 'react-icons/hi';
 
 import AdminNavLink from './AdminNavLink';
 
@@ -15,6 +22,12 @@ export default function AdminNavLinks() {
       <AdminNavLink
         name="Reports"
         icon={<HiAnnotation className="text-xl" />}
+      />
+      <AdminNavLink name="Doc" icon={<HiSupport className="text-xl" />} />
+      <AdminNavLink
+        secondary
+        name="Experimental"
+        icon={<HiBeaker className="text-xl" />}
       />
     </div>
   );
