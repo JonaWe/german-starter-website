@@ -8,8 +8,10 @@ import {
   serverTimestamp,
 } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import toast, { Toast, Toaster } from 'react-hot-toast';
 import {
   HiBadgeCheck,
+  HiCheckCircle,
   HiDotsVertical,
   HiEmojiSad,
   HiTrash,
@@ -27,6 +29,7 @@ import BasicMenu from '../../Menu';
 import { Option } from '../../Menu/MenuPopout';
 import WithLink from '../../OptionalLink';
 import Avatar from '../../UI/Avatar';
+import CustomInfoToast from '../../UI/Toaster/CustomInfoToast';
 import Tooltip from '../../UI/Tooltip';
 
 interface NewsCommentProps {
@@ -43,7 +46,11 @@ const dateFormatOptions: Intl.DateTimeFormatOptions = {
 
 const filter = new Filter();
 
-const reportComment = async (path: string, comment: string) => {
+const reportComment = async (
+  path: string,
+  comment: string,
+  successText: string
+) => {
   const ticketsRef = collection(db, 'tickets');
 
   await addDoc(ticketsRef, {
@@ -53,6 +60,22 @@ const reportComment = async (path: string, comment: string) => {
     createdAt: serverTimestamp(),
     type: 'COMMENT_REPORT',
   });
+
+  toast(
+    (t: Toast) => (
+      <CustomInfoToast t={t}>
+        <HiCheckCircle className="fill-green-500 text-xl" />
+        {successText}
+      </CustomInfoToast>
+    ),
+    {
+      style: {
+        backgroundColor: 'transparent',
+        boxShadow: 'none',
+        padding: 0,
+      },
+    }
+  );
 };
 
 export default function NewsComment({
@@ -85,7 +108,7 @@ export default function NewsComment({
           {t.support.report.report}
         </span>
       ),
-      onClick: () => reportComment(path, comment),
+      onClick: () => reportComment(path, comment, t.support.report.thanks),
     },
   ] as Option[];
 
@@ -97,6 +120,7 @@ export default function NewsComment({
 
   return (
     <div className="mb-6 flex justify-between items-center group hover:bg-background-150/10">
+      <Toaster position="bottom-right" />
       <div className="flex gap-2">
         <Avatar
           className="w-12 h-12"
