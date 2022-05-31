@@ -1,13 +1,23 @@
 import { useRouter } from 'next/router';
 
 import Filter from 'bad-words';
-import { Timestamp } from 'firebase/firestore';
+import {
+  Timestamp,
+  addDoc,
+  collection,
+  serverTimestamp,
+} from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { HiBadgeCheck, HiDotsVertical, HiTrash } from 'react-icons/hi';
+import {
+  HiBadgeCheck,
+  HiDotsVertical,
+  HiEmojiSad,
+  HiTrash,
+} from 'react-icons/hi';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-import { auth } from '../../../firebase/clientApp';
+import { auth, db } from '../../../firebase/clientApp';
 import useAdmin from '../../../hooks/useAdmin';
 import useLocalization from '../../../hooks/useLocalization';
 import usePublicUser from '../../../hooks/usePublicUser';
@@ -33,6 +43,18 @@ const dateFormatOptions: Intl.DateTimeFormatOptions = {
 
 const filter = new Filter();
 
+const reportComment = async (path: string, comment: string) => {
+  const ticketsRef = collection(db, 'tickets');
+
+  await addDoc(ticketsRef, {
+    author: auth.currentUser?.uid,
+    description: `Comment reported by user: "${comment}"`,
+    reason: path,
+    createdAt: serverTimestamp(),
+    type: 'COMMENT_REPORT',
+  });
+};
+
 export default function NewsComment({
   uid,
   date,
@@ -55,6 +77,15 @@ export default function NewsComment({
         </span>
       ),
       onClick: () => deleteComment(path),
+    },
+    {
+      labelCell: (
+        <span className="flex items-center gap-1">
+          <HiEmojiSad className="-translate-y-0.5" />
+          {t.support.report.report}
+        </span>
+      ),
+      onClick: () => reportComment(path, comment),
     },
   ] as Option[];
 

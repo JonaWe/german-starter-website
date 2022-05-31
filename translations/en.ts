@@ -141,6 +141,7 @@ export default {
       thanks: 'Thank you for your reply!',
       feedbackHeader: 'Your feedback',
       typeHeader: 'Choose report type',
+      report: 'Report',
       types: [
         {
           name: 'Feedback',

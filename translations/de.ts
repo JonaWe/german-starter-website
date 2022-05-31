@@ -141,6 +141,7 @@ export default {
       thanks: 'Viele Dank für deine Rückmeldung!',
       typeHeader: 'Report art wählen',
       feedbackHeader: 'Deine Rückmeldung',
+      report: 'Melden',
       types: [
         {
           name: 'Rückmeldung',
