@@ -58,3 +58,4 @@ CREATE FULLTEXT INDEX text_search ON players(name)
 - [ ] show player log with nice design like github ink name changes, kills, deaths, pve deaths.
 - [ ] Calculate skill value or levle for player based of stats
 - [ ] Option to ban player from comments
+- [ ] Option to report comment
