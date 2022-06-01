@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import {
   HiClock,
   HiCursorClick,
@@ -117,9 +119,11 @@ export default function Spotlight({ playerOfTheDay }: any) {
       </div>
       <header className="relative z-10">
         <div className="flex items-center gap-3">
-          <h2 className="text-5xl leading-[0]">
-            {player?.nickname || <Skeleton />}
-          </h2>
+          <Link href={`/profile/${steamid}/${player?.nickname}`}>
+            <a className="text-5xl leading-[0] font-bebas hover:opacity-80 transition-opacity">
+              {player?.nickname || <Skeleton />}
+            </a>
+          </Link>
           <HiFire className="text-4xl mb-1 fill-rust-500" />
         </div>
         <p className="opacity-75">Spotlight</p>
