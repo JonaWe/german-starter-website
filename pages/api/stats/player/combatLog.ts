@@ -28,7 +28,7 @@ export default async function handler(
             CONVERT(TARGET_STEAMID, Char(17)) AS target_steamid,
             time,
             sleeper,
-            "pvp_kill" AS reason
+            "pvp_event" AS reason
     FROM   pvplog
     WHERE  killer_steamid = ${steamid}
     OR     target_steamid = ${steamid}
@@ -55,7 +55,7 @@ export default async function handler(
        END AS target_steamid,
        time,
        sleeper,
-       "pvp_kill" AS reason
+       "pvp_event" AS reason
     FROM   pvplog
     WHERE  killer_steamid = ${steamid}
     OR     target_steamid = ${steamid}

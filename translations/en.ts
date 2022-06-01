@@ -216,5 +216,23 @@ export default {
       country: 'Country',
       steamInfo: 'Steam information',
     },
+    combatLog: {
+      unRestricted: {
+        pvpKill: ' killed ',
+        pvpSleeperKill: ' killed $ while he was sleeping',
+        pvpDeath: ' was killed by ',
+        suicide: ' committed suicide',
+        pveDeath: ' died of ',
+        pvpSleeperDeath: ' got killed by $ while he was sleeping',
+      },
+      restricted: {
+        pvpKill: ' killed a player',
+        pvpSleeperKill: ' killed a player while he was sleeping',
+        pvpDeath: ' was killed by a player',
+        suicide: ' committed suicide',
+        pveDeath: ' died of ',
+        pvpSleeperDeath: ' got killed while he was sleeping',
+      },
+    },
   },
 };

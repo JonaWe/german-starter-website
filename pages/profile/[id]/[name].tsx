@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { getDefaultLayout } from '../../../components/Layout/DefaultLayout';
 import CommentSection from '../../../components/News/CommentSection';
 import PageContent from '../../../components/PageContent';
+import CombatLog from '../../../components/Stats/CombatLog';
 import AliasTable from '../../../components/Stats/PlayerPage/AliasTable';
 import RecommendedPlayerCards from '../../../components/Stats/PlayerPage/FriendsOnServer/RecommendedPlayerCards';
 import PlayerPageSEO from '../../../components/Stats/PlayerPage/PlayerPageSEO';
@@ -92,7 +93,8 @@ const Home: NextPageWithLayout = (props: any) => {
       </h1>
       <AliasTable aliases={aliases} />
       <PvEChart data={pve_events} />
-      <pre>{JSON.stringify(props, null, 2)}</pre>
+      <CombatLog />
+      {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
       <h2 className="mb-3">Related profiles</h2>
       <div className="w-full">
         <RecommendedPlayerCards

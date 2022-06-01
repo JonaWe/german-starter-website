@@ -218,5 +218,23 @@ export default {
       country: 'Nationalität',
       steamInfo: 'Steam informationen',
     },
+    combatLog: {
+      unRestricted: {
+        pvpKill: ' hat $ getötet',
+        pvpSleeperKill: ' hat $ im schalf getötet',
+        pvpDeath: ' wurde von $ getötet',
+        suicide: ' hat sich selbst getötet',
+        pveDeath: ' is durch $ gestorben',
+        pvpSleeperDeath: ' wurde im schlaf von $ getötet',
+      },
+      restricted: {
+        pvpKill: ' hat ein Spieler getötet',
+        pvpSleeperKill: ' hat ein Spieler im schalf getötet',
+        pvpDeath: ' wurde von einem Spieler getötet',
+        suicide: ' hat sich selbst getötet',
+        pveDeath: ' is durch $ gestorben',
+        pvpSleeperDeath: ' wurde im schlaf getötet',
+      },
+    },
   },
 };
