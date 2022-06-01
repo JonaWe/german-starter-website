@@ -40,6 +40,7 @@
     "react-query": "^3.34.16",
     "react-spinners": "^0.11.0",
     "react-sticky-box": "^1.0.2",
+    "react-string-replace": "^1.1.0",
     "react-table": "^7.7.0",
     "recharts": "^2.1.9",
     "steam-server-query": "^1.1.3",
