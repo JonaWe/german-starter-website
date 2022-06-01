@@ -210,5 +210,11 @@ export default {
   stats: {
     playerOfTheDay: 'Plyer of the day',
     viewProfile: 'View profile',
+    steamInfo: {
+      playTimeRust: 'Playtime in Rust',
+      created: 'Profile Created',
+      country: 'Country',
+      steamInfo: 'Steam information',
+    },
   },
 };
