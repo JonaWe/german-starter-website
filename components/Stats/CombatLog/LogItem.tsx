@@ -7,6 +7,7 @@ import {
   GiSkullCrack,
   GiWolfTrap,
 } from 'react-icons/gi';
+import reactStringReplace from 'react-string-replace';
 
 import useLocalization from '../../../hooks/useLocalization';
 
@@ -58,8 +59,7 @@ export default function LogItem({
         <GiGunshot className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
       ),
       unRestricted: (
-        player: Player,
-        entity: Entity,
+        subjects: { player: Player; entity: Entity },
         sleeper: boolean = false
       ) => {
         const snippets =
@@ -69,10 +69,21 @@ export default function LogItem({
 
         return (
           <>
-            <span className="text-green-500">{player}</span>
+            {/* <span className="text-green-500">{player}</span>
             {snippets[0]}
             <span className="text-red-500">{entity}</span>
-            {snippets[1]}
+            {snippets[1]} */}
+            {reactStringReplace(
+              t.stats.combatLog.unRestricted[
+                sleeper ? 'pvpSleeperKill' : 'pvpKill'
+              ],
+              /(\${\w+})/g,
+              (match, i) => (
+                <span key={i} style={{ color: 'red' }}>
+                  {match.replace('${', '').replace('}', '')}
+                </span>
+              )
+            )}
           </>
         );
       },
