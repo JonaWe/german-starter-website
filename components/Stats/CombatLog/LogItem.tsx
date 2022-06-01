@@ -89,7 +89,7 @@ export default function LogItem({
         const snippets =
           t.stats.combatLog.unRestricted[
             sleeper ? 'pvpSleeperDeath' : 'pvpDeath'
-          ].split('$');
+          ];
 
         return (
           <>
