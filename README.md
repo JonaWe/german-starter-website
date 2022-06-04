@@ -52,3 +52,10 @@ CREATE FULLTEXT INDEX text_search ON players(name)
 - [ ] Send state from Py Script to this page via Webhook and then save in firebase. For example last Player Update SUCCESS/ERROR or Can not Update Player data. Also show the state from the user table to the user (Uptodate / updating and show last update)
 - [ ] Calendar that shows wipes. Automatically show forced Wipes and option to add custom wipes in Dashboard
 - [x] Show related profiles on user profile page (Social Media like) and show friends on server
+- [ ] Show highest kill streak.
+- [ ] show overall rust stats. If not public show demo graphs blured like vercel
+- [ ] Add image to discord annoumce. Default grab first url from text.
+- [ ] show player log with nice design like github ink name changes, kills, deaths, pve deaths.
+- [ ] Calculate skill value or levle for player based of stats
+- [ ] Option to ban player from comments
+- [ ] Option to report comment
