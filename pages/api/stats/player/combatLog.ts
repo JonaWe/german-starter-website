@@ -72,9 +72,16 @@ export default async function handler(
 
   if (!log) return res.status(500).send('could not get player');
 
+  //When log length is less then requested limit, return nextPage null to indicate no more pages are available
+  const nextPage =
+  parseInt(limit) === log.length ? parseInt(offset) + parseInt(limit) : null;
+
+  console.log(log.length, offset, parseInt(limit), nextPage);
+
   return res.status(200).json({
     restricted: restrict,
     steamid,
     log,
+    nextPage,
   });
 }

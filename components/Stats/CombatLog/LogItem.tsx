@@ -7,9 +7,11 @@ import {
   GiSkullCrack,
   GiWolfTrap,
 } from 'react-icons/gi';
-import reactStringReplace from 'react-string-replace';
 
 import useLocalization from '../../../hooks/useLocalization';
+import PlayerPill from './Pills/PlayerPill';
+import TargetPill from './Pills/TargetPill';
+import PrepareText from './PrepareText';
 
 interface LogItemProps {
   event: 'PVP_KILL' | 'PVP_DEATH' | 'PVE_DEATH' | 'NAME_CHANGED';
@@ -18,24 +20,37 @@ interface LogItemProps {
   restricted?: boolean;
 }
 
-enum EventType {
+export enum EventType {
   pvp = 'pvp_event',
 }
+
 /**
- * PLayer is the is always the current watched player
- * entry is the other subject involved in the event
- * sleeper is optional and is only used for
+ * @member player is the is always the current watched player
+ * @member entry is the other subject involved in the event
+ * @member sleeper is optional and is only used to determine if the event involved a sleeper
  */
 interface EventData {
   player: Player;
   entity: Entity;
-  time: string;
   sleeper?: boolean;
-  reason?: string;
 }
 
-type Entity = string | null;
-type Player = string | null;
+interface EventOptions {
+  Icon: React.ReactNode;
+  text: string;
+  EntityPill: ({ text }: { text: string }) => React.ReactNode;
+  PlayerPill: ({ text }: { text: string }) => React.ReactNode;
+}
+
+interface EventTypes {
+  PVP_KILL: EventOptions;
+  PVP_DEATH: EventOptions;
+  PVE_DEATH: EventOptions;
+  NAME_CHANGED: EventOptions;
+}
+
+export type Entity = string | null;
+export type Player = string | null;
 
 const timeOption: Intl.DateTimeFormatOptions = {
   timeStyle: 'short',
@@ -53,89 +68,45 @@ export default function LogItem({
 }: LogItemProps) {
   const t = useLocalization();
 
-  const EVENTS = {
+  //TODO: optimize EVENTS with useMemo (not sure if it's worth it / possible)
+  const EVENTS: EventTypes = {
     PVP_KILL: {
-      icon: (
+      Icon: (
         <GiGunshot className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
       ),
-      unRestricted: (
-        subjects: { player: Player; entity: Entity },
-        sleeper: boolean = false
-      ) => {
-        const snippets =
-          t.stats.combatLog.unRestricted[
-            sleeper ? 'pvpSleeperKill' : 'pvpKill'
-          ].split('$');
-
-        return (
-          <>
-            {/* <span className="text-green-500">{player}</span>
-            {snippets[0]}
-            <span className="text-red-500">{entity}</span>
-            {snippets[1]} */}
-            {reactStringReplace(
-              t.stats.combatLog.unRestricted[
-                sleeper ? 'pvpSleeperKill' : 'pvpKill'
-              ],
-              /(\${\w+})/g,
-              (match, i) => (
-                <span key={i} style={{ color: 'red' }}>
-                  {match.replace('${', '').replace('}', '')}
-                </span>
-              )
-            )}
-          </>
-        );
-      },
+      text: t.stats.combatLog.unRestricted[
+        data.sleeper ? 'pvpSleeperKill' : 'pvpKill'
+      ],
+      EntityPill: TargetPill,
+      PlayerPill: PlayerPill,
     },
     PVP_DEATH: {
-      icon: (
+      Icon: (
         <GiSkullCrack className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
       ),
-      unRestricted: (
-        player: Player,
-        entity: Entity,
-        sleeper: boolean = false
-      ) => {
-        const snippets =
-          t.stats.combatLog.unRestricted[
-            sleeper ? 'pvpSleeperDeath' : 'pvpDeath'
-          ];
-
-        return (
-          <>
-            <span className="text-green-500">{player}</span>
-            {snippets[0]}
-            <span className="text-red-500">{entity}</span>
-            {snippets[1]}
-          </>
-        );
-      },
+      text: t.stats.combatLog.unRestricted[
+        data.sleeper ? 'pvpSleeperDeath' : 'pvpDeath'
+      ],
+      EntityPill: PlayerPill,
+      PlayerPill: PlayerPill,
     },
     PVE_DEATH: {
-      icon: (
+      Icon: (
         <GiWolfTrap className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
       ),
-      unRestricted: (player: Player, entity: Entity) => {
-        const snippets = t.stats.combatLog.unRestricted.pveDeath.split('$');
-
-        return (
-          <>
-            <span className="text-green-500">{player}</span>
-            {snippets[0]}
-            <span className="text-red-500">{entity}</span>
-            {snippets[1]}
-          </>
-        );
-      },
+      text: t.stats.combatLog.unRestricted[
+        data.sleeper ? 'pvpSleeperDeath' : 'pvpDeath'
+      ],
+      EntityPill: PlayerPill,
+      PlayerPill: PlayerPill,
     },
     NAME_CHANGED: {
-      icon: (
+      Icon: (
         <GiBodySwapping className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
       ),
-      unRestricted: (player: Player) => {
-        return <></>;
-      },
+      text: "You've changed your name!",
+      EntityPill: PlayerPill,
+      PlayerPill: PlayerPill,
     },
   };
 
@@ -154,18 +125,24 @@ export default function LogItem({
     <div>
       <div className="group flex gap-5">
         <div className="bg-background-150/80 w-14 aspect-square rounded-full flex items-center justify-center group-hover:bg-background-150 transition-all">
-          {EVENTS[event].icon}
+          {EVENTS[event].Icon}
         </div>
         <div>
           <span className="text-sm opacity-75 font-light">{timeString}</span>
           <p>
-            {EVENTS[event].unRestricted(
-              data.player,
-              data.reason === EventType.pvp
-                ? data.entity
-                : data.reason || 'Banane',
-              data.sleeper
-            )}
+            <PrepareText
+              subjects={{
+                player: data.player,
+                entity: data.entity,
+              }}
+              text={EVENTS[event].text}
+              EntityPill={(text) =>
+                EVENTS[event].EntityPill({ text: text || '' })
+              }
+              PlayerPill={(text) =>
+                EVENTS[event].PlayerPill({ text: text || '' })
+              }
+            />
           </p>
         </div>
       </div>

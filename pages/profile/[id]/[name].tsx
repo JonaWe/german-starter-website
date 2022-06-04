@@ -93,7 +93,7 @@ const Home: NextPageWithLayout = (props: any) => {
       </h1>
       <AliasTable aliases={aliases} />
       <PvEChart data={pve_events} />
-      <CombatLog />
+      <CombatLog steamid={stats.steamid} />
       {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
       <h2 className="mb-3">Related profiles</h2>
       <div className="w-full">
