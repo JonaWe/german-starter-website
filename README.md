@@ -59,3 +59,7 @@ CREATE FULLTEXT INDEX text_search ON players(name)
 - [ ] Calculate skill value or levle for player based of stats
 - [ ] Option to ban player from comments
 - [ ] Option to report comment
+
+## Questions
+- Force steam sign in?
+- Convert names of pve deaths back do ids on dont convert new ones in python script? Format in frontend instead. maybe display additional info
