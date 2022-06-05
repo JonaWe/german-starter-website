@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
 
 import useSteamUser from '../../../../hooks/useSteamUser';
+import { CellProps } from '../LogItem';
 
-export default function PlayerPill({ text }: { text: string }) {
-  const [player] = useSteamUser(text);
+export default function PlayerCell({ value: steamid, restricted }: CellProps) {
+  const [player] = useSteamUser(steamid);
   return (
     <motion.span
       layout="position"
@@ -13,7 +14,7 @@ export default function PlayerPill({ text }: { text: string }) {
           : 'text-purple-500 bg-purple-500/5 border-purple-500 w-fit max-w-lg'
       }`}
     >
-      {player?.nickname || text}
+      {player?.nickname || steamid}
     </motion.span>
   );
 }

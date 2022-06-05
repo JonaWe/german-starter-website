@@ -10,8 +10,8 @@ import {
 } from 'react-icons/gi';
 
 import useLocalization from '../../../hooks/useLocalization';
-import PlayerPill from './Pills/PlayerPill';
-import TargetPill from './Pills/TargetPill';
+import PlayerCell from './Cells/PlayerCell';
+import TargetCell from './Cells/TargetCell';
 import PrepareText from './PrepareText';
 
 interface LogItemProps {
@@ -23,6 +23,11 @@ interface LogItemProps {
 
 export enum EventType {
   pvp = 'pvp_event',
+}
+
+export interface CellProps {
+  value: string;
+  restricted: boolean;
 }
 
 /**
@@ -39,8 +44,8 @@ interface EventData {
 interface EventOptions {
   Icon: React.ReactNode;
   text: string;
-  EntityPill: ({ text }: { text: string }) => React.ReactNode;
-  PlayerPill: ({ text }: { text: string }) => React.ReactNode;
+  EntityCell: ({ value, restricted }: CellProps) => React.ReactNode;
+  PlayerCell: ({ value, restricted }: CellProps) => React.ReactNode;
 }
 
 interface EventTypes {
@@ -78,8 +83,8 @@ export default function LogItem({
       text: t.stats.combatLog.unRestricted[
         data.sleeper ? 'pvpSleeperKill' : 'pvpKill'
       ],
-      EntityPill: TargetPill,
-      PlayerPill: PlayerPill,
+      EntityCell: TargetCell,
+      PlayerCell: PlayerCell,
     },
     PVP_DEATH: {
       Icon: (
@@ -88,8 +93,8 @@ export default function LogItem({
       text: t.stats.combatLog.unRestricted[
         data.sleeper ? 'pvpSleeperDeath' : 'pvpDeath'
       ],
-      EntityPill: PlayerPill,
-      PlayerPill: PlayerPill,
+      EntityCell: PlayerCell,
+      PlayerCell: PlayerCell,
     },
     PVE_DEATH: {
       Icon:
@@ -105,16 +110,16 @@ export default function LogItem({
           ? 'suicide'
           : 'pveDeath'
       ],
-      EntityPill: PlayerPill,
-      PlayerPill: PlayerPill,
+      EntityCell: PlayerCell,
+      PlayerCell: PlayerCell,
     },
     NAME_CHANGED: {
       Icon: (
         <GiBodySwapping className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
       ),
       text: "You've changed your name!",
-      EntityPill: PlayerPill,
-      PlayerPill: PlayerPill,
+      EntityCell: PlayerCell,
+      PlayerCell: PlayerCell,
     },
   };
 
@@ -146,10 +151,10 @@ export default function LogItem({
             }}
             text={EVENTS[event].text}
             EntityPill={(text) =>
-              EVENTS[event].EntityPill({ text: text || '' })
+              EVENTS[event].EntityCell({ value: text || '', restricted })
             }
             PlayerPill={(text) =>
-              EVENTS[event].PlayerPill({ text: text || '' })
+              EVENTS[event].PlayerCell({ value: text || '', restricted })
             }
           />
         </p>
