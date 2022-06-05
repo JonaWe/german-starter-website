@@ -30,7 +30,6 @@ export default function CombatLog({ steamid }: { steamid: string }) {
     'projects',
     async ({ pageParam = 0 }) => {
       const axios = await getAxios();
-      console.log(pageParam);
       const res = await axios.get(
         `/api/stats/player/combatLog?steamid=${steamid}&limit=${PAGE_SIZE}&restrict=${restricted}&offset=${pageParam}`
       );
@@ -49,12 +48,8 @@ export default function CombatLog({ steamid }: { steamid: string }) {
     }
   }, [inView]);
 
-  useEffect(() => {
-    console.log(error);
-  }, [error]);
-
   return (
-    <div className="flex gap-y-10 flex-col">
+    <div>
       <h1>Infinite Loading</h1>
       {status === 'loading' ? (
         <p>Loading...</p>
@@ -74,9 +69,9 @@ export default function CombatLog({ steamid }: { steamid: string }) {
                 : 'Nothing more to load'}
             </button>
           </div>
-          {data?.pages.map((page) => (
-            <>
-              {page.log.map((entry: any) => {
+          <ul className="flex gap-y-10 flex-col">
+            {data?.pages.map((page) =>
+              page.log.map((entry: any) => {
                 const isKill =
                   entry.reason === EventType.pvp &&
                   entry.killer_steamid === steamid;
@@ -102,25 +97,23 @@ export default function CombatLog({ steamid }: { steamid: string }) {
                   : 'NAME_CHANGED';
 
                 return (
-                  <>
-                    <LogItem
-                      key={entry.time}
-                      event={event}
-                      data={{
-                        player: isPvEDeath
-                          ? entry.target_steamid
-                          : entry.killer_steamid,
-                        entity: isPvEDeath ? entry.reason : entry.target_steamid,
-                        sleeper: entry.sleeper,
-                      }}
-                      time={new Date(entry.time)}
-                      restricted={isRestricted}
-                    />
-                  </>
+                  <LogItem
+                    key={entry.time + entry.target_steamid}
+                    event={event}
+                    data={{
+                      player: isPvEDeath
+                        ? entry.target_steamid
+                        : entry.killer_steamid,
+                      entity: isPvEDeath ? entry.reason : entry.target_steamid,
+                      sleeper: entry.sleeper,
+                    }}
+                    time={new Date(entry.time)}
+                    restricted={isRestricted}
+                  />
                 );
-              })}
-            </>
-          ))}
+              })
+            )}
+          </ul>
         </>
       )}
       <div>

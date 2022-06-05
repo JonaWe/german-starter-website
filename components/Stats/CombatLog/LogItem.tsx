@@ -122,7 +122,7 @@ export default function LogItem({
     : time.toLocaleDateString(locales, dateOption);
 
   return (
-    <div>
+    <li>
       <div className="group flex gap-5">
         <div className="bg-background-150/80 w-14 aspect-square rounded-full flex items-center justify-center group-hover:bg-background-150 transition-all">
           {EVENTS[event].Icon}
@@ -146,6 +146,6 @@ export default function LogItem({
           </p>
         </div>
       </div>
-    </div>
+    </li>
   );
 }

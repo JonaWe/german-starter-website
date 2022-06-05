@@ -76,8 +76,6 @@ export default async function handler(
   const nextPage =
   parseInt(limit) === log.length ? parseInt(offset) + parseInt(limit) : null;
 
-  console.log(log.length, offset, parseInt(limit), nextPage);
-
   return res.status(200).json({
     restricted: restrict,
     steamid,
