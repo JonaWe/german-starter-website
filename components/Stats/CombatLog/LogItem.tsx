@@ -8,6 +8,7 @@ import {
   GiSuicide,
   GiWolfTrap,
 } from 'react-icons/gi';
+import Skeleton from 'react-loading-skeleton';
 
 import useLocalization from '../../../hooks/useLocalization';
 import PlayerCell from './Cells/PlayerCell';
@@ -19,6 +20,7 @@ interface LogItemProps {
   time: Date;
   data: EventData;
   restricted?: boolean;
+  loading?: boolean;
 }
 
 export enum EventType {
@@ -71,6 +73,7 @@ export default function LogItem({
   time,
   data,
   restricted = false,
+  loading = false,
 }: LogItemProps) {
   const t = useLocalization();
 
@@ -137,27 +140,36 @@ export default function LogItem({
       time.toLocaleDateString(locales, dateOption);
 
   return (
-    <li className="group flex gap-5">
-      <div className="bg-background-150/80 w-14 aspect-square rounded-full flex items-center justify-center group-hover:bg-background-150 transition-all">
-        {EVENTS[event].Icon}
-      </div>
-      <div>
-        <span className="text-sm opacity-75 font-light">{timeString}</span>
-        <p>
-          <PrepareText
-            subjects={{
-              player: data.player,
-              entity: data.entity,
-            }}
-            text={EVENTS[event].text}
-            EntityPill={(text) =>
-              EVENTS[event].EntityCell({ value: text || '', restricted })
-            }
-            PlayerPill={(text) =>
-              EVENTS[event].PlayerCell({ value: text || '', restricted })
-            }
-          />
-        </p>
+    <li className="pb-10 relative">
+      <span className="border-l-4 absolute inset-y-0 translate-x-6 border-background-150/80 z-[1]" />
+      <div className="group flex gap-5">
+        <div className="bg-background-150 w-14 aspect-square rounded-full flex items-center justify-center group-hover:bg-background-600 transition-all relative z-10">
+          {!loading && EVENTS[event].Icon}
+        </div>
+        <div>
+          <span className="text-sm opacity-75 font-light">
+            {loading ? <Skeleton /> : timeString}
+          </span>
+          <p>
+            {loading ? (
+              <Skeleton />
+            ) : (
+              <PrepareText
+                subjects={{
+                  player: data.player,
+                  entity: data.entity,
+                }}
+                text={EVENTS[event].text}
+                EntityPill={(text) =>
+                  EVENTS[event].EntityCell({ value: text || '', restricted })
+                }
+                PlayerPill={(text) =>
+                  EVENTS[event].PlayerCell({ value: text || '', restricted })
+                }
+              />
+            )}
+          </p>
+        </div>
       </div>
     </li>
   );

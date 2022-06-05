@@ -19,6 +19,7 @@ export default function CombatLog({ steamid }: { steamid: string }) {
   const [restricted, setRestricted] = useState(false);
 
   const PAGE_SIZE = 10;
+  const FETCH_ON_ITEM = 10;
 
   const {
     status,
@@ -60,8 +61,7 @@ export default function CombatLog({ steamid }: { steamid: string }) {
   }, [restricted]);
 
   return (
-    <div>
-      <h1>Infinite Loading</h1>
+    <div className="w-1/3">
       {restricted ? 'Restricted view' : 'Full view'}
       <Button text="" onClick={() => setRestricted(!restricted)}>
         Toggle restricted
@@ -84,9 +84,9 @@ export default function CombatLog({ steamid }: { steamid: string }) {
                 : 'Nothing more to load'}
             </button>
           </div>
-          <ul className="flex gap-y-10 flex-col">
+          <ul className="flex flex-col h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-background-600">
             {data?.pages.map((page) =>
-              page.log.map((entry: any) => {
+              page.log.map((entry: any, i: number) => {
                 const isKill =
                   entry.reason === EventType.pvp &&
                   entry.killer_steamid === steamid;
@@ -113,33 +113,41 @@ export default function CombatLog({ steamid }: { steamid: string }) {
                   : 'NAME_CHANGED';
 
                 return (
-                  <LogItem
-                    key={entry.time + entry.target_steamid}
-                    event={event}
-                    data={{
-                      player:
-                        isPvEDeath || isPvPDeath
-                          ? entry.target_steamid
-                          : entry.killer_steamid,
-                      entity: isPvEDeath
-                        ? entry.reason
-                        : isPvPDeath
-                        ? entry.killer_steamid
-                        : entry.target_steamid,
-                      sleeper: entry.sleeper,
-                    }}
-                    time={new Date(entry.time)}
-                    restricted={isRestricted}
-                  />
+                  <>
+                    <LogItem
+                      key={entry.time + entry.target_steamid}
+                      event={event}
+                      data={{
+                        player:
+                          isPvEDeath || isPvPDeath
+                            ? entry.target_steamid
+                            : entry.killer_steamid,
+                        entity: isPvEDeath
+                          ? entry.reason
+                          : isPvPDeath
+                          ? entry.killer_steamid
+                          : entry.target_steamid,
+                        sleeper: entry.sleeper,
+                      }}
+                      time={new Date(entry.time)}
+                      restricted={isRestricted}
+                    />
+                    {i + 1 === FETCH_ON_ITEM && <span ref={ref} />}
+                  </>
                 );
               })
             )}
+            <LogItem
+              event="PVP_KILL"
+              data={{ player: '', entity: '' }}
+              time={new Date()}
+              loading
+            />
           </ul>
         </>
       )}
       <div>
         <button
-          ref={ref}
           onClick={() => fetchNextPage()}
           disabled={!hasNextPage || isFetchingNextPage}
         >
