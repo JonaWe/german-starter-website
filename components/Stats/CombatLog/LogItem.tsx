@@ -5,6 +5,7 @@ import {
   GiBodySwapping,
   GiGunshot,
   GiSkullCrack,
+  GiSuicide,
   GiWolfTrap,
 } from 'react-icons/gi';
 
@@ -91,11 +92,18 @@ export default function LogItem({
       PlayerPill: PlayerPill,
     },
     PVE_DEATH: {
-      Icon: (
-        <GiWolfTrap className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
-      ),
+      Icon:
+        data.entity !== 'Suicide' ? (
+          <GiWolfTrap className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
+        ) : (
+          <GiSuicide className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
+        ),
       text: t.stats.combatLog.unRestricted[
-        data.sleeper ? 'pvpSleeperDeath' : 'pvpDeath'
+        data.sleeper
+          ? 'pvpSleeperDeath'
+          : data.entity === 'Suicide'
+          ? 'suicide'
+          : 'pveDeath'
       ],
       EntityPill: PlayerPill,
       PlayerPill: PlayerPill,
@@ -119,32 +127,32 @@ export default function LogItem({
           addSuffix: true,
         })
       : time.toLocaleTimeString(locales, timeOption)
-    : time.toLocaleDateString(locales, dateOption);
+    : time.toLocaleTimeString(locales, timeOption) +
+      '  ' +
+      time.toLocaleDateString(locales, dateOption);
 
   return (
-    <li>
-      <div className="group flex gap-5">
-        <div className="bg-background-150/80 w-14 aspect-square rounded-full flex items-center justify-center group-hover:bg-background-150 transition-all">
-          {EVENTS[event].Icon}
-        </div>
-        <div>
-          <span className="text-sm opacity-75 font-light">{timeString}</span>
-          <p>
-            <PrepareText
-              subjects={{
-                player: data.player,
-                entity: data.entity,
-              }}
-              text={EVENTS[event].text}
-              EntityPill={(text) =>
-                EVENTS[event].EntityPill({ text: text || '' })
-              }
-              PlayerPill={(text) =>
-                EVENTS[event].PlayerPill({ text: text || '' })
-              }
-            />
-          </p>
-        </div>
+    <li className="group flex gap-5">
+      <div className="bg-background-150/80 w-14 aspect-square rounded-full flex items-center justify-center group-hover:bg-background-150 transition-all">
+        {EVENTS[event].Icon}
+      </div>
+      <div>
+        <span className="text-sm opacity-75 font-light">{timeString}</span>
+        <p>
+          <PrepareText
+            subjects={{
+              player: data.player,
+              entity: data.entity,
+            }}
+            text={EVENTS[event].text}
+            EntityPill={(text) =>
+              EVENTS[event].EntityPill({ text: text || '' })
+            }
+            PlayerPill={(text) =>
+              EVENTS[event].PlayerPill({ text: text || '' })
+            }
+          />
+        </p>
       </div>
     </li>
   );

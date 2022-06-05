@@ -5,11 +5,16 @@ import Link from 'next/link';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from 'react-query';
 
+import { auth } from '../../../firebase/clientApp';
+import useAdmin from '../../../hooks/useAdmin';
 import getAxios from '../../../lib/axios';
+import Button from '../../UI/Button';
 import LogItem, { EventType } from './LogItem';
 
 export default function CombatLog({ steamid }: { steamid: string }) {
   const { ref, inView } = useInView();
+
+  const [admin] = useAdmin(auth.currentUser);
 
   const [restricted, setRestricted] = useState(false);
 
@@ -19,6 +24,7 @@ export default function CombatLog({ steamid }: { steamid: string }) {
     status,
     data,
     error,
+    refetch,
     isFetching,
     isFetchingNextPage,
     isFetchingPreviousPage,
@@ -30,6 +36,7 @@ export default function CombatLog({ steamid }: { steamid: string }) {
     'projects',
     async ({ pageParam = 0 }) => {
       const axios = await getAxios();
+
       const res = await axios.get(
         `/api/stats/player/combatLog?steamid=${steamid}&limit=${PAGE_SIZE}&restrict=${restricted}&offset=${pageParam}`
       );
@@ -48,9 +55,17 @@ export default function CombatLog({ steamid }: { steamid: string }) {
     }
   }, [inView]);
 
+  useEffect(() => {
+    refetch();
+  }, [restricted]);
+
   return (
     <div>
       <h1>Infinite Loading</h1>
+      {restricted ? 'Restricted view' : 'Full view'}
+      <Button text="" onClick={() => setRestricted(!restricted)}>
+        Toggle restricted
+      </Button>
       {status === 'loading' ? (
         <p>Loading...</p>
       ) : status === 'error' ? (
@@ -85,8 +100,9 @@ export default function CombatLog({ steamid }: { steamid: string }) {
                   entry.target_steamid === steamid;
 
                 const isRestricted =
-                  entry.killer_steamid === null ||
-                  entry.target_steamid === null;
+                  (entry.killer_steamid === null ||
+                    entry.target_steamid === null) &&
+                  !isPvEDeath;
 
                 const event = isKill
                   ? 'PVP_KILL'
@@ -101,10 +117,15 @@ export default function CombatLog({ steamid }: { steamid: string }) {
                     key={entry.time + entry.target_steamid}
                     event={event}
                     data={{
-                      player: isPvEDeath
-                        ? entry.target_steamid
-                        : entry.killer_steamid,
-                      entity: isPvEDeath ? entry.reason : entry.target_steamid,
+                      player:
+                        isPvEDeath || isPvPDeath
+                          ? entry.target_steamid
+                          : entry.killer_steamid,
+                      entity: isPvEDeath
+                        ? entry.reason
+                        : isPvPDeath
+                        ? entry.killer_steamid
+                        : entry.target_steamid,
                       sleeper: entry.sleeper,
                     }}
                     time={new Date(entry.time)}
