@@ -21,11 +21,11 @@ export default function PrepareText({
           .replace('}', '') as keyof typeof subjects;
 
         return (
-          <span key={i}>
+          <>
             {key === 'player'
               ? PlayerPill(subjects[key])
               : EntityPill(subjects[key])}
-          </span>
+          </>
         );
       })}
     </>

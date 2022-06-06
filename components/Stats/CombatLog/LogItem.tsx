@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 
 import { formatDistance, isSameDay, isSameHour } from 'date-fns';
+import { motion } from 'framer-motion';
 import {
   GiBodySwapping,
   GiGunshot,
@@ -140,17 +141,23 @@ export default function LogItem({
       time.toLocaleDateString(locales, dateOption);
 
   return (
-    <li className="pb-10 relative">
+    <li className="pb-10 relative w-full">
       <span className="border-l-4 absolute inset-y-0 translate-x-6 border-background-150/80 z-[1]" />
       <div className="group flex gap-5">
-        <div className="bg-background-150 w-14 aspect-square rounded-full flex items-center justify-center group-hover:bg-background-600 transition-all relative z-10">
-          {!loading && EVENTS[event].Icon}
+        <div
+          className={`bg-background-150 w-14 aspect-square rounded-full flex items-center justify-center group-hover:bg-background-600 transition-all relative z-10`}
+        >
+          {!loading && (
+            <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+              {EVENTS[event].Icon}
+            </motion.span>
+          )}
         </div>
-        <div>
+        <div className={`${loading ? 'w-32' : ''} min-w-max`}>
           <span className="text-sm opacity-75 font-light">
             {loading ? <Skeleton /> : timeString}
           </span>
-          <p>
+          <div className='flex items-center'>
             {loading ? (
               <Skeleton />
             ) : (
@@ -168,7 +175,7 @@ export default function LogItem({
                 }
               />
             )}
-          </p>
+          </div>
         </div>
       </div>
     </li>
