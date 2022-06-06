@@ -157,9 +157,11 @@ export default function LogItem({
           <span className="text-sm opacity-75 font-light">
             {loading ? <Skeleton /> : timeString}
           </span>
-          <div className='flex items-center'>
+          <div className="flex items-center">
             {loading ? (
-              <Skeleton />
+              <p className='w-full'>
+                <Skeleton />
+              </p>
             ) : (
               <PrepareText
                 subjects={{
