@@ -7,7 +7,7 @@ interface AvatarProps {
 
 export default function Avatar({ className, url }: AvatarProps) {
   return (
-    <div
+    <span
       className={`aspect-square overflow-hidden bg-background-500 relative ${
         className ? className : ''
       }`}
@@ -22,6 +22,6 @@ export default function Avatar({ className, url }: AvatarProps) {
         />
       )}
       <span className="absolute inset-0 bg-background-700 animate-pulse z-[5]" />
-    </div>
+    </span>
   );
 }
