@@ -36,6 +36,7 @@ The following secrets must be set as environment variables.
 - **SESSION_KEY**: Random secret with a min length of 32 for [iron session](https://github.com/vvo/iron-session)
 - **DATABASE_URL**: Database URL for Prisma
 - **DISCORD_WEBHOOK_URL**: Webhook URL from discord
+- **GS_SERVER_WEB_API_KEY**: Key to access protected api under `playerstats.german-starter.de:5000` from the GS web server.
 
 ### Database
 
