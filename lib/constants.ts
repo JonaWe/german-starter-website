@@ -11,10 +11,16 @@ const GITHUB_URLS = {
     'https://github.com/JonaWe/german-starter-website/blob/main/lib/constatns.ts',
 };
 
+const FACEPUNCH_URLS = {
+  RUST_ITEMS_WIKI_URL: 'https://wiki.facepunch.com/rust/item',
+  RUST_ITEMS_FILES_URL: 'https://files.facepunch.com/rust/item',
+};
+
 export {
   STEAM_ID_LENGTH,
   STEAM_APPID_RUST,
   PY_LOG_PATH,
   BASE_DOMAIN,
   GITHUB_URLS,
+  FACEPUNCH_URLS,
 };

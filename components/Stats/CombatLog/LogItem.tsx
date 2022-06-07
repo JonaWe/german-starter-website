@@ -15,6 +15,7 @@ import useLocalization from '../../../hooks/useLocalization';
 import PlayerCell from './Cells/PlayerCell';
 import TargetCell from './Cells/TargetCell';
 import PrepareText from './PrepareText';
+import ReasonCell from './Cells/ReasonCell';
 
 interface LogItemProps {
   event: 'PVP_KILL' | 'PVP_DEATH' | 'PVE_DEATH' | 'NAME_CHANGED';
@@ -87,7 +88,7 @@ export default function LogItem({
       text: t.stats.combatLog.unRestricted[
         data.sleeper ? 'pvpSleeperKill' : 'pvpKill'
       ],
-      EntityCell: TargetCell,
+      EntityCell: PlayerCell,
       PlayerCell: PlayerCell,
     },
     PVP_DEATH: {
@@ -114,7 +115,7 @@ export default function LogItem({
           ? 'suicide'
           : 'pveDeath'
       ],
-      EntityCell: PlayerCell,
+      EntityCell: ReasonCell,
       PlayerCell: PlayerCell,
     },
     NAME_CHANGED: {
