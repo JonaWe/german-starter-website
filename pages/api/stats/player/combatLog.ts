@@ -74,12 +74,7 @@ export default async function handler(
 
   //When log length is less then requested limit, return nextPage null to indicate no more pages are available
   const nextPage =
-  parseInt(limit) === log.length ? parseInt(offset) + parseInt(limit) : null;
+    parseInt(limit) === log.length ? parseInt(offset) + parseInt(limit) : null;
 
-  return res.status(200).json({
-    restricted: restrict,
-    steamid,
-    log,
-    nextPage,
-  });
+  return res.status(200).json(log);
 }
