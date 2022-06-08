@@ -1,12 +1,13 @@
-import Tippy from '@tippyjs/react/headless';
+import Tippy, { TippyProps } from '@tippyjs/react/headless';
 import { motion, useSpring } from 'framer-motion';
 
 interface TooltipProps {
   children: React.ReactElement;
   text: string;
+  options?: any;
 }
 
-export default function Tooltip({ children, text }: TooltipProps) {
+export default function Tooltip({ children, text, options }: TooltipProps) {
   const springConfig = { damping: 15, stiffness: 300 };
   const initialScale = 0.5;
   const opacity = useSpring(0, springConfig);
@@ -41,6 +42,7 @@ export default function Tooltip({ children, text }: TooltipProps) {
           {text}
         </motion.span>
       )}
+      popperOptions={options}
       animation={true}
       onMount={onMount}
       onHide={onHide}

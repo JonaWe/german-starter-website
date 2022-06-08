@@ -6,7 +6,7 @@ import { Item } from './QuickInfo';
 export default function QuickInfoItem({ name, value }: Item) {
   return (
     <div className="flex text-center flex-col max-w-[25%]">
-      <Tooltip text={String(value)}>
+      <Tooltip text={String(value)} options={{delay: [300, 0]}}>
         <h3 className="text-6xl -mb-2 truncate">
           {value ? (
             typeof value !== 'number' ? (
