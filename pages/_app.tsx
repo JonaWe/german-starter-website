@@ -9,6 +9,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import CommandPallet from '../components/CommandPallet';
+import PageProgress from '../components/UI/Progress/PageProgress';
 import '../styles/globals.css';
 
 export type NextPageWithLayout<T = {}> = NextPage<T> & {
@@ -28,6 +29,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     <QueryClientProvider client={queryClient}>
       <SkeletonTheme baseColor="#373737" highlightColor="#555">
         <CommandPallet />
+        <PageProgress />
         <DefaultSeo
           title="German Starter Server"
           description="German Starter Server"

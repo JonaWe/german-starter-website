@@ -12,6 +12,7 @@
     "@hookform/resolvers": "^2.8.8",
     "@prisma/client": "^3.11.1",
     "@tailwindcss/typography": "^0.5.2",
+    "@tanem/react-nprogress": "^5.0.1",
     "@tanstack/react-virtual": "^3.0.0-beta.2",
     "@tippyjs/react": "^4.2.6",
     "axios": "^0.26.1",
@@ -50,7 +51,8 @@
     "steamid": "^2.0.0",
     "tailwind-scrollbar-hide": "^1.1.7",
     "use-debounce": "^7.0.1",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
