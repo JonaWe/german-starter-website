@@ -117,9 +117,8 @@ export default function CombatLog({ steamid }: { steamid: string }) {
                       : 'NAME_CHANGED';
 
                     return (
-                      <>
+                      <li key={entry.time + entry.target_steamid}>
                         <LogItem
-                          key={entry.time + entry.target_steamid}
                           event={event}
                           data={{
                             player:
@@ -137,7 +136,7 @@ export default function CombatLog({ steamid }: { steamid: string }) {
                           restricted={isRestricted}
                         />
                         {i + 1 === FETCH_ON_ITEM && <span ref={ref} />}
-                      </>
+                      </li>
                     );
                   })
                 )}

@@ -148,7 +148,7 @@ export default function LogItem({
       time.toLocaleDateString(locales, dateOption);
 
   return (
-    <li className="pb-10 relative w-full">
+    <div className="pb-10 relative w-full">
       <span className="border-l-4 absolute inset-y-0 translate-x-6 border-background-150/80 z-[1]" />
       <div className="group flex gap-5">
         <div
@@ -187,6 +187,6 @@ export default function LogItem({
           </div>
         </div>
       </div>
-    </li>
+    </div>
   );
 }
