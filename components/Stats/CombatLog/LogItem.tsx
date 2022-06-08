@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { memo, useMemo } from 'react';
 
 import { useRouter } from 'next/router';
 
@@ -21,7 +21,9 @@ import PrepareText from './PrepareText';
 interface LogItemProps {
   event: 'PVP_KILL' | 'PVP_DEATH' | 'PVE_DEATH' | 'NAME_CHANGED';
   time: Date;
-  data: EventData;
+  player: string;
+  entity: string;
+  sleeper?: boolean;
   restricted?: boolean;
   loading?: boolean;
 }
@@ -71,17 +73,18 @@ const dateOption: Intl.DateTimeFormatOptions = {
   dateStyle: 'long',
 };
 
-export default function LogItem({
+const LogItem = ({
   event,
   time,
-  data,
+  player,
+  entity,
+  sleeper = false,
   restricted = false,
   loading = false,
-}: LogItemProps) {
+}: LogItemProps) => {
   const t = useLocalization();
 
   //TODO: optimize EVENTS with useMemo (not sure if it's worth it / possible)
-
   const events = useMemo(() => {
     const events: EventTypes = {
       PVP_KILL: {
@@ -89,7 +92,7 @@ export default function LogItem({
           <GiGunshot className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
         ),
         text: t.stats.combatLog.unRestricted[
-          data.sleeper ? 'pvpSleeperKill' : 'pvpKill'
+          sleeper ? 'pvpSleeperKill' : 'pvpKill'
         ],
         EntityCell: ShowPlayerCell,
         PlayerCell: ShowPlayerCell,
@@ -99,22 +102,22 @@ export default function LogItem({
           <GiSkullCrack className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
         ),
         text: t.stats.combatLog.unRestricted[
-          data.sleeper ? 'pvpSleeperDeath' : 'pvpDeath'
+          sleeper ? 'pvpSleeperDeath' : 'pvpDeath'
         ],
         EntityCell: ShowPlayerCell,
         PlayerCell: ShowPlayerCell,
       },
       PVE_DEATH: {
         Icon:
-          data.entity !== 'Suicide' ? (
+          entity !== 'Suicide' ? (
             <GiWolfTrap className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
           ) : (
             <GiSuicide className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
           ),
         text: t.stats.combatLog.unRestricted[
-          data.sleeper
+          sleeper
             ? 'pvpSleeperDeath'
-            : data.entity === 'Suicide'
+            : entity === 'Suicide'
             ? 'suicide'
             : 'pveDeath'
         ],
@@ -131,7 +134,7 @@ export default function LogItem({
       },
     };
     return events;
-  }, [data.sleeper, data.entity]);
+  }, [sleeper, entity]);
 
   const { text, PlayerCell, EntityCell, Icon } = events[event];
   const { locales } = useRouter();
@@ -172,8 +175,8 @@ export default function LogItem({
             ) : (
               <PrepareText
                 subjects={{
-                  player: data.player,
-                  entity: data.entity,
+                  player,
+                  entity,
                 }}
                 text={text}
                 EntityPill={(text) => (
@@ -189,4 +192,9 @@ export default function LogItem({
       </div>
     </div>
   );
-}
+};
+
+//FIXME: #20 Find out why it dose not work with the default comparison and remove, the custom one
+export default memo(LogItem, (prev, next) => {
+  return true;
+});

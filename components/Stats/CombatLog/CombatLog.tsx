@@ -98,7 +98,8 @@ export default function CombatLog({ steamid }: { steamid: string }) {
       <LogItem
         key={i}
         event="PVP_KILL"
-        data={{ player: '', entity: '' }}
+        player={''}
+        entity={''}
         time={new Date()}
         loading
       />
@@ -157,7 +158,8 @@ export default function CombatLog({ steamid }: { steamid: string }) {
                       <LogItem
                         key={virtualRow.index}
                         event="PVP_KILL"
-                        data={{ player: '', entity: '' }}
+                        player={''}
+                        entity={''}
                         time={new Date()}
                         loading
                       />
@@ -205,18 +207,19 @@ export default function CombatLog({ steamid }: { steamid: string }) {
                     >
                       <LogItem
                         event={event}
-                        data={{
-                          player:
-                            isPvEDeath || isPvPDeath
-                              ? entry.target_steamid
-                              : entry.killer_steamid,
-                          entity: isPvEDeath
+                        player={
+                          isPvEDeath || isPvPDeath
+                            ? entry.target_steamid
+                            : entry.killer_steamid
+                        }
+                        entity={
+                          isPvEDeath
                             ? entry.reason
                             : isPvPDeath
                             ? entry.killer_steamid
-                            : entry.target_steamid,
-                          sleeper: entry.sleeper,
-                        }}
+                            : entry.target_steamid
+                        }
+                        sleeper={entry.sleeper}
                         time={new Date(entry.time)}
                         restricted={isRestricted}
                       />
