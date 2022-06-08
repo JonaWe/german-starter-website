@@ -155,6 +155,7 @@ export default function CombatLog({ steamid }: { steamid: string }) {
                   if (isLoaderRow)
                     return (
                       <LogItem
+                        key={virtualRow.index}
                         event="PVP_KILL"
                         data={{ player: '', entity: '' }}
                         time={new Date()}
