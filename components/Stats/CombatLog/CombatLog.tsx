@@ -42,7 +42,6 @@ export default function CombatLog({ steamid }: { steamid: string }) {
   useEffect(() => {
     if (inView) {
       fetchNextPage();
-      console.log('Fetching next page');
     }
   }, [inView]);
 

@@ -1,3 +1,5 @@
+import React, { useMemo } from 'react';
+
 import { useRouter } from 'next/router';
 
 import { formatDistance, isSameDay, isSameHour } from 'date-fns';
@@ -12,10 +14,9 @@ import {
 import Skeleton from 'react-loading-skeleton';
 
 import useLocalization from '../../../hooks/useLocalization';
-import PlayerCell from './Cells/PlayerCell';
-import TargetCell from './Cells/TargetCell';
-import PrepareText from './PrepareText';
+import ShowPlayerCell from './Cells/PlayerCell';
 import ReasonCell from './Cells/ReasonCell';
+import PrepareText from './PrepareText';
 
 interface LogItemProps {
   event: 'PVP_KILL' | 'PVP_DEATH' | 'PVE_DEATH' | 'NAME_CHANGED';
@@ -48,8 +49,8 @@ interface EventData {
 interface EventOptions {
   Icon: React.ReactNode;
   text: string;
-  EntityCell: ({ value, restricted }: CellProps) => React.ReactNode;
-  PlayerCell: ({ value, restricted }: CellProps) => React.ReactNode;
+  EntityCell: React.ComponentType<any>;
+  PlayerCell: React.ComponentType<any>;
 }
 
 interface EventTypes {
@@ -80,54 +81,59 @@ export default function LogItem({
   const t = useLocalization();
 
   //TODO: optimize EVENTS with useMemo (not sure if it's worth it / possible)
-  const EVENTS: EventTypes = {
-    PVP_KILL: {
-      Icon: (
-        <GiGunshot className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
-      ),
-      text: t.stats.combatLog.unRestricted[
-        data.sleeper ? 'pvpSleeperKill' : 'pvpKill'
-      ],
-      EntityCell: PlayerCell,
-      PlayerCell: PlayerCell,
-    },
-    PVP_DEATH: {
-      Icon: (
-        <GiSkullCrack className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
-      ),
-      text: t.stats.combatLog.unRestricted[
-        data.sleeper ? 'pvpSleeperDeath' : 'pvpDeath'
-      ],
-      EntityCell: PlayerCell,
-      PlayerCell: PlayerCell,
-    },
-    PVE_DEATH: {
-      Icon:
-        data.entity !== 'Suicide' ? (
-          <GiWolfTrap className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
-        ) : (
-          <GiSuicide className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
-        ),
-      text: t.stats.combatLog.unRestricted[
-        data.sleeper
-          ? 'pvpSleeperDeath'
-          : data.entity === 'Suicide'
-          ? 'suicide'
-          : 'pveDeath'
-      ],
-      EntityCell: ReasonCell,
-      PlayerCell: PlayerCell,
-    },
-    NAME_CHANGED: {
-      Icon: (
-        <GiBodySwapping className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
-      ),
-      text: "You've changed your name!",
-      EntityCell: PlayerCell,
-      PlayerCell: PlayerCell,
-    },
-  };
 
+  const events = useMemo(() => {
+    const events: EventTypes = {
+      PVP_KILL: {
+        Icon: (
+          <GiGunshot className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
+        ),
+        text: t.stats.combatLog.unRestricted[
+          data.sleeper ? 'pvpSleeperKill' : 'pvpKill'
+        ],
+        EntityCell: ShowPlayerCell,
+        PlayerCell: ShowPlayerCell,
+      },
+      PVP_DEATH: {
+        Icon: (
+          <GiSkullCrack className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
+        ),
+        text: t.stats.combatLog.unRestricted[
+          data.sleeper ? 'pvpSleeperDeath' : 'pvpDeath'
+        ],
+        EntityCell: ShowPlayerCell,
+        PlayerCell: ShowPlayerCell,
+      },
+      PVE_DEATH: {
+        Icon:
+          data.entity !== 'Suicide' ? (
+            <GiWolfTrap className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
+          ) : (
+            <GiSuicide className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
+          ),
+        text: t.stats.combatLog.unRestricted[
+          data.sleeper
+            ? 'pvpSleeperDeath'
+            : data.entity === 'Suicide'
+            ? 'suicide'
+            : 'pveDeath'
+        ],
+        EntityCell: ReasonCell,
+        PlayerCell: ShowPlayerCell,
+      },
+      NAME_CHANGED: {
+        Icon: (
+          <GiBodySwapping className="text-3xl fill-sand-500/60 group-hover:fill-sand-500 transition-colors" />
+        ),
+        text: "You've changed your name!",
+        EntityCell: ShowPlayerCell,
+        PlayerCell: ShowPlayerCell,
+      },
+    };
+    return events;
+  }, [data.sleeper, data.entity]);
+
+  const { text, PlayerCell, EntityCell, Icon } = events[event];
   const { locales } = useRouter();
   const now = Date.now();
 
@@ -150,7 +156,7 @@ export default function LogItem({
         >
           {!loading && (
             <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-              {EVENTS[event].Icon}
+              {Icon}
             </motion.span>
           )}
         </div>
@@ -160,7 +166,7 @@ export default function LogItem({
           </span>
           <div className="flex items-center">
             {loading ? (
-              <p className='w-full'>
+              <p className="w-full">
                 <Skeleton />
               </p>
             ) : (
@@ -169,13 +175,13 @@ export default function LogItem({
                   player: data.player,
                   entity: data.entity,
                 }}
-                text={EVENTS[event].text}
-                EntityPill={(text) =>
-                  EVENTS[event].EntityCell({ value: text || '', restricted })
-                }
-                PlayerPill={(text) =>
-                  EVENTS[event].PlayerCell({ value: text || '', restricted })
-                }
+                text={text}
+                EntityPill={(text) => (
+                  <EntityCell value={text || ''} restricted={restricted} />
+                )}
+                PlayerPill={(text) => (
+                  <PlayerCell value={text || ''} restricted={restricted} />
+                )}
               />
             )}
           </div>
