@@ -6,7 +6,10 @@ import useSteamUser from '../../../../hooks/useSteamUser';
 import Avatar from '../../../UI/Avatar';
 import { CellProps } from '../LogItem';
 
-export default function PlayerCell({ value: steamid, restricted }: CellProps) {
+export default function PlayerCell({
+  value: steamid,
+  restricted,
+}: CellProps) {
   const [player] = useSteamUser(steamid);
 
   const restrictedText = 'Player';
