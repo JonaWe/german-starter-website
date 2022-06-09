@@ -5,6 +5,7 @@ import useSteamUser from '../../../hooks/useSteamUser';
 import { TicketWithId } from '../../../pages/admin/reports';
 import Button from '../../UI/Button';
 import AuthorInfo from './AuthorInfo';
+import DeleteComment from './DeleteComment';
 import ReportReasonPill from './ReportReasonPill';
 import ReportedPlayer from './ReportedPlayer';
 import ResolveModal from './ResolveModal';
@@ -36,6 +37,9 @@ export default function TicketManger({ ticket }: { ticket: TicketWithId }) {
               <h3 className="mt-5 mb-1">Reason</h3>
               <ReportReasonPill reason={ticket.reason || '-'} />
             </>
+          )}
+          {ticket.type === 'COMMENT_REPORT' && (
+            <DeleteComment path={ticket.reason || ''} />
           )}
           <Button
             text="Resolve"

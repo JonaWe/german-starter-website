@@ -36,6 +36,7 @@ The following secrets must be set as environment variables.
 - **SESSION_KEY**: Random secret with a min length of 32 for [iron session](https://github.com/vvo/iron-session)
 - **DATABASE_URL**: Database URL for Prisma
 - **DISCORD_WEBHOOK_URL**: Webhook URL from discord
+- **GS_SERVER_WEB_API_KEY**: Key to access protected api under `playerstats.german-starter.de:5000` from the GS web server.
 
 ### Database
 
@@ -58,4 +59,10 @@ CREATE FULLTEXT INDEX text_search ON players(name)
 - [ ] show player log with nice design like github ink name changes, kills, deaths, pve deaths.
 - [ ] Calculate skill value or levle for player based of stats
 - [ ] Option to ban player from comments
-- [ ] Option to report comment
+- [x] Option to report comment
+- [ ] Add watch player option. If some one wathces a player he always sees him on the main page (or some whare else)
+- [ ] Add someting to the header like the current players "We have **13000+** active players"
+
+## Questions
+- Force steam sign in?
+- Convert names of pve deaths back do ids on dont convert new ones in python script? Format in frontend instead. maybe display additional info (Frontend logic implementation is done)

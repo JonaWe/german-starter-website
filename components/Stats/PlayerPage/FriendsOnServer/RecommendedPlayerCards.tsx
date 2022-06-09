@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import { players } from '@prisma/client';
 import { AnimatePresence, motion } from 'framer-motion';
 import { SkeletonTheme } from 'react-loading-skeleton';
@@ -18,8 +20,8 @@ export default function RecommendedPlayerCards({
   publicProfile?: boolean;
   cardCount?: number;
 }) {
-  const fetchTopPlayers = async (rand: any) => {
-    return await fetchPlayersStats(rand, cardCount + 1, null, [
+  const fetchTopPlayers = async () => {
+    return await fetchPlayersStats(0, cardCount + 1, null, [
       {
         desc: true,
         id: 'kills',
@@ -35,11 +37,9 @@ export default function RecommendedPlayerCards({
     refetchOnWindowFocus: false,
   });
 
-  const randomIndex = Math.floor(Math.random() * (10 + 1));
-
   const { data: topPlayers } = useQuery(
-    ['topPlayers', randomIndex],
-    (randomIndex) => fetchTopPlayers(randomIndex),
+    ['topPlayers'],
+    () => fetchTopPlayers(),
     {
       refetchOnWindowFocus: false,
     }

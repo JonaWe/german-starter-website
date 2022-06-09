@@ -1,13 +1,25 @@
 import { useRouter } from 'next/router';
 
 import Filter from 'bad-words';
-import { Timestamp } from 'firebase/firestore';
+import {
+  Timestamp,
+  addDoc,
+  collection,
+  serverTimestamp,
+} from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { HiBadgeCheck, HiDotsVertical, HiTrash } from 'react-icons/hi';
+import toast, { Toast, Toaster } from 'react-hot-toast';
+import {
+  HiBadgeCheck,
+  HiCheckCircle,
+  HiDotsVertical,
+  HiEmojiSad,
+  HiTrash,
+} from 'react-icons/hi';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-import { auth } from '../../../firebase/clientApp';
+import { auth, db } from '../../../firebase/clientApp';
 import useAdmin from '../../../hooks/useAdmin';
 import useLocalization from '../../../hooks/useLocalization';
 import usePublicUser from '../../../hooks/usePublicUser';
@@ -17,6 +29,7 @@ import BasicMenu from '../../Menu';
 import { Option } from '../../Menu/MenuPopout';
 import WithLink from '../../OptionalLink';
 import Avatar from '../../UI/Avatar';
+import CustomInfoToast from '../../UI/Toaster/CustomInfoToast';
 import Tooltip from '../../UI/Tooltip';
 
 interface NewsCommentProps {
@@ -32,6 +45,38 @@ const dateFormatOptions: Intl.DateTimeFormatOptions = {
 };
 
 const filter = new Filter();
+
+const reportComment = async (
+  path: string,
+  comment: string,
+  successText: string
+) => {
+  const ticketsRef = collection(db, 'tickets');
+
+  await addDoc(ticketsRef, {
+    author: auth.currentUser?.uid,
+    description: `Comment reported by user: "${comment}"`,
+    reason: path,
+    createdAt: serverTimestamp(),
+    type: 'COMMENT_REPORT',
+  });
+
+  toast(
+    (t: Toast) => (
+      <CustomInfoToast t={t}>
+        <HiCheckCircle className="fill-green-500 text-xl" />
+        {successText}
+      </CustomInfoToast>
+    ),
+    {
+      style: {
+        backgroundColor: 'transparent',
+        boxShadow: 'none',
+        padding: 0,
+      },
+    }
+  );
+};
 
 export default function NewsComment({
   uid,
@@ -56,6 +101,15 @@ export default function NewsComment({
       ),
       onClick: () => deleteComment(path),
     },
+    {
+      labelCell: (
+        <span className="flex items-center gap-1">
+          <HiEmojiSad className="-translate-y-0.5" />
+          {t.support.report.report}
+        </span>
+      ),
+      onClick: () => reportComment(path, comment, t.support.report.thanks),
+    },
   ] as Option[];
 
   const link = user
@@ -66,6 +120,7 @@ export default function NewsComment({
 
   return (
     <div className="mb-6 flex justify-between items-center group hover:bg-background-150/10">
+      <Toaster position="bottom-right" />
       <div className="flex gap-2">
         <Avatar
           className="w-12 h-12"

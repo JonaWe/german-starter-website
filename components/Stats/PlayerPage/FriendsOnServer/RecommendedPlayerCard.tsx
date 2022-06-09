@@ -14,7 +14,6 @@ import RecommendedPlayerTags from './RecommendedPlayerTags';
 interface RecommendedPlayerCardProps {
   name: string;
   steamid: string;
-  key: string;
   animationDelay?: number;
   tags: Tag[];
 }
@@ -29,7 +28,6 @@ export type Color = 'green' | 'yellow' | 'sand' | 'blue' | 'rust';
 export default function RecommendedPlayerCard({
   name,
   steamid,
-  key,
   tags: defaultTags,
   animationDelay = 0,
 }: RecommendedPlayerCardProps) {
@@ -55,7 +53,7 @@ export default function RecommendedPlayerCard({
       className="relative w-72 h-full bg-background-700 overflow-hidden py-5 px-7 cursor-pointer hover:-translate-y-1 hover:shadow-xl transition group text-left font-sans"
       aria-disabled={!player}
       onClick={() => router.push(player ? `/profile/${steamid}/${name}` : '#')}
-      key={`card_${key}`}
+      key={`card_${steamid}`}
     >
       <div className="relative z-10 h-full">
         <div className="flex justify-between flex-col h-full">

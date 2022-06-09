@@ -141,6 +141,7 @@ export default {
       thanks: 'Thank you for your reply!',
       feedbackHeader: 'Your feedback',
       typeHeader: 'Choose report type',
+      report: 'Report',
       types: [
         {
           name: 'Feedback',
@@ -209,5 +210,29 @@ export default {
   stats: {
     playerOfTheDay: 'Plyer of the day',
     viewProfile: 'View profile',
+    steamInfo: {
+      playTimeRust: 'Playtime in Rust',
+      created: 'Profile Created',
+      country: 'Country',
+      steamInfo: 'Steam information',
+    },
+    combatLog: {
+      unRestricted: {
+        pvpKill: '${player} killed ${entity}',
+        pvpSleeperKill: '${player} killed ${entity} while he was sleeping',
+        pvpDeath: '${player} was killed by ${entity}',
+        suicide: '${player} committed suicide',
+        pveDeath: '${player} died of ${entity}',
+        pvpSleeperDeath: '${player} got killed by ${entity} while he was sleeping',
+      },
+      restricted: {
+        pvpKill: '${player} killed a player',
+        pvpSleeperKill: '${player} killed a player while he was sleeping',
+        pvpDeath: '${player} was killed by a player',
+        suicide: '${player} committed suicide',
+        pveDeath: '${player} died of ',
+        pvpSleeperDeath: '${player} got killed while he was sleeping',
+      },
+    },
   },
 };

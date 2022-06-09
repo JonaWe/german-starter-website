@@ -1,7 +1,7 @@
 interface InfoProps {
   className?: string;
   type?: 'info' | 'warning' | 'success' | 'error' | null;
-  info: string;
+  info: string | React.ReactNode;
 }
 
 export interface Info {

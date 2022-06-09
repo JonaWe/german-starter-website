@@ -141,6 +141,7 @@ export default {
       thanks: 'Viele Dank für deine Rückmeldung!',
       typeHeader: 'Report art wählen',
       feedbackHeader: 'Deine Rückmeldung',
+      report: 'Melden',
       types: [
         {
           name: 'Rückmeldung',
@@ -211,5 +212,29 @@ export default {
   stats: {
     playerOfTheDay: 'Spieler des Tages',
     viewProfile: 'Profil ansehen',
+    steamInfo: {
+      playTimeRust: 'Spielzeit in Rust',
+      created: 'Profil erstellt',
+      country: 'Nationalität',
+      steamInfo: 'Steam informationen',
+    },
+    combatLog: {
+      unRestricted: {
+        pvpKill: '${player} hat ${entity} getötet',
+        pvpSleeperKill: '${player} hat ${entity} im schalf getötet',
+        pvpDeath: '${player} wurde von ${entity} getötet',
+        suicide: '${player} hat sich selbst getötet',
+        pveDeath: '${player} is durch ${entity} gestorben',
+        pvpSleeperDeath: '${player} wurde im schlaf von ${entity}getötet',
+      },
+      restricted: {
+        pvpKill: '${player} hat ein Spieler getötet',
+        pvpSleeperKill: '${player} hat ein Spieler im schalf getötet',
+        pvpDeath: '${player} wurde von einem Spieler getötet',
+        suicide: '${player} hat sich selbst getötet',
+        pveDeath: '${player} is durch ${entity} gestorben',
+        pvpSleeperDeath: '${player} wurde im schlaf getötet',
+      },
+    },
   },
 };

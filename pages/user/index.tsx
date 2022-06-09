@@ -8,9 +8,8 @@ import useLocalization from '../../hooks/useLocalization';
 import type { NextPageWithLayout } from '../_app';
 
 const tabs = [
-  { title: 'Profile', body: <div>your profile</div> },
+  { title: 'Profile', body: <UserSettings /> },
   { title: 'Reports', body: <div>a list of my reports</div> },
-  { title: 'Settings', body: <UserSettings /> },
 ];
 
 const UserHome: NextPageWithLayout = () => {

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useQuery } from 'react-query';
 
 export const fetchPlayer = async (steamid: string) => {
+  if (!steamid) return null;
   const data = await axios.post('/api/steam/getPlayerSummary', {
     steamid,
   });
