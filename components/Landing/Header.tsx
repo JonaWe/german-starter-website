@@ -22,11 +22,11 @@ export default function Header() {
       </header>
       <Background className="w-screen h-screen">
         <Image
-          src="/assets/images/banner.jpg"
+          src="/assets/images/banner_bg_3.png"
           alt="banner"
           layout="fill"
           objectFit="cover"
-          className="opacity-70"
+          className="opacity-90"
         />
       </Background>
     </Parallax>
