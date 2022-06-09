@@ -60,7 +60,9 @@ CREATE FULLTEXT INDEX text_search ON players(name)
 - [ ] Calculate skill value or levle for player based of stats
 - [ ] Option to ban player from comments
 - [x] Option to report comment
+- [ ] Add watch player option. If some one wathces a player he always sees him on the main page (or some whare else)
+- [ ] Add someting to the header like the current players "We have **13000+** active players"
 
 ## Questions
 - Force steam sign in?
-- Convert names of pve deaths back do ids on dont convert new ones in python script? Format in frontend instead. maybe display additional info
+- Convert names of pve deaths back do ids on dont convert new ones in python script? Format in frontend instead. maybe display additional info (Frontend logic implementation is done)
