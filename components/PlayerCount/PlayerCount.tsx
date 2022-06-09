@@ -28,7 +28,10 @@ export default function PlayerCount({
         {isLoading && <Spinner />}
         {error ? '?' : data?.data.playerCount}
       </p>
-      <div className="anima h-2 w-2 animate-pulse rounded-full bg-green-600"></div>
+      <span className="flex h-2 w-2 relative">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-600 opacity-75" />
+        <span className="relative inline-flex rounded-full h-2 w-2 bg-green-600" />
+      </span>
     </span>
   );
 }
