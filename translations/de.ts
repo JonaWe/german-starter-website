@@ -237,4 +237,8 @@ export default {
       },
     },
   },
+  map: {
+    showLabels: 'Marker anzeigen',
+    hideLabels: 'Marker vertecken',
+  },
 };

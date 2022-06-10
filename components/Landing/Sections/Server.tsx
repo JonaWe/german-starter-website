@@ -5,6 +5,7 @@ import useLocalization from '../../../hooks/useLocalization';
 import CopyButton from '../../Buttons/CopyButton';
 import JoinButton from '../../Buttons/JoinButton';
 import PlayerCount from '../../PlayerCount';
+import RustMap from '../../RustMap';
 import Badge from '../../UI/Badge';
 import Button from '../../UI/Button';
 import Tooltip from '../../UI/Tooltip';
@@ -44,7 +45,7 @@ export default function Server() {
             <PlayerCount serverIp={serverIP} className="text-sand-600" />
           </Tooltip>
         </div>
-        <p>{t.serverDescription}</p>
+        <RustMap />
         <div className="mt-6 flex justify-center gap-5">
           <JoinButton />
           <Button

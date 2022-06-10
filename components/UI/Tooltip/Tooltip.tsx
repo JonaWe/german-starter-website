@@ -4,10 +4,16 @@ import { motion, useSpring } from 'framer-motion';
 interface TooltipProps {
   children: React.ReactElement;
   text: string;
+  className?: string;
   options?: any;
 }
 
-export default function Tooltip({ children, text, options }: TooltipProps) {
+export default function Tooltip({
+  children,
+  text,
+  options,
+  className,
+}: TooltipProps) {
   const springConfig = { damping: 15, stiffness: 300 };
   const initialScale = 0.5;
   const opacity = useSpring(0, springConfig);
@@ -47,7 +53,7 @@ export default function Tooltip({ children, text, options }: TooltipProps) {
       onMount={onMount}
       onHide={onHide}
     >
-      <span>{children}</span>
+      <span className={className}>{children}</span>
     </Tippy>
   );
 }
