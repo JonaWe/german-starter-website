@@ -14,10 +14,15 @@ export default async function handler(
   if (!user) return;
 
   const DELIMITER = '\n';
+  const MAX_LINES = 40;
 
   const { data } = await axios.get(PY_LOG_PATH);
 
-  const log = data.split(DELIMITER).reverse().join(DELIMITER);
+  const log = data
+    .split(DELIMITER)
+    .reverse()
+    .slice(0, MAX_LINES)
+    .join(DELIMITER);
 
   res.status(200).send(log);
 }
