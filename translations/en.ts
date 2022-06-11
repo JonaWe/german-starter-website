@@ -223,7 +223,8 @@ export default {
         pvpDeath: '${player} was killed by ${entity}',
         suicide: '${player} committed suicide',
         pveDeath: '${player} died of ${entity}',
-        pvpSleeperDeath: '${player} got killed by ${entity} while he was sleeping',
+        pvpSleeperDeath:
+          '${player} got killed by ${entity} while he was sleeping',
       },
       restricted: {
         pvpKill: '${player} killed a player',
@@ -234,5 +235,9 @@ export default {
         pvpSleeperDeath: '${player} got killed while he was sleeping',
       },
     },
+  },
+  map: {
+    showLabels: 'Show labels',
+    hideLabels: 'Hide labels',
   },
 };

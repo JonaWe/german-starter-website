@@ -6,9 +6,15 @@ interface ModalProps {
   open: boolean;
   closeModal: (o: boolean) => void;
   children: React.ReactNode;
+  className?: string;
 }
 
-export default function Modal({ open, closeModal, children }: ModalProps) {
+export default function Modal({
+  open,
+  closeModal,
+  children,
+  className,
+}: ModalProps) {
   return (
     <>
       <Transition
@@ -24,7 +30,7 @@ export default function Modal({ open, closeModal, children }: ModalProps) {
       >
         <Dialog
           as="div"
-          className="fixed inset-0 z-10 overflow-y-auto bg-background-900/80"
+          className={`fixed inset-0 z-10 overflow-y-auto bg-background-900/80`}
           onClose={closeModal}
         >
           <div className="min-h-screen px-4 text-center">
@@ -56,7 +62,9 @@ export default function Modal({ open, closeModal, children }: ModalProps) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-background-500 shadow-xl">
+              <div
+                className={`inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-background-500 shadow-xl ${className}`}
+              >
                 {children}
               </div>
             </Transition.Child>
