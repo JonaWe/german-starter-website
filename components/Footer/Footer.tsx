@@ -57,7 +57,7 @@ export default function Footer() {
             <ul className="flex gap-5">
               {SOCIAL_LINKS.map(({ link, icon, name }) => (
                 <li key={name}>
-                  <a href={link} target="_blank">
+                  <a href={link} target="_blank" rel="noreferrer">
                     {icon}
                   </a>
                 </li>
