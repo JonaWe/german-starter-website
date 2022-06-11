@@ -1,68 +1,43 @@
 import { useState } from 'react';
 
-import axios from 'axios';
-import { AnimatePresence, motion } from 'framer-motion';
-import { HiEye, HiEyeOff } from 'react-icons/hi';
-import { useQuery } from 'react-query';
+import { HiArrowsExpand, HiMap } from 'react-icons/hi';
 
 import useLocalization from '../../hooks/useLocalization';
-import Tooltip from '../UI/Tooltip';
+import Button from '../UI/Button';
+import FullScreenMap from './FullScreenMap';
+import Map from './Map';
 
-const fetchMap = async () => {
-  const { data } = await axios.get('/api/server/map');
-  return data;
-};
+interface RustMapProps {
+  map: any;
+  variant?: 'preview' | 'button';
+}
 
-export default function RustMap() {
-  const { data: map } = useQuery('map', fetchMap, {
-    refetchOnWindowFocus: false,
-  });
-
-  const [showLabels, setShowLabels] = useState(false);
-
+export default function RustMap({ map, variant }: RustMapProps) {
   const t = useLocalization();
 
+  const [fullMapOpen, setFullMapOpen] = useState(false);
+
   return (
-    <div>
-      <div className="relative">
-        <Tooltip
-          text={showLabels ? t.map.hideLabels : t.map.showLabels}
-          className="absolute z-10 right-5 top-5"
-          options={{
-            delay: 0.5,
-          }}
-        >
-          <button
-            className="bg-background-500/80 hover:bg-background-500 transition-colors group p-3"
-            onClick={() => setShowLabels(!showLabels)}
-          >
-            {showLabels ? (
-              <HiEyeOff className="fill-sand-500/70 group-hover:fill-sand-500 transition-colors pointer-events-none" />
-            ) : (
-              <HiEye className="fill-sand-500/70 group-hover:fill-sand-500 transition-colors pointer-events-none" />
-            )}
-          </button>
-        </Tooltip>
-        <AnimatePresence>
-          {showLabels && (
-            <motion.img
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2, ease: 'easeInOut' }}
-              src={map.imageLabeled}
-              alt="map"
-              className="absolute"
-            />
-          )}
-        </AnimatePresence>
-        <img
-          src={'/assets/images/map_overlay.png'}
-          alt="map"
-          className="absolute"
-        />
-        <img src={map.imageUnlabeled} alt="map" className="" />
-      </div>
-    </div>
+    <>
+      <FullScreenMap
+        map={map}
+        open={fullMapOpen}
+        onClose={() => setFullMapOpen(false)}
+      />
+      {variant === 'button' ? (
+        <Button text="Map" onClick={() => setFullMapOpen(true)}>
+          <HiMap />
+        </Button>
+      ) : (
+        <div className="relative w-52 aspect-square group hover:scale-105 transition-all">
+          <HiArrowsExpand className="text-2xl absolute top-[50%] right-[50%] translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:scale-125 scale-90 z-20 duration-300 pointer-events-none" />
+          <span
+            onClick={() => setFullMapOpen(true)}
+            className="absolute group-hover:bg-background-600/50 cursor-pointer inset-0 z-10 transition-colors duration-300 "
+          />
+          <Map map={map} />
+        </div>
+      )}
+    </>
   );
 }
