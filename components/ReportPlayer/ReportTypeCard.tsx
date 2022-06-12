@@ -15,7 +15,7 @@ export default function ReportTypeCard({
 }: ReportTypeCardProps) {
   return (
     <Link href={href}>
-      <a className="overflow-hidden bg-background-500 relative cursor-pointer w-64 h-80 p-5 flex items-end hover:shadow-xl transition hover:-translate-y-1 group mx-auto">
+      <a className="overflow-hidden bg-background-500 relative cursor-pointer w-64 h-80 p-5 flex items-end hover:shadow-xl transition hover:-translate-y-1 group">
         <div className="z-[10] relative">
           <h2 className="leading-none">{title}</h2>
           <p className="leading-none text-sm">{description}</p>

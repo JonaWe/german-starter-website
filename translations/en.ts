@@ -130,6 +130,7 @@ export default {
     },
   },
   support: {
+    reportTypesTitle: 'Reply',
     report: {
       new: 'back to support',
       completeHeader: 'Complete report',

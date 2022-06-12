@@ -32,6 +32,6 @@ const StatsPage: NextPageWithLayout = (props: any) => {
   );
 };
 
-StatsPage.getLayout = getDefaultLayout('/assets/images/rules_banner.jpg');
+StatsPage.getLayout = getDefaultLayout('/assets/images/pvp_raid_05.jpg');
 
 export default StatsPage;

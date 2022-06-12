@@ -130,6 +130,7 @@ export default {
     },
   },
   support: {
+    reportTypesTitle: 'Rückmeldung',
     report: {
       new: 'neue rückmeldung',
       completeHeader: 'Rückmeldung abschließen',
