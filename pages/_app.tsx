@@ -22,6 +22,13 @@ type AppPropsWithLayout = AppProps & {
 
 const queryClient = new QueryClient();
 
+const additionalLinkTags = [
+  {
+    rel: 'icon',
+    href: '/assets/images/fav_1.png',
+  },
+];
+
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
@@ -32,6 +39,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         <PageProgress />
         <DefaultSeo
           title="German Starter Server"
+          additionalLinkTags={additionalLinkTags}
           description="German Starter Server"
           canonical="https://www.german-starter.de"
           openGraph={{
