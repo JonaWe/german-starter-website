@@ -36,7 +36,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full mt-40 h-64 bg-background-700">
+    <footer className="w-full mt-40 min-h-[256px] bg-background-700">
       <PageContent className="h-full">
         <div className="flex justify-between flex-col h-full pt-16">
           <div className="flex justify-center text-center flex-col">
@@ -47,9 +47,11 @@ export default function Footer() {
                 </h3>
               </a>
             </Link>
-            <NavItems />
+            <div className="flex justify-center">
+              <NavItems />
+            </div>
           </div>
-          <div className="flex justify-between items-center py-5">
+          <div className="flex justify-between items-center py-5 sm:flex-row flex-col">
             <h3 className="opacity-60">
               © Copyright 2022 All Rights Reserved by german-starter.eu, SUMIS
               and Jona.
