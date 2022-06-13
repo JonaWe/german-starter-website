@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
-import Markdown from 'markdown-to-jsx';
-
 import { getAdminLayout } from '../../../components/Layout/AdminLayout';
+import RustMap from '../../../components/RustMap';
 import Map from '../../../components/RustMap/Map';
 import Button from '../../../components/UI/Button';
 import { useSetHeading } from '../../../context/defaultLayoutHeadingContext';
@@ -12,6 +11,11 @@ import useServerMap from '../../../hooks/useServerMap';
 import getAxios from '../../../lib/axios';
 import announceNews from '../../../lib/discord/announceNews';
 import { NextPageWithLayout } from '../../_app';
+
+const bounds = [
+  [100, 0],
+  [0, 100],
+];
 
 const AdminExperimental: NextPageWithLayout = () => {
   const t = useLocalization();
@@ -45,9 +49,9 @@ const AdminExperimental: NextPageWithLayout = () => {
       <pre className="h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-inherit w-full overflow-x-hidden">
         {logs}
       </pre>
-      <h2>Heatmap</h2>
+      <h2>Map</h2>
       <div className="relative w-2/3 aspect-square mb-10">
-        <img src={map?.imageUnlabeled} alt="map" className="absolute inset-0" />
+        <RustMap map={map} reload={refetch} />
       </div>
     </>
   );
