@@ -3,10 +3,12 @@ import { useState } from 'react';
 import Markdown from 'markdown-to-jsx';
 
 import { getAdminLayout } from '../../../components/Layout/AdminLayout';
+import Map from '../../../components/RustMap/Map';
 import Button from '../../../components/UI/Button';
 import { useSetHeading } from '../../../context/defaultLayoutHeadingContext';
 import { auth } from '../../../firebase/clientApp';
 import useLocalization from '../../../hooks/useLocalization';
+import useServerMap from '../../../hooks/useServerMap';
 import getAxios from '../../../lib/axios';
 import announceNews from '../../../lib/discord/announceNews';
 import { NextPageWithLayout } from '../../_app';
@@ -14,6 +16,7 @@ import { NextPageWithLayout } from '../../_app';
 const AdminExperimental: NextPageWithLayout = () => {
   const t = useLocalization();
   const [logs, setLogs] = useState('');
+  useSetHeading('Experimental');
 
   const getLog = async () => {
     const axios = await getAxios();
@@ -21,10 +24,12 @@ const AdminExperimental: NextPageWithLayout = () => {
     setLogs(data);
   };
 
-  useSetHeading('Experimental');
+  const { data: map, refetch } = useServerMap();
+
   getLog();
   return (
     <>
+      <h2>Discord</h2>
       <Button
         text="announceNews"
         onClick={() =>
@@ -36,9 +41,14 @@ const AdminExperimental: NextPageWithLayout = () => {
           )
         }
       />
+      <h2 className="mt-5">Loggs</h2>
       <pre className="h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-inherit w-full overflow-x-hidden">
         {logs}
       </pre>
+      <h2>Heatmap</h2>
+      <div className="relative w-2/3 aspect-square mb-10">
+        <img src={map?.imageUnlabeled} alt="map" className="absolute inset-0" />
+      </div>
     </>
   );
 };

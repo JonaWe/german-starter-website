@@ -5,6 +5,7 @@ import { useQuery } from 'react-query';
 
 import useDocumentDataFromCollectionOnce from '../../../hooks/useDocumentDataFromCollectionOnce';
 import useLocalization from '../../../hooks/useLocalization';
+import useServerMap from '../../../hooks/useServerMap';
 import CopyButton from '../../Buttons/CopyButton';
 import JoinButton from '../../Buttons/JoinButton';
 import PlayerCount from '../../PlayerCount';
@@ -12,11 +13,6 @@ import RustMap from '../../RustMap';
 import Badge from '../../UI/Badge';
 import Button from '../../UI/Button';
 import Tooltip from '../../UI/Tooltip';
-
-const fetchMap = async () => {
-  const { data } = await axios.get('/api/server/map');
-  return data;
-};
 
 export default function Server() {
   const [serverConfig, loading, error] = useDocumentDataFromCollectionOnce(
@@ -31,9 +27,7 @@ export default function Server() {
       ? serverConfig.ip
       : '51.195.60.162:28015';
 
-  const { data: map, refetch } = useQuery('map', fetchMap, {
-    refetchOnWindowFocus: false,
-  });
+  const { data: map, refetch } = useServerMap();
 
   return (
     <section className="sm:m-10 sm:mt-32 mb-20 sm:mb-0">
