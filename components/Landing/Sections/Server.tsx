@@ -31,7 +31,7 @@ export default function Server() {
       ? serverConfig.ip
       : '51.195.60.162:28015';
 
-  const { data: map } = useQuery('map', fetchMap, {
+  const { data: map, refetch } = useQuery('map', fetchMap, {
     refetchOnWindowFocus: false,
   });
 
@@ -60,12 +60,8 @@ export default function Server() {
           </div>
           <div className="mt-6 flex justify-center gap-5">
             <JoinButton />
-            <Button
-              href="/rules"
-              text="Rules"
-              useLink
-            />
-            <RustMap map={map} variant="button" />
+            <Button href="/rules" text="Rules" useLink />
+            <RustMap reload={refetch} map={map} variant="button" />
           </div>
         </div>
         <div className="absolute inset-0 overflow-hidden">

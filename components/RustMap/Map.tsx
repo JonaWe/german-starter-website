@@ -1,7 +1,7 @@
 import { Children, useState } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { HiEye, HiEyeOff } from 'react-icons/hi';
+import { HiEye, HiEyeOff, HiMap } from 'react-icons/hi';
 
 import useLocalization from '../../hooks/useLocalization';
 import Tooltip from '../UI/Tooltip';
@@ -10,8 +10,10 @@ export default function Map({
   map,
   showBtn,
   children,
+  reload,
 }: {
   map: any;
+  reload: () => void;
   showBtn?: boolean;
   children?: React.ReactNode;
 }) {
@@ -60,7 +62,17 @@ export default function Map({
         alt="map"
         className="absolute"
       />
-      <img src={map?.imageUnlabeled} alt="map" className="w-full h-full" />
+      {map && map.imageUnlabeled ? (
+        <img src={map?.imageUnlabeled} alt="map" className="w-full h-full" />
+      ) : (
+        <div className="w-[448px] aspect-square flex items-center justify-center">
+          <Tooltip text={t.from.general.retry}>
+            <button onClick={reload}>
+              <HiMap className="fill-background-150 text-6xl animate-pulse" />
+            </button>
+          </Tooltip>
+        </div>
+      )}
     </>
   );
 }

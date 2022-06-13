@@ -9,10 +9,11 @@ import Map from './Map';
 
 interface RustMapProps {
   map: any;
+  reload: () => void;
   variant?: 'preview' | 'button';
 }
 
-export default function RustMap({ map, variant }: RustMapProps) {
+export default function RustMap({ map, variant, reload }: RustMapProps) {
   const t = useLocalization();
 
   const [fullMapOpen, setFullMapOpen] = useState(false);
@@ -35,7 +36,7 @@ export default function RustMap({ map, variant }: RustMapProps) {
             onClick={() => setFullMapOpen(true)}
             className="absolute group-hover:bg-background-600/50 cursor-pointer inset-0 z-10 transition-colors duration-300 "
           />
-          <Map map={map} />
+          <Map map={map} reload={reload} />
         </div>
       )}
     </>

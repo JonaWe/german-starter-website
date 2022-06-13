@@ -127,6 +127,7 @@ export default {
       haveAccount: 'ich habe bereits ein Konto',
       noAccount: 'ich habe noch kein Konto',
       delete: 'Löschen',
+      retry: 'Erneut versuchen',
     },
   },
   support: {
@@ -241,5 +242,6 @@ export default {
   map: {
     showLabels: 'Marker anzeigen',
     hideLabels: 'Marker vertecken',
+    notLoaded: 'Karte nicht geladen',
   },
 };
