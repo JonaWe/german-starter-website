@@ -4,6 +4,7 @@ import { getAdminLayout } from '../../../components/Layout/AdminLayout';
 import RustMap from '../../../components/RustMap';
 import Map from '../../../components/RustMap/Map';
 import Button from '../../../components/UI/Button';
+import Calendar from '../../../components/UI/Calendar';
 import { useSetHeading } from '../../../context/defaultLayoutHeadingContext';
 import { auth } from '../../../firebase/clientApp';
 import useLocalization from '../../../hooks/useLocalization';
@@ -44,6 +45,8 @@ const AdminExperimental: NextPageWithLayout = () => {
       <pre className="h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-inherit w-full overflow-x-hidden">
         {logs}
       </pre>
+      <h2>Calendar</h2>
+      <Calendar />
       <h2>Map</h2>
       <div className="relative w-2/3 aspect-square mb-10">
         <RustMap map={map} reload={refetch} />
