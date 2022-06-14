@@ -12,11 +12,6 @@ import getAxios from '../../../lib/axios';
 import announceNews from '../../../lib/discord/announceNews';
 import { NextPageWithLayout } from '../../_app';
 
-const bounds = [
-  [100, 0],
-  [0, 100],
-];
-
 const AdminExperimental: NextPageWithLayout = () => {
   const t = useLocalization();
   const [logs, setLogs] = useState('');

@@ -155,7 +155,7 @@ const LogItem = ({
       <span className="border-l-4 absolute inset-y-0 translate-x-6 border-background-150/80 z-[1]" />
       <div className="group flex gap-5">
         <div
-          className={`bg-background-150 w-14 aspect-square rounded-full flex items-center justify-center group-hover:bg-background-600 transition-all relative z-10`}
+          className={`bg-background-150 w-14 aspect-square rounded-full flex items-center justify-center transition-all relative z-10`}
         >
           {!loading && (
             <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}>

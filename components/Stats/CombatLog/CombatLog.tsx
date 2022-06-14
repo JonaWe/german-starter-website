@@ -106,7 +106,7 @@ export default function CombatLog({ steamid }: { steamid: string }) {
     ));
 
   return (
-    <div className="w-full">
+    <div className="relative w-full before:absolute before:inset-x-0 before:bottom-0 before:h-1/6 before:z-10 before:bg-gradient-to-t before:from-background-500">
       {restricted ? 'Restricted view' : 'Full view'}
       <Button text="" onClick={() => setRestricted(!restricted)}>
         Toggle restricted
