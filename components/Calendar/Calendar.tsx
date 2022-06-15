@@ -37,54 +37,11 @@ export interface CalendarEvent {
   endDatetime: Date;
 }
 
-const meetings = [
-  {
-    id: 1,
-    name: 'Leslie Alexander',
-    imageUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    startDatetime: '2022-05-11T13:00',
-    endDatetime: '2022-05-11T14:30',
-  },
-  {
-    id: 2,
-    name: 'Michael Foster',
-    imageUrl:
-      'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    startDatetime: '2022-05-20T09:00',
-    endDatetime: '2022-05-20T11:30',
-  },
-  {
-    id: 3,
-    name: 'Dries Vincent',
-    imageUrl:
-      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    startDatetime: '2022-05-20T17:00',
-    endDatetime: '2022-05-20T18:30',
-  },
-  {
-    id: 4,
-    name: 'Leslie Alexander',
-    imageUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    startDatetime: '2022-06-09T13:00',
-    endDatetime: '2022-06-09T14:30',
-  },
-  {
-    id: 5,
-    name: 'Michael Foster',
-    imageUrl:
-      'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    startDatetime: '2022-05-13T14:00',
-    endDatetime: '2022-05-13T14:30',
-  },
-];
-
 export function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Calendar() {
+export default function Calendar({ events }: { events: CalendarEvent[] }) {
   const today = startOfToday();
   const [selectedDay, setSelectedDay] = useState(today);
   const [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'));
@@ -105,10 +62,6 @@ export default function Calendar() {
     setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'));
   };
 
-  const selectedDayMeetings = meetings.filter((meeting) =>
-    isSameDay(parseISO(meeting.startDatetime), selectedDay)
-  );
-
   //Move out of the component \/
   const saturday = 4;
   const startOfCurrentMonth = startOfMonth(firstDayCurrentMonth);
@@ -121,14 +74,14 @@ export default function Calendar() {
       name: 'Mr Wiper',
       endDatetime: new Date('2022-06-20T09:00'),
     },
-    {
-      startDatetime: new Date('2022-05-20T09:00'),
-      type: 'event',
-      name: 'event',
-      endDatetime: new Date('2022-05-20T09:00'),
-    },
   ] as CalendarEvent[];
   //Move out of the component /\
+
+  const eventsWithWipes = [...events, ...wipesOfMonth];
+
+  const selectedDayEvents = eventsWithWipes.filter((event) =>
+    isSameDay(event.startDatetime, selectedDay)
+  );
 
   return (
     <div className="md:grid md:grid-cols-2 md:divide-x-4 md:divide-background-150">
@@ -158,7 +111,7 @@ export default function Calendar() {
         <div className="grid grid-cols-7 mt-2 text-sm">
           {days.map((day, dayIdx) => (
             <CalendarDay
-              events={wipesOfMonth}
+              events={eventsWithWipes}
               selectedDay={selectedDay}
               setSelectedDay={setSelectedDay}
               day={day}
@@ -176,9 +129,9 @@ export default function Calendar() {
           </time>
         </h3>
         <ol className="mt-4 space-y-1 text-sm leading-6 text-sand-500">
-          {selectedDayMeetings.length > 0 ? (
-            selectedDayMeetings.map((meeting) => (
-              <CalendarEvent meeting={meeting} key={meeting.id} />
+          {selectedDayEvents.length > 0 ? (
+            selectedDayEvents.map((meeting) => (
+              <CalendarEvent meeting={meeting} key={meeting.name} />
             ))
           ) : (
             <p>No meetings for today.</p>

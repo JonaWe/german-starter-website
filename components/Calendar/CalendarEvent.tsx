@@ -7,9 +7,6 @@ import { HiOutlineDotsVertical } from 'react-icons/hi';
 import { classNames } from './Calendar';
 
 export default function CalendarEvent({ meeting }: { meeting: any }) {
-  let startDateTime = parseISO(meeting.startDatetime);
-  let endDateTime = parseISO(meeting.endDatetime);
-
   return (
     <li className="flex items-center px-4 py-2 space-x-4 group rounded-xl focus-within:bg-sand-100 hover:bg-sand-100">
       <img
@@ -21,11 +18,11 @@ export default function CalendarEvent({ meeting }: { meeting: any }) {
         <p className="">{meeting.name}</p>
         <p className="mt-0.5">
           <time dateTime={meeting.startDatetime}>
-            {format(startDateTime, 'h:mm a')}
+            {format(meeting.startDatetime, 'h:mm a')}
           </time>{' '}
           -{' '}
           <time dateTime={meeting.endDatetime}>
-            {format(endDateTime, 'h:mm a')}
+            {format(meeting.endDatetime, 'h:mm a')}
           </time>
         </p>
       </div>
