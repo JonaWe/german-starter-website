@@ -147,6 +147,7 @@ export default {
       feedbackHeader: 'Your feedback',
       typeHeader: 'Choose report type',
       report: 'Report',
+      media: 'Image proof',
       types: [
         {
           name: 'Feedback',

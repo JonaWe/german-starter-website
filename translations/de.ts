@@ -147,6 +147,7 @@ export default {
       typeHeader: 'Report art wählen',
       feedbackHeader: 'Deine Rückmeldung',
       report: 'Melden',
+      media: 'Beweise',
       types: [
         {
           name: 'Rückmeldung',

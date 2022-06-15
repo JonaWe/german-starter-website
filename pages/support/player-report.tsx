@@ -16,6 +16,7 @@ import LastStep from '../../components/ReportPlayer/LastStep';
 import LoginStep from '../../components/ReportPlayer/LoginStep';
 import SelectPlayer from '../../components/ReportPlayer/SelectPlayer';
 import SuccessStep from '../../components/ReportPlayer/SuccessStep';
+import FileUploader from '../../components/UI/Forms/FileUploader';
 import SimpleListbox from '../../components/UI/Listbox';
 import { auth, db } from '../../firebase/clientApp';
 import useLocalization from '../../hooks/useLocalization';
@@ -168,6 +169,16 @@ const PlayerReport: NextPage = () => {
                   {errors.description.message}
                 </div>
               )}
+              <label className="block my-1 text-sm">
+                {t.support.report.media}
+              </label>
+              <FileUploader
+                accept={{
+                  'image/png': ['.png'],
+                  'image/jpeg': ['.jpe', '.jpeg', '.jpg'],
+                }}
+                maxFiles={2}
+              />
               <div className="flex justify-between items-center">
                 <LastStep
                   onClick={() => router.push('/support')}
