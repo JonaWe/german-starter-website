@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
+import { DocumentReference } from 'firebase-admin/firestore';
 import {
   StorageReference,
   getDownloadURL,
@@ -16,7 +17,8 @@ interface FileUploader {
   accept: Accept;
   maxFiles: number;
   maxSize?: number;
-  storageRef: StorageReference;
+  storageRef?: StorageReference;
+  docRef?: DocumentReference;
 }
 
 export default function FileUploader({
@@ -24,14 +26,13 @@ export default function FileUploader({
   maxFiles,
   maxSize,
   storageRef,
+  docRef,
 }: FileUploader) {
   const [myFiles, setMyFiles] = useState<any[]>([]);
 
-  const uploadFile = (file: any) => {
+  const uploadFile = async (file: any) => {
     // Create a reference to 'images/mountains.jpg'
     const mountainImagesRef = ref(storage, 'tickets/' + file.name);
-
-    const uploadTask = uploadBytesResumable(mountainImagesRef, file);
 
     const newFiles = [
       ...myFiles,
@@ -44,48 +45,19 @@ export default function FileUploader({
 
     setMyFiles(newFiles);
 
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {},
-      (error) => {
-        // A full list of error codes is available at
-        // https://firebase.google.com/docs/storage/web/handle-errors
-        switch (error.code) {
-          case 'storage/unauthorized':
-            // User doesn't have permission to access the object
-            break;
-          case 'storage/canceled':
-            // User canceled the upload
-            break;
+    const uploadTask = await uploadBytes(mountainImagesRef, file);
 
-          // ...
-          case 'storage/unknown':
-            // Unknown error occurred, inspect error.serverResponse
-            break;
-        }
-      },
-      () => {
-        // Upload completed successfully, now we can get the download URL
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log('File available at', downloadURL);
-        });
+    getDownloadURL(uploadTask.ref).then((downloadURL) => {
+      console.log('File available at', downloadURL);
+    });
 
-        const changedIndex = newFiles
-          .map((file) => file.name)
-          .indexOf(file.name);
+    const changedIndex = newFiles.map((file) => file.name).indexOf(file.name);
 
-        console.log(changedIndex);
-        console.log('before: ', newFiles);
+    const cpNewFiles = [...newFiles];
 
-        const cpNewFiles = [...newFiles];
+    cpNewFiles[changedIndex].loading = false;
 
-        cpNewFiles[changedIndex].loading = false;
-
-        console.log('after: ', newFiles);
-
-        setMyFiles(cpNewFiles);
-      }
-    );
+    setMyFiles(cpNewFiles);
   };
 
   useEffect(() => {
@@ -113,7 +85,7 @@ export default function FileUploader({
       {myFiles.length < maxFiles && (
         <div
           {...getRootProps()}
-          className={`h-20 border-2 border-dashed flex items-center justify-center p-3 transition-all cursor-pointer ${
+          className={`h-20 border-2 border-dashed flex items-center justify-center p-3 transition-all cursor-pointer mb-2 ${
             isDragActive
               ? 'border-rust-500 bg-rust-500/10'
               : 'border-background-150'

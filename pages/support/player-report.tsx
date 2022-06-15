@@ -5,7 +5,8 @@ import { useRouter } from 'next/router';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection, doc, serverTimestamp } from 'firebase/firestore';
+import { ref } from 'firebase/storage';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
@@ -18,7 +19,7 @@ import SelectPlayer from '../../components/ReportPlayer/SelectPlayer';
 import SuccessStep from '../../components/ReportPlayer/SuccessStep';
 import FileUploader from '../../components/UI/Forms/FileUploader';
 import SimpleListbox from '../../components/UI/Listbox';
-import { auth, db } from '../../firebase/clientApp';
+import { auth, db, storage } from '../../firebase/clientApp';
 import useLocalization from '../../hooks/useLocalization';
 
 const schema = yup
