@@ -6,6 +6,7 @@ import reactStringReplace from 'react-string-replace';
 
 import useLocalization from '../../hooks/useLocalization';
 import JoinButton from '../Buttons/JoinButton';
+import Button from '../UI/Button';
 
 export default function Header({ playerCount }: { playerCount: number }) {
   const t = useLocalization();
@@ -31,7 +32,10 @@ export default function Header({ playerCount }: { playerCount: number }) {
             })}
           </h1>
           <p className="mb-6 sm:max-w-[30%]">{t.headerText}</p>
-          <JoinButton />
+          <div className="flex gap-5">
+            <JoinButton />
+            <Button text={t.infoBtn} useLink href="#server"/>
+          </div>
         </div>
       </header>
       <Background className="w-screen h-screen">

@@ -1,8 +1,10 @@
 export default {
   test: 'test',
   subHeader: 'Eine Community von über!',
-  header: "${count} Spieler",
-  headerText: "Der German Starter Server ist der grösste Community server von Rust. Sei ein teil davon!",
+  header: '${count} Spieler',
+  headerText:
+    'Der German Starter Server ist der grösste Community server von Rust. Sei ein teil davon!',
+  infoBtn: 'Infos anzeigen',
   joinBtn: 'Server beitreten',
   serverDescription: `[EU] German Starter ist ein einsteigerfreundlicher PvP Server. (das heißt nicht, dass du nicht getötet wirst) Das bedeutet, wenn du Fragen zum Spiel und zur Spielweise hast, werden diese beantwortet. Solltest du falsch gebaut haben, kannst du einen der Admins bitten, dir beim Entfernen einer Mauer zu helfen. Vollständige Wipes werden durchgeführt, wenn Facepunch seine monatlichen Patches durchführt. Bitte lest unsere Serverregeln, um Missverständnisse zu vermeiden`,
   pageNotFound: 'Seite nicht gefunden',
