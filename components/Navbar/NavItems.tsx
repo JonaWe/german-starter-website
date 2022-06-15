@@ -15,7 +15,6 @@ export interface NavigationItem {
 }
 
 export const navigationItems: NavigationItem[] = [
-  { id: 'home', href: '/', external: false },
   { id: 'news', href: '/news', external: false },
   { id: 'support', href: '/support', external: false },
   { id: 'rules', href: '/rules', external: false },
