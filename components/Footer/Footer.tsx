@@ -57,8 +57,8 @@ export default function Footer() {
               and Jona.
             </h3>
             <ul className="flex gap-5">
-              {SOCIAL_LINKS.map(({ link, icon, name }) => (
-                <li key={name}>
+              {SOCIAL_LINKS.map(({ link, icon, name }, i) => (
+                <li key={name + i}>
                   <a href={link} target="_blank" rel="noreferrer">
                     {icon}
                   </a>
