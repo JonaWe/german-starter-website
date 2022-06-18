@@ -55,7 +55,7 @@ export default function FilePicker({
             <p className="text-sm text-sand-500/50">Drop the files here ...</p>
           ) : (
             <p className="text-xs text-sand-500/50 text-center">
-              Drag 'n' drop some files here, or click to select files
+              Drag &apos;n&apos; drop some files here, or click to select files
             </p>
           )}
         </div>
@@ -75,8 +75,9 @@ export default function FilePicker({
       </ul>
       <ul className="mt-2">
         {fileRejections &&
-          fileRejections.map(({ errors }) => (
+          fileRejections.map(({ errors }, i) => (
             <FileSelectError
+              key={i}
               errors={errors}
               accept={accept}
               maxSize={maxSize}

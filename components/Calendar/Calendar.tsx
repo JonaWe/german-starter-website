@@ -111,6 +111,7 @@ export default function Calendar({ events }: { events: CalendarEvent[] }) {
         <div className="grid grid-cols-7 mt-2 text-sm">
           {days.map((day, dayIdx) => (
             <CalendarDay
+              key={dayIdx}
               events={eventsWithWipes}
               selectedDay={selectedDay}
               setSelectedDay={setSelectedDay}
