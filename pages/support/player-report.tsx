@@ -21,6 +21,7 @@ import FilePicker from '../../components/UI/Forms/FilePicker';
 import SimpleListbox from '../../components/UI/Listbox';
 import { auth, db, storage } from '../../firebase/clientApp';
 import useLocalization from '../../hooks/useLocalization';
+import uploadTicketImage from '../../lib/reports/uploadTicketImage';
 
 const schema = yup
   .object({
@@ -60,6 +61,7 @@ const fetchPlayer = async (steamid: string) => {
 const PlayerReport: NextPage = () => {
   const [step, setStep] = useState(1);
   const [files, setFiles] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
   const MAX_FILES = 2;
   const t = useLocalization();
   const [user] = useAuthState(auth);
@@ -111,9 +113,11 @@ const PlayerReport: NextPage = () => {
   const onSubmit = handleSubmit(async (data) => {
     if (!user) return nextStep();
 
+    setLoading(true);
+
     const ticketsRef = collection(db, 'tickets');
 
-    await addDoc(ticketsRef, {
+    const ticketRef = await addDoc(ticketsRef, {
       author: user.uid,
       reportedPlayer: data.player.steamid,
       reason: data.reason.id || t.support.report.player.reasons[0],
@@ -122,6 +126,15 @@ const PlayerReport: NextPage = () => {
       type: 'PLAYER_REPORT',
     });
 
+    for (let i = 0; i < files.length; i++) {
+      try {
+        await uploadTicketImage(files[i], ticketRef, i.toString());
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    setLoading(false);
     nextStep();
   });
 
@@ -193,7 +206,10 @@ const PlayerReport: NextPage = () => {
                   name={t.support.report.new}
                   className="self-end mt-2"
                 />
-                <FinalStepButton className="self-end mt-2" />
+                <FinalStepButton
+                  disabled={loading}
+                  className={`self-end mt-2 ${loading ? 'animate-pulse' : ''}`}
+                />
               </div>
             </motion.div>
           )}
@@ -205,7 +221,7 @@ const PlayerReport: NextPage = () => {
               back={back}
               description={watch('description')}
               playerId={watch('player').steamid}
-              reason={watch('reason')}
+              reason={watch('reason') || t.support.report.player.reasons[0]}
               type="player-report"
             />
           )}

@@ -22,20 +22,6 @@ export default function FilePicker({
   onChange,
   files,
 }: FileUploader) {
-  const [myFiles, setMyFiles] = useState<any[]>([]);
-
-  const uploadFile = async (file: any) => {
-    // Create a reference to 'images/mountains.jpg'
-    const mountainImagesRef = ref(storage, 'tickets/' + file.name);
-    setMyFiles(myFiles);
-
-    const uploadTask = await uploadBytes(mountainImagesRef, file);
-
-    getDownloadURL(uploadTask.ref).then((downloadURL) => {
-      console.log('File available at', downloadURL);
-    });
-  };
-
   const onDrop = useCallback(
     (acceptedFiles) => {
       onChange([...files, ...acceptedFiles]);
