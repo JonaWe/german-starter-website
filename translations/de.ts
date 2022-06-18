@@ -131,6 +131,17 @@ export default {
       noAccount: 'ich habe noch kein Konto',
       delete: 'Löschen',
       retry: 'Erneut versuchen',
+      errors: {
+        required: 'Dieses Feld ist erforderlich',
+        email: 'Dies ist keine gültige E-Mail-Adresse',
+        password: 'Das Passwort muss mindestens ${count} Zeichen lang sein',
+        passwordConf: 'Die Passwörter stimmen nicht übere',
+        minLength: 'Das Passwort muss mindestens ${count} Zeichen lang sein',
+        file: {
+          tooLarge: 'Die Datei ist zu groß (max. ${size})',
+          type: 'Dieser Dateityp ist nicht erlaubt (erlaubt: ${types})',
+        },
+      },
     },
   },
   support: {

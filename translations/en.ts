@@ -131,6 +131,17 @@ export default {
       haveAccount: 'I allready have an account',
       delete: 'Delete',
       retry: 'Try again',
+      errors: {
+        required: 'This field is required',
+        email: 'Please enter a valid email address',
+        password: 'Please enter a valid password',
+        passwordConf: 'Please enter the same password',
+        minLength: 'Please enter at least ${count} characters',
+        file: {
+          tooLarge: 'This file is too large (max. ${size})',
+          type: 'This filetype is not allowed (allowed: ${types})',
+        },
+      },
     },
   },
   support: {

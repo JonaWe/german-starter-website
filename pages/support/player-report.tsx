@@ -17,7 +17,7 @@ import LastStep from '../../components/ReportPlayer/LastStep';
 import LoginStep from '../../components/ReportPlayer/LoginStep';
 import SelectPlayer from '../../components/ReportPlayer/SelectPlayer';
 import SuccessStep from '../../components/ReportPlayer/SuccessStep';
-import FileUploader from '../../components/UI/Forms/FileUploader';
+import FilePicker from '../../components/UI/Forms/FilePicker';
 import SimpleListbox from '../../components/UI/Listbox';
 import { auth, db, storage } from '../../firebase/clientApp';
 import useLocalization from '../../hooks/useLocalization';
@@ -59,6 +59,8 @@ const fetchPlayer = async (steamid: string) => {
 
 const PlayerReport: NextPage = () => {
   const [step, setStep] = useState(1);
+  const [files, setFiles] = useState<any[]>([]);
+  const MAX_FILES = 2;
   const t = useLocalization();
   const [user] = useAuthState(auth);
 
@@ -171,14 +173,19 @@ const PlayerReport: NextPage = () => {
                 </div>
               )}
               <label className="block my-1 text-sm">
-                {t.support.report.media}
+                {t.support.report.media}{' '}
+                <span className="text-xs opacity-75">
+                  ({files.length + '/' + MAX_FILES})
+                </span>
               </label>
-              <FileUploader
+              <FilePicker
                 accept={{
                   'image/png': ['.png'],
                   'image/jpeg': ['.jpe', '.jpeg', '.jpg'],
                 }}
-                maxFiles={2}
+                maxFiles={MAX_FILES}
+                files={files}
+                onChange={(files) => setFiles(files)}
               />
               <div className="flex justify-between items-center">
                 <LastStep

@@ -1,88 +1,61 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
-import { DocumentReference } from 'firebase-admin/firestore';
-import {
-  StorageReference,
-  getDownloadURL,
-  ref,
-  uploadBytes,
-  uploadBytesResumable,
-} from 'firebase/storage';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { Accept, useDropzone } from 'react-dropzone';
 
-import { storage } from '../../../firebase/clientApp';
+import { storage } from '../../../../firebase/clientApp';
 import FileItem from './FileItem';
+import FileSelectError from './FileSelectError';
 
 interface FileUploader {
   accept: Accept;
   maxFiles: number;
   maxSize?: number;
-  storageRef?: StorageReference;
-  docRef?: DocumentReference;
+  files: any[];
+  onChange: (file: any[]) => void;
 }
 
-export default function FileUploader({
+export default function FilePicker({
   accept,
   maxFiles,
-  maxSize,
-  storageRef,
-  docRef,
+  maxSize = 1024000,
+  onChange,
+  files,
 }: FileUploader) {
   const [myFiles, setMyFiles] = useState<any[]>([]);
 
   const uploadFile = async (file: any) => {
     // Create a reference to 'images/mountains.jpg'
     const mountainImagesRef = ref(storage, 'tickets/' + file.name);
-
-    const newFiles = [
-      ...myFiles,
-      {
-        name: file.name,
-        loading: true,
-        error: false,
-      },
-    ];
-
-    setMyFiles(newFiles);
+    setMyFiles(myFiles);
 
     const uploadTask = await uploadBytes(mountainImagesRef, file);
 
     getDownloadURL(uploadTask.ref).then((downloadURL) => {
       console.log('File available at', downloadURL);
     });
-
-    const changedIndex = newFiles.map((file) => file.name).indexOf(file.name);
-
-    const cpNewFiles = [...newFiles];
-
-    cpNewFiles[changedIndex].loading = false;
-
-    setMyFiles(cpNewFiles);
   };
-
-  useEffect(() => {
-    console.log('state: ', myFiles);
-  }, [myFiles]);
 
   const onDrop = useCallback(
     (acceptedFiles) => {
-      uploadFile(acceptedFiles[0]);
+      onChange([...files, ...acceptedFiles]);
     },
-    [myFiles]
+    [files, onChange]
   );
 
-  const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
+  const { getRootProps, getInputProps, isDragActive, fileRejections } =
     useDropzone({
       onDrop,
       accept,
-      maxFiles,
-      multiple: true,
-      maxSize: maxSize || 1000000,
+      maxFiles: maxFiles - files.length,
+      maxSize: maxSize,
     });
+
+  console.log(fileRejections);
 
   return (
     <>
-      {myFiles.length < maxFiles && (
+      {files.length < maxFiles && (
         <div
           {...getRootProps()}
           className={`h-20 border-2 border-dashed flex items-center justify-center p-3 transition-all cursor-pointer mb-2 ${
@@ -102,9 +75,27 @@ export default function FileUploader({
         </div>
       )}
       <ul className="flex flex-col gap-y-1">
-        {myFiles.map((file) => (
-          <FileItem name={file.name} error={false} loading={file.loading} />
+        {files.map((file, i) => (
+          <FileItem
+            onRemove={() => {
+              onChange(files.filter((f) => f.name !== file.name));
+            }}
+            key={i}
+            name={file.name}
+            size={file.size}
+            error={false}
+          />
         ))}
+      </ul>
+      <ul className="mt-2">
+        {fileRejections &&
+          fileRejections.map(({ errors }) => (
+            <FileSelectError
+              errors={errors}
+              accept={accept}
+              maxSize={maxSize}
+            />
+          ))}
       </ul>
     </>
   );
