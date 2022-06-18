@@ -50,20 +50,22 @@ CREATE FULLTEXT INDEX text_search ON players(name)
 ## Ideas
 
 - [ ] Show if player is in the rise or on the fall indicated with a red/green arrow in stats table and user plage.
-- [ ] Show top player of the day instead of random player in spotlight on the stats page. Maybe indicated with a flame.
-- [ ] Send state from Py Script to this page via Webhook and then save in firebase. For example last Player Update SUCCESS/ERROR or Can not Update Player data. Also show the state from the user table to the user (Uptodate / updating and show last update)
+- [x] Show top player of the day instead of random player in spotlight on the stats page. Maybe indicated with a flame.
+- [ ] Send state from Py Script to this page via Webhook and then save in firebase. For example last Player Update SUCCESS/ERROR or Can not Update Player data. Also show the state from the user table to the user (Update / updating and show last update)
 - [ ] Calendar that shows wipes. Automatically show forced Wipes and option to add custom wipes in Dashboard
 - [x] Show related profiles on user profile page (Social Media like) and show friends on server
 - [ ] Show highest kill streak.
-- [ ] show overall rust stats. If not public show demo graphs blured like vercel
-- [ ] Add image to discord annoumce. Default grab first url from text.
+- [ ] show overall rust stats. If not public show demo graphs blurred like vercel
+- [ ] Add image to discord announce. Default grab first url from text.
 - [ ] show player log with nice design like github ink name changes, kills, deaths, pve deaths.
-- [ ] Calculate skill value or levle for player based of stats
+- [ ] Calculate skill value or level for player based of stats
 - [ ] Option to ban player from comments
 - [x] Option to report comment
-- [ ] Add watch player option. If some one wathces a player he always sees him on the main page (or some whare else)
-- [ ] Add someting to the header like the current players "We have **13000+** active players"
+- [ ] Add watch player option. If some one watches a player he always sees him on the main page (or some where else)
+- [X] Add something to the header like the current players "We have **13000+** active players"
+- [ ] Show last wipe in the header. Small or large Badge stamp if it hast just wiped 1-2 days ago.
 
 ## Questions
+
 - Force steam sign in?
-- Convert names of pve deaths back do ids on dont convert new ones in python script? Format in frontend instead. maybe display additional info (Frontend logic implementation is done)
+- Convert names of pve deaths back do ids on don't convert new ones in python script? Format in frontend instead. maybe display additional info (Frontend logic implementation is done)

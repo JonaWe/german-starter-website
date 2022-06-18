@@ -120,7 +120,7 @@ const PlayerReport: NextPage = () => {
     const ticketRef = await addDoc(ticketsRef, {
       author: user.uid,
       reportedPlayer: data.player.steamid,
-      reason: data.reason.id || t.support.report.player.reasons[0],
+      reason: data.reason.id || t.support.report.player.reasons[0].id,
       description: data.description,
       createdAt: serverTimestamp(),
       type: 'PLAYER_REPORT',
@@ -221,7 +221,7 @@ const PlayerReport: NextPage = () => {
               back={back}
               description={watch('description')}
               playerId={watch('player').steamid}
-              reason={watch('reason') || t.support.report.player.reasons[0]}
+              reason={watch('reason') || t.support.report.player.reasons[0].id}
               type="player-report"
             />
           )}

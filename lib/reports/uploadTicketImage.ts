@@ -14,7 +14,12 @@ export default async function uploadTicketImage(
 
   const downloadURL = await getDownloadURL(uploadTask.ref);
 
-  updateDoc(ticketRef, { uploads: arrayUnion(downloadURL) });
+  updateDoc(ticketRef, {
+    uploads: arrayUnion({
+      id,
+      url: downloadURL,
+    }),
+  });
 
   return downloadURL;
 }

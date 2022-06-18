@@ -20,6 +20,7 @@ export default function FileItem({
       <a
         href={link ? link : '#'}
         target={link ? '_blank' : '_self'}
+        rel="noreferrer"
         className={`${link ? 'cursor-pointer' : 'cursor-default'}`}
       >
         <span
