@@ -64,6 +64,9 @@ CREATE FULLTEXT INDEX text_search ON players(name)
 - [ ] Add watch player option. If some one watches a player he always sees him on the main page (or some where else)
 - [X] Add something to the header like the current players "We have **13000+** active players"
 - [ ] Show last wipe in the header. Small or large Badge stamp if it hast just wiped 1-2 days ago.
+- [ ] Different roles. Admin/Moderator with different access levels (Important for VIP)
+- [ ] VIP shop
+- [ ] Map voting
 
 ## Questions
 
