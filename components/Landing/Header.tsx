@@ -22,7 +22,7 @@ export default function Header({ playerCount }: { playerCount: number }) {
           <h1 className="leading-none">
             {reactStringReplace(t.header, /(\${\w+})/g, () => {
               return (
-                <span className="relative">
+                <span className="relative" key={t.header}>
                   <span className="opacity-0">{playerCount}</span>
                   <span className="left-0 absolute">
                     <CountUp end={playerCount} />
@@ -34,7 +34,7 @@ export default function Header({ playerCount }: { playerCount: number }) {
           <p className="mb-6 sm:max-w-[30%]">{t.headerText}</p>
           <div className="flex gap-5">
             <JoinButton />
-            <Button text={t.infoBtn} useLink href="#server"/>
+            <Button text={t.infoBtn} useLink href="#server" />
           </div>
         </div>
       </header>
