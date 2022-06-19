@@ -14,7 +14,7 @@ const AdminUsers: NextPageWithLayout = () => {
   useSetHeading('Users');
   return (
     <section>
-      <div className="flex gap-10">
+      <div className="">
         <div>
           <h2>User account{"'"}s</h2>
           <UsersTable />

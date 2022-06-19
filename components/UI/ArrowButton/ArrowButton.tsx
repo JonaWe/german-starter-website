@@ -8,7 +8,7 @@ interface ArrowButtonProps {
   delay?: number;
 }
 
-export default function Avatar({
+export default function ArrowButton({
   orientation = 'right',
   onClick = () => void 0,
   delay = 0,
