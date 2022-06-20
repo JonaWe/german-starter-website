@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { User } from 'firebase/auth';
+import { UserRecord } from 'firebase-admin/auth';
 import { useQuery } from 'react-query';
 
 import getAxios from '../../lib/axios';
@@ -11,7 +11,7 @@ const fetchUser = async (uid: string) => {
   const axios = await getAxios();
   const data = await axios.post('/api/admin/user?uid=' + uid);
 
-  return data.data as User;
+  return data.data as UserRecord;
 };
 
 export default function useUser(uid: string) {
