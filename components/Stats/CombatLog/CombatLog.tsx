@@ -3,12 +3,11 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
 import { useVirtualizer } from '@tanstack/react-virtual';
-import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from 'react-query';
 
-import { auth } from '../../../firebase/clientApp';
-import useAdmin from '../../../hooks/useAdmin';
+import useRole from '../../../hooks/useRole';
 import getAxios from '../../../lib/axios';
+import isAllowedRole from '../../../lib/firebase/isAllowedRole';
 import Button from '../../UI/Button';
 import InfoBox from '../../UI/Info';
 import LogItem, { EventType } from './LogItem';
@@ -16,7 +15,8 @@ import LogItem, { EventType } from './LogItem';
 export default function CombatLog({ steamid }: { steamid: string }) {
   const [flatEvents, setFlatEvents] = useState<any>([]);
 
-  const [admin] = useAdmin(auth.currentUser);
+  const [role] = useRole(null);
+  const isAdmin = isAllowedRole(role?.id, 'admin');
 
   const [restricted, setRestricted] = useState(false);
 

@@ -4,12 +4,13 @@ import { MessageBuilder, Webhook } from 'discord-webhook-node';
 
 import { BASE_DOMAIN } from '../../../../lib/constants';
 import withAdminAuth from '../../../../lib/firebase/withAdminAuth';
+import withAuth from '../../../../lib/firebase/withAuth';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const user = await withAdminAuth(req, res);
+  const user = await withAuth(req, res, 'owner');
   if (!user) return;
 
   const { author, titleDe, titleEn, id, imageURL } = req.body;

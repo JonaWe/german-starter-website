@@ -5,11 +5,11 @@ import { Timestamp } from '@firebase/firestore';
 import Markdown from 'markdown-to-jsx';
 import { HiPencil } from 'react-icons/hi';
 
-import { auth } from '../../../firebase/clientApp';
-import useAdmin from '../../../hooks/useAdmin';
 import { checkIfSameDay } from '../../../lib/checkIfSameDay';
 import NewsCommentSection from '../CommentSection/CommentSection';
 import NewsAuthor from './NewsAuthor';
+import useRole from '../../../hooks/useRole';
+import isAllowedRole from '../../../lib/firebase/isAllowedRole';
 
 interface NewsItemProps {
   title: string;
@@ -38,14 +38,15 @@ export default function NewsItem({
 }: NewsItemProps) {
   const { locale } = useRouter();
 
-  const [admin] = useAdmin(auth.currentUser);
+  const [role] = useRole(null);
+  const isAdmin = isAllowedRole(role?.id, 'admin');
 
   return (
     <article className={`${className} mb-10 scroll-m-36`} id={id}>
       <div className="border-b-2 pb-7 border-background-150">
         <div className="flex justify-between items-center">
           <h2 className="leading-none text-5xl">{title}</h2>
-          {admin && id && (
+          {isAdmin && id && (
             <>
               <Link href={`/admin/news/${id}`}>
                 <a>

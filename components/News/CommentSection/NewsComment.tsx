@@ -20,11 +20,12 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 import { auth, db } from '../../../firebase/clientApp';
-import useAdmin from '../../../hooks/useAdmin';
 import useLocalization from '../../../hooks/useLocalization';
 import usePublicUser from '../../../hooks/usePublicUser';
+import useRole from '../../../hooks/useRole';
 import useSteamUser from '../../../hooks/useSteamUser';
 import deleteComment from '../../../lib/firebase/deleteDocByPath';
+import isAllowedRole from '../../../lib/firebase/isAllowedRole';
 import BasicMenu from '../../Menu';
 import { Option } from '../../Menu/MenuPopout';
 import WithLink from '../../OptionalLink';
@@ -87,7 +88,9 @@ export default function NewsComment({
   const [user] = usePublicUser(uid);
   const [steamUser] = useSteamUser(user?.steamid);
   const [currentUser] = useAuthState(auth);
-  const [admin] = useAdmin(currentUser ?? null);
+
+  const [role] = useRole(currentUser ?? null);
+  const isAdmin = isAllowedRole(role?.id, 'admin');
 
   const t = useLocalization();
 
@@ -149,7 +152,7 @@ export default function NewsComment({
           <p>{filter.clean(comment)}</p>
         </div>
       </div>
-      {(currentUser?.uid === uid || admin) && (
+      {(currentUser?.uid === uid || isAdmin) && (
         <div className="group-hover:opacity-100 opacity-0">
           <BasicMenu options={options}>
             <HiDotsVertical className="group-hover:opacity-40 opacity-0 text-lg hover:opacity-100 transition-opacity mr-2" />
