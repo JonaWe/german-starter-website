@@ -5,7 +5,8 @@ import { doc } from 'firebase/firestore';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 
 import { ACCESS_ROLES, RoleId } from '../../../../data/AccessRoles';
-import { db } from '../../../../firebase/clientApp';
+import { auth, db } from '../../../../firebase/clientApp';
+import useRole from '../../../../hooks/useRole';
 import changeRole from '../../../../lib/changeRole';
 import Button from '../../../UI/Button';
 import SimpleListbox from '../../../UI/Listbox/SimpleListbox';
@@ -16,12 +17,16 @@ interface RoleOption {
 }
 
 export default function ChangeRoleButton({ uid }: { uid: string }) {
-  const roleOptions = Object.entries(ACCESS_ROLES).map(([key, role]) => {
-    return {
-      id: role.id,
-      name: `${role.name} (${role.accessLevelDescription})`,
-    };
-  });
+  const [userRole] = useRole(auth?.currentUser);
+
+  const roleOptions = Object.entries(ACCESS_ROLES)
+    .filter(([key, role]) => userRole?.accessLevel >= role.accessLevel)
+    .map(([key, role]) => {
+      return {
+        id: role.id,
+        name: `${role.name} (${role.accessLevelDescription})`,
+      };
+    });
 
   const selectedUserRef = doc(db, 'users', uid);
   const [selectedUserData] = useDocumentData(selectedUserRef);
