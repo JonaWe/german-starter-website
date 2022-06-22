@@ -6,6 +6,7 @@ import { HiInformationCircle } from 'react-icons/hi';
 import ChangeRoleButton from '../../../../components/Admin/ManageUsers/UserPage/ChangeRoleButton';
 import ProfileInfoItem from '../../../../components/Admin/ManageUsers/UserPage/ProfileInfoItem';
 import ResolvedTickets from '../../../../components/Admin/ManageUsers/UserPage/ResolvedTickets';
+import ListTickets from '../../../../components/Admin/ManageUsers/UserPage/ResolvedTickets';
 import { getAdminLayout } from '../../../../components/Layout/AdminLayout';
 import Avatar from '../../../../components/UI/Avatar';
 import Breadcrumb from '../../../../components/UI/Breadcrumb';
@@ -90,9 +91,15 @@ const ManageUser: NextPageWithLayout = () => {
             </span>
             {user && <ChangeRoleButton uid={user.uid} />}
           </div>
-          <div>
-            <h3 className="font-sans font-semibold mb-4">Resolved Tickets</h3>
-            <ResolvedTickets />
+          <div className='grid grid-cols-2'>
+            <div>
+              <h3 className="font-sans font-semibold mb-4">Resolved Tickets</h3>
+              {user && <ListTickets filter={'resolvedBy'} uid={user.uid} />}
+            </div>
+            <div>
+              <h3 className="font-sans font-semibold mb-4">Opened Tickets</h3>
+              {user && <ListTickets filter={'author'} uid={user.uid} />}
+            </div>
           </div>
         </div>
       </section>

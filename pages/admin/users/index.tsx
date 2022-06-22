@@ -3,9 +3,21 @@ import { useRouter } from 'next/router';
 import ManageAdmins from '../../../components/Admin/ManageUsers';
 import UsersTable from '../../../components/Admin/ManageUsers/UsersTable';
 import { getAdminLayout } from '../../../components/Layout/AdminLayout';
+import Breadcrumb from '../../../components/UI/Breadcrumb';
 import { useSetHeading } from '../../../context/defaultLayoutHeadingContext';
 import useLocalization from '../../../hooks/useLocalization';
 import type { NextPageWithLayout } from '../../_app';
+
+const segments = [
+  {
+    name: 'Admin',
+    path: '/admin',
+  },
+  {
+    name: 'Users',
+    path: 'users',
+  },
+];
 
 const AdminUsers: NextPageWithLayout = () => {
   const t = useLocalization();
@@ -16,7 +28,7 @@ const AdminUsers: NextPageWithLayout = () => {
     <section>
       <div className="">
         <div>
-          <h2>User account{"'"}s</h2>
+          <Breadcrumb segments={segments} />
           <UsersTable />
         </div>
       </div>

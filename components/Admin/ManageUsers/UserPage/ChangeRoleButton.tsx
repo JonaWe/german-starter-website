@@ -19,7 +19,7 @@ export default function ChangeRoleButton({ uid }: { uid: string }) {
   const roleOptions = Object.entries(ACCESS_ROLES).map(([key, role]) => {
     return {
       id: role.id,
-      name: role.name,
+      name: `${role.name} (${role.accessLevelDescription})`,
     };
   });
 
@@ -43,8 +43,12 @@ export default function ChangeRoleButton({ uid }: { uid: string }) {
   useEffect(() => {
     const role = {
       id: ACCESS_ROLES[(selectedUserData?.role as RoleId) || defaultRoleId].id,
-      name: ACCESS_ROLES[(selectedUserData?.role as RoleId) || defaultRoleId]
-        .name,
+      name: `${
+        ACCESS_ROLES[(selectedUserData?.role as RoleId) || defaultRoleId].name
+      } (${
+        ACCESS_ROLES[(selectedUserData?.role as RoleId) || defaultRoleId]
+          .accessLevelDescription
+      })`,
     };
     setSelectedRole(role);
     setSavedRole(role);
@@ -53,7 +57,7 @@ export default function ChangeRoleButton({ uid }: { uid: string }) {
 
   return (
     <div className="flex items-center gap-3">
-      <div className="w-52">
+      <div className="w-64">
         <SimpleListbox
           options={roleOptions}
           selected={selectedRole || (defaultRole as RoleOption)}
