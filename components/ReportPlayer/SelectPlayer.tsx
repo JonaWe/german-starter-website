@@ -1,7 +1,9 @@
 import { useState } from 'react';
 
 import { Combobox } from '@headlessui/react';
+import { Ring } from '@uiball/loaders';
 import axios from 'axios';
+import { AnimatePresence, motion } from 'framer-motion';
 import { HiSearch, HiX } from 'react-icons/hi';
 import { useDebouncedCallback } from 'use-debounce';
 
@@ -20,6 +22,7 @@ export default function SelectPlayer({
   selected,
 }: SelectPlayerProps) {
   const [value, setValue] = useState<Player[]>([]);
+  const [loading, setLoading] = useState(false);
   const t = useLocalization();
 
   const search = async (query: string) => {
@@ -41,13 +44,16 @@ export default function SelectPlayer({
   };
 
   const debounced = useDebouncedCallback((query) => {
+    setLoading(true);
     if (!isSteamId(query)) {
       search(query).then((data) => {
         setValue(data.data.players);
+        setLoading(false);
       });
     } else {
       fetchPlayer(query).then((data) => {
         setValue(data.data.player);
+        setLoading(false);
       });
     }
   }, 300);
@@ -75,14 +81,27 @@ export default function SelectPlayer({
             </div>
           </>
         ) : (
-          <div className="flex items-center px-2">
-            <HiSearch className="text-2xl fill-sand-500/70" />
+          <div className="flex items-center px-2 relative">
+            <HiSearch className="text-2xl fill-sand-500/70 flex-none" />
             <Combobox.Input
               onChange={(e) => debounced(e.target.value)}
               placeholder={t.support.report.search}
               autoComplete="off"
               className="w-full focus-visible:ring-0 bg-transparent py-3 placeholder:text-sand-500/40 text-sm"
             />
+            <AnimatePresence>
+              {loading && (
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{duration: 0.2}}
+                  className="absolute right-0"
+                >
+                  <Ring size={20} color={'#C3C0BD'} />
+                </motion.span>
+              )}
+            </AnimatePresence>
           </div>
         )}
       </div>
