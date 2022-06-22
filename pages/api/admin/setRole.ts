@@ -1,10 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { UserRecord } from 'firebase-admin/auth';
 
 import { ACCESS_ROLES, RoleId, isOfTypeRole } from '../../../data/AccessRoles';
 import { auth, db } from '../../../firebase/admin/firebaseAdmin';
-import withAdminAuth from '../../../lib/firebase/withAdminAuth';
 import withAuth from '../../../lib/firebase/withAuth';
 
 export default async function handler(
