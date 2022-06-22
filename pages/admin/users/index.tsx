@@ -19,7 +19,6 @@ const AdminUsers: NextPageWithLayout = () => {
           <h2>User account{"'"}s</h2>
           <UsersTable />
         </div>
-        <ManageAdmins />
       </div>
     </section>
   );
