@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { UserRecord } from 'firebase-admin/auth';
 
-import { isOfTypeRole } from '../../../data/AccessRoles';
+import { ACCESS_ROLES, RoleId, isOfTypeRole } from '../../../data/AccessRoles';
 import { auth, db } from '../../../firebase/admin/firebaseAdmin';
 import withAdminAuth from '../../../lib/firebase/withAdminAuth';
 import withAuth from '../../../lib/firebase/withAuth';
@@ -25,6 +25,14 @@ export default async function handler(
   const userToChange = await auth.getUser(uid);
 
   if (!userToChange) return res.status(400).send({ error: 'invalid uid' });
+
+  if (
+    ACCESS_ROLES[userToChange.customClaims?.role as RoleId].accessLevel <
+    ACCESS_ROLES[role as RoleId].accessLevel
+  )
+    return res
+      .status(403)
+      .send('cant not change user to higher level then yourself');
 
   try {
     await auth.setCustomUserClaims(userToChange.uid, {
