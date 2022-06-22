@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 interface NameCellProps {
@@ -7,8 +9,8 @@ interface NameCellProps {
 
 export default function NameCell({ value: name, row }: NameCellProps) {
   return (
-    <>
-      <p>{row.original.uid ? name || '-' : <Skeleton />}</p>
-    </>
+    <Link href={'/admin/users/' + row.original.uid}>
+      <a>{row.original.uid ? name || '-' : <Skeleton />}</a>
+    </Link>
   );
 }

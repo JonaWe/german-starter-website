@@ -1,14 +1,7 @@
 import { useMemo } from 'react';
 
-import axios from 'axios';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useQuery } from 'react-query';
-
-import { auth } from '../../../firebase/clientApp';
 import getAxios from '../../../lib/axios';
-import { NewsItemWithId } from '../../../pages/admin/news';
 import BigDataTable from '../../UI/Table/BigDataTable';
-import Table from '../../UI/Table/Table';
 import EmailCell from './Cells/EmailCell';
 import NameCell from './Cells/NameCell';
 import RoleCell from './Cells/RoleCell';

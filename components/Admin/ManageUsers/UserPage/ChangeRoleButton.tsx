@@ -10,6 +10,11 @@ import changeRole from '../../../../lib/changeRole';
 import Button from '../../../UI/Button';
 import SimpleListbox from '../../../UI/Listbox/SimpleListbox';
 
+interface RoleOption {
+  id: string;
+  name: string;
+}
+
 export default function ChangeRoleButton({ uid }: { uid: string }) {
   const roleOptions = Object.entries(ACCESS_ROLES).map(([key, role]) => {
     return {
@@ -21,10 +26,11 @@ export default function ChangeRoleButton({ uid }: { uid: string }) {
   const selectedUserRef = doc(db, 'users', uid);
   const [selectedUserData] = useDocumentData(selectedUserRef);
 
-  const [selectedRole, setSelectedRole] = useState<{
-    id: string;
-    name: string;
-  } | null>(null);
+  const defaultRoleId = 'user';
+
+  const defaultRole = roleOptions.find((r) => r.id === defaultRoleId);
+
+  const [selectedRole, setSelectedRole] = useState<RoleOption | null>(null);
 
   const [savedRole, setSavedRole] = useState<any>();
   const [loading, setLoading] = useState(false);
@@ -35,10 +41,10 @@ export default function ChangeRoleButton({ uid }: { uid: string }) {
   };
 
   useEffect(() => {
-    if (!selectedUserData?.role) return;
     const role = {
-      id: ACCESS_ROLES[selectedUserData.role as RoleId].id,
-      name: ACCESS_ROLES[selectedUserData.role as RoleId].name,
+      id: ACCESS_ROLES[(selectedUserData?.role as RoleId) || defaultRoleId].id,
+      name: ACCESS_ROLES[(selectedUserData?.role as RoleId) || defaultRoleId]
+        .name,
     };
     setSelectedRole(role);
     setSavedRole(role);
@@ -50,7 +56,7 @@ export default function ChangeRoleButton({ uid }: { uid: string }) {
       <div className="w-52">
         <SimpleListbox
           options={roleOptions}
-          selected={selectedRole || roleOptions[0]}
+          selected={selectedRole || (defaultRole as RoleOption)}
           setSelected={(role) => setSelectedRole(role)}
         />
       </div>
