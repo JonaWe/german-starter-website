@@ -118,6 +118,7 @@ export default {
     signUp: 'Sign up',
   },
   signUp: {
+    username: 'Username',
     success: 'Your account has been created successfully!',
   },
   from: {

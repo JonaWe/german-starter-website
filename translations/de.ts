@@ -118,6 +118,7 @@ export default {
     signUp: 'Registrieren',
   },
   signUp: {
+    username: 'Benutzername',
     success: 'Dein Profil wurde erfolgreich erstellt!',
   },
   from: {
