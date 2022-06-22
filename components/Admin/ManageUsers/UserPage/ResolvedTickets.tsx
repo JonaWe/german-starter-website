@@ -26,14 +26,14 @@ export default function ListTickets({
   return (
     <ul className="max-h-[60vh] overflow-y-auto py-1 scrollbar-thin scrollbar-thumb-background-400 pr-4 mr-4">
       {data.length > 0 || loading ? (
-        data?.map(({ resolveMessage, createdAt, author, __id }) => {
+        data?.map(({ description, createdAt, author, __id }) => {
           const time = createdAt
             ? format(new Date(createdAt?.seconds * 1000), 'MMM dd, yyyy')
             : '-';
 
           return (
             <ResolvedTicketItem
-              message={resolveMessage}
+              message={description}
               time={time}
               author={author}
               id={__id}
