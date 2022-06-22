@@ -27,7 +27,7 @@ export default async function handler(
   if (!userToChange) return res.status(400).send({ error: 'invalid uid' });
 
   if (
-    ACCESS_ROLES[userToChange.customClaims?.role as RoleId].accessLevel <
+    ACCESS_ROLES[(user.role as RoleId) || 'user'].accessLevel <
     ACCESS_ROLES[role as RoleId].accessLevel
   )
     return res
