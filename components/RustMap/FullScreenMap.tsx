@@ -8,14 +8,16 @@ export default function FullScreenMap({
   map,
   open,
   onClose,
+  reload,
 }: {
   map: any;
   open: boolean;
+  reload: () => void;
   onClose: () => void;
 }) {
   return (
     <Modal open={open} closeModal={onClose} className="!p-0">
-      <Map map={map} showBtn>
+      <Map map={map} showBtn reload={reload}>
         <button
           className="bg-background-500/80 hover:bg-background-500 transition-colors group p-3 absolute z-10 right-5 top-5"
           onClick={onClose}

@@ -22,6 +22,7 @@ export default function RustMap({ map, variant, reload }: RustMapProps) {
     <>
       <FullScreenMap
         map={map}
+        reload={reload}
         open={fullMapOpen}
         onClose={() => setFullMapOpen(false)}
       />

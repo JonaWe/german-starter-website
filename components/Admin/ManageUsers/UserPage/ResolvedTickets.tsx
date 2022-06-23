@@ -33,6 +33,7 @@ export default function ListTickets({
 
           return (
             <ResolvedTicketItem
+              key={__id}
               message={description}
               time={time}
               author={author}
