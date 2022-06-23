@@ -10,6 +10,7 @@ import getAxios from '../../../lib/axios';
 import isAllowedRole from '../../../lib/firebase/isAllowedRole';
 import Button from '../../UI/Button';
 import InfoBox from '../../UI/Info';
+import CombatLogError from './CombatLogError';
 import LogItem, { EventType } from './LogItem';
 
 export default function CombatLog({ steamid }: { steamid: string }) {
@@ -82,12 +83,6 @@ export default function CombatLog({ steamid }: { steamid: string }) {
     rowVirtualizer.getVirtualItems(),
   ]);
 
-  // useEffect(() => {
-  //   if (inView) {
-  //     fetchNextPage();
-  //   }
-  // }, [inView]);
-
   useEffect(() => {
     refetch();
   }, [restricted]);
@@ -112,22 +107,7 @@ export default function CombatLog({ steamid }: { steamid: string }) {
         Toggle restricted
       </Button>
       {status === 'error' ? (
-        <InfoBox
-          info={
-            <span>
-              Unable to load log!{' '}
-              <Link
-                href={`/support/feedback?description=${
-                  'unable fetch log data: ' + String(error)
-                }`}
-              >
-                <a className="text-blue-500 underline">Report this issue</a>
-              </Link>
-            </span>
-          }
-          className="m-5"
-          type={'error'}
-        />
+        <CombatLogError message={String(error)} />
       ) : (
         <>
           <ul
