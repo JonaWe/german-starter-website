@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import getAxios from '../../../lib/axios';
-import BigDataTable from '../../UI/Table/BigDataTable';
+import BigDataTable from '../../UI/Table/BigDataTable'; // eslint-disable-line no-use-before-define
 import EmailCell from './Cells/EmailCell';
 import NameCell from './Cells/NameCell';
 import RoleCell from './Cells/RoleCell';
