@@ -15,8 +15,8 @@ export default function TeamGroup({ members, title }: TeamGroupProps) {
       <h3 className="text-3xl">{title}</h3>
       {/* <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-sand-500 to-transparent" /> */}
       <div className="flex gap-6 lg:gap-10">
-        {members.map(({ name, image, link }) => (
-          <TeamMember key="name" name={name} src={image} link={link} />
+        {members.map(({ name, image, link }, i) => (
+          <TeamMember key={name + link} name={name} src={image} link={link} />
         ))}
       </div>
     </div>
