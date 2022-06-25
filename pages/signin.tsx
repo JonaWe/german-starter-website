@@ -60,9 +60,15 @@ const SignIn: NextPage = () => {
       .catch((error) => {
         if (error.message.includes(AUTH_ERRORS.USER_NOT_FOUND))
           setAuthError('User not found!');
-        else if (error.message.includes(AUTH_ERRORS.INVALID_PASSWORD))
+        else if (
+          error.message.includes(AUTH_ERRORS.INVALID_PASSWORD) ||
+          error.message.includes(AUTH_ERRORS.WRONG_PASSWORD)
+        )
           setAuthError('Invalid password!');
-        else setAuthError('Ups, something wrong!');
+        else {
+          console.log(error.message);
+          setAuthError('Ups, something wrong!');
+        }
       });
   });
 
