@@ -5,6 +5,7 @@ import { useQuery } from 'react-query';
 
 import useDocumentDataFromCollectionOnce from '../../../hooks/useDocumentDataFromCollectionOnce';
 import useLocalization from '../../../hooks/useLocalization';
+import useServerMap from '../../../hooks/useServerMap';
 import CopyButton from '../../Buttons/CopyButton';
 import JoinButton from '../../Buttons/JoinButton';
 import PlayerCount from '../../PlayerCount';
@@ -12,11 +13,6 @@ import RustMap from '../../RustMap';
 import Badge from '../../UI/Badge';
 import Button from '../../UI/Button';
 import Tooltip from '../../UI/Tooltip';
-
-const fetchMap = async () => {
-  const { data } = await axios.get('/api/server/map');
-  return data;
-};
 
 export default function Server() {
   const [serverConfig, loading, error] = useDocumentDataFromCollectionOnce(
@@ -31,12 +27,10 @@ export default function Server() {
       ? serverConfig.ip
       : '51.195.60.162:28015';
 
-  const { data: map } = useQuery('map', fetchMap, {
-    refetchOnWindowFocus: false,
-  });
+  const { data: map, refetch } = useServerMap();
 
   return (
-    <section className="sm:m-10 sm:mt-32 mb-20 sm:mb-0">
+    <section className="sm:m-10 sm:mt-32 mb-20 sm:mb-0 scroll-mt-[40vh]" id="server">
       <div className="mx-auto h-full max-w-screen-md bg-background-400/60 p-5 pb-12 text-center relative">
         <Badge text="Server" className="mx-auto -translate-y-10 relative z-10">
           <div className="relative w-7 h-7">
@@ -60,12 +54,8 @@ export default function Server() {
           </div>
           <div className="mt-6 flex justify-center gap-5">
             <JoinButton />
-            <Button
-              href="/rules"
-              text="Rules"
-              useLink
-            />
-            <RustMap map={map} variant="button" />
+            <Button href="/rules" text="Rules" useLink />
+            <RustMap reload={refetch} map={map} variant="button" />
           </div>
         </div>
         <div className="absolute inset-0 overflow-hidden">

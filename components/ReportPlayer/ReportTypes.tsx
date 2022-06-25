@@ -22,12 +22,13 @@ const types = {
   },
 } as Types;
 
-export default function ReportPlayer() {
+export default function ReportTypes() {
   const t = useLocalization();
 
   return (
-    <div className="flex w-full justify-center">
-      <div className="flex justify-between gap-20 flex-wrap items-center">
+    <>
+      <h2>{t.support.reportTypesTitle}</h2>
+      <div className="flex gap-14 flex-wrap">
         {t.support.report.types.map((type) => {
           return (
             <ReportTypeCard
@@ -41,6 +42,6 @@ export default function ReportPlayer() {
         })}
         {/* <ReportSteps /> */}
       </div>
-    </div>
+    </>
   );
 }

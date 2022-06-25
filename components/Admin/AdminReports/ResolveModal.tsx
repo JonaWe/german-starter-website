@@ -4,7 +4,7 @@ import { collection, doc, setDoc } from 'firebase/firestore';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import { db } from '../../../firebase/clientApp';
+import { auth, db } from '../../../firebase/clientApp';
 import useButtonStyle from '../../../hooks/useButtonStyle';
 import Button from '../../UI/Button';
 import Modal from '../../UI/Modal';
@@ -37,7 +37,11 @@ export default function ResolveModal({
     const ticketRef = doc(ticketsRef, ticketId);
     await setDoc(
       ticketRef,
-      { status: 'resolved', resolveMessage: data.message },
+      {
+        status: 'resolved',
+        resolveMessage: data.message,
+        resolvedBy: auth.currentUser?.uid,
+      },
       { merge: true }
     );
     closeModal();

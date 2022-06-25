@@ -4,7 +4,9 @@ import usePublicUser from '../../../hooks/usePublicUser';
 import useSteamUser from '../../../hooks/useSteamUser';
 import { TicketWithId } from '../../../pages/admin/reports';
 import Button from '../../UI/Button';
+import FileItem from '../../UI/Forms/FilePicker/FileItem';
 import AuthorInfo from './AuthorInfo';
+import UploadedFileItem from './Cells/UploadedFileItem';
 import DeleteComment from './DeleteComment';
 import ReportReasonPill from './ReportReasonPill';
 import ReportedPlayer from './ReportedPlayer';
@@ -38,6 +40,20 @@ export default function TicketManger({ ticket }: { ticket: TicketWithId }) {
               <ReportReasonPill reason={ticket.reason || '-'} />
             </>
           )}
+          <h3 className="mt-5">Uploads</h3>
+          <ul className="flex gap-5">
+            {ticket.uploads &&
+              ticket.uploads.map((upload, i) => (
+                <UploadedFileItem
+                  key={upload.id}
+                  name={`Upload ${upload.id}`}
+                  link={upload.url}
+                  fileId={upload.id}
+                  filePath={`/tickets/${ticket.__id}/${upload.id}`}
+                  ticketPath={`tickets/${ticket.__id}`}
+                />
+              ))}
+          </ul>
           {ticket.type === 'COMMENT_REPORT' && (
             <DeleteComment path={ticket.reason || ''} />
           )}

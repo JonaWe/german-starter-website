@@ -21,6 +21,13 @@ export default async function publishNews(
   );
 
   const newsItem = (await getDoc(newsItemRef)).data();
+
   if (newsItem && announce)
-    announceNews(auth, newsItem.en.title, newsItem.de.title, newsItem.__id);
+    announceNews(
+      auth,
+      newsItem.en.title,
+      newsItem.de.title,
+      newsItem.__id,
+      newsItem.previewImageUrl
+    );
 }

@@ -1,9 +1,12 @@
 export default {
   test: 'test',
-  subHeader: 'The server for everyone',
+  subHeader: 'Join the community of over',
+  headerText:
+    'The German Starter server is the largest community server of Rust. Be part of it!',
+  header: '${count} players!',
   joinBtn: 'Join server',
+  infoBtn: 'Show info',
   serverDescription: `[EU] German Starter is a newbie friendly PvP Server. (that doesn't mean you won't be killed) That means if you have Questions about the game and how to play they will be answered. In case you've build wrong you can ask one of the Admins to help you removing a Wall. Full wipes are being done when Facepunch does their Monthly patches. Please read our Server rules to prevent misconceptions.`,
-  headerText: `sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.`,
   pageNotFound: 'Page not found',
   navigation: {
     home: 'Home',
@@ -115,6 +118,7 @@ export default {
     signUp: 'Sign up',
   },
   signUp: {
+    username: 'Username',
     success: 'Your account has been created successfully!',
   },
   from: {
@@ -127,9 +131,22 @@ export default {
       noAccount: "I don't have an account",
       haveAccount: 'I allready have an account',
       delete: 'Delete',
+      retry: 'Try again',
+      errors: {
+        required: 'This field is required',
+        email: 'Please enter a valid email address',
+        password: 'Please enter a valid password',
+        passwordConf: 'Please enter the same password',
+        minLength: 'Please enter at least ${count} characters',
+        file: {
+          tooLarge: 'This file is too large (max. ${size})',
+          type: 'This filetype is not allowed (allowed: ${types})',
+        },
+      },
     },
   },
   support: {
+    reportTypesTitle: 'Reply',
     report: {
       new: 'back to support',
       completeHeader: 'Complete report',
@@ -142,6 +159,7 @@ export default {
       feedbackHeader: 'Your feedback',
       typeHeader: 'Choose report type',
       report: 'Report',
+      media: 'Image proof',
       types: [
         {
           name: 'Feedback',
@@ -239,5 +257,6 @@ export default {
   map: {
     showLabels: 'Show labels',
     hideLabels: 'Hide labels',
+    notLoaded: 'Map not loaded',
   },
 };

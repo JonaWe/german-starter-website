@@ -1,23 +1,28 @@
-import { collection, doc, setDoc } from 'firebase/firestore';
-import { useDocumentDataOnce } from 'react-firebase-hooks/firestore';
+import { DocumentData, collection, doc, setDoc } from 'firebase/firestore';
+import { useDocumentData } from 'react-firebase-hooks/firestore';
 
 import { db } from '../firebase/clientApp';
 
-interface ServerSettings {
-  teamspeakUrl: string;
-  discordUrl: string;
-  ip: string;
+export interface ServerSettings {
+  teamspeakUrl?: string;
+  discordUrl?: string;
+  ip?: string;
 }
+
+type configRes = [
+  DocumentData | null | undefined,
+  (settings: ServerSettings) => Promise<void>
+];
 
 export default function useServerConfig() {
   const serverRef = collection(db, 'config');
   const configRef = doc(serverRef, 'server');
 
-  const [config] = useDocumentDataOnce(configRef);
+  const [config] = useDocumentData(configRef);
 
-  const setConfig = (settings: ServerSettings) => {
-    setDoc(configRef, settings, { merge: true });
+  const setConfig = async (settings: ServerSettings) => {
+    await setDoc(configRef, settings, { merge: true });
   };
 
-  return [config, setConfig];
+  return [config, setConfig] as configRes;
 }

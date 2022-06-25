@@ -1,8 +1,11 @@
 export default {
   test: 'test',
-  subHeader: 'Der Server für jederman',
+  subHeader: 'Eine Community von über!',
+  header: '${count} Spieler',
+  headerText:
+    'Der German Starter Server ist der grösste Community server von Rust. Sei ein teil davon!',
+  infoBtn: 'Infos anzeigen',
   joinBtn: 'Server beitreten',
-  headerText: `sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takim`,
   serverDescription: `[EU] German Starter ist ein einsteigerfreundlicher PvP Server. (das heißt nicht, dass du nicht getötet wirst) Das bedeutet, wenn du Fragen zum Spiel und zur Spielweise hast, werden diese beantwortet. Solltest du falsch gebaut haben, kannst du einen der Admins bitten, dir beim Entfernen einer Mauer zu helfen. Vollständige Wipes werden durchgeführt, wenn Facepunch seine monatlichen Patches durchführt. Bitte lest unsere Serverregeln, um Missverständnisse zu vermeiden`,
   pageNotFound: 'Seite nicht gefunden',
   navigation: {
@@ -115,6 +118,7 @@ export default {
     signUp: 'Registrieren',
   },
   signUp: {
+    username: 'Benutzername',
     success: 'Dein Profil wurde erfolgreich erstellt!',
   },
   from: {
@@ -127,9 +131,22 @@ export default {
       haveAccount: 'ich habe bereits ein Konto',
       noAccount: 'ich habe noch kein Konto',
       delete: 'Löschen',
+      retry: 'Erneut versuchen',
+      errors: {
+        required: 'Dieses Feld ist erforderlich',
+        email: 'Dies ist keine gültige E-Mail-Adresse',
+        password: 'Das Passwort muss mindestens ${count} Zeichen lang sein',
+        passwordConf: 'Die Passwörter stimmen nicht übere',
+        minLength: 'Das Passwort muss mindestens ${count} Zeichen lang sein',
+        file: {
+          tooLarge: 'Die Datei ist zu groß (max. ${size})',
+          type: 'Dieser Dateityp ist nicht erlaubt (erlaubt: ${types})',
+        },
+      },
     },
   },
   support: {
+    reportTypesTitle: 'Rückmeldung',
     report: {
       new: 'neue rückmeldung',
       completeHeader: 'Rückmeldung abschließen',
@@ -142,6 +159,7 @@ export default {
       typeHeader: 'Report art wählen',
       feedbackHeader: 'Deine Rückmeldung',
       report: 'Melden',
+      media: 'Beweise',
       types: [
         {
           name: 'Rückmeldung',
@@ -240,5 +258,6 @@ export default {
   map: {
     showLabels: 'Marker anzeigen',
     hideLabels: 'Marker vertecken',
+    notLoaded: 'Karte nicht geladen',
   },
 };

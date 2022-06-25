@@ -5,9 +5,9 @@ import { Timestamp } from '@firebase/firestore';
 import Markdown from 'markdown-to-jsx';
 import { HiPencil } from 'react-icons/hi';
 
-import { auth } from '../../../firebase/clientApp';
-import useAdmin from '../../../hooks/useAdmin';
+import useRole from '../../../hooks/useRole';
 import { checkIfSameDay } from '../../../lib/checkIfSameDay';
+import isAllowedRole from '../../../lib/firebase/isAllowedRole';
 import NewsCommentSection from '../CommentSection/CommentSection';
 import NewsAuthor from './NewsAuthor';
 
@@ -38,14 +38,15 @@ export default function NewsItem({
 }: NewsItemProps) {
   const { locale } = useRouter();
 
-  const [admin] = useAdmin(auth.currentUser);
+  const [role] = useRole(null);
+  const isAdmin = isAllowedRole(role?.id, 'admin');
 
   return (
     <article className={`${className} mb-10 scroll-m-36`} id={id}>
       <div className="border-b-2 pb-7 border-background-150">
         <div className="flex justify-between items-center">
           <h2 className="leading-none text-5xl">{title}</h2>
-          {admin && id && (
+          {isAdmin && id && (
             <>
               <Link href={`/admin/news/${id}`}>
                 <a>
@@ -64,7 +65,7 @@ export default function NewsItem({
                 .toDate()
                 .toLocaleDateString(locale, dateFormatOptions)}
         </p>
-        <div className="prose prose-invert prose-blockquote:border-background-150 prose-a:text-blue-500 prose-li:marker:text-background-150">
+        <div className="prose prose-invert prose-blockquote:border-background-150 prose-a:text-blue-500 prose-li:marker:text-background-150 prose-headings:font-normal">
           <Markdown>{content}</Markdown>
         </div>
         <div className="flex gap-3 mt-10">

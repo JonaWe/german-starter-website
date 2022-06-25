@@ -18,7 +18,7 @@ export default function LoginStep({
   reason,
 }: {
   back: () => void;
-  playerId: string;
+  playerId?: string;
   description: string;
   type: string;
   reason: { id: string; name: string };

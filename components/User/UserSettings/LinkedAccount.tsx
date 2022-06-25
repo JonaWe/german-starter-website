@@ -2,7 +2,13 @@ import Link from 'next/link';
 
 import useLocalization from '../../../hooks/useLocalization';
 
-export default function LinkedAccount({ steamUser }: { steamUser: any }) {
+export default function LinkedAccount({
+  steamUser,
+  editable = true,
+}: {
+  steamUser: any;
+  editable?: boolean;
+}) {
   const t = useLocalization();
   return (
     <div className="flex gap-2">
@@ -19,11 +25,13 @@ export default function LinkedAccount({ steamUser }: { steamUser: any }) {
           </div>
         </div>
       </a>
-      <Link href="api/steam/auth">
-        <a className="font-bebas text-xl py-2 px-4 flex items-center gap-1 text-sand-500 transition duration-150 bg-background-300 hover:bg-background-400">
-          {t.user.settings.steamAccount.change}
-        </a>
-      </Link>
+      {editable && (
+        <Link href="api/steam/auth">
+          <a className="font-bebas text-xl py-2 px-4 flex items-center gap-1 text-sand-500 transition duration-150 bg-background-300 hover:bg-background-400">
+            {t.user.settings.steamAccount.change}
+          </a>
+        </Link>
+      )}
     </div>
   );
 }

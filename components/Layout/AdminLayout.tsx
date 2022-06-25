@@ -6,7 +6,9 @@ import { IdTokenResult } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { DefaultLayoutHeadingContextProvider } from '../../context/defaultLayoutHeadingContext';
+import { ACCESS_ROLES, RoleId } from '../../data/AccessRoles';
 import { auth } from '../../firebase/clientApp';
+import isAllowedRole from '../../lib/firebase/isAllowedRole';
 import AdminNav from '../Admin/AdminNav';
 import LoadingScreen from '../UI/LoadingScreen';
 
@@ -21,6 +23,8 @@ function AdminLayout({ children }: LayoutProps) {
 
   const router = useRouter();
 
+  const REQUIRED_ROLE_ID: RoleId = 'admin';
+
   useEffect(() => {
     if (loading) {
     } else if (!loading && !user) {
@@ -28,13 +32,14 @@ function AdminLayout({ children }: LayoutProps) {
     } else if (user && !tokenResult) {
       user.getIdTokenResult().then((value) => setTokenResult(value));
     } else if (tokenResult) {
-      if (!tokenResult.claims.admin) {
+      if (!isAllowedRole(tokenResult.claims.role as RoleId, REQUIRED_ROLE_ID)) {
         router.push('/signin?successUrl=admin');
       }
     }
   }, [user, loading, router, tokenResult]);
 
-  if (!tokenResult?.claims.admin) return <LoadingScreen />;
+  if (!isAllowedRole(tokenResult?.claims.role as RoleId, REQUIRED_ROLE_ID))
+    return <LoadingScreen />;
 
   return (
     <DefaultLayoutHeadingContextProvider value={{ setHeading }}>

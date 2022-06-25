@@ -34,7 +34,7 @@ const AdminDoc: NextPageWithLayout = (props: any) => {
 
   return (
     <div className="pb-10">
-      <div className="prose prose-invert prose-blockquote:border-background-150 prose-a:text-blue-500 prose-li:marker:text-background-150 mx-auto w-full">
+      <div className="prose prose-invert prose-blockquote:border-background-150 prose-a:text-blue-500 prose-li:marker:text-background-150 mx-auto w-full prose-headings:font-normal">
         <Markdown>{readmeContent}</Markdown>
       </div>
       <span className="group w-fit absolute bottom-5">

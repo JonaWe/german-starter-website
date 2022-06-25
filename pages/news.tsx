@@ -23,6 +23,7 @@ export interface NewsItem {
   published: boolean;
   id: string;
   announced: boolean;
+  previewImageUrl?: string;
 }
 
 export interface NewsItemSerialisiert {

@@ -5,7 +5,8 @@ import { useRouter } from 'next/router';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection, doc, serverTimestamp } from 'firebase/firestore';
+import { ref } from 'firebase/storage';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
@@ -16,9 +17,11 @@ import LastStep from '../../components/ReportPlayer/LastStep';
 import LoginStep from '../../components/ReportPlayer/LoginStep';
 import SelectPlayer from '../../components/ReportPlayer/SelectPlayer';
 import SuccessStep from '../../components/ReportPlayer/SuccessStep';
+import FilePicker from '../../components/UI/Forms/FilePicker';
 import SimpleListbox from '../../components/UI/Listbox';
-import { auth, db } from '../../firebase/clientApp';
+import { auth, db, storage } from '../../firebase/clientApp';
 import useLocalization from '../../hooks/useLocalization';
+import uploadTicketImage from '../../lib/reports/uploadTicketImage';
 
 const schema = yup
   .object({
@@ -57,6 +60,9 @@ const fetchPlayer = async (steamid: string) => {
 
 const PlayerReport: NextPage = () => {
   const [step, setStep] = useState(1);
+  const [files, setFiles] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  const MAX_FILES = 2;
   const t = useLocalization();
   const [user] = useAuthState(auth);
 
@@ -107,17 +113,28 @@ const PlayerReport: NextPage = () => {
   const onSubmit = handleSubmit(async (data) => {
     if (!user) return nextStep();
 
+    setLoading(true);
+
     const ticketsRef = collection(db, 'tickets');
 
-    await addDoc(ticketsRef, {
+    const ticketRef = await addDoc(ticketsRef, {
       author: user.uid,
       reportedPlayer: data.player.steamid,
-      reason: data.reason.id || t.support.report.player.reasons[0],
+      reason: data.reason.id || t.support.report.player.reasons[0].id,
       description: data.description,
       createdAt: serverTimestamp(),
       type: 'PLAYER_REPORT',
     });
 
+    for (let i = 0; i < files.length; i++) {
+      try {
+        await uploadTicketImage(files[i], ticketRef, i.toString());
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    setLoading(false);
     nextStep();
   });
 
@@ -168,13 +185,31 @@ const PlayerReport: NextPage = () => {
                   {errors.description.message}
                 </div>
               )}
+              <label className="block my-1 text-sm">
+                {t.support.report.media}{' '}
+                <span className="text-xs opacity-75">
+                  ({files.length + '/' + MAX_FILES})
+                </span>
+              </label>
+              <FilePicker
+                accept={{
+                  'image/png': ['.png'],
+                  'image/jpeg': ['.jpe', '.jpeg', '.jpg'],
+                }}
+                maxFiles={MAX_FILES}
+                files={files}
+                onChange={(files) => setFiles(files)}
+              />
               <div className="flex justify-between items-center">
                 <LastStep
                   onClick={() => router.push('/support')}
                   name={t.support.report.new}
                   className="self-end mt-2"
                 />
-                <FinalStepButton className="self-end mt-2" />
+                <FinalStepButton
+                  disabled={loading}
+                  className={`self-end mt-2 ${loading ? 'animate-pulse' : ''}`}
+                />
               </div>
             </motion.div>
           )}
@@ -186,7 +221,7 @@ const PlayerReport: NextPage = () => {
               back={back}
               description={watch('description')}
               playerId={watch('player').steamid}
-              reason={watch('reason')}
+              reason={watch('reason') || t.support.report.player.reasons[0].id}
               type="player-report"
             />
           )}

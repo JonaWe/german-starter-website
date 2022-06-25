@@ -18,6 +18,12 @@ export interface Ticket {
   type: string;
   status?: string;
   createdAt: Timestamp;
+  uploads: Upload[];
+}
+
+interface Upload {
+  id: string;
+  url: string;
 }
 
 export interface TicketWithId extends Ticket {

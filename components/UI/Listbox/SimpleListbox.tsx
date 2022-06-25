@@ -18,7 +18,7 @@ export default function SimpleListbox({
     <Listbox value={selected} onChange={setSelected}>
       <div className="relative mt-1">
         <Listbox.Button className="relative w-full py-3 pl-3 pr-10 text-left bg-background-150 shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 sm:text-sm">
-          <span className="block truncate font-sans">{selected.name}</span>
+          <span className="block truncate font-sans">{selected?.name}</span>
           <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
             <HiChevronDown className="text-lg" />
           </span>
@@ -49,7 +49,7 @@ export default function SimpleListbox({
                         selected ? 'font-medium' : 'font-normal'
                       }`}
                     >
-                      {person.name}
+                      {person?.name}
                     </span>
                   </>
                 )}

@@ -3,20 +3,21 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
 import { useVirtualizer } from '@tanstack/react-virtual';
-import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from 'react-query';
 
-import { auth } from '../../../firebase/clientApp';
-import useAdmin from '../../../hooks/useAdmin';
+import useRole from '../../../hooks/useRole';
 import getAxios from '../../../lib/axios';
+import isAllowedRole from '../../../lib/firebase/isAllowedRole';
 import Button from '../../UI/Button';
 import InfoBox from '../../UI/Info';
+import CombatLogError from './CombatLogError';
 import LogItem, { EventType } from './LogItem';
 
 export default function CombatLog({ steamid }: { steamid: string }) {
   const [flatEvents, setFlatEvents] = useState<any>([]);
 
-  const [admin] = useAdmin(auth.currentUser);
+  const [role] = useRole(null);
+  const isAdmin = isAllowedRole(role?.id, 'admin');
 
   const [restricted, setRestricted] = useState(false);
 
@@ -82,12 +83,6 @@ export default function CombatLog({ steamid }: { steamid: string }) {
     rowVirtualizer.getVirtualItems(),
   ]);
 
-  // useEffect(() => {
-  //   if (inView) {
-  //     fetchNextPage();
-  //   }
-  // }, [inView]);
-
   useEffect(() => {
     refetch();
   }, [restricted]);
@@ -106,28 +101,13 @@ export default function CombatLog({ steamid }: { steamid: string }) {
     ));
 
   return (
-    <div className="w-full">
+    <div className="relative w-full before:absolute before:inset-x-0 before:bottom-0 before:h-1/6 before:z-10 before:bg-gradient-to-t before:from-background-500">
       {restricted ? 'Restricted view' : 'Full view'}
       <Button text="" onClick={() => setRestricted(!restricted)}>
         Toggle restricted
       </Button>
       {status === 'error' ? (
-        <InfoBox
-          info={
-            <span>
-              Unable to load log!{' '}
-              <Link
-                href={`/support/feedback?description=${
-                  'unable fetch log data: ' + String(error)
-                }`}
-              >
-                <a className="text-blue-500 underline">Report this issue</a>
-              </Link>
-            </span>
-          }
-          className="m-5"
-          type={'error'}
-        />
+        <CombatLogError message={String(error)} />
       ) : (
         <>
           <ul

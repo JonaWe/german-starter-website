@@ -3,4 +3,6 @@ export const AUTH_ERRORS = {
   EMAIL_ALREADY_EXIST: 'auth/email-already-exist',
   EMAIL_ALREADY_IN_USE: 'auth/email-already-in-use',
   INVALID_PASSWORD: 'auth/invalid-password',
+  WRONG_PASSWORD: 'auth/wrong-password',
+  TO_MANY_REQUESTS: 'auth/too-many-requests',
 };

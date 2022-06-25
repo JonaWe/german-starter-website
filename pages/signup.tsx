@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { useForm } from 'react-hook-form';
@@ -25,6 +25,7 @@ import { AUTH_ERRORS } from '../lib/firebase/errors';
 
 const schema = yup
   .object({
+    username: yup.string().required().max(20).min(3),
     password: yup
       .string()
       .required()
@@ -67,6 +68,12 @@ const SignIn: NextPage = () => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
         addAvatar();
+        if (auth?.currentUser)
+          updateProfile(auth.currentUser, {
+            displayName: data.username,
+          });
+        else console.log('could not set username');
+
         if (successUrl) router.push('/' + successUrl);
         else router.push('/user/link-steam-account');
       })
@@ -93,7 +100,7 @@ const SignIn: NextPage = () => {
         >
           <div className="flex p-10 pb-0 flex-col gap-3 justify-center">
             <div className="flex flex-col">
-              <label htmlFor="email" className="block mb-1 text-2xl font-bebas">
+              <label htmlFor="email" className="block text-2xl font-bebas">
                 {t.signIn.email}
               </label>
               <input {...register('email')} />
@@ -104,10 +111,18 @@ const SignIn: NextPage = () => {
               )}
             </div>
             <div className="flex flex-col">
-              <label
-                htmlFor="password"
-                className="block mb-1 text-2xl font-bebas"
-              >
+              <label htmlFor="username" className="block text-2xl font-bebas">
+                {t.signUp.username}
+              </label>
+              <input {...register('username')} />
+              {errors.email && (
+                <div className={`text-red-400 text-xs mt-2`}>
+                  {errors.username.message}
+                </div>
+              )}
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="password" className="block text-2xl font-bebas">
                 {t.signIn.pass}
               </label>
               <input type="password" {...register('password')} />
@@ -120,7 +135,7 @@ const SignIn: NextPage = () => {
             <div className="flex flex-col">
               <label
                 htmlFor="passwordRepeat"
-                className="block mb-1 text-2xl font-bebas"
+                className="block text-2xl font-bebas"
               >
                 {t.signIn.passConf}
               </label>

@@ -5,12 +5,13 @@ import axios from 'axios';
 import { auth, db } from '../../../../firebase/admin/firebaseAdmin';
 import { PY_LOG_PATH } from '../../../../lib/constants';
 import withAdminAuth from '../../../../lib/firebase/withAdminAuth';
+import withAuth from '../../../../lib/firebase/withAuth';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const user = await withAdminAuth(req, res);
+  const user = await withAuth(req, res, 'owner');
   if (!user) return;
 
   const DELIMITER = '\n';
