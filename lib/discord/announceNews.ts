@@ -6,7 +6,7 @@ export default async function announceNews(
   titleEn: string,
   titleDe: string,
   id: string,
-  previewImageUrl: string
+  previewImageUrl?: string
 ) {
   const user = auth.currentUser;
 
@@ -20,7 +20,7 @@ export default async function announceNews(
     `/api/admin/discord/announceNews`,
     {
       author: { name: user.displayName, photoURL: user.photoURL },
-      imageURL: previewImageUrl,
+      imageURL: previewImageUrl || '',
       titleEn,
       titleDe,
       id,
