@@ -9,8 +9,8 @@ export default function ProfileInfoItem({
 }) {
   return (
     <div className="mb-2">
-      <p className="leading-none">{value || '-'}</p>
       <p className="text-xs opacity-50">{label}</p>
+      <p className="leading-none">{value || '-'}</p>
     </div>
   );
 }

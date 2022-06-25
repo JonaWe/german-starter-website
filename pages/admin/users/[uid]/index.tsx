@@ -4,15 +4,18 @@ import { format } from 'date-fns';
 import { HiInformationCircle } from 'react-icons/hi';
 
 import ChangeRoleButton from '../../../../components/Admin/ManageUsers/UserPage/ChangeRoleButton';
+import ProfileInfo from '../../../../components/Admin/ManageUsers/UserPage/ProfileInfo';
 import ProfileInfoItem from '../../../../components/Admin/ManageUsers/UserPage/ProfileInfoItem';
 import ResolvedTickets from '../../../../components/Admin/ManageUsers/UserPage/ResolvedTickets';
 import ListTickets from '../../../../components/Admin/ManageUsers/UserPage/ResolvedTickets';
+import UserPageSteamInfo from '../../../../components/Admin/ManageUsers/UserPage/UserPageSteamInfo';
 import { getAdminLayout } from '../../../../components/Layout/AdminLayout';
 import Avatar from '../../../../components/UI/Avatar';
 import Breadcrumb from '../../../../components/UI/Breadcrumb';
 import InfoBox from '../../../../components/UI/Info';
 import LoadingScreen from '../../../../components/UI/LoadingScreen';
 import Tooltip from '../../../../components/UI/Tooltip';
+import LinkedAccount from '../../../../components/User/UserSettings/LinkedAccount';
 import { useSetHeading } from '../../../../context/defaultLayoutHeadingContext';
 import useUser from '../../../../hooks/admin/useUser';
 import { NextPageWithLayout } from '../../../_app';
@@ -58,29 +61,7 @@ const ManageUser: NextPageWithLayout = () => {
         </div>
         <div className="grid grid-cols-2">
           <div>
-            <h3 className="font-sans font-semibold mb-2">
-              Profile information
-            </h3>
-            <ProfileInfoItem value={user?.email} label={'E-Mail'} />
-            <ProfileInfoItem value={user?.displayName} label={'Username'} />
-            <ProfileInfoItem
-              value={format(
-                new Date(user?.metadata.creationTime || ''),
-                'MMM dd, yyyy'
-              )}
-              label={'Profile Created'}
-            />
-            <ProfileInfoItem
-              value={format(
-                new Date(user?.metadata.lastSignInTime || ''),
-                'MMM dd, yyyy'
-              )}
-              label={'Last sign in'}
-            />
-            <ProfileInfoItem
-              value={user?.disabled ? 'Disabled' : 'Active'}
-              label={'Status'}
-            />
+            <ProfileInfo user={user} />
             <span className="flex items-center gap-1">
               <h3 className="font-sans font-semibold items-center gap-3">
                 Role
@@ -90,8 +71,9 @@ const ManageUser: NextPageWithLayout = () => {
               </Tooltip>
             </span>
             {user && <ChangeRoleButton uid={user.uid} />}
+            {user && <UserPageSteamInfo uid={user.uid} />}
           </div>
-          <div className='grid grid-cols-2'>
+          <div className="grid grid-cols-2">
             <div>
               <h3 className="font-sans font-semibold mb-4">Resolved Tickets</h3>
               {user && <ListTickets filter={'resolvedBy'} uid={user.uid} />}
