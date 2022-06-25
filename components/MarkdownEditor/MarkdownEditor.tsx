@@ -31,17 +31,14 @@ import Tooltip from '../UI/Tooltip';
 import LanguagePill from './LanguagePill';
 import MarkdownEditorInputItem from './MarkdownEditorInputItem';
 
-const schema = yup
-  .object({
-    title: yup.string().required('Title is required').min(5).max(35),
-    content: yup.string().required('Content is required').min(10).max(10000),
-    titleEn: yup.string().required('Title is required').min(5).max(35),
-    contentEn: yup.string().required('Content is required').min(10).max(10000),
-    announce: yup.boolean(),
-    previewImageUrl: yup
-      .string()
-      .url(),
-  });
+const schema = yup.object({
+  title: yup.string().required('Title is required').min(5).max(35),
+  content: yup.string().required('Content is required').min(10).max(10000),
+  titleEn: yup.string().required('Title is required').min(5).max(35),
+  contentEn: yup.string().required('Content is required').min(10).max(10000),
+  announce: yup.boolean(),
+  previewImageUrl: yup.string().url(),
+});
 
 export interface FormInput {
   title: string;
@@ -51,7 +48,7 @@ export interface FormInput {
   authors: string[];
   published: boolean;
   announce: boolean;
-  previewImageUrl: string;
+  previewImageUrl?: string;
 }
 
 interface MarkdownEditorProps {
@@ -133,7 +130,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
       },
       releaseDate: newsItem?.releaseDate ?? serverTimestamp(),
       authors: data.authors,
-      previewImageUrl: data.previewImageUrl,
+      previewImageUrl: data?.previewImageUrl || '',
     };
 
     if (newsItem) {
