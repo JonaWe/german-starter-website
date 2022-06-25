@@ -65,6 +65,8 @@ const SignIn: NextPage = () => {
           error.message.includes(AUTH_ERRORS.WRONG_PASSWORD)
         )
           setAuthError('Invalid password!');
+        else if (error.message.includes(AUTH_ERRORS.TO_MANY_REQUESTS))
+          setAuthError('Access to this account has been temporarily disabled due to many failed login attempts!');
         else {
           console.log(error.message);
           setAuthError('Ups, something wrong!');
