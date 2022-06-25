@@ -56,7 +56,7 @@ CREATE FULLTEXT INDEX text_search ON players(name)
 - [x] Show related profiles on user profile page (Social Media like) and show friends on server
 - [ ] Show highest kill streak.
 - [ ] show overall rust stats. If not public show demo graphs blurred like vercel
-- [ ] Add image to discord announce. Default grab first url from text.
+- [x] Add image to discord announce. Default grab first url from text.
 - [ ] show player log with nice design like github ink name changes, kills, deaths, pve deaths.
 - [ ] Calculate skill value or level for player based of stats
 - [ ] Option to ban player from comments
@@ -64,7 +64,7 @@ CREATE FULLTEXT INDEX text_search ON players(name)
 - [ ] Add watch player option. If some one watches a player he always sees him on the main page (or some where else)
 - [X] Add something to the header like the current players "We have **13000+** active players"
 - [ ] Show last wipe in the header. Small or large Badge stamp if it hast just wiped 1-2 days ago.
-- [ ] Different roles. Admin/Moderator with different access levels (Important for VIP)
+- [x] Different roles. Admin/Moderator with different access levels (Important for VIP)
 - [ ] VIP shop
 - [ ] Map voting
 
@@ -72,3 +72,5 @@ CREATE FULLTEXT INDEX text_search ON players(name)
 
 - Force steam sign in?
 - Convert names of pve deaths back do ids on don't convert new ones in python script? Format in frontend instead. maybe display additional info (Frontend logic implementation is done)
+- Combat log public
+- Stripe with a lot of payment methods but paypal or just paypal
