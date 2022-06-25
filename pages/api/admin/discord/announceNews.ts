@@ -48,5 +48,7 @@ export default async function handler(
 
   hook.send(embed);
 
+  console.log(imageURL);
+
   res.status(200).json({});
 }

@@ -38,8 +38,10 @@ const schema = yup
     titleEn: yup.string().required('Title is required').min(5).max(35),
     contentEn: yup.string().required('Content is required').min(10).max(10000),
     announce: yup.boolean(),
-  })
-  .required();
+    previewImageUrl: yup
+      .string()
+      .url(),
+  });
 
 export interface FormInput {
   title: string;
@@ -49,6 +51,7 @@ export interface FormInput {
   authors: string[];
   published: boolean;
   announce: boolean;
+  previewImageUrl: string;
 }
 
 interface MarkdownEditorProps {
@@ -98,6 +101,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
     setValue('contentEn', newsItem.en.content);
     setValue('published', newsItem.published);
     setValue('authors', newsItem.authors);
+    setValue('previewImageUrl', newsItem?.previewImageUrl);
     setValue('announce', !newsItem.announced);
   }, [newsItem, setValue, user]);
 
@@ -129,6 +133,7 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
       },
       releaseDate: newsItem?.releaseDate ?? serverTimestamp(),
       authors: data.authors,
+      previewImageUrl: data.previewImageUrl,
     };
 
     if (newsItem) {
@@ -231,6 +236,14 @@ export default function MarkdownEditor({ newsItem }: MarkdownEditorProps) {
               </a>
             </Tooltip>
           </span>
+          <MarkdownEditorInputItem
+            title={'Preview image url'}
+            placeholder="http://example.com/image.png"
+            register={register}
+            input="previewImageUrl"
+            errors={errors}
+            as="input"
+          />
           <label className="text-sand-500 pb-1 mt-4" htmlFor={'author'}>
             Authors
           </label>
