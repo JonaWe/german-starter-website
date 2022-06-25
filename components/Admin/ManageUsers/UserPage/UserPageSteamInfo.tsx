@@ -12,7 +12,7 @@ export default function UserPageSteamInfo({ uid }: { uid: string }) {
   const userRef = doc(db, 'users', uid);
   const [userData, error] = useDocumentData(userRef);
 
-  const [steamUser] = useSteamUser(userData?.settings.steamid);
+  const [steamUser] = useSteamUser(userData?.settings?.steamid);
 
   console.log(steamUser);
 
