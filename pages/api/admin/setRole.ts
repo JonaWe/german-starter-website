@@ -38,7 +38,6 @@ export default async function handler(
     });
 
     db.doc(`users/${userToChange.uid}`).set({ role }, { merge: true });
-    console.log(userToChange.uid);
 
     return res.status(200).send('success');
   } catch (err) {

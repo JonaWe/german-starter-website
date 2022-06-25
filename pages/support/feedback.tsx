@@ -67,8 +67,6 @@ const Feedback: NextPage = () => {
   const onSubmit = handleSubmit(async (data) => {
     if (!user) return nextStep();
 
-    console.log(data);
-
     const ticketsRef = collection(db, 'tickets');
 
     await addDoc(ticketsRef, {

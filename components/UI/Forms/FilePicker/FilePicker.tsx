@@ -37,8 +37,6 @@ export default function FilePicker({
       maxSize: maxSize,
     });
 
-  console.log(fileRejections);
-
   return (
     <>
       {files.length < maxFiles && (
