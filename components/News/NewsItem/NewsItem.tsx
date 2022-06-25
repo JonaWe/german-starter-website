@@ -5,11 +5,11 @@ import { Timestamp } from '@firebase/firestore';
 import Markdown from 'markdown-to-jsx';
 import { HiPencil } from 'react-icons/hi';
 
+import useRole from '../../../hooks/useRole';
 import { checkIfSameDay } from '../../../lib/checkIfSameDay';
+import isAllowedRole from '../../../lib/firebase/isAllowedRole';
 import NewsCommentSection from '../CommentSection/CommentSection';
 import NewsAuthor from './NewsAuthor';
-import useRole from '../../../hooks/useRole';
-import isAllowedRole from '../../../lib/firebase/isAllowedRole';
 
 interface NewsItemProps {
   title: string;
@@ -65,7 +65,7 @@ export default function NewsItem({
                 .toDate()
                 .toLocaleDateString(locale, dateFormatOptions)}
         </p>
-        <div className="prose prose-invert prose-blockquote:border-background-150 prose-a:text-blue-500 prose-li:marker:text-background-150">
+        <div className="prose prose-invert prose-blockquote:border-background-150 prose-a:text-blue-500 prose-li:marker:text-background-150 prose-headings:font-normal">
           <Markdown>{content}</Markdown>
         </div>
         <div className="flex gap-3 mt-10">
