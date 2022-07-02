@@ -47,7 +47,7 @@ export default function VotingItem({
             />
           </span>
         </div>
-        <div className="text-4xl translate-y-6 group-hover:translate-y-0 opacity-0 group-hover:opacity-40 transition-all py-3 px-4 bg-background-400/80 border-2">
+        <div className="text-4xl translate-y-6 group-hover:translate-y-0 opacity-0 group-hover:opacity-40 transition-all py-2 px-3 bg-background-400/80 border-2">
           <h2 className="">{votes}</h2>
         </div>
       </div>
