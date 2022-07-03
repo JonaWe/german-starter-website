@@ -34,7 +34,7 @@ const Home: NextPageWithLayout<HomeProps> = ({
 
 Home.getLayout = getDefaultLayout();
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   let totalPlayerCount = 0;
   let totalPvPEvents: any = 0;
 
@@ -46,7 +46,7 @@ export async function getServerSideProps() {
   } catch (err) {
     totalPlayerCount = -1;
     totalPvPEvents = -1;
-    console.log(err);
+    throw new Error(`Failed to fetch social proof, received status ${err}`);
   }
 
   return {
@@ -54,6 +54,7 @@ export async function getServerSideProps() {
       totalPlayerCount,
       totalPvPEvents,
     },
+    revalidate: 60 * 60 * 10,
   };
 }
 
