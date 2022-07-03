@@ -57,8 +57,9 @@ export default function Header({
         </header>
         <div className="md:-mt-24 -mt-12 w-full bg-background-500 flex items-center justify-center md:pt-10 pt-3">
           <div className="flex justify-between gap-5 sm:gap-20 sm:overflow-hidden overflow-auto">
-            {socialProofItems.map(({ name, value, format }) => (
+            {socialProofItems.map(({ name, value, format }, i) => (
               <SocialProofItem
+                key={name + i}
                 name={name}
                 value={value}
                 format={format as Format}
