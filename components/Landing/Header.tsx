@@ -31,7 +31,7 @@ export default function Header({
     },
     {
       name: 'Discord members',
-      value: discordInfo.approximate_member_count,
+      value: discordInfo?.approximate_member_count,
       format: 'compact',
     },
   ];
