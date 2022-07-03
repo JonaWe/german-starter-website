@@ -21,10 +21,7 @@ const Home: NextPageWithLayout<HomeProps> = ({
   const t = useLocalization();
   return (
     <div className="">
-      <Header
-        playerCount={totalPlayerCount}
-        totalPvPEvents={totalPvPEvents}
-      />
+      <Header playerCount={totalPlayerCount} totalPvPEvents={totalPvPEvents} />
       <PageContent>
         <Server />
         <Community />
@@ -39,7 +36,7 @@ Home.getLayout = getDefaultLayout();
 
 export async function getServerSideProps() {
   let totalPlayerCount = 0;
-  let totalPvPEvents: any;
+  let totalPvPEvents: any = 0;
 
   try {
     totalPlayerCount = await prisma.players.count();
