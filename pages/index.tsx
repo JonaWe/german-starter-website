@@ -11,13 +11,20 @@ import { NextPageWithLayout } from './_app';
 
 interface HomeProps {
   totalPlayerCount: number;
+  totalPvPEvents: number;
 }
 
-const Home: NextPageWithLayout<HomeProps> = ({ totalPlayerCount }) => {
+const Home: NextPageWithLayout<HomeProps> = ({
+  totalPlayerCount,
+  totalPvPEvents,
+}) => {
   const t = useLocalization();
   return (
     <div className="">
-      <Header playerCount={totalPlayerCount} />
+      <Header
+        playerCount={totalPlayerCount}
+        totalPvPEvents={totalPvPEvents}
+      />
       <PageContent>
         <Server />
         <Community />
@@ -32,16 +39,23 @@ Home.getLayout = getDefaultLayout();
 
 export async function getServerSideProps() {
   let totalPlayerCount = 0;
+  let totalPvPEvents: any;
 
   try {
     totalPlayerCount = await prisma.players.count();
-  } catch {
+    totalPvPEvents =
+      await prisma.$queryRaw`SELECT count(killer_steamid) as totalPvPEvents FROM pvplog`;
+    totalPvPEvents = totalPvPEvents[0].totalPvPEvents;
+  } catch (err) {
     totalPlayerCount = -1;
+    totalPvPEvents = -1;
+    console.log(err);
   }
 
   return {
     props: {
-      totalPlayerCount: totalPlayerCount,
+      totalPlayerCount,
+      totalPvPEvents,
     },
   };
 }

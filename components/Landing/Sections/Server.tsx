@@ -30,7 +30,10 @@ export default function Server() {
   const { data: map, refetch } = useServerMap();
 
   return (
-    <section className="sm:m-10 sm:mt-32 mb-20 sm:mb-0 scroll-mt-[40vh]" id="server">
+    <section
+      className="sm:m-10 sm:mt-32 mb-20 sm:mb-0 scroll-mt-[40vh]"
+      id="server"
+    >
       <div className="mx-auto h-full max-w-screen-md bg-background-400/60 p-5 pb-12 text-center relative">
         <Badge text="Server" className="mx-auto -translate-y-10 relative z-10">
           <div className="relative w-7 h-7">
@@ -53,7 +56,9 @@ export default function Server() {
             </Tooltip>
           </div>
           <div className="mt-6 flex justify-center gap-5">
-            <JoinButton />
+            <span className="sm:block hidden">
+              <JoinButton />
+            </span>
             <Button href="/rules" text="Rules" useLink />
             <RustMap reload={refetch} map={map} variant="button" />
           </div>
