@@ -2,7 +2,6 @@ import Image from 'next/image';
 
 import { Background, Parallax } from 'react-parallax';
 
-import useDiscordServerInfo from '../../hooks/useDiscordServerInfo';
 import useLocalization from '../../hooks/useLocalization';
 import JoinButton from '../Buttons/JoinButton';
 import Button from '../UI/Button';

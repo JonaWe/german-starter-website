@@ -265,4 +265,8 @@ export default {
     hideLabels: 'Marker vertecken',
     notLoaded: 'Karte nicht geladen',
   },
+  voting: {
+    openInRustMaps: 'Auf RustMaps anzeigen',
+    vote: 'Abstimmen',
+  },
 };

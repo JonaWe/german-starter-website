@@ -264,4 +264,8 @@ export default {
     hideLabels: 'Hide labels',
     notLoaded: 'Map not loaded',
   },
+  voting: {
+    openInRustMaps: 'Show in RustMaps',
+    vote: 'Vote',
+  },
 };

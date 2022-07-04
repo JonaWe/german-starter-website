@@ -9,6 +9,7 @@ import {
 } from 'react-firebase-hooks/firestore';
 
 import { db } from '../../firebase/clientApp';
+import useLocalization from '../../hooks/useLocalization';
 import getDataWithId from '../../lib/firebase/getDataWithId';
 import VotingItem from './VotingItem';
 
@@ -16,6 +17,7 @@ export default function VotingItems({ id }: { id: string }) {
   const votingRef = doc(db, 'voting', id);
   const mapsRef = collection(db, 'voting', id, 'maps');
   const [selectedMap, setSelectedMap] = useState('startup');
+  const t = useLocalization();
 
   const [votingInfo, loadingInfo] = useDocumentData(votingRef);
   const [mapsSnap, loadingMap] = useCollection(mapsRef);
