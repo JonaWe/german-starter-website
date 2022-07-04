@@ -11,27 +11,28 @@ import SocialProofItem, { Format } from './SocialProofItem';
 export default function Header({
   playerCount,
   totalPvPEvents,
+  discordMembers,
 }: {
   playerCount: number;
+  discordMembers: number;
   totalPvPEvents: number;
 }) {
   const t = useLocalization();
-  const { data: discordInfo } = useDiscordServerInfo();
 
   const socialProofItems = [
     {
-      name: 'Community',
+      name: t.header.socialProof.community,
       value: playerCount,
       format: 'compact',
     },
     {
-      name: 'Recorded PvP events',
+      name: t.header.socialProof.events,
       value: totalPvPEvents,
       format: 'compact',
     },
     {
-      name: 'Discord members',
-      value: discordInfo?.approximate_member_count,
+      name: t.header.socialProof.discordMembers,
+      value: discordMembers,
       format: 'compact',
     },
   ];
@@ -46,7 +47,7 @@ export default function Header({
           <div className="w-full text-center flex items-center flex-col">
             <h1 className="leading-none tracking-widest md:-mb-10">German</h1>
             <h1 className="leading-none tracking-widest">Starter</h1>
-            <p className="mb-6 sm:max-w-[30%]">{t.headerText}</p>
+            <p className="mb-6 sm:max-w-[30%]">{t.header.text}</p>
             <div className="flex gap-5">
               <span className="hidden sm:block">
                 <JoinButton />
