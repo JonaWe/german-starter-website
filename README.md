@@ -70,7 +70,7 @@ CREATE FULLTEXT INDEX text_search ON players(name)
 
 ## Questions
 
-- Force steam sign in?
-- Convert names of pve deaths back do ids on don't convert new ones in python script? Format in frontend instead. maybe display additional info (Frontend logic implementation is done)
-- Combat log public
-- Stripe with a lot of payment methods but paypal or just paypal
+- Force steam sign in? / no
+- Convert names of pve deaths back do ids on don't convert new ones in python script? Format in frontend instead. maybe display additional info (Frontend logic implementation is done) / yes
+- Combat log public / yes, but limite number of entries and only show names to logged in users
+- Stripe with a lot of payment methods but paypal or just paypal / paypal
