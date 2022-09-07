@@ -77,7 +77,7 @@ const News: NextPageWithLayout<NewsPageProps> = ({
 
 News.getLayout = getDefaultLayout('/assets/images/news_banner.jpg');
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   return {
     props: {
       newsItems: (await getPublicNewsArticle()).map((item) => {
