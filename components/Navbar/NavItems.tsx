@@ -20,8 +20,8 @@ export const navigationItems: NavigationItem[] = [
   { id: 'rules', href: '/rules', external: false },
   {
     id: 'playerstats',
-    href: '/stats',
-    external: false,
+    href: 'https://playerstats.german-starter.de/', // /stats
+    external: true, // flase
   },
 ];
 
