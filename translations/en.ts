@@ -98,7 +98,7 @@ export default {
   },
   community: {
     title: 'Just have fun!',
-    text: `!!TEMP!! [EU] German Starter is a newbie friendly PvP Server. (that doesn't mean you won't be killed) That means if you have Questions about the game and how to play they will be answered. In case you've build wrong you can ask one of the Admins to help you removing a Wall. Full wipes are being done when Facepunch does their Monthly patches. Please read our Server rules to prevent misconceptions.`,
+    text: `[EU] German Starter is a newbie friendly PvP Server. (that doesn't mean you won't be killed) That means if you have Questions about the game and how to play they will be answered. In case you've build wrong you can ask one of the Admins to help you removing a Wall. Full wipes are being done when Facepunch does their Monthly patches. Please read our Server rules to prevent misconceptions.`,
   },
   benefits: [
     {
