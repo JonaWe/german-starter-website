@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 
 import { Timestamp } from '@firebase/firestore';
+import { HiNewspaper } from 'react-icons/hi';
 import StickyBox from 'react-sticky-box';
 
 import { getDefaultLayout } from '../components/Layout/DefaultLayout';
@@ -46,7 +47,14 @@ const News: NextPageWithLayout<NewsPageProps> = ({
   useSetHeading(t.newsPage.title);
   return (
     <section className="flex justify-center">
-      {(!newsItems || newsItems.length === 0) && <p>No News found!</p>}
+      {(!newsItems || newsItems.length === 0) && (
+        <div className="w-full h-32 flex items-center justify-center">
+          <div className="flex flex-col items-center opacity-20">
+            <HiNewspaper className="text-7xl" />
+            <p>No news published yet!</p>
+          </div>
+        </div>
+      )}
       <div className="w-full flex items-start sm:gap-10">
         {/* FIXME: Fix offsetTop not working */}
         <StickyBox offsetTop={0} offsetBottom={0}>
