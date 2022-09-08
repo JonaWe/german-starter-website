@@ -26,7 +26,7 @@ export default function LinkedAccount({
         </div>
       </a>
       {editable && (
-        <Link href="api/steam/auth">
+        <Link href="/api/steam/auth">
           <a className="font-bebas text-xl py-2 px-4 flex items-center gap-1 text-sand-500 transition duration-150 bg-background-300 hover:bg-background-400">
             {t.user.settings.steamAccount.change}
           </a>
