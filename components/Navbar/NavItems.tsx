@@ -45,16 +45,21 @@ export default function NavItems() {
     };
   }, [router]);
 
-  const currentNavItem = navigationItems.find(
-    (item) => item.href === activeItem
-  );
+  const currentNavItem =
+    activeItem === '/'
+      ? ''
+      : navigationItems.find((item) => item.href === activeItem);
 
   return (
     <>
       <Head>
         <title>
           German Starter |{' '}
-          {currentNavItem ? t.navigation[currentNavItem.id] : '404'}
+          {currentNavItem === ''
+            ? 'Home'
+            : currentNavItem
+            ? t.navigation[currentNavItem.id]
+            : activeItem.replace('/', '')}
         </title>
       </Head>
       <nav className="md:flex flex-row place-content-between items-center gap-7 h-full overflow-hidden md:mx-auto">
