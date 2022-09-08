@@ -17,7 +17,7 @@ export default function Navbar() {
       className={`left-0 top-0 fixed z-50 flex w-screen justify-center px-6 py-2 ${
         scrollDistance === 0
           ? 'bg-transparent pt-8 drop-shadow-none'
-          : 'bg-background-500 pt-2 drop-shadow-xl'
+          : 'bg-background-500 pt-2 drop-shadow-xl' //modern alternative nav bg: backdrop-blur-md bg-background-500/60
       } transition-all duration-[400ms]`}
     >
       <div className="flex w-full max-w-screen-2xl flex-row place-content-between items-center gap-4">

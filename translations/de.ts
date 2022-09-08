@@ -1,12 +1,17 @@
 export default {
   test: 'test',
-  subHeader: 'Eine Community von über!',
-  header: '${count} Spieler',
-  headerText:
-    'Der German Starter Server ist der grösste Community server von Rust. Sei ein teil davon!',
+  header: {
+    sub: 'Eine Community von über!',
+    text: 'Der German Starter Server ist der grösste Community server von Rust. Sei ein teil davon!',
+    socialProof: {
+      community: 'Rust Community',
+      events: 'Aufgezeichnete Events',
+      discordMembers: 'Discord Mitglieder',
+    },
+  },
   infoBtn: 'Infos anzeigen',
   joinBtn: 'Server beitreten',
-  serverDescription: `[EU] German Starter ist ein einsteigerfreundlicher PvP Server. (das heißt nicht, dass du nicht getötet wirst) Das bedeutet, wenn du Fragen zum Spiel und zur Spielweise hast, werden diese beantwortet. Solltest du falsch gebaut haben, kannst du einen der Admins bitten, dir beim Entfernen einer Mauer zu helfen. Vollständige Wipes werden durchgeführt, wenn Facepunch seine monatlichen Patches durchführt. Bitte lest unsere Serverregeln, um Missverständnisse zu vermeiden`,
+  serverDescription: `[EU] German Starter ist ein einsteiger freundlicher PvP Server. (das heißt nicht, dass du nicht getötet wirst) Das bedeutet, wenn du Fragen zum Spiel und zur Spielweise hast, werden diese beantwortet. Solltest du falsch gebaut haben, kannst du einen der Admins bitten, dir beim Entfernen einer Mauer zu helfen. Vollständige Wipes werden durchgeführt, wenn Facepunch seine monatlichen Patches durchführt. Bitte lest unsere Serverregeln, um Missverständnisse zu vermeiden`,
   pageNotFound: 'Seite nicht gefunden',
   navigation: {
     home: 'Home',
@@ -91,7 +96,7 @@ export default {
   },
   community: {
     title: 'Purer Spass!',
-    text: `[EU] German Starter is a newbie friendly PvP Server. (that doesn't mean you won't be killed) That means if you have Questions about the game and how to play they will be answered. In case you've build wrong you can ask one of the Admins to help you removing a Wall. Full wipes are being done when Facepunch does their Monthly patches. Please read our Server rules to prevent misconceptions.`,
+    text: `[EU] German Starter ist ein einsteiger freundlicher PvP Server. (Das bedeutet nicht, dass du nicht getötet wirst) Das bedeutet, wenn du Fragen über das Spiel und wie man spielt hast, werden sie beantwortet. Solltest du falsch gebaut haben, kannst du einen der Admins bitten, dir beim Entfernen einer Mauer zu helfen. Vollständige Wipes werden durchgeführt, wenn Facepunch seine monatlichen Patches durchführt. Bitte lest unsere Serverregeln, um Missverständnisse zu vermeiden.`,
   },
   benefits: [
     {
@@ -259,5 +264,9 @@ export default {
     showLabels: 'Marker anzeigen',
     hideLabels: 'Marker vertecken',
     notLoaded: 'Karte nicht geladen',
+  },
+  voting: {
+    openInRustMaps: 'Auf RustMaps anzeigen',
+    vote: 'Abstimmen',
   },
 };

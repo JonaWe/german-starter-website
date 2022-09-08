@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 
 import { motion } from 'framer-motion';
 
+import useLocalization from '../../hooks/useLocalization';
 import ArrowButton from '../UI/ArrowButton';
 
 interface VotingItemProps {
@@ -23,32 +24,30 @@ export default function VotingItem({
   checked,
   isMostVoted,
 }: VotingItemProps) {
+  const t = useLocalization();
   return (
     <div
-      className={`bg-background-700 w-80 flex flex-col transition-all duration-300 hover:scale-105 border-rust-500 group ${
+      className={`bg-background-700 w-80 flex flex-col transition-all duration-300 hover:scale-105 border-rust-500 relative ${
         checked
           ? 'scale-105 shadow-rust-500/40 shadow-2xl'
           : 'scale-100 hover:shadow-rust-500/10 hover:shadow-2xl'
       }`}
     >
-      <div className="relative">
+      <div className="relative z-10">
         <div className="absolute bg-gradient-to-t from-background-700 -bottom-1 w-full h-1/3" />
         <img src={imageURL || ''} alt="map" className="w" />
       </div>
-      <div className="px-5 pb-5 pt-1 flex justify-between items-center">
+      <div className="px-5 pb-5 pt-1 flex justify-between items-center bg-background-700">
         <div>
           <h2 className="-mb-2 text-4xl">{name}</h2>
           <span className="group inline-block">
             <ArrowButton
-              text={'maashalla mach auf'}
+              text={t.voting.openInRustMaps}
               onClick={() => {
                 if (mapURL) window.open(mapURL);
               }}
             />
           </span>
-        </div>
-        <div className="text-4xl translate-y-6 group-hover:translate-y-0 opacity-0 group-hover:opacity-40 transition-all py-2 px-3 bg-background-400/80 border-2">
-          <h2 className="">{votes}</h2>
         </div>
       </div>
       <span className="bg-background-600 h-2">
@@ -64,6 +63,11 @@ export default function VotingItem({
           />
         )}
       </span>
+      <div
+        className={`absolute inset-0 bg-rust-500/50 transition-all -z-10 ${
+          checked ? 'translate-x-2 translate-y-2' : ''
+        }`}
+      />
     </div>
   );
 }

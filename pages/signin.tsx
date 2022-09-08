@@ -39,7 +39,9 @@ const SignIn: NextPage = () => {
     .map((key) => key + '=' + router.query[key])
     .join('&');
 
-  const successUrl = router.query.successUrl + '?' + returnParams;
+  const successUrl = router.query.successUrl
+    ? router.query.successUrl.toString()
+    : '' + '?' + returnParams;
 
   const {
     register,
@@ -66,7 +68,9 @@ const SignIn: NextPage = () => {
         )
           setAuthError('Invalid password!');
         else if (error.message.includes(AUTH_ERRORS.TO_MANY_REQUESTS))
-          setAuthError('Access to this account has been temporarily disabled due to many failed login attempts!');
+          setAuthError(
+            'Access to this account has been temporarily disabled due to many failed login attempts!'
+          );
         else {
           console.log(error.message);
           setAuthError('Ups, something wrong!');
@@ -74,11 +78,7 @@ const SignIn: NextPage = () => {
       });
   });
 
-  const authConfig = uiConfig(
-    githubAuth,
-    googleAuth,
-    successUrl ? successUrl.toString() : ''
-  );
+  const authConfig = uiConfig(githubAuth, googleAuth, successUrl);
 
   return (
     <>

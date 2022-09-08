@@ -21,7 +21,7 @@ export default function NewsNav({
 }: {
   newsItems: NewsItemSerialisiert[];
 }) {
-  const [current, setCurrent] = useState(newsItems[0].id);
+  const [current, setCurrent] = useState(newsItems?.[0]?.id);
   const { locale } = useRouter();
   return (
     <nav className="hidden sm:block">

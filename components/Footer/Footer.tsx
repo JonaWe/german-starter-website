@@ -1,6 +1,14 @@
 import Link from 'next/link';
 
-import { FaDiscord, FaGithub, FaSteam } from 'react-icons/fa';
+import {
+  FaDiscord,
+  FaGithub,
+  FaInstagram,
+  FaSteam,
+  FaTiktok,
+  FaTwitch,
+  FaYoutube,
+} from 'react-icons/fa';
 
 import useServerConfig from '../../hooks/useServerConfig';
 import NavItems from '../Navbar/NavItems';
@@ -32,6 +40,34 @@ export default function Footer() {
         <FaSteam className="text-xl fill-sand-500/60 hover:fill-sand-500 hover:scale-105 hover:cursor-pointer transition-all" />
       ),
       link: 'https://steamcommunity.com/groups/BHDRML',
+    },
+    {
+      name: 'Instagram',
+      icon: (
+        <FaInstagram className="text-xl fill-sand-500/60 hover:fill-sand-500 hover:scale-105 hover:cursor-pointer transition-all" />
+      ),
+      link: 'https://www.instagram.com/germanstarterpython/',
+    },
+    {
+      name: 'Twitch',
+      icon: (
+        <FaTwitch className="text-xl fill-sand-500/60 hover:fill-sand-500 hover:scale-105 hover:cursor-pointer transition-all" />
+      ),
+      link: 'https://www.twitch.tv/germanstarter',
+    },
+    {
+      name: 'TikTok',
+      icon: (
+        <FaTiktok className="text-xl fill-sand-500/60 hover:fill-sand-500 hover:scale-105 hover:cursor-pointer transition-all" />
+      ),
+      link: 'https://www.tiktok.com/@germanstarterpython666',
+    },
+    {
+      name: 'YouTube',
+      icon: (
+        <FaYoutube className="text-xl fill-sand-500/60 hover:fill-sand-500 hover:scale-105 hover:cursor-pointer transition-all" />
+      ),
+      link: 'https://www.youtube.com/channel/UCG93H9st6x0W7YNdb1lUX6A/featured',
     },
   ];
 
