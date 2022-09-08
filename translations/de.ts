@@ -176,11 +176,11 @@ export default {
           description: 'Melde einen Spieler',
           id: 'PLAYER_REPORT',
         },
-        {
-          name: 'Bug',
-          description: 'Melde einen Bug',
-          id: 'BUG',
-        },
+        // {
+        //   name: 'Bug',
+        //   description: 'Melde einen Bug',
+        //   id: 'BUG',
+        // },
       ],
       player: {
         selection: 'Selact a player',
