@@ -38,14 +38,14 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         <CommandPallet />
         <PageProgress />
         <DefaultSeo
-          title="German Starter Server"
+          title="[EU] German Starter Server"
           additionalLinkTags={additionalLinkTags}
-          description="German Starter Server"
+          description="German Starter Server, the largest community server of Rust."
           canonical="https://www.german-starter.de"
           openGraph={{
             url: 'https://www.german-starter.de',
-            title: 'German Starter Server',
-            description: 'German Starter Server',
+            title: '[EU] German Starter Server',
+            description: 'German Starter Server, the largest community server of Rust.',
             images: [
               {
                 url: 'https://www.german-starter.de/assets/images/banner_bg.png',
