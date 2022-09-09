@@ -1,3 +1,5 @@
+import Banner from '../../public/assets/images/banner_bg_4.webp';
+
 import Image from 'next/image';
 
 import { Background, Parallax } from 'react-parallax';
@@ -70,7 +72,8 @@ export default function Header({
       </div>
       <Background className="w-screen h-screen">
         <Image
-          src="/assets/images/banner_bg_4.png"
+          src={Banner}
+          placeholder={'blur'}
           alt="banner"
           layout="fill"
           objectFit="cover"

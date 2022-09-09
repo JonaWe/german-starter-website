@@ -21,7 +21,7 @@ export default function Community() {
         </Badge>
         <div className="h-full w-full absolute">
           <Image
-            src="/assets/images/community.png"
+            src="/assets/images/community.webp"
             className="absolute inset-0"
             layout="fill"
             objectFit="cover"

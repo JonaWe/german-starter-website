@@ -17,7 +17,7 @@ export default function Team() {
         <Badge className="mx-auto" text={t.team.title} />
       </div>
       <Parallax
-        bgImage="assets/images/team_banner.png"
+        bgImage="assets/images/team_banner.webp"
         bgImageAlt="the cat"
         strength={200}
         className="w-screen overflow-hidden bg-center bg-cover bg-no-repeat flex justify-center mt-32"

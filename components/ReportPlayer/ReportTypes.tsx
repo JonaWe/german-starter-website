@@ -16,10 +16,10 @@ const types = {
     link: '/support/player-report',
     image: '/assets/images/oilrig_ak.png',
   },
-  BUG: {
-    link: '/support/bug-report',
-    image: '/assets/images/ice_compound.png',
-  },
+  // BUG: {
+  //   link: '/support/bug-report',
+  //   image: '/assets/images/ice_compound.png',
+  // },
 } as Types;
 
 export default function ReportTypes() {
