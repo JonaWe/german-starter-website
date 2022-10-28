@@ -13,11 +13,6 @@ const GROUP_DEVELOPER = [
 
 const GROUP_ADMINS = [
   {
-    name: 'Stanley Tylon',
-    image: '/assets/team_avatars/stanley_tylon.webp',
-    link: 'https://discordapp.com/users/468458124760842271',
-  },
-  {
     name: 'Banana Joe',
     image: '/assets/team_avatars/banana_joe.webp',
     link: 'https://discordapp.com/users/726159915391123677',
