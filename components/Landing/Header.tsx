@@ -1,13 +1,20 @@
-import Banner from '../../public/assets/images/banner_bg_4.webp';
-
 import Image from 'next/image';
 
 import { Background, Parallax } from 'react-parallax';
 
 import useLocalization from '../../hooks/useLocalization';
+import Banner from '../../public/assets/images/banner_bg_4.webp';
+import WinterBanner from '../../public/assets/images/winter-banner.png';
 import JoinButton from '../Buttons/JoinButton';
 import Button from '../UI/Button';
 import SocialProofItem, { Format } from './SocialProofItem';
+
+const isWinter = () => {
+  const today = new Date();
+  const month = today.getMonth();
+
+  return [11, 0, 1].includes(month);
+};
 
 export default function Header({
   playerCount,
@@ -72,7 +79,11 @@ export default function Header({
       </div>
       <Background className="w-screen h-screen">
         <Image
-          src={Banner}
+          src={
+            process.env.NEXT_PUBLIC_WINTER_BANNER || isWinter()
+              ? WinterBanner
+              : Banner
+          }
           placeholder={'blur'}
           alt="banner"
           layout="fill"
