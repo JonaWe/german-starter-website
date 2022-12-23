@@ -1,3 +1,4 @@
+import { Orbit, Ring } from '@uiball/loaders';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 
@@ -20,18 +21,31 @@ export default function PlayerCount({
     });
   };
 
-  const { data, error, isLoading } = useQuery('serverInfo', fetchPlayerCount);
+  const { data, error, isLoading } = useQuery('serverInfo', fetchPlayerCount, {
+    retry: 2,
+  });
 
   return (
-    <span className={`flex items-center gap-1 ${className}`} title={title}>
+    <span
+      className={`flex items-center h-full gap-1 ${className}`}
+      title={title}
+    >
       <p className="font-bebas text-sand-600">
-        {isLoading && <Spinner />}
-        {error ? '?' : data?.data.playerCount}
+        {isLoading && <span className="opacity-20 animate-pulse">0</span>}
+        {!error && data?.data.playerCount}
       </p>
-      <span className="flex h-2 w-2 relative">
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-600 opacity-75" />
-        <span className="relative inline-flex rounded-full h-2 w-2 bg-green-600" />
-      </span>
+      {!error ? (
+        <span className="flex h-2 w-2 relative">
+          <span
+            className={`animate-ping absolute inline-flex h-full w-full rounded-full ${isLoading ? "bg-gray-400 animate-pulse" : "bg-green-600"} opacity-75`}
+          />
+          <span
+            className={`relative inline-flex rounded-full h-2 w-2 ${isLoading ? "bg-gray-400 animate-pulse" : "bg-green-600"}`}
+          />
+        </span>
+      ) : (
+        <span className="text-xs rounded-md px-2 py-1 bg-red-700">OFFLINE</span>
+      )}
     </span>
   );
 }
