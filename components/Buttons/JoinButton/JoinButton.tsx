@@ -11,7 +11,7 @@ export default function JoinButton() {
   const t = useLocalization();
 
   const serverIP =
-    !loading && !error && value ? value.ip : '51.195.60.162:28015';
+    !loading && !error && value ? value.ip : '135.125.189.209:28015';
 
   return (
     <Button
