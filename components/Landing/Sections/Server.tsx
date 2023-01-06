@@ -25,7 +25,7 @@ export default function Server() {
   const serverIP =
     !loading && !error && serverConfig
       ? serverConfig.ip
-      : '51.195.60.162:28015';
+      : '135.125.189.209:28015';
 
   const { data: map, refetch } = useServerMap();
 
