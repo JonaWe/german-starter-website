@@ -13,7 +13,7 @@ const isWinter = () => {
   const today = new Date();
   const month = today.getMonth();
 
-  return [11, 0, 1].includes(month);
+  return [11].includes(month);
 };
 
 export default function Header({
