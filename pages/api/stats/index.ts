@@ -16,11 +16,13 @@ export default async function handler(
     take,
     query,
     orderBy,
+    wipe,
   }: {
     skip: number;
     take: number;
     query: string;
     orderBy: { desc: boolean; id: string }[];
+    wipe?: boolean;
   } = body;
 
   let orderOptions: any = [];
@@ -38,20 +40,46 @@ export default async function handler(
       orderOptions.push(entry);
     });
 
-  const stats = await prisma.players.findMany({
-    skip: skip || 0,
-    take: take || 100,
-    orderBy: orderOptions,
-    where: {
-      name: { search: query && query.length > 0 ? query : undefined },
-    },
-  });
+  const stats = !wipe
+    ? await prisma.players.findMany({
+        skip: skip || 0,
+        take: take || 100,
+        orderBy: orderOptions,
+        where: {
+          name: { search: query && query.length > 0 ? query : undefined },
+        },
+      })
+    : (
+        await prisma.player_wipe_stats.findMany({
+          skip: skip || 0,
+          take: take || 100,
+          orderBy: orderOptions,
+          include: {
+            players: true,
+          },
+          where: {
+            players: {
+              name: { search: query && query.length > 0 ? query : undefined },
+            },
+          },
+        })
+      ).map((p) => {
+        return { ...p, name: p.players.name };
+      });
 
-  const count = await prisma.players.count({
-    where: {
-      name: { search: query && query.length > 0 ? query : undefined },
-    },
-  });
+  const count = !wipe
+    ? await prisma.players.count({
+        where: {
+          name: { search: query && query.length > 0 ? query : undefined },
+        },
+      })
+    : await prisma.player_wipe_stats.count({
+        where: {
+          players: {
+            name: { search: query && query.length > 0 ? query : undefined },
+          },
+        },
+      });
 
   //TODO: Cleanup this code
   const data = JSON.parse(
