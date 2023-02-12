@@ -49,7 +49,6 @@ export default function MostKilledPLayersChart({
             </ChartTooltip>
           )}
         />
-        <Legend />
         <Bar dataKey="kills" fill="#CD412B" />
       </BarChart>
     </ResponsiveContainer>
