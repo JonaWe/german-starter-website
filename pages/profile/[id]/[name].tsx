@@ -115,26 +115,34 @@ const Home: NextPageWithLayout = (props: any) => {
       value:
         banInfo?.gameBans > 0
           ? `Game banned, ${banInfo.daysSinceLastBan} days ago!`
-          : 'Private',
+          : 'No game bans',
       Icon: (
         <ImHammer2 className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
       ),
       name: 'Ban status',
     },
-    {
-      value: new Date(player?.created * 1000).toLocaleDateString(),
-      Icon: (
-        <HiCursorClick className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
-      ),
-      name: t.stats.steamInfo.created,
-    },
-    {
-      value: Math.floor((rustInfo?.playTime / 60) * 10) / 10 + ' h',
-      Icon: (
-        <HiPuzzle className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
-      ),
-      name: t.stats.steamInfo.playTimeRust,
-    },
+    ...(player?.created
+      ? [
+          {
+            value: new Date(player?.created * 1000).toLocaleDateString(),
+            Icon: (
+              <HiCursorClick className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
+            ),
+            name: t.stats.steamInfo.created,
+          },
+        ]
+      : []),
+    ...(rustInfo?.playTime > 0
+      ? [
+          {
+            value: Math.floor((rustInfo?.playTime / 60) * 10) / 10 + ' h',
+            Icon: (
+              <HiPuzzle className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
+            ),
+            name: t.stats.steamInfo.playTimeRust,
+          },
+        ]
+      : []),
     {
       value:
         player?.personaState === PersonaState.Online ? 'online' : 'offline',
@@ -158,10 +166,19 @@ const Home: NextPageWithLayout = (props: any) => {
       {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
       <div className="grid grid-cols-3 grid-rows-2 gap-5 mt-5">
         <div className="row-start-1 row-end-3">
-          <h2>Steam Info</h2>
+          <div className="flex justify-between items-center">
+            <h2>Steam Info</h2>
+            <a
+              href={'http://steamcommunity.com/profiles/' + stats.steamid}
+              className="opacity-30 text-sm hover:underline"
+              target={"_blank"}
+            >
+              Open steam profile
+            </a>
+          </div>
           <div className="grid grid-cols-2 grid-rows-6 gap-3">
             {generalInfo.map((info) => (
-              <div className="flex justify-between flex-col bg-background-150 p-3 rounded-md">
+              <div className="flex justify-between flex-col bg-background-150/75 hover:bg-background-150 p-3 rounded-md">
                 <div className="flex">{info.Icon}</div>
                 <div className="">
                   <div className="text-lg -mb-1">{info.value}</div>
