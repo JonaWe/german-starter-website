@@ -133,7 +133,7 @@ export default function Spotlight({ playerOfTheDay }: any) {
         <div className="w-full h-96 grid grid-cols-2 pt-4">
           <GeneralInfo items={generalInfo} />
           <div className="flex justify-between flex-col">
-            <PlayerDeathsKillsChart steamid={player.steamid} />
+            <PlayerDeathsKillsChart steamid={steamid} />
             <QuickInfo items={quickInfoItems} />
           </div>
         </div>

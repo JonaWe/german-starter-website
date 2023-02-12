@@ -5,6 +5,7 @@ import { getDefaultLayout } from '../../../components/Layout/DefaultLayout';
 import CommentSection from '../../../components/News/CommentSection';
 import PageContent from '../../../components/PageContent';
 import KillsByDayOfWeekChart from '../../../components/Stats/Charts/KillsByDayOfWeekChart';
+import MostKilledPLayersChart from '../../../components/Stats/Charts/MostKilledPlayersChart/MostKilledPlayersChart';
 import PlayerDeathsKillsChart from '../../../components/Stats/Charts/PlayerDeathsKillsChart';
 import CombatLog from '../../../components/Stats/CombatLog';
 import AliasTable from '../../../components/Stats/PlayerPage/AliasTable';
@@ -13,6 +14,7 @@ import PlayerPageSEO from '../../../components/Stats/PlayerPage/PlayerPageSEO';
 import PvEChart from '../../../components/Stats/PlayerPage/PvEChart';
 import Avatar from '../../../components/UI/Avatar';
 import useLocalization from '../../../hooks/useLocalization';
+import useMostKilledPlayers from '../../../hooks/useMostKilledPlayers';
 import { prisma } from '../../../lib/stats/db';
 import { CommunityVisibilityState } from '../../../lib/steam/interfaces/CommunityVisibilityState';
 import { steam } from '../../../lib/steam/steamClient';
@@ -106,7 +108,12 @@ const Home: NextPageWithLayout = (props: any) => {
             <PlayerDeathsKillsChart height="100%" steamid={stats.steamid} />
           </div>
         </div>
-        <div className="col-span-2 bg-red-500"></div>
+        <div className="col-span-2">
+          <h2>Most killed players</h2>
+          <div className="h-72">
+            <MostKilledPLayersChart steamid={stats.steamid} />
+          </div>
+        </div>
       </div>
       <div className="grid grid-cols-2 mt-5">
         <div className="">
