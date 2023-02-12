@@ -1,8 +1,6 @@
 //Exact type instead of any but dose not work Payload<number, string>[];
 
 export default function DeathsKillsChartTooltip({ payload }: { payload: any }) {
-  console.log(payload);
-
   return (
     <div className="flex gap-3">
       <div>

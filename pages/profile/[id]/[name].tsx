@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
+import { GiBearHead, GiChewedSkull, GiPistolGun, GiSuicide } from 'react-icons/gi';
 
 import { HiClock, HiCursorClick, HiEye, HiPuzzle } from 'react-icons/hi';
 import { ImHammer2 } from 'react-icons/im';
@@ -153,6 +154,38 @@ const Home: NextPageWithLayout = (props: any) => {
     },
   ];
 
+  const statsOnServer = [
+    {
+      value: stats.kills,
+      Icon: (
+        <GiPistolGun className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
+      ),
+      name: 'Kills',
+    },
+    {
+      value: stats.pvpdeaths,
+      Icon: (
+        <GiChewedSkull className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
+      ),
+      name: 'Deaths',
+    },
+    {
+      value: stats.pvedeaths,
+      Icon: (
+        <GiBearHead className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
+      ),
+      name: 'PvE Deaths',
+    },
+    {
+      value: stats.suicides,
+      Icon: (
+        <GiSuicide className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
+      ),
+      name: 'Suicides',
+    },
+  ];
+
+
   return (
     <PageContent>
       <PlayerPageSEO player={steam} locale={router.locale || 'de'} />
@@ -164,23 +197,23 @@ const Home: NextPageWithLayout = (props: any) => {
       {/* <PvEChart data={pve_events} /> */}
       {/* <CombatLog steamid={stats.steamid} /> */}
       {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
-      <div className="grid grid-cols-3 grid-rows-2 gap-5 mt-5">
+      <div className="grid grid-cols-3 grid-rows-2 gap-y-5 gap-x-10 mt-5">
         <div className="row-start-1 row-end-3">
           <div className="flex justify-between items-center">
             <h2>Steam Info</h2>
             <a
               href={'http://steamcommunity.com/profiles/' + stats.steamid}
               className="opacity-30 text-sm hover:underline"
-              target={"_blank"}
+              target={'_blank'}
             >
               Open steam profile
             </a>
           </div>
-          <div className="grid grid-cols-2 grid-rows-6 gap-3">
+          <div className="grid grid-cols-2 grid-flow-row gap-3 mb-3">
             {generalInfo.map((info) => (
               <div className="flex justify-between flex-col bg-background-150/75 hover:bg-background-150 p-3 rounded-md">
                 <div className="flex">{info.Icon}</div>
-                <div className="">
+                <div className="mt-2">
                   <div className="text-lg -mb-1">{info.value}</div>
                   <div className="text-opacity-30 text-sm">{info.name}</div>
                 </div>
@@ -188,6 +221,17 @@ const Home: NextPageWithLayout = (props: any) => {
             ))}
           </div>
           <h2>Stats on server</h2>
+          <div className="grid grid-cols-2 grid-flow-row gap-3 mb-3">
+            {statsOnServer.map((info) => (
+              <div className="flex justify-between flex-col bg-background-150/75 hover:bg-background-150 p-3 rounded-md">
+                <div className="flex">{info.Icon}</div>
+                <div className="mt-2">
+                  <div className="text-lg -mb-1">{info.value}</div>
+                  <div className="text-opacity-30 text-sm">{info.name}</div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
         <div className="col-span-2">
           <h2>Kills and Deaths over time</h2>

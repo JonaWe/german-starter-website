@@ -53,8 +53,6 @@ export default function KillsByDayOfWeekChart({
         daysOfWeek.indexOf(a.name) - daysOfWeek.indexOf(b.name)
     );
 
-  console.log(result);
-
   return (
     <div className="h-full">
       <ResponsiveContainer width="100%" height="100%">
