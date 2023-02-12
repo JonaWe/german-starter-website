@@ -1,6 +1,9 @@
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
+import { HiClock, HiCursorClick, HiEye, HiPuzzle } from 'react-icons/hi';
+import { ImHammer2 } from 'react-icons/im';
+
 import { getDefaultLayout } from '../../../components/Layout/DefaultLayout';
 import CommentSection from '../../../components/News/CommentSection';
 import PageContent from '../../../components/PageContent';
@@ -15,8 +18,12 @@ import PvEChart from '../../../components/Stats/PlayerPage/PvEChart';
 import Avatar from '../../../components/UI/Avatar';
 import useLocalization from '../../../hooks/useLocalization';
 import useMostKilledPlayers from '../../../hooks/useMostKilledPlayers';
+import usePlayerBanInfo from '../../../hooks/usePlayerBanInfo';
+import usePlayerRustInfo from '../../../hooks/usePlayerRustInfo';
+import useSteamUser from '../../../hooks/useSteamUser';
 import { prisma } from '../../../lib/stats/db';
 import { CommunityVisibilityState } from '../../../lib/steam/interfaces/CommunityVisibilityState';
+import { PersonaState } from '../../../lib/steam/interfaces/PersonaState';
 import { steam } from '../../../lib/steam/steamClient';
 import { NextPageWithLayout } from '../../_app';
 
@@ -87,7 +94,56 @@ const Home: NextPageWithLayout = (props: any) => {
   const { id } = router.query;
   const { pve_events, stats, steam, aliases } = props;
 
+  const { data: banInfo } = usePlayerBanInfo(String(id));
+  const { data: rustInfo } = usePlayerRustInfo(String(id));
+  const [player] = useSteamUser(String(id));
+
   const t = useLocalization();
+
+  const generalInfo = [
+    {
+      value:
+        player?.visibilityState === CommunityVisibilityState.Public
+          ? 'Public'
+          : 'Private',
+      Icon: (
+        <HiEye className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
+      ),
+      name: 'Profile status',
+    },
+    {
+      value:
+        banInfo?.gameBans > 0
+          ? `Game banned, ${banInfo.daysSinceLastBan} days ago!`
+          : 'Private',
+      Icon: (
+        <ImHammer2 className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
+      ),
+      name: 'Ban status',
+    },
+    {
+      value: new Date(player?.created * 1000).toLocaleDateString(),
+      Icon: (
+        <HiCursorClick className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
+      ),
+      name: t.stats.steamInfo.created,
+    },
+    {
+      value: Math.floor((rustInfo?.playTime / 60) * 10) / 10 + ' h',
+      Icon: (
+        <HiPuzzle className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
+      ),
+      name: t.stats.steamInfo.playTimeRust,
+    },
+    {
+      value:
+        player?.personaState === PersonaState.Online ? 'online' : 'offline',
+      Icon: (
+        <HiClock className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
+      ),
+      name: 'Status',
+    },
+  ];
 
   return (
     <PageContent>
@@ -100,8 +156,22 @@ const Home: NextPageWithLayout = (props: any) => {
       {/* <PvEChart data={pve_events} /> */}
       {/* <CombatLog steamid={stats.steamid} /> */}
       {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
-      <div className="grid grid-cols-3 grid-rows-2">
-        <div className="row-start-1 row-end-3 bg-black">sidebar</div>
+      <div className="grid grid-cols-3 grid-rows-2 gap-5 mt-5">
+        <div className="row-start-1 row-end-3">
+          <h2>Steam Info</h2>
+          <div className="grid grid-cols-2 grid-rows-6 gap-3">
+            {generalInfo.map((info) => (
+              <div className="flex justify-between flex-col bg-background-150 p-3 rounded-md">
+                <div className="flex">{info.Icon}</div>
+                <div className="">
+                  <div className="text-lg -mb-1">{info.value}</div>
+                  <div className="text-opacity-30 text-sm">{info.name}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <h2>Stats on server</h2>
+        </div>
         <div className="col-span-2">
           <h2>Kills and Deaths over time</h2>
           <div className="h-72">

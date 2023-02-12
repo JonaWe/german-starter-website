@@ -15,7 +15,7 @@ export default async function handler(
     return res.status(400).send('invalid steamid');
 
   const killedPlayers =
-    await prisma.$queryRaw`SELECT COUNT(killer_steamid) AS kills, target_steamid, name FROM pvplog
+    await prisma.$queryRaw`SELECT COUNT(killer_steamid) AS kills, CONVERT(target_steamid, CHAR(17)) as target_steamid, name FROM pvplog
     JOIN players on target_steamid = players.steamid
     WHERE killer_steamid = ${steamid}
     GROUP BY target_steamid

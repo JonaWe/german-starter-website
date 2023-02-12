@@ -1,6 +1,7 @@
 import {
   Area,
   AreaChart,
+  Brush,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -51,6 +52,7 @@ export default function PlayerDeathsKillsChart({
           fillOpacity={0}
           stroke="#373737"
         />
+        <Brush dataKey="time" height={30} stroke="#373737" fill="#0000" />
       </AreaChart>
     </ResponsiveContainer>
   );

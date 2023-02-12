@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 import {
   Bar,
   BarChart,
@@ -19,6 +21,7 @@ export default function MostKilledPLayersChart({
   steamid: string;
 }) {
   const { data } = useMostKilledPlayers(steamid);
+  const router = useRouter();
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart
@@ -49,7 +52,11 @@ export default function MostKilledPLayersChart({
             </ChartTooltip>
           )}
         />
-        <Bar dataKey="kills" fill="#CD412B" />
+        <Bar
+          dataKey="kills"
+          fill="#CD412B"
+          onClick={(data) => router.push('/profile/' + data.target_steamid)}
+        />
       </BarChart>
     </ResponsiveContainer>
   );

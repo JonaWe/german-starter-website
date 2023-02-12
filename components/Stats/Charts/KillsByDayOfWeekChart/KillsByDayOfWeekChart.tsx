@@ -1,4 +1,5 @@
 import {
+    Brush,
   Legend,
   PolarAngleAxis,
   PolarGrid,
