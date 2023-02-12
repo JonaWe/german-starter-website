@@ -21,7 +21,7 @@ export default function KillsByDayOfWeekChart({
 }: {
   steamid: string;
 }) {
-  const stats = useStatsPerDay(steamid);
+  const data = useStatsPerDay(steamid);
   const daysOfWeek = [
     'Monday',
     'Tuesday',
@@ -38,7 +38,7 @@ export default function KillsByDayOfWeekChart({
       return acc;
     }, [])
     .map((dayData: Result) => {
-      stats?.forEach((item: any) => {
+      data?.forEach((item: any) => {
         const date = new Date(item.kill_time);
         if (dayData.name === daysOfWeek[date.getUTCDay()]) {
           dayData.kills += item.kills;
@@ -51,6 +51,8 @@ export default function KillsByDayOfWeekChart({
       (a: Result, b: Result) =>
         daysOfWeek.indexOf(a.name) - daysOfWeek.indexOf(b.name)
     );
+
+  console.log(result);
 
   return (
     <div className="h-full">

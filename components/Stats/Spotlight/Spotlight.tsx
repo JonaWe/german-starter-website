@@ -27,6 +27,7 @@ import useSteamUser from '../../../hooks/useSteamUser';
 import { CommunityVisibilityState } from '../../../lib/steam/interfaces/CommunityVisibilityState';
 import { PersonaState } from '../../../lib/steam/interfaces/PersonaState';
 import ChartTooltip from '../../UI/Charts/Tooltip';
+import PlayerDeathsKillsChart from '../Charts/PlayerDeathsKillsChart';
 import DeathsKillsChartTooltip from '../Charts/PlayerDeathsKillsChart/DeathsKillsChartTooltip';
 import GeneralInfo from './GeneralInfo';
 import QuickInfo from './QuickInfo';
@@ -132,39 +133,7 @@ export default function Spotlight({ playerOfTheDay }: any) {
         <div className="w-full h-96 grid grid-cols-2 pt-4">
           <GeneralInfo items={generalInfo} />
           <div className="flex justify-between flex-col">
-            <ResponsiveContainer width={'100%'} height={'75%'}>
-              <AreaChart data={data}>
-                <defs>
-                  <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#CD412B" stopOpacity={0.5} />
-                    <stop offset="95%" stopColor="#CD412B" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <XAxis dataKey="time" />
-                <YAxis dataKey="kills" />
-                <Tooltip
-                  isAnimationActive={false}
-                  content={({ payload, active }) => (
-                    <ChartTooltip active={active}>
-                      <DeathsKillsChartTooltip payload={payload} />
-                    </ChartTooltip>
-                  )}
-                />
-                <Area
-                  type="monotone"
-                  dataKey="kills"
-                  stroke="#CD412B"
-                  fillOpacity={1}
-                  fill="url(#colorUv)"
-                />
-                <Area
-                  type="monotone"
-                  dataKey="deaths"
-                  fillOpacity={0}
-                  stroke="#373737"
-                />
-              </AreaChart>
-            </ResponsiveContainer>
+            <PlayerDeathsKillsChart steamid={player.steamid} />
             <QuickInfo items={quickInfoItems} />
           </div>
         </div>

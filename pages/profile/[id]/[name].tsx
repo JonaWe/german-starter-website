@@ -5,6 +5,7 @@ import { getDefaultLayout } from '../../../components/Layout/DefaultLayout';
 import CommentSection from '../../../components/News/CommentSection';
 import PageContent from '../../../components/PageContent';
 import KillsByDayOfWeekChart from '../../../components/Stats/Charts/KillsByDayOfWeekChart';
+import PlayerDeathsKillsChart from '../../../components/Stats/Charts/PlayerDeathsKillsChart';
 import CombatLog from '../../../components/Stats/CombatLog';
 import AliasTable from '../../../components/Stats/PlayerPage/AliasTable';
 import RecommendedPlayerCards from '../../../components/Stats/PlayerPage/FriendsOnServer/RecommendedPlayerCards';
@@ -97,8 +98,18 @@ const Home: NextPageWithLayout = (props: any) => {
       {/* <PvEChart data={pve_events} /> */}
       {/* <CombatLog steamid={stats.steamid} /> */}
       {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
-      <div>
-        <div>
+      <div className="grid grid-cols-3 grid-rows-2">
+        <div className="row-start-1 row-end-3 bg-black">sidebar</div>
+        <div className="col-span-2">
+          <h2>Kills and Deaths over time</h2>
+          <div className="h-72">
+            <PlayerDeathsKillsChart height="100%" steamid={stats.steamid} />
+          </div>
+        </div>
+        <div className="col-span-2 bg-red-500"></div>
+      </div>
+      <div className="grid grid-cols-2 mt-5">
+        <div className="">
           <h2>Activity by day of week</h2>
           <div className="h-72">
             <KillsByDayOfWeekChart steamid={stats.steamid} />
