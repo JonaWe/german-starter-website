@@ -4,11 +4,13 @@ import { useRouter } from 'next/router';
 import { getDefaultLayout } from '../../../components/Layout/DefaultLayout';
 import CommentSection from '../../../components/News/CommentSection';
 import PageContent from '../../../components/PageContent';
+import KillsByDayOfWeekChart from '../../../components/Stats/Charts/KillsByDayOfWeekChart';
 import CombatLog from '../../../components/Stats/CombatLog';
 import AliasTable from '../../../components/Stats/PlayerPage/AliasTable';
 import RecommendedPlayerCards from '../../../components/Stats/PlayerPage/FriendsOnServer/RecommendedPlayerCards';
 import PlayerPageSEO from '../../../components/Stats/PlayerPage/PlayerPageSEO';
 import PvEChart from '../../../components/Stats/PlayerPage/PvEChart';
+import Avatar from '../../../components/UI/Avatar';
 import useLocalization from '../../../hooks/useLocalization';
 import { prisma } from '../../../lib/stats/db';
 import { CommunityVisibilityState } from '../../../lib/steam/interfaces/CommunityVisibilityState';
@@ -87,14 +89,22 @@ const Home: NextPageWithLayout = (props: any) => {
   return (
     <PageContent>
       <PlayerPageSEO player={steam} locale={router.locale || 'de'} />
-      <h1 className="mt-10">
-        {steam.nickname}
-        {"'"}s Playerstats
-      </h1>
-      <AliasTable aliases={aliases} />
-      <PvEChart data={pve_events} />
-      <CombatLog steamid={stats.steamid} />
+      <div className="flex gap-5 items-center mt-10">
+        <Avatar className="w-24 h-24" url={steam.avatar.large} />
+        <h1 className="text-8xl">{steam.nickname}</h1>
+      </div>
+      {/* <AliasTable aliases={aliases} /> */}
+      {/* <PvEChart data={pve_events} /> */}
+      {/* <CombatLog steamid={stats.steamid} /> */}
       {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
+      <div>
+        <div>
+          <h2>Activity by day of week</h2>
+          <div className="h-72">
+            <KillsByDayOfWeekChart steamid={stats.steamid} />
+          </div>
+        </div>
+      </div>
       <h2 className="mb-3">Related profiles</h2>
       <div className="w-full">
         <RecommendedPlayerCards
