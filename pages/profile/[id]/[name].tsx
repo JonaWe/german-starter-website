@@ -1,7 +1,20 @@
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import { GiBearHead, GiChewedSkull, GiPistolGun, GiSuicide } from 'react-icons/gi';
 
+import {
+  formatDistanceStrict,
+  formatDuration,
+  formatISODuration,
+  intervalToDuration,
+} from 'date-fns';
+import {
+  GiBearHead,
+  GiChewedSkull,
+  GiFist,
+  GiPistolGun,
+  GiRun,
+  GiSuicide,
+} from 'react-icons/gi';
 import { HiClock, HiCursorClick, HiEye, HiPuzzle } from 'react-icons/hi';
 import { ImHammer2 } from 'react-icons/im';
 
@@ -17,10 +30,12 @@ import RecommendedPlayerCards from '../../../components/Stats/PlayerPage/Friends
 import PlayerPageSEO from '../../../components/Stats/PlayerPage/PlayerPageSEO';
 import PvEChart from '../../../components/Stats/PlayerPage/PvEChart';
 import Avatar from '../../../components/UI/Avatar';
+import useAvgTimeAlive from '../../../hooks/useAvgTimeAlive';
 import useLocalization from '../../../hooks/useLocalization';
 import useMostKilledPlayers from '../../../hooks/useMostKilledPlayers';
 import usePlayerBanInfo from '../../../hooks/usePlayerBanInfo';
 import usePlayerRustInfo from '../../../hooks/usePlayerRustInfo';
+import usePlayerStats from '../../../hooks/usePlayerStats';
 import useSteamUser from '../../../hooks/useSteamUser';
 import { prisma } from '../../../lib/stats/db';
 import { CommunityVisibilityState } from '../../../lib/steam/interfaces/CommunityVisibilityState';
@@ -98,6 +113,8 @@ const Home: NextPageWithLayout = (props: any) => {
   const { data: banInfo } = usePlayerBanInfo(String(id));
   const { data: rustInfo } = usePlayerRustInfo(String(id));
   const [player] = useSteamUser(String(id));
+  const { data: timeAlive } = useAvgTimeAlive(String(id));
+  const nemesis = usePlayerStats(String(id))?.nemesis;
 
   const t = useLocalization();
 
@@ -183,6 +200,28 @@ const Home: NextPageWithLayout = (props: any) => {
       ),
       name: 'Suicides',
     },
+    {
+      value: nemesis?.nem_name,
+      Icon: (
+        <GiFist className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
+      ),
+      name: 'Nemesis',
+      onClick: () => router.push('/profile/' + nemesis.nem_id),
+    },
+    ...(timeAlive?.avgTimeBetween
+      ? [
+          {
+            value: formatDistanceStrict(
+              (timeAlive?.avgTimeBetween || 0) * 1000,
+              new Date(0)
+            ),
+            Icon: (
+              <GiRun className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
+            ),
+            name: 'Avg time alive',
+          },
+        ]
+      : []),
   ];
 
 
@@ -197,7 +236,7 @@ const Home: NextPageWithLayout = (props: any) => {
       {/* <PvEChart data={pve_events} /> */}
       {/* <CombatLog steamid={stats.steamid} /> */}
       {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
-      <div className="grid grid-cols-3 grid-rows-2 gap-y-5 gap-x-10 mt-5">
+      <div className="grid md:grid-cols-3 grid-cols-1 md:grid-rows-2 gap-y-5 gap-x-10 mt-5">
         <div className="row-start-1 row-end-3">
           <div className="flex justify-between items-center">
             <h2>Steam Info</h2>
@@ -223,7 +262,10 @@ const Home: NextPageWithLayout = (props: any) => {
           <h2>Stats on server</h2>
           <div className="grid grid-cols-2 grid-flow-row gap-3 mb-3">
             {statsOnServer.map((info) => (
-              <div className="flex justify-between flex-col bg-background-150/75 hover:bg-background-150 p-3 rounded-md">
+              <div
+                className={`flex justify-between flex-col bg-background-150/75 hover:bg-background-150 p-3 rounded-md ${info?.onClick ? "cursor-pointer" : ""}`}
+                onClick={info?.onClick}
+              >
                 <div className="flex">{info.Icon}</div>
                 <div className="mt-2">
                   <div className="text-lg -mb-1">{info.value}</div>
