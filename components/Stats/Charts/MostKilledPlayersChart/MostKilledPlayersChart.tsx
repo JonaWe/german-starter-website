@@ -36,7 +36,7 @@ export default function MostKilledPLayersChart({
         }}
       >
         <XAxis dataKey="name" />
-        <YAxis />
+        <YAxis width={30} />
         <Tooltip
           cursor={{
             fill: '#373737',
