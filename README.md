@@ -72,7 +72,7 @@ CREATE FULLTEXT INDEX text_search ON players(name)
 - [ ] Mark banned players
 - [ ] PVE Grafik reduzieren
 - [ ] Allow to starr players
-- [ ] Link to steam
+- [X] Link to steam
 - [ ] Allow to set notes for player
 
 ## Questions
