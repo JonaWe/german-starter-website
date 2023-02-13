@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import {
   Area,
   AreaChart,
@@ -20,6 +21,9 @@ export default function PlayerDeathsKillsChart({
   height?: string;
 }) {
   const data = useStatsPerDay(steamid);
+
+  console.log(data);
+
   return (
     <ResponsiveContainer width={'100%'} height={height || '75%'}>
       <AreaChart data={data}>
@@ -29,8 +33,12 @@ export default function PlayerDeathsKillsChart({
             <stop offset="95%" stopColor="#CD412B" stopOpacity={0} />
           </linearGradient>
         </defs>
-        <XAxis dataKey="time" />
-        <YAxis dataKey="kills" />
+        <XAxis
+          dataKey="kill_time"
+          tickFormatter={(d) => `${new Date(d).toLocaleDateString()}`}
+          ticks={[data[0].kill_time, data.at(-1).kill_time]}
+        />
+        <YAxis dataKey="kills" width={30} />
         <Tooltip
           isAnimationActive={false}
           content={({ payload, active }) => (
@@ -52,7 +60,13 @@ export default function PlayerDeathsKillsChart({
           fillOpacity={0}
           stroke="#373737"
         />
-        <Brush dataKey="time" height={30} stroke="#373737" fill="#0000" />
+        <Brush
+          dataKey="kill_time"
+          tickFormatter={(d) => `${new Date(d).toLocaleDateString()}`}
+          height={30}
+          stroke="#373737"
+          fill="#0000"
+        />
       </AreaChart>
     </ResponsiveContainer>
   );
