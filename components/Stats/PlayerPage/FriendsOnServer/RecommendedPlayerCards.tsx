@@ -21,12 +21,19 @@ export default function RecommendedPlayerCards({
   cardCount?: number;
 }) {
   const fetchTopPlayers = async () => {
-    return await fetchPlayersStats(0, cardCount + 1, null, [
-      {
-        desc: true,
-        id: 'kills',
-      },
-    ]);
+    return await fetchPlayersStats(
+      0,
+      cardCount + 1,
+      null,
+      [
+        {
+          desc: true,
+          id: 'kills',
+        },
+      ],
+      undefined,
+      true
+    );
   };
 
   const {
