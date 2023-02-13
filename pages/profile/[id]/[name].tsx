@@ -224,7 +224,6 @@ const Home: NextPageWithLayout = (props: any) => {
       : []),
   ];
 
-
   return (
     <PageContent>
       <PlayerPageSEO player={steam} locale={router.locale || 'de'} />
@@ -263,7 +262,9 @@ const Home: NextPageWithLayout = (props: any) => {
           <div className="grid grid-cols-2 grid-flow-row gap-3 mb-3">
             {statsOnServer.map((info) => (
               <div
-                className={`flex justify-between flex-col bg-background-150/75 hover:bg-background-150 p-3 rounded-md ${info?.onClick ? "cursor-pointer" : ""}`}
+                className={`flex justify-between flex-col bg-background-150/75 hover:bg-background-150 p-3 rounded-md ${
+                  info?.onClick ? 'cursor-pointer' : ''
+                }`}
                 onClick={info?.onClick}
               >
                 <div className="flex">{info.Icon}</div>
@@ -289,7 +290,7 @@ const Home: NextPageWithLayout = (props: any) => {
         </div>
       </div>
       <div className="grid grid-cols-2 mt-5">
-        <div className="">
+        <div className="col-span-2 sm:col-span-1">
           <h2>Activity by day of week</h2>
           <div className="h-72">
             <KillsByDayOfWeekChart steamid={stats.steamid} />
