@@ -36,7 +36,7 @@ export default function PlayerDeathsKillsChart({
         <XAxis
           dataKey="kill_time"
           tickFormatter={(d) => `${new Date(d).toLocaleDateString()}`}
-          ticks={[data[0].kill_time, data.at(-1).kill_time]}
+          ticks={[data?.at(0).kill_time, data?.at(-1).kill_time]}
         />
         <YAxis dataKey="kills" width={30} />
         <Tooltip
