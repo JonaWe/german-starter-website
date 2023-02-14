@@ -3,9 +3,6 @@ import { useRouter } from 'next/router';
 
 import {
   formatDistanceStrict,
-  formatDuration,
-  formatISODuration,
-  intervalToDuration,
 } from 'date-fns';
 import {
   GiBearHead,
@@ -15,7 +12,13 @@ import {
   GiRun,
   GiSuicide,
 } from 'react-icons/gi';
-import { HiClock, HiCursorClick, HiEye, HiPuzzle } from 'react-icons/hi';
+import {
+  HiClock,
+  HiCursorClick,
+  HiEye,
+  HiInformationCircle,
+  HiPuzzle,
+} from 'react-icons/hi';
 import { ImHammer2 } from 'react-icons/im';
 
 import { getDefaultLayout } from '../../../components/Layout/DefaultLayout';
@@ -24,15 +27,14 @@ import PageContent from '../../../components/PageContent';
 import KillsByDayOfWeekChart from '../../../components/Stats/Charts/KillsByDayOfWeekChart';
 import MostKilledPLayersChart from '../../../components/Stats/Charts/MostKilledPlayersChart/MostKilledPlayersChart';
 import PlayerDeathsKillsChart from '../../../components/Stats/Charts/PlayerDeathsKillsChart';
-import CombatLog from '../../../components/Stats/CombatLog';
-import AliasTable from '../../../components/Stats/PlayerPage/AliasTable';
 import RecommendedPlayerCards from '../../../components/Stats/PlayerPage/FriendsOnServer/RecommendedPlayerCards';
+import PersonalNotes from '../../../components/Stats/PlayerPage/Notes';
 import PlayerPageSEO from '../../../components/Stats/PlayerPage/PlayerPageSEO';
 import PvEChart from '../../../components/Stats/PlayerPage/PvEChart';
 import Avatar from '../../../components/UI/Avatar';
+import Tooltip from '../../../components/UI/Tooltip';
 import useAvgTimeAlive from '../../../hooks/useAvgTimeAlive';
 import useLocalization from '../../../hooks/useLocalization';
-import useMostKilledPlayers from '../../../hooks/useMostKilledPlayers';
 import usePlayerBanInfo from '../../../hooks/usePlayerBanInfo';
 import usePlayerRustInfo from '../../../hooks/usePlayerRustInfo';
 import usePlayerStats from '../../../hooks/usePlayerStats';
@@ -236,7 +238,7 @@ const Home: NextPageWithLayout = (props: any) => {
       {/* <CombatLog steamid={stats.steamid} /> */}
       {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
       <div className="grid md:grid-cols-3 grid-cols-1 md:grid-rows-2 gap-y-5 gap-x-10 mt-5">
-        <div className="row-start-1 row-end-3">
+        <div className="row-start-1 row-end-4">
           <div className="flex justify-between items-center">
             <h2>Steam Info</h2>
             <a
@@ -275,6 +277,13 @@ const Home: NextPageWithLayout = (props: any) => {
               </div>
             ))}
           </div>
+          <h2>
+            Personal notes{' '}
+            <Tooltip text="You can create notes about player that are completely private and only visible to you.">
+              <HiInformationCircle className="inline text-lg ml-2 opacity-20" />
+            </Tooltip>
+          </h2>
+          <PersonalNotes id={String(id)} />
         </div>
         <div className="col-span-2">
           <h2>Kills and Deaths over time</h2>
@@ -288,12 +297,12 @@ const Home: NextPageWithLayout = (props: any) => {
             <MostKilledPLayersChart steamid={stats.steamid} />
           </div>
         </div>
-      </div>
-      <div className="grid grid-cols-2 mt-5">
-        <div className="col-span-2 sm:col-span-1">
-          <h2>Activity by day of week</h2>
-          <div className="h-72">
-            <KillsByDayOfWeekChart steamid={stats.steamid} />
+        <div className="grid grid-cols-2 col-span-2 mt-5">
+          <div className="col-span-2 sm:col-span-1">
+            <h2>Activity by day of week</h2>
+            <div className="h-72">
+              <KillsByDayOfWeekChart steamid={stats.steamid} />
+            </div>
           </div>
         </div>
       </div>

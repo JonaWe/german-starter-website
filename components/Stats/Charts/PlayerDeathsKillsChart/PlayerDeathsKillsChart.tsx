@@ -21,9 +21,7 @@ export default function PlayerDeathsKillsChart({
   height?: string;
 }) {
   const data = useStatsPerDay(steamid);
-
-  console.log(data);
-
+  
   return (
     <ResponsiveContainer width={'100%'} height={height || '75%'}>
       <AreaChart data={data}>
