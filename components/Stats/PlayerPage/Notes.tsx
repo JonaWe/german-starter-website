@@ -64,7 +64,7 @@ export default function PersonalNotes({ id }: { id: string }) {
       ) : (
         <div className="bg-background-150/20 rounded-md p-4">
           <p className='mb-2'>
-            Login to create notes about player that are completely private and
+            Login to create notes about players that are completely private and
             only visible to you.
           </p>
           <Button primary text="login" useLink href='/signin'></Button>

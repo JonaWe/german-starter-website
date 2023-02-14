@@ -279,7 +279,7 @@ const Home: NextPageWithLayout = (props: any) => {
           </div>
           <h2>
             Personal notes{' '}
-            <Tooltip text="You can create notes about player that are completely private and only visible to you.">
+            <Tooltip text="You can create notes about players that are completely private and only visible to you.">
               <HiInformationCircle className="inline text-lg ml-2 opacity-20" />
             </Tooltip>
           </h2>
