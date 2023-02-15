@@ -240,7 +240,7 @@ const Home: NextPageWithLayout = (props: any) => {
         <Avatar className="w-24 h-24" url={steam.avatar.large} />
         <div>
           <h1 className="text-8xl -mb-3">{steam.nickname}</h1>
-          <CopyButton className='font-mono opacity-75' text={String(id)} />
+          <CopyButton className="font-mono opacity-75" text={String(id)} />
         </div>
       </div>
       {/* <AliasTable aliases={aliases} /> */}
@@ -255,13 +255,17 @@ const Home: NextPageWithLayout = (props: any) => {
               href={'http://steamcommunity.com/profiles/' + stats.steamid}
               className="opacity-30 text-sm hover:underline"
               target={'_blank'}
+              rel="noreferrer"
             >
               Open steam profile
             </a>
           </div>
           <div className="grid grid-cols-2 grid-flow-row gap-3 mb-3">
             {generalInfo.map((info) => (
-              <div className="flex justify-between flex-col bg-background-150/75 hover:bg-background-150 p-3 rounded-md">
+              <div
+                key={info.name}
+                className="flex justify-between flex-col bg-background-150/75 hover:bg-background-150 p-3 rounded-md"
+              >
                 <div className="flex">{info.Icon}</div>
                 <div className="mt-2">
                   <div className="text-lg -mb-1">{info.value}</div>
@@ -274,6 +278,7 @@ const Home: NextPageWithLayout = (props: any) => {
           <div className="grid grid-cols-2 grid-flow-row gap-3 mb-3">
             {statsOnServer.map((info) => (
               <div
+                key={info.name}
                 className={`flex justify-between flex-col bg-background-150/75 hover:bg-background-150 p-3 rounded-md ${
                   info?.onClick ? 'cursor-pointer' : ''
                 }`}

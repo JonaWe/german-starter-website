@@ -22,6 +22,7 @@ export default function PlayerStatsTable() {
   const dropdowns = [
     <select
       className="bg-background-150 h-fit p-2"
+      key="wipe"
       onChange={(e) => setWipeOnly(e.target.value === 'true' ? true : false)}
     >
       <option value="true">Wipe</option>
