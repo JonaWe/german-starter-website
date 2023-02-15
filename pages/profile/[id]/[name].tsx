@@ -1,9 +1,8 @@
 import { GetServerSideProps } from 'next';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import {
-  formatDistanceStrict,
-} from 'date-fns';
+import { formatDistanceStrict } from 'date-fns';
 import {
   GiBearHead,
   GiChewedSkull,
@@ -13,6 +12,7 @@ import {
   GiSuicide,
 } from 'react-icons/gi';
 import {
+  HiChevronLeft,
   HiClock,
   HiCursorClick,
   HiEye,
@@ -229,7 +229,13 @@ const Home: NextPageWithLayout = (props: any) => {
   return (
     <PageContent>
       <PlayerPageSEO player={steam} locale={router.locale || 'de'} />
-      <div className="flex gap-5 items-center mt-10">
+      <Link href={'/stats#players'}>
+        <a className="mt-10 mb-3 flex gap-1 items-center opacity-50 hover:opacity-70 transition-opacity">
+          <HiChevronLeft className="text-xl" />
+          <span>View all</span>
+        </a>
+      </Link>
+      <div className="flex gap-5 items-center">
         <Avatar className="w-24 h-24" url={steam.avatar.large} />
         <h1 className="text-8xl">{steam.nickname}</h1>
       </div>
