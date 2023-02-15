@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { formatDistanceStrict } from 'date-fns';
 import {
   GiBearHead,
+  GiChart,
   GiChewedSkull,
   GiFist,
   GiPistolGun,
@@ -188,6 +189,13 @@ const Home: NextPageWithLayout = (props: any) => {
         <GiChewedSkull className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
       ),
       name: 'Deaths',
+    },
+    {
+      value: Math.round((stats.kills / stats.pvpdeaths) * 10) / 10,
+      Icon: (
+        <GiChart className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
+      ),
+      name: 'KD',
     },
     {
       value: stats.pvedeaths,
