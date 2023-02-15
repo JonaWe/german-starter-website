@@ -23,7 +23,7 @@ export default async function handler(
   let isCurrent = false;
 
   //Check if player in firebase is from the current day
-  if (checkIfSameDay((playerOfTheDay?.date as Timestamp).toDate()))
+  if (playerOfTheDay?.date && checkIfSameDay((playerOfTheDay?.date as Timestamp).toDate()))
     return res.status(200).json({ playerOfTheDay: { ...playerOfTheDay } });
 
   //Get player of the day from db

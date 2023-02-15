@@ -5,7 +5,8 @@ const fetchPlayersStats = async (
   pageSize: number,
   query: string | null = null,
   sortBy: { desc: boolean; id: string }[],
-  timeOut?: number
+  timeOut?: number,
+  wipeOnly?: boolean
 ) => {
   const offset = page * pageSize;
 
@@ -15,8 +16,11 @@ const fetchPlayersStats = async (
       take: pageSize,
       query: query,
       orderBy: sortBy,
+      wipe: wipeOnly,
     });
     const data = await response.data;
+
+    console.log(wipeOnly);
 
     return data;
   } catch (e) {

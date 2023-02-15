@@ -14,7 +14,7 @@ const getOnlinePlayers = async () => {
   const configSnap = await getDoc(configRef);
   const config = configSnap.data();
 
-  const data = await queryGameServerPlayer('208.52.152.94:28025', 2, 5000);
+  const data = await queryGameServerPlayer('135.125.189.209:28015', 2, 5000);
 
   return data;
 };

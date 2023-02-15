@@ -36,29 +36,6 @@ const TOTAL_COUNT_CHANGED = 'TOTAL_COUNT_CHANGED';
 const PAGE_FILTER_CHANGED = 'PAGE_FILTER_CHANGED';
 const PAGE_SORT_CHANGED = 'PAGE_SORT_CHANGED';
 
-const pageSelectionOptions = [
-  {
-    name: '10',
-    id: '10',
-  },
-  {
-    name: '20',
-    id: '20',
-  },
-  {
-    name: '30',
-    id: '30',
-  },
-  {
-    name: '40',
-    id: '40',
-  },
-  {
-    name: '50',
-    id: '50',
-  },
-];
-
 const reducer = (state, { type, payload }) => {
   switch (type) {
     case PAGE_CHANGED:
@@ -94,12 +71,16 @@ const reducer = (state, { type, payload }) => {
 export default function BigDataTable({
   columns,
   fetchData,
+  dropdowns,
+  id,
 }: {
   columns: any;
   fetchData: any;
+  dropdowns?: React.ReactNode[];
+  id?: string;
 }) {
   const [query, setQuery] = useState('');
-  const [searchValue] = useDebounce(query, 200);
+  const [searchValue] = useDebounce(query, 100);
 
   const [
     {
@@ -113,7 +94,13 @@ export default function BigDataTable({
   ] = useReducer(reducer, initialState);
 
   const { isLoading, error, data, isSuccess } = useQuery(
-    ['data_row', queryPageIndex, queryPageSize, searchValue, queryPageSortBy],
+    [
+      'data_row' + id,
+      queryPageIndex,
+      queryPageSize,
+      searchValue,
+      queryPageSortBy,
+    ],
     () =>
       fetchData(queryPageIndex, queryPageSize, searchValue, queryPageSortBy),
     {
@@ -203,19 +190,22 @@ export default function BigDataTable({
           }}
           selected={pageSize}
         /> */}
-        <select
-          className="bg-background-150 h-fit p-2"
-          value={pageSize}
-          onChange={(e) => {
-            setPageSize(Number(e.target.value));
-          }}
-        >
-          {[10, 20, 30, 40, 50].map((pageSize) => (
-            <option key={pageSize} value={pageSize}>
-              Show {pageSize}
-            </option>
-          ))}
-        </select>
+        <div className="space-x-3">
+          <select
+            className="bg-background-150 h-fit p-2"
+            value={pageSize}
+            onChange={(e) => {
+              setPageSize(Number(e.target.value));
+            }}
+          >
+            {[10, 20, 30, 40, 50].map((pageSize) => (
+              <option key={pageSize} value={pageSize}>
+                Show {pageSize}
+              </option>
+            ))}
+          </select>
+          {dropdowns?.map((dropdown) => dropdown)}
+        </div>
         <SearchFiled value={query} onChange={setQuery} />
       </div>
       <table {...getTableProps()} className="border-collapse w-full">

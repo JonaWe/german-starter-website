@@ -68,6 +68,13 @@ CREATE FULLTEXT INDEX text_search ON players(name)
 - [ ] VIP shop
 - [ ] Map voting
 
+- [ ] Compare player with average (leetify)
+- [ ] Mark banned players
+- [ ] PVE Grafik reduzieren
+- [ ] Allow to starr players
+- [X] Link to steam
+- [ ] Allow to set notes for player
+
 ## Questions
 
 - Force steam sign in? / no
