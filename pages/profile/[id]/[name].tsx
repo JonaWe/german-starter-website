@@ -21,6 +21,7 @@ import {
 } from 'react-icons/hi';
 import { ImHammer2 } from 'react-icons/im';
 
+import CopyButton from '../../../components/Buttons/CopyButton';
 import { getDefaultLayout } from '../../../components/Layout/DefaultLayout';
 import CommentSection from '../../../components/News/CommentSection';
 import PageContent from '../../../components/PageContent';
@@ -237,7 +238,10 @@ const Home: NextPageWithLayout = (props: any) => {
       </Link>
       <div className="flex gap-5 items-center">
         <Avatar className="w-24 h-24" url={steam.avatar.large} />
-        <h1 className="text-8xl">{steam.nickname}</h1>
+        <div>
+          <h1 className="text-8xl -mb-3">{steam.nickname}</h1>
+          <CopyButton className='font-mono opacity-75' text={String(id)} />
+        </div>
       </div>
       {/* <AliasTable aliases={aliases} /> */}
       {/* <PvEChart data={pve_events} /> */}
