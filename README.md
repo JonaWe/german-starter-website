@@ -74,6 +74,7 @@ CREATE FULLTEXT INDEX text_search ON players(name)
 - [ ] Allow to starr players
 - [X] Link to steam
 - [X] Allow to set notes for player
+- [ ] Average first and last kill on each day
 
 ## Questions
 
