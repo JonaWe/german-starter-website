@@ -29,6 +29,7 @@ import PageContent from '../../../components/PageContent';
 import KillsByDayOfWeekChart from '../../../components/Stats/Charts/KillsByDayOfWeekChart';
 import MostKilledPLayersChart from '../../../components/Stats/Charts/MostKilledPlayersChart/MostKilledPlayersChart';
 import PlayerDeathsKillsChart from '../../../components/Stats/Charts/PlayerDeathsKillsChart';
+import FavoriteButton from '../../../components/Stats/Favorites/FavoriteButton';
 import RecommendedPlayerCards from '../../../components/Stats/PlayerPage/FriendsOnServer/RecommendedPlayerCards';
 import PersonalNotes from '../../../components/Stats/PlayerPage/Notes';
 import PlayerPageSEO from '../../../components/Stats/PlayerPage/PlayerPageSEO';
@@ -244,12 +245,15 @@ const Home: NextPageWithLayout = (props: any) => {
           <span>View all</span>
         </a>
       </Link>
-      <div className="flex gap-5 items-center">
-        <Avatar className="w-24 h-24" url={steam.avatar.large} />
-        <div>
-          <h1 className="text-8xl -mb-3">{steam.nickname}</h1>
-          <CopyButton className="font-mono opacity-75" text={String(id)} />
+      <div className="flex justify-between items-center">
+        <div className="flex gap-5 items-center">
+          <Avatar className="w-24 h-24" url={steam.avatar.large} />
+          <div>
+            <h1 className="text-8xl -mb-3">{steam.nickname}</h1>
+            <CopyButton className="font-mono opacity-75" text={String(id)} />
+          </div>
         </div>
+        <FavoriteButton steamid={String(id)} />
       </div>
       {/* <AliasTable aliases={aliases} /> */}
       {/* <PvEChart data={pve_events} /> */}
