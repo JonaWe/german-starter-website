@@ -1,26 +1,36 @@
+import { useRouter } from 'next/router';
+
 import { collection, doc, query, setDoc, where } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import {
-  useCollectionData,
-} from 'react-firebase-hooks/firestore';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { HiOutlineBookmark } from 'react-icons/hi';
 
 import { auth, db } from '../../../firebase/clientApp';
 
-export default function FavoriteButton({ steamid }: { steamid: string }) {
+export default function FavoriteButton({
+  steamid,
+  iconOnly,
+}: {
+  steamid: string;
+  iconOnly?: boolean;
+}) {
   const [user] = useAuthState(auth);
-  const favRef = collection(
-    db,
-    'users',
-    user?.uid || 'invalid',
-    'favorites'
-  );
+  const favRef = collection(db, 'users', user?.uid || 'invalid', 'favorites');
   const favQuery = query(favRef, where('steamid', '==', steamid));
 
   const [favorites] = useCollectionData(favQuery);
+  const router = useRouter();
   const favorite = favorites?.[0];
 
   const toggleFav = async () => {
+    if (!user)
+      return router.push(
+        '/signin?info=' +
+          encodeURIComponent(
+            'To easily access your favorite players, sign in and save them to your account.'
+          )
+      );
+
     await setDoc(doc(favRef, steamid), {
       steamid,
       isFavorite: !favorite?.isFavorite,
@@ -37,7 +47,7 @@ export default function FavoriteButton({ steamid }: { steamid: string }) {
           favorite?.isFavorite ? 'fill-sand-500' : 'fill-sand-500/0'
         }`}
       />
-      {favorite?.isFavorite ? 'Marked' : 'Mark'}
+      {!iconOnly && (favorite?.isFavorite ? 'Marked' : 'Mark')}
     </button>
   );
 }
