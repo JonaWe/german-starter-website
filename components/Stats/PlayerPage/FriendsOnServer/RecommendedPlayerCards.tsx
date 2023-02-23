@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { players } from '@prisma/client';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useScrollContainer } from 'react-indiana-drag-scroll';
 import { SkeletonTheme } from 'react-loading-skeleton';
 import { useQuery } from 'react-query';
 
@@ -20,6 +21,7 @@ export default function RecommendedPlayerCards({
   publicProfile?: boolean;
   cardCount?: number;
 }) {
+  const scrollContainer = useScrollContainer();
   const fetchTopPlayers = async () => {
     return await fetchPlayersStats(
       0,
@@ -81,7 +83,10 @@ export default function RecommendedPlayerCards({
 
   return (
     <SkeletonTheme baseColor="#161616" highlightColor="#1b1b1b">
-      <motion.ul className="h-56 flex gap-6 w-full overflow-x-auto scrollbar-thin hover:scrollbar-thumb-background-600 transition-all snap-x md:snap-none pb-4">
+      <motion.ul
+        className="h-56 flex gap-6 w-full overflow-x-auto scrollbar-thin hover:scrollbar-thumb-background-600 transition-all snap-x md:snap-none pb-4"
+        ref={scrollContainer.ref}
+      >
         <AnimatePresence>
           {cardItems?.slice(0, cardCount).map((item, i) => {
             const delay = (cardCount - (i + 1)) * DELAY_FACTOR;
