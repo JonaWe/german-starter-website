@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 import { players } from '@prisma/client';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useScrollContainer } from 'react-indiana-drag-scroll';
