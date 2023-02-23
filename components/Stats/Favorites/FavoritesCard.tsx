@@ -11,8 +11,6 @@ export default function FavoritesCard({ steamid }: { steamid: string }) {
   const [player] = useSteamUser(steamid);
   const stats = usePlayerStats(steamid);
 
-  console.log(stats);
-
   return (
     <li className="p-5 flex justify-between flex-col bg-background-150/75 rounded-md">
       <div className="flex justify-between gap-4">

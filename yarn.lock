@@ -740,6 +740,11 @@
   resolved "https://registry.npmjs.org/@firebase/webchannel-wrapper/-/webchannel-wrapper-0.6.1.tgz"
   integrity sha512-9FqhNjKQWpQ3fGnSOCovHOm+yhhiorKEqYLAfd525jWavunDJcx8rOW6i6ozAh+FbwcYMkL7b+3j4UR/30MpoQ==
 
+"@formkit/auto-animate@^1.0.0-beta.6":
+  version "1.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@formkit/auto-animate/-/auto-animate-1.0.0-beta.6.tgz#ed7f8bc47d774a7764756646e9e3432e8be51cb3"
+  integrity sha512-PVDhLAlr+B4Xb7e+1wozBUWmXa6BFU8xUPR/W/E+TsQhPS1qkAdAsJ25keEnFrcePSnXHrOsh3tiFbEToOzV9w==
+
 "@google-cloud/common@^3.8.1":
   version "3.10.0"
   resolved "https://registry.npmjs.org/@google-cloud/common/-/common-3.10.0.tgz"

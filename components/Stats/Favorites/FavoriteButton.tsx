@@ -1,6 +1,13 @@
 import { useRouter } from 'next/router';
 
-import { collection, doc, query, setDoc, where } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  query,
+  serverTimestamp,
+  setDoc,
+  where,
+} from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { HiOutlineBookmark } from 'react-icons/hi';
@@ -34,6 +41,7 @@ export default function FavoriteButton({
     await setDoc(doc(favRef, steamid), {
       steamid,
       isFavorite: !favorite?.isFavorite,
+      changedAt: serverTimestamp(),
     });
   };
 
