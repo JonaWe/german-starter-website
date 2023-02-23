@@ -1,20 +1,29 @@
 import { useMemo, useState } from 'react';
 
+import { Column } from 'react-table';
+
 import { fetchPlayersStats } from '../../../lib/stats/fetch/fetchPlayersStats';
 import BigDataTable from '../../UI/Table/BigDataTable/BigDataTable';
+import BookmarkCell from './Cells/BookmarkCell';
 import KDCell from './Cells/KDCell';
 import NumberCell from './Cells/NumberCell';
 import PlayerCell from './Cells/PlayerCell';
 
 export default function PlayerStatsTable() {
   const [wipeOnly, setWipeOnly] = useState(true);
-  const columns = useMemo(
+  const columns: Column<object>[] = useMemo(
     () => [
       { Header: 'Player', accessor: 'name', Cell: PlayerCell },
       { Header: 'Kills', accessor: 'kills', Cell: NumberCell },
       { Header: 'Deaths (PvP)', accessor: 'pvpdeaths', Cell: NumberCell },
       { Header: 'K/D', accessor: 'steamid', Cell: KDCell },
       { Header: 'Deaths (PvE)', accessor: 'pvedeaths', Cell: NumberCell },
+      {
+        Header: '',
+        accessor: 'mark',
+        Cell: BookmarkCell,
+        width: 10,
+      },
     ],
     []
   );

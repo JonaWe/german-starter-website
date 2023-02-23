@@ -248,7 +248,7 @@ export default function BigDataTable({
               <tr
                 {...row.getRowProps()}
                 key={rowIndex}
-                className="hover:bg-background-400/20"
+                className="hover:bg-background-400/20 group"
               >
                 {row.cells.map((cell, cellIndex) => {
                   return (

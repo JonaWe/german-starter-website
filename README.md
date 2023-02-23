@@ -70,10 +70,11 @@ CREATE FULLTEXT INDEX text_search ON players(name)
 
 - [ ] Compare player with average (leetify)
 - [ ] Mark banned players
-- [ ] PVE Grafik reduzieren
+- [X] PVE Grafik reduzieren
 - [ ] Allow to starr players
 - [X] Link to steam
-- [ ] Allow to set notes for player
+- [X] Allow to set notes for player
+- [ ] Average first and last kill on each day
 
 ## Questions
 

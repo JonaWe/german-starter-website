@@ -14,6 +14,7 @@ import * as yup from 'yup';
 import PageContent from '../components/PageContent';
 import Divider from '../components/UI/Divider';
 import InfoBox from '../components/UI/Info';
+import Info from '../components/UI/Info';
 import Spinner from '../components/UI/Spinner';
 import { uiConfig } from '../config/firebaseAuthUI.config';
 import { auth, githubAuth, googleAuth } from '../firebase/clientApp';
@@ -87,6 +88,7 @@ const SignIn: NextPage = () => {
         className="text-green-600 bg-background-400 sm:w-96 pb-5 mx-auto"
       >
         <div className="flex p-10 pb-0 flex-col gap-3 justify-center">
+          {router.query.info && <Info info={router.query.info} />}
           <div className="flex flex-col">
             <label htmlFor="email" className="block mb-1 text-2xl font-bebas">
               {t.signIn.email}

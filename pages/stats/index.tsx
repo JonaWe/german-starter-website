@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import { getDefaultLayout } from '../../components/Layout/DefaultLayout';
 import PageContent from '../../components/PageContent';
+import Favorites from '../../components/Stats/Favorites/Favorites';
 import PlayerStatsTable from '../../components/Stats/PlayerStatsTable';
 import Spotlight from '../../components/Stats/Spotlight';
 import { useSetHeading } from '../../context/defaultLayoutHeadingContext';
@@ -27,6 +28,7 @@ const StatsPage: NextPageWithLayout = (props: any) => {
   return (
     <>
       <Spotlight playerOfTheDay={playerOfTheDay} />
+      <Favorites />
       <PlayerStatsTable />
     </>
   );
