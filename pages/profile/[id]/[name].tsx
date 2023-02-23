@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -26,6 +28,8 @@ import CopyButton from '../../../components/Buttons/CopyButton';
 import { getDefaultLayout } from '../../../components/Layout/DefaultLayout';
 import CommentSection from '../../../components/News/CommentSection';
 import PageContent from '../../../components/PageContent';
+import ActivityChart from '../../../components/Stats/Charts/ActivityChart';
+import YearDropdown from '../../../components/Stats/Charts/ActivityChart/YearDropdown';
 import KillsByDayOfWeekChart from '../../../components/Stats/Charts/KillsByDayOfWeekChart';
 import MostKilledPLayersChart from '../../../components/Stats/Charts/MostKilledPlayersChart/MostKilledPlayersChart';
 import PlayerDeathsKillsChart from '../../../components/Stats/Charts/PlayerDeathsKillsChart';
@@ -120,6 +124,7 @@ const Home: NextPageWithLayout = (props: any) => {
   const [player] = useSteamUser(String(id));
   const { data: timeAlive } = useAvgTimeAlive(String(id));
   const nemesis = usePlayerStats(String(id))?.nemesis;
+  const [activityYear, setActivityYear] = useState(new Date().getFullYear());
 
   const t = useLocalization();
 
@@ -260,7 +265,7 @@ const Home: NextPageWithLayout = (props: any) => {
       {/* <CombatLog steamid={stats.steamid} /> */}
       {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
       <div className="grid md:grid-cols-3 grid-cols-1 md:grid-rows-2 gap-y-5 gap-x-10 mt-5">
-        <div className="row-start-1 row-end-4">
+        <div className="row-start-1 row-end-5">
           <div className="flex justify-between items-center">
             <h2>Steam Info</h2>
             <a
@@ -322,6 +327,15 @@ const Home: NextPageWithLayout = (props: any) => {
           <h2>Most killed players</h2>
           <div className="h-72">
             <MostKilledPLayersChart steamid={stats.steamid} />
+          </div>
+        </div>
+        <div className="col-span-2">
+          <div className='flex justify-between items-center'>
+            <h2>Kill activity</h2>
+            <YearDropdown year={activityYear} onChange={setActivityYear} />
+          </div>
+          <div className="h-72 pt-7">
+            <ActivityChart year={activityYear} steamid={stats.steamid} />
           </div>
         </div>
         <div className="grid grid-cols-2 col-span-2 mt-5">
