@@ -6,6 +6,7 @@ import { useQuery } from 'react-query';
 import useDocumentDataFromCollectionOnce from '../../../hooks/useDocumentDataFromCollectionOnce';
 import useLocalization from '../../../hooks/useLocalization';
 import useServerMap from '../../../hooks/useServerMap';
+import { SERVER_GAME_PORT, SERVER_IP } from '../../../lib/constants';
 import CopyButton from '../../Buttons/CopyButton';
 import JoinButton from '../../Buttons/JoinButton';
 import PlayerCount from '../../PlayerCount';
@@ -52,7 +53,10 @@ export default function Server() {
               <CopyButton text={serverIP} title="Click to copy server IP" />
             </Tooltip>
             <Tooltip text="Players on server">
-              <PlayerCount serverIp={serverIP} className="text-sand-600" />
+              <PlayerCount
+                serverIp={SERVER_IP + ':' + SERVER_GAME_PORT}
+                className="text-sand-600"
+              />
             </Tooltip>
           </div>
           <div className="mt-6 flex justify-center gap-5">
