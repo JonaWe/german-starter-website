@@ -244,12 +244,17 @@ const Home: NextPageWithLayout = (props: any) => {
   return (
     <PageContent>
       <PlayerPageSEO player={steam} locale={router.locale || 'de'} />
-      <Link href={'/stats#players'}>
-        <a className="mt-10 mb-3 flex gap-1 items-center opacity-50 hover:opacity-70 transition-opacity">
-          <HiChevronLeft className="text-xl" />
-          <span>View all</span>
-        </a>
-      </Link>
+      <div className='flex justify-between items-center mt-10'>
+        <Link href={'/stats#players'}>
+          <a className="mb-3 flex gap-1 items-center opacity-50 hover:opacity-70 transition-opacity">
+            <HiChevronLeft className="text-xl" />
+            <span>View all</span>
+          </a>
+        </Link>
+        <div className="sm:hidden visible">
+          <FavoriteButton steamid={String(id)} />
+        </div>
+      </div>
       <div className="flex justify-between items-center">
         <div className="flex gap-5 items-center">
           <Avatar className="w-24 h-24" url={steam.avatar.large} />
@@ -258,13 +263,15 @@ const Home: NextPageWithLayout = (props: any) => {
             <CopyButton className="font-mono opacity-75" text={String(id)} />
           </div>
         </div>
-        <FavoriteButton steamid={String(id)} />
+        <div className="hidden sm:visible">
+          <FavoriteButton steamid={String(id)} />
+        </div>
       </div>
       {/* <AliasTable aliases={aliases} /> */}
       {/* <PvEChart data={pve_events} /> */}
       {/* <CombatLog steamid={stats.steamid} /> */}
       {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
-      <div className="grid md:grid-cols-3 grid-cols-1 md:grid-rows-2 gap-y-5 gap-x-10 mt-5">
+      <div className="grid md:grid-cols-3 grid-cols-1 md:grid-rows-2 gap-y-5 gap-x-0 sm:gap-x-10 mt-5">
         <div className="row-start-1 row-end-5">
           <div className="flex justify-between items-center">
             <h2>Steam Info</h2>
@@ -330,7 +337,7 @@ const Home: NextPageWithLayout = (props: any) => {
           </div>
         </div>
         <div className="col-span-2">
-          <div className='flex justify-between items-center'>
+          <div className="flex justify-between items-center">
             <h2>Kill activity</h2>
             <YearDropdown year={activityYear} onChange={setActivityYear} />
           </div>
