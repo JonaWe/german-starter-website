@@ -190,7 +190,7 @@ export default function BigDataTable({
           }}
           selected={pageSize}
         /> */}
-        <div className="space-x-3">
+        <div className="flex gap-1 sm:flex-row flex-col">
           <select
             className="bg-background-150 h-fit p-2"
             value={pageSize}

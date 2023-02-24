@@ -40,7 +40,7 @@ export default function PlayerStatsTable() {
   ];
 
   return (
-    <div className="w-full scroll-m-20" id="players">
+    <div className="w-full scroll-m-20 overflow-x-auto" id="players">
       {wipeOnly ? (
         <BigDataTable
           dropdowns={dropdowns}

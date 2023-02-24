@@ -14,9 +14,9 @@ export interface Item {
 export default function GeneralInfo({ items }: GeneralInfoProps) {
   const t = useLocalization();
   return (
-    <div>
+    <div className='mb-2'>
       <h2>{t.stats.steamInfo.steamInfo}</h2>
-      <div className="flex flex-col gap-y-3">
+      <div className="sm:flex sm:flex-col grid grid-cols-2 gap-y-3">
         {items.map(({ name, value, Icon }) => {
           return (
             <GeneralInfoItem name={name} value={value} Icon={Icon} key={name} />
