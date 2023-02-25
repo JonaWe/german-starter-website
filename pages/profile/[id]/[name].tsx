@@ -15,12 +15,14 @@ import {
   GiSuicide,
 } from 'react-icons/gi';
 import {
+  HiAcademicCap,
   HiChevronLeft,
   HiClock,
   HiCursorClick,
   HiEye,
   HiInformationCircle,
   HiPuzzle,
+  HiUsers,
 } from 'react-icons/hi';
 import { ImHammer2 } from 'react-icons/im';
 
@@ -46,11 +48,20 @@ import usePlayerBanInfo from '../../../hooks/usePlayerBanInfo';
 import usePlayerRustInfo from '../../../hooks/usePlayerRustInfo';
 import usePlayerStats from '../../../hooks/usePlayerStats';
 import useSteamUser from '../../../hooks/useSteamUser';
+import useUserSettings from '../../../hooks/useUserSettigns';
 import { prisma } from '../../../lib/stats/db';
 import { CommunityVisibilityState } from '../../../lib/steam/interfaces/CommunityVisibilityState';
 import { PersonaState } from '../../../lib/steam/interfaces/PersonaState';
 import { steam } from '../../../lib/steam/steamClient';
 import { NextPageWithLayout } from '../../_app';
+
+interface Metric {
+  Icon: React.ReactNode;
+  value: string | number;
+  name: string;
+  addition?: React.ReactNode;
+  onClick?: (v?: any) => void;
+}
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   let steamId: bigint;
@@ -121,14 +132,18 @@ const Home: NextPageWithLayout = (props: any) => {
 
   const { data: banInfo } = usePlayerBanInfo(String(id));
   const { data: rustInfo } = usePlayerRustInfo(String(id));
+  const [loggedInUser] = useUserSettings();
+  const loggedInStats = usePlayerStats(loggedInUser?.steamid);
   const [player] = useSteamUser(String(id));
   const { data: timeAlive } = useAvgTimeAlive(String(id));
   const nemesis = usePlayerStats(String(id))?.nemesis;
   const [activityYear, setActivityYear] = useState(new Date().getFullYear());
+  const loggedInKD = loggedInStats?.kills / loggedInStats?.pvpdeaths;
+  const KD = stats.kills / stats.pvpdeaths;
 
   const t = useLocalization();
 
-  const generalInfo = [
+  const generalInfo: Metric[] = [
     {
       value:
         player?.visibilityState === CommunityVisibilityState.Public
@@ -181,7 +196,7 @@ const Home: NextPageWithLayout = (props: any) => {
     },
   ];
 
-  const statsOnServer = [
+  const statsOnServer: Metric[] = [
     {
       value: stats.kills,
       Icon: (
@@ -241,10 +256,20 @@ const Home: NextPageWithLayout = (props: any) => {
       : []),
   ];
 
+  const comparedToCurrentUser: Metric[] = [
+    {
+      Icon: (
+        <HiUsers className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
+      ),
+      name: 'Your chance of killing',
+      value: `${Math.floor(((loggedInKD + 1) / (loggedInKD + KD + 2)) * 100)}%`,
+    },
+  ];
+
   return (
     <PageContent>
       <PlayerPageSEO player={steam} locale={router.locale || 'de'} />
-      <div className='flex justify-between items-center mt-10'>
+      <div className="flex justify-between items-center mt-10">
         <Link href={'/stats#players'}>
           <a className="mb-3 flex gap-1 items-center opacity-50 hover:opacity-70 transition-opacity">
             <HiChevronLeft className="text-xl" />
@@ -301,6 +326,24 @@ const Home: NextPageWithLayout = (props: any) => {
           <h2>Stats on server</h2>
           <div className="grid grid-cols-2 grid-flow-row gap-3 mb-3">
             {statsOnServer.map((info) => (
+              <div
+                key={info.name}
+                className={`flex justify-between flex-col bg-background-150/75 hover:bg-background-150 p-3 rounded-md ${
+                  info?.onClick ? 'cursor-pointer' : ''
+                }`}
+                onClick={info?.onClick}
+              >
+                <div className="flex">{info.Icon}</div>
+                <div className="mt-2">
+                  <div className="text-lg -mb-1">{info.value}</div>
+                  <div className="text-opacity-30 text-sm">{info.name}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <h2>Compared to you</h2>
+          <div className="grid grid-cols-2 grid-flow-row gap-3 mb-3">
+            {comparedToCurrentUser.map((info) => (
               <div
                 key={info.name}
                 className={`flex justify-between flex-col bg-background-150/75 hover:bg-background-150 p-3 rounded-md ${

@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 import useLocalization from '../../../hooks/useLocalization';
 import useSteamUser from '../../../hooks/useSteamUser';
-import useUserSettigns from '../../../hooks/useUserSettigns';
+import useUserSettings from '../../../hooks/useUserSettigns';
 import Info from '../../UI/Info';
 import LinkAccount from './LinkAccount';
 import LinkedAccount from './LinkedAccount';
@@ -10,7 +10,7 @@ import Section from './Section';
 
 export default function UserSettings() {
   const t = useLocalization();
-  const [settings] = useUserSettigns();
+  const [settings] = useUserSettings();
 
   const sid = settings?.steamid;
 

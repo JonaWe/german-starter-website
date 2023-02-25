@@ -5,17 +5,15 @@ import { auth, db } from '../firebase/clientApp';
 import { UserSettings } from '../interfaces/UserSettings';
 import updateSettings from '../lib/firebase/updateSettings';
 
-export default function useUserSettigns() {
+export default function useUserSettings() {
   const user = auth.currentUser;
 
-  if (!user) return [null, null];
-
   //insert invalid user id if no user avilable because else doc() will thorw a error
-  const userRef = doc(db, 'users', user.uid);
+  const userRef = doc(db, 'users', user?.uid || 'invalid');
   const [userData, error] = useDocumentData(userRef);
 
-  const setSettigns = (settings: UserSettings) => {
-    updateSettings(user?.uid, settings);
+  const setSettings = (settings: UserSettings) => {
+    updateSettings(user?.uid || 'invalid', settings);
   };
-  return [userData?.settings, setSettigns, error];
+  return [userData?.settings, setSettings, error];
 }
