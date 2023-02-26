@@ -16,6 +16,7 @@ import {
 } from 'react-icons/gi';
 import {
   HiAcademicCap,
+  HiCheck,
   HiChevronLeft,
   HiClock,
   HiCursorClick,
@@ -41,6 +42,7 @@ import PersonalNotes from '../../../components/Stats/PlayerPage/Notes';
 import PlayerPageSEO from '../../../components/Stats/PlayerPage/PlayerPageSEO';
 import PvEChart from '../../../components/Stats/PlayerPage/PvEChart';
 import Avatar from '../../../components/UI/Avatar';
+import Button from '../../../components/UI/Button';
 import Tooltip from '../../../components/UI/Tooltip';
 import useAvgTimeAlive from '../../../hooks/useAvgTimeAlive';
 import useLocalization from '../../../hooks/useLocalization';
@@ -307,7 +309,7 @@ const Home: NextPageWithLayout = (props: any) => {
             <CopyButton className="font-mono opacity-75" text={String(id)} />
           </div>
         </div>
-        <div className="hidden sm:visible">
+        <div className="invisible sm:visible">
           <FavoriteButton steamid={String(id)} />
         </div>
       </div>
@@ -360,31 +362,86 @@ const Home: NextPageWithLayout = (props: any) => {
               </div>
             ))}
           </div>
-          <h2>Compared to you</h2>
-          <div className="grid grid-cols-2 grid-flow-row gap-3 mb-3">
-            {comparedToCurrentUser.map((info) => (
-              <div
-                key={info.name}
-                className={`flex justify-between flex-col bg-background-150/75 hover:bg-background-150 p-3 rounded-md ${
-                  info?.onClick ? 'cursor-pointer' : ''
-                }`}
-                onClick={info?.onClick}
-              >
-                <div className="flex">{info.Icon}</div>
-                <div className="mt-2">
-                  <div className="text-lg -mb-1">{info.value}</div>
-                  <div className="text-opacity-30 text-sm">{info.name}</div>
+          {loggedInUser && (
+            <>
+              <h2>Compared to you</h2>
+              {loggedInUser?.steamid ? (
+                <div className="grid grid-cols-2 grid-flow-row gap-3 mb-3">
+                  {comparedToCurrentUser.map((info) => (
+                    <div
+                      key={info.name}
+                      className={`flex justify-between flex-col bg-background-150/75 hover:bg-background-150 p-3 rounded-md ${
+                        info?.onClick ? 'cursor-pointer' : ''
+                      }`}
+                      onClick={info?.onClick}
+                    >
+                      <div className="flex">{info.Icon}</div>
+                      <div className="mt-2">
+                        <div className="text-lg -mb-1">{info.value}</div>
+                        <div className="text-opacity-30 text-sm">
+                          {info.name}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              </div>
-            ))}
-          </div>
-          <h2>
-            Personal notes{' '}
-            <Tooltip text="You can create notes about players that are completely private and only visible to you.">
-              <HiInformationCircle className="inline text-lg ml-2 opacity-20" />
-            </Tooltip>
-          </h2>
-          <PersonalNotes id={String(id)} />
+              ) : (
+                <div className="bg-background-150/20 rounded-md p-4 mb-2">
+                  <p className='mb-2'>
+                    Link your steam account to see metrics from {steam.nickname}{' '}
+                    compared to you.
+                  </p>
+                  <Button
+                    useLink
+                    primary
+                    href="/api/steam/auth"
+                    text="Link steam"
+                  />
+                </div>
+              )}
+              <h2>
+                Personal notes{' '}
+                <Tooltip text="You can create notes about players that are completely private and only visible to you.">
+                  <HiInformationCircle className="inline text-lg ml-2 opacity-20" />
+                </Tooltip>
+              </h2>
+              <PersonalNotes id={String(id)} />
+            </>
+          )}
+          {!loggedInUser && (
+            <>
+              <h2>more features</h2>
+              <ul className="bg-background-150/20 rounded-md p-4">
+                <p className="opacity-70 mb-2">
+                  Login and link your steam account to get more awesome
+                  features.
+                </p>
+                <li className="flex gap-2">
+                  <HiCheck className="fill-rust-500 text-2xl" />
+                  Take personal notes for each player
+                </li>
+                <li className="flex gap-2">
+                  <HiCheck className="fill-rust-500 text-2xl" />
+                  Bookmark players for easy access
+                </li>
+                <li className="flex gap-2">
+                  <HiCheck className="fill-rust-500 text-2xl" />
+                  View metrics from players, related to you
+                </li>
+                <li className="flex gap-2">
+                  <HiCheck className="fill-rust-500 text-2xl" />
+                  Comment on player profiles
+                </li>
+                <Button
+                  primary
+                  text="login"
+                  useLink
+                  className="mt-2"
+                  href={`/signin?successUrl=/profile/${id}`}
+                />
+              </ul>
+            </>
+          )}
         </div>
         <div className="col-span-2">
           <h2>Kills and Deaths over time</h2>
