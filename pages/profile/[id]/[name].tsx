@@ -44,6 +44,7 @@ import Avatar from '../../../components/UI/Avatar';
 import Tooltip from '../../../components/UI/Tooltip';
 import useAvgTimeAlive from '../../../hooks/useAvgTimeAlive';
 import useLocalization from '../../../hooks/useLocalization';
+import useOneToOneStats from '../../../hooks/useOneToOneStats';
 import usePlayerBanInfo from '../../../hooks/usePlayerBanInfo';
 import usePlayerRustInfo from '../../../hooks/usePlayerRustInfo';
 import usePlayerStats from '../../../hooks/usePlayerStats';
@@ -140,6 +141,10 @@ const Home: NextPageWithLayout = (props: any) => {
   const [activityYear, setActivityYear] = useState(new Date().getFullYear());
   const loggedInKD = loggedInStats?.kills / loggedInStats?.pvpdeaths;
   const KD = stats.kills / stats.pvpdeaths;
+  const { data: playerVsCurrentUser } = useOneToOneStats(
+    stats.steamid,
+    loggedInUser?.steamid
+  );
 
   const t = useLocalization();
 
@@ -263,6 +268,20 @@ const Home: NextPageWithLayout = (props: any) => {
       ),
       name: 'Your chance of killing',
       value: `${Math.floor(((loggedInKD + 1) / (loggedInKD + KD + 2)) * 100)}%`,
+    },
+    {
+      Icon: (
+        <GiChewedSkull className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
+      ),
+      name: 'Deaths to you',
+      value: playerVsCurrentUser?.deaths,
+    },
+    {
+      Icon: (
+        <GiPistolGun className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
+      ),
+      name: 'Kills on you',
+      value: playerVsCurrentUser?.kills,
     },
   ];
 
