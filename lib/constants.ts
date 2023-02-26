@@ -11,6 +11,10 @@ const GITHUB_URLS = {
     'https://github.com/JonaWe/german-starter-website/blob/main/lib/constatns.ts',
 };
 
+const SERVER_IP = '135.125.189.209';
+const SERVER_QUERY_PORT = '28017';
+const SERVER_GAME_PORT = '28017';
+
 const FACEPUNCH_URLS = {
   RUST_ITEMS_WIKI_URL: 'https://wiki.facepunch.com/rust/item',
   RUST_ITEMS_FILES_URL: 'https://files.facepunch.com/rust/item',
@@ -23,4 +27,7 @@ export {
   BASE_DOMAIN,
   GITHUB_URLS,
   FACEPUNCH_URLS,
+  SERVER_IP,
+  SERVER_QUERY_PORT,
+  SERVER_GAME_PORT,
 };

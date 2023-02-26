@@ -15,12 +15,15 @@ import {
   GiSuicide,
 } from 'react-icons/gi';
 import {
+  HiAcademicCap,
+  HiCheck,
   HiChevronLeft,
   HiClock,
   HiCursorClick,
   HiEye,
   HiInformationCircle,
   HiPuzzle,
+  HiUsers,
 } from 'react-icons/hi';
 import { ImHammer2 } from 'react-icons/im';
 
@@ -39,18 +42,29 @@ import PersonalNotes from '../../../components/Stats/PlayerPage/Notes';
 import PlayerPageSEO from '../../../components/Stats/PlayerPage/PlayerPageSEO';
 import PvEChart from '../../../components/Stats/PlayerPage/PvEChart';
 import Avatar from '../../../components/UI/Avatar';
+import Button from '../../../components/UI/Button';
 import Tooltip from '../../../components/UI/Tooltip';
 import useAvgTimeAlive from '../../../hooks/useAvgTimeAlive';
 import useLocalization from '../../../hooks/useLocalization';
+import useOneToOneStats from '../../../hooks/useOneToOneStats';
 import usePlayerBanInfo from '../../../hooks/usePlayerBanInfo';
 import usePlayerRustInfo from '../../../hooks/usePlayerRustInfo';
 import usePlayerStats from '../../../hooks/usePlayerStats';
 import useSteamUser from '../../../hooks/useSteamUser';
+import useUserSettings from '../../../hooks/useUserSettigns';
 import { prisma } from '../../../lib/stats/db';
 import { CommunityVisibilityState } from '../../../lib/steam/interfaces/CommunityVisibilityState';
 import { PersonaState } from '../../../lib/steam/interfaces/PersonaState';
 import { steam } from '../../../lib/steam/steamClient';
 import { NextPageWithLayout } from '../../_app';
+
+interface Metric {
+  Icon: React.ReactNode;
+  value: string | number;
+  name: string;
+  addition?: React.ReactNode;
+  onClick?: (v?: any) => void;
+}
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   let steamId: bigint;
@@ -121,14 +135,22 @@ const Home: NextPageWithLayout = (props: any) => {
 
   const { data: banInfo } = usePlayerBanInfo(String(id));
   const { data: rustInfo } = usePlayerRustInfo(String(id));
+  const [loggedInUser] = useUserSettings();
+  const loggedInStats = usePlayerStats(loggedInUser?.steamid);
   const [player] = useSteamUser(String(id));
   const { data: timeAlive } = useAvgTimeAlive(String(id));
   const nemesis = usePlayerStats(String(id))?.nemesis;
   const [activityYear, setActivityYear] = useState(new Date().getFullYear());
+  const loggedInKD = loggedInStats?.kills / loggedInStats?.pvpdeaths;
+  const KD = stats.kills / stats.pvpdeaths;
+  const { data: playerVsCurrentUser } = useOneToOneStats(
+    stats.steamid,
+    loggedInUser?.steamid
+  );
 
   const t = useLocalization();
 
-  const generalInfo = [
+  const generalInfo: Metric[] = [
     {
       value:
         player?.visibilityState === CommunityVisibilityState.Public
@@ -181,7 +203,7 @@ const Home: NextPageWithLayout = (props: any) => {
     },
   ];
 
-  const statsOnServer = [
+  const statsOnServer: Metric[] = [
     {
       value: stats.kills,
       Icon: (
@@ -241,10 +263,34 @@ const Home: NextPageWithLayout = (props: any) => {
       : []),
   ];
 
+  const comparedToCurrentUser: Metric[] = [
+    {
+      Icon: (
+        <HiUsers className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
+      ),
+      name: 'Your chance of killing',
+      value: `${Math.floor(((loggedInKD + 1) / (loggedInKD + KD + 2)) * 100)}%`,
+    },
+    {
+      Icon: (
+        <GiChewedSkull className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
+      ),
+      name: 'Deaths to you',
+      value: playerVsCurrentUser?.deaths,
+    },
+    {
+      Icon: (
+        <GiPistolGun className="text-xl fill-sand-500/60 group-hover:fill-sand-500 transition-all" />
+      ),
+      name: 'Kills on you',
+      value: playerVsCurrentUser?.kills,
+    },
+  ];
+
   return (
     <PageContent>
       <PlayerPageSEO player={steam} locale={router.locale || 'de'} />
-      <div className='flex justify-between items-center mt-10'>
+      <div className="flex justify-between items-center mt-10">
         <Link href={'/stats#players'}>
           <a className="mb-3 flex gap-1 items-center opacity-50 hover:opacity-70 transition-opacity">
             <HiChevronLeft className="text-xl" />
@@ -263,7 +309,7 @@ const Home: NextPageWithLayout = (props: any) => {
             <CopyButton className="font-mono opacity-75" text={String(id)} />
           </div>
         </div>
-        <div className="hidden sm:visible">
+        <div className="invisible sm:visible">
           <FavoriteButton steamid={String(id)} />
         </div>
       </div>
@@ -316,13 +362,86 @@ const Home: NextPageWithLayout = (props: any) => {
               </div>
             ))}
           </div>
-          <h2>
-            Personal notes{' '}
-            <Tooltip text="You can create notes about players that are completely private and only visible to you.">
-              <HiInformationCircle className="inline text-lg ml-2 opacity-20" />
-            </Tooltip>
-          </h2>
-          <PersonalNotes id={String(id)} />
+          {loggedInUser && (
+            <>
+              <h2>Compared to you</h2>
+              {loggedInUser?.steamid ? (
+                <div className="grid grid-cols-2 grid-flow-row gap-3 mb-3">
+                  {comparedToCurrentUser.map((info) => (
+                    <div
+                      key={info.name}
+                      className={`flex justify-between flex-col bg-background-150/75 hover:bg-background-150 p-3 rounded-md ${
+                        info?.onClick ? 'cursor-pointer' : ''
+                      }`}
+                      onClick={info?.onClick}
+                    >
+                      <div className="flex">{info.Icon}</div>
+                      <div className="mt-2">
+                        <div className="text-lg -mb-1">{info.value}</div>
+                        <div className="text-opacity-30 text-sm">
+                          {info.name}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="bg-background-150/20 rounded-md p-4 mb-2">
+                  <p className='mb-2'>
+                    Link your steam account to see metrics from {steam.nickname}{' '}
+                    compared to you.
+                  </p>
+                  <Button
+                    useLink
+                    primary
+                    href="/api/steam/auth"
+                    text="Link steam"
+                  />
+                </div>
+              )}
+              <h2>
+                Personal notes{' '}
+                <Tooltip text="You can create notes about players that are completely private and only visible to you.">
+                  <HiInformationCircle className="inline text-lg ml-2 opacity-20" />
+                </Tooltip>
+              </h2>
+              <PersonalNotes id={String(id)} />
+            </>
+          )}
+          {!loggedInUser && (
+            <>
+              <h2>more features</h2>
+              <ul className="bg-background-150/20 rounded-md p-4">
+                <p className="opacity-70 mb-2">
+                  Login and link your steam account to get more awesome
+                  features.
+                </p>
+                <li className="flex gap-2">
+                  <HiCheck className="fill-rust-500 text-2xl" />
+                  Take personal notes for each player
+                </li>
+                <li className="flex gap-2">
+                  <HiCheck className="fill-rust-500 text-2xl" />
+                  Bookmark players for easy access
+                </li>
+                <li className="flex gap-2">
+                  <HiCheck className="fill-rust-500 text-2xl" />
+                  View metrics from players, related to you
+                </li>
+                <li className="flex gap-2">
+                  <HiCheck className="fill-rust-500 text-2xl" />
+                  Comment on player profiles
+                </li>
+                <Button
+                  primary
+                  text="login"
+                  useLink
+                  className="mt-2"
+                  href={`/signin?successUrl=/profile/${id}`}
+                />
+              </ul>
+            </>
+          )}
         </div>
         <div className="col-span-2">
           <h2>Kills and Deaths over time</h2>

@@ -6,6 +6,7 @@ import { Timestamp } from 'firebase-admin/firestore';
 import { queryGameServerRules } from 'steam-server-query';
 
 import { db } from '../../../firebase/admin/firebaseAdmin';
+import { SERVER_GAME_PORT, SERVER_IP } from '../../../lib/constants';
 
 const SEED_ID = 'world.seed';
 const SIZE_ID = 'world.size';
@@ -36,7 +37,7 @@ export default async function handler(
 
   const config = configSnap.data();
 
-  const rules = await queryGameServerRules(config?.ip);
+  const rules = await queryGameServerRules(SERVER_IP + ':' + SERVER_GAME_PORT);
 
   const seed = rules.rules.find((rule) => rule.name === SEED_ID)?.value;
   const size = rules.rules.find((rule) => rule.name === SIZE_ID)?.value;
