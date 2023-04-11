@@ -21,12 +21,7 @@ const GROUP_ADMINS = [
     name: 'PuffPuff',
     image: '/assets/team_avatars/puffpuff.webp',
     link: 'https://discordapp.com/users/726159915391123677',
-  },
-  {
-    name: 'Sam',
-    image: '/assets/team_avatars/sam.webp',
-    link: '#',
-  },
+  }
 ];
 
 const GROUP_OWNER = [
