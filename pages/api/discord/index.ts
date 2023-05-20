@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import { db } from '../../../firebase/admin/firebaseAdmin';
 
+//test
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
