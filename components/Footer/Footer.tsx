@@ -53,7 +53,7 @@ export default function Footer() {
       icon: (
         <FaTwitch className="text-xl fill-sand-500/60 hover:fill-sand-500 hover:scale-105 hover:cursor-pointer transition-all" />
       ),
-      link: 'https://www.twitch.tv/germanstarter',
+      link: 'https://www.twitch.tv/germanscout666',
     },
     {
       name: 'TikTok',
