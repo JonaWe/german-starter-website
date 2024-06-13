@@ -11,7 +11,7 @@ const GITHUB_URLS = {
     'https://github.com/JonaWe/german-starter-website/blob/main/lib/constatns.ts',
 };
 
-const SERVER_IP = '159.69.226.140';
+const SERVER_IP = '88.214.57.27';
 const SERVER_QUERY_PORT = '28016';
 const SERVER_GAME_PORT = '28015';
 
